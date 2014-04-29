@@ -1,8 +1,196 @@
+<link rel="stylesheet" href="../../../Downloads/jquery.svg.package-1.4.5/jquery.svg.css">
+
 <style>
+	#chart-area {    
+		width:650px;
+		height:497px;
+		background:#333;
+		margin:0 0 0 0;
+	}
+
 	#canvas {
 		background:#fff;
+		margin:10px 0 0 0;
+		border-left:1px solid #333;
+		border-bottom:1px solid #333;
 	}
+		.plot-point {
+			cursor:pointer;
+			opacity:0.5;
+		}
+		.plot-point:hover {
+			z-index:1000;
+			opacity:1;
+		}		
+	#y-axis {
+		width:75px;
+		height:400px;
+		float:left;
+		margin:10px 0 0 0;
+	}
+		#y-axis-label {
+			width:25px;
+			height:402px;
+			margin:0 5px 0 5px;
+			float:left;
+		}
+			#y-axis-label h4 {
+				transform:rotate(270deg);
+				-ms-transform:rotate(270deg);
+				-o-transform:rotate(270deg);
+				-moz-transform:rotate(270deg);
+				-webkit-transform:rotate(270deg);
+				width:402px;
+				height:25px;
+				text-align:center;
+				background:#fff;
+				left: -176px;
+				top: 188px;
+				position: absolute;
+				font: 300 1em/1em "helvetica neue";
+				color:#aaa;
+			}
+			#y-axis-ticks {
+				background:pink;
+				width:40px;
+				height:402px;
+				margin:0 0 0 0;
+				float:left;
+			}
+	#x-axis {
+		width:500px;
+		height:75px;
+		margin:0 0 0 76px;
+	}
+		#x-axis-label {
+			width:500px;
+			height:25px;
+			margin:5px 0 5px 0;
+		}
+			#x-axis-label h4 {
+				width:500px;
+				height:25px;
+				text-align:center;
+				background:#fff;
+				left: 84px;
+				top: 442px;
+				position: absolute;
+				font: 300 1em/1em "helvetica neue";
+				color:#aaa;
+			}
+		#x-axis-ticks {
+			width:500px;
+			height:40px;
+			margin:-5px 0 0 0;
+			background:pink;
+		}
+
+
 </style>
-<svg id="canvas" width="500" height="500">
+<div id="chart-area">
+	<div id="y-axis">
+		<div id="y-axis-label">
+			<h4>this is a label for the y-axis</h4>
+		</div>
+		<div id="y-axis-ticks"></div>
+	</div>
+	<svg id="canvas" width="500" height="402" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"><g></g></svg>
+	<div id="x-axis">
+		<div id="x-axis-ticks"></div>
+		<div id="x-axis-label">
+			<h4>this is a label for the x-axis</h4>
+		</div>
+	</div>
+	<button onclick="determineStep(1);">Step</button>
+</div>       
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://www.edsource.org/wp-content/js/tabletop.js"></script>
+<script src="../../../Downloads/jquery.svg.package-1.4.5/jquery.svg.js"></script>
+<script src="../../../Downloads/jquery.svg.package-1.4.5/jquery.svganim.min.js"></script>
+
+<script>	
+	"use strict";
+	//GLOBAL VARIABLES
+	var public_spreadsheet_url = "https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdDZOUWRhVXRiSjVrMjlqNzlPR1BJc0E&output=html";
+	var chartDump = [], xData = [], yData = [], pointLabel = [];
+	var plotRadius = 10, initX = 1, initY = 2, widthX = 502, widthY = 400, yAdjust = 10000, xAdjust = 10, color = "#f8981d", plotPoints = 51, chartStep = 0;
+	var maxDataX, maxDataY, minDataX, minDataY, maxX, maxY, minX, minY;
+
+
+	$(document).ready(function(){
+			Tabletop.init( { key: public_spreadsheet_url,
+		                     callback: showInfo,
+		                     wanted: ["Data"],
+		                     debug: true } );
+	});
+
+	function showInfo(data, tabletop) {		
+		$.each( tabletop.sheets("Data").all(), function(i, data) {
+			var insertRow = [];
+			insertRow[0] = data.label;
+			insertRow[1] = parseFloat(data.data1);
+			insertRow[2] = parseFloat(data.data2);
+			chartDump.push(insertRow);
+		});
+		grabData();
+		dataRange();
+		plotData();
+	}
+
+	function grabData(){
+		var i, cs;
+		cs = chartStep * plotPoints;
+		for (i=0 ; i < plotPoints ; i++){
+			var ii = i + cs;
+			console.log(ii)
+			xData[i] = chartDump[ii][initX];
+			yData[i] = chartDump[ii][initY];
+			pointLabel[i] = chartDump[ii][0] 
+		}
+	}
 	
-</svg>
+	function dataRange(){
+		maxDataX = Math.max.apply(null, xData);
+		maxDataY = Math.max.apply(null, yData);
+		minDataX = Math.min.apply(null, xData);
+		minDataY = Math.min.apply(null, yData);
+
+		//ESTABLISH AXIS LABELS
+		minX = Math.floor(minDataX/xAdjust) * xAdjust;
+		minY = Math.floor(minDataY/yAdjust) * yAdjust;
+		maxX = Math.ceil(maxDataX/xAdjust) * xAdjust;
+		maxY = Math.ceil(maxDataY/yAdjust) * yAdjust;	
+	}
+	
+	function plotData(){
+		var i;
+		for (i=0 ; i < plotPoints ; i++){
+			var posX = [], posY = [];
+			posX[i] = (xData[i] / maxX) * widthX;
+			posY[i] = widthY - ((yData[i] / maxY) * widthY);
+			$("#canvas g").append("<circle id=\"point"+ i + "\" fill=\"" + color + "\" data-point=\""+ pointLabel[i] +"\" data-x=\"" + xData[i] + "\" data-y=\"" + yData[i] + "\" class=\"plot-point\" cx=\"" + posX[i] + "\" cy=\"" + posY[i] + "\" r=\"" + plotRadius + "\" />");
+			$("#canvas").html($("#canvas").html()); //refresh page to load dynamic svgs
+		}
+	}
+	
+	function determineStep(step){
+		chartStep = step;
+		animateChart();
+	}
+	
+	function animateChart(){
+		var i;
+		grabData();
+		var posX = [], posY = [];
+		posX[i] = (xData[i] / maxX) * widthX;
+		posY[i] = widthY - ((yData[i] / maxY) * widthY);
+		for (i=0 ; i < plotPoints ; i++){
+			$("#point"+i+"").animate({
+				svgCx:posX[i],
+				svgCy:posY[i]
+			}, 1000);
+		}
+	}
+
+
+</script>
