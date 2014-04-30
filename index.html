@@ -1,24 +1,27 @@
-<link rel="stylesheet" href="../../../Downloads/jquery.svg.package-1.4.5/jquery.svg.css">
-
 <style>
-	#chart-area {    
+	.axis path,
+	.axis line {
+		fill: none;
+		stroke: black;
+		shape-rendering: crispEdges;
+	}
+	
+	.axis text {
+		font-family: sans-serif;
+		font-size: 11px;
+	}
+	
+	#canvas {    
 		width:650px;
-		height:497px;
-		background:#333;
+		height:600px;
+		background:#fff;
 		margin:0 0 0 0;
 	}
 
-	#canvas {
-		background:#fff;
-		margin:10px 0 0 0;
-		border-left:1px solid #333;
-		border-bottom:1px solid #333;
-	}
-		.plot-point {
+		#canvas circle {
 			cursor:pointer;
-			opacity:0.5;
 		}
-		.plot-point:hover {
+		#canvas circle:hover {
 			z-index:1000;
 			opacity:1;
 		}		
@@ -45,7 +48,7 @@
 				text-align:center;
 				background:#fff;
 				left: -176px;
-				top: 188px;
+				top: 185px;
 				position: absolute;
 				font: 300 1em/1em "helvetica neue";
 				color:#aaa;
@@ -58,64 +61,61 @@
 				float:left;
 			}
 	#x-axis {
-		width:500px;
+		width:650px;
 		height:75px;
-		margin:0 0 0 76px;
+		margin:0 0 0 0;
 	}
 		#x-axis-label {
-			width:500px;
+			width:502px;
 			height:25px;
-			margin:5px 0 5px 0;
+			margin:5px 0 5px 76px;
 		}
 			#x-axis-label h4 {
-				width:500px;
+				width:502px;
 				height:25px;
 				text-align:center;
 				background:#fff;
 				left: 84px;
-				top: 442px;
+				top: 452px;
 				position: absolute;
 				font: 300 1em/1em "helvetica neue";
 				color:#aaa;
 			}
 		#x-axis-ticks {
-			width:500px;
+			width:502px;
 			height:40px;
-			margin:-5px 0 0 0;
+			margin:-5px 0 0 76px;
 			background:pink;
 		}
 
+	#upperarea {
+		width:650px;
+		height:400px;
+		margin:0 0 18px 0;
+	}
 
 </style>
-<div id="chart-area">
-	<div id="y-axis">
-		<div id="y-axis-label">
-			<h4>this is a label for the y-axis</h4>
-		</div>
-		<div id="y-axis-ticks"></div>
-	</div>
-	<svg id="canvas" width="500" height="402" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"><g></g></svg>
-	<div id="x-axis">
-		<div id="x-axis-ticks"></div>
-		<div id="x-axis-label">
-			<h4>this is a label for the x-axis</h4>
-		</div>
-	</div>
-	<button onclick="determineStep(1);">Step</button>
-</div>       
+<div id="canvas">
+
+</div>      
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="http://www.edsource.org/wp-content/js/tabletop.js"></script>
-<script src="../../../Downloads/jquery.svg.package-1.4.5/jquery.svg.js"></script>
-<script src="../../../Downloads/jquery.svg.package-1.4.5/jquery.svganim.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
 
 <script>	
 	"use strict";
 	//GLOBAL VARIABLES
 	var public_spreadsheet_url = "https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdDZOUWRhVXRiSjVrMjlqNzlPR1BJc0E&output=html";
-	var chartDump = [], xData = [], yData = [], pointLabel = [];
-	var plotRadius = 10, initX = 1, initY = 2, widthX = 502, widthY = 400, yAdjust = 10000, xAdjust = 10, color = "#f8981d", plotPoints = 51, chartStep = 0;
-	var maxDataX, maxDataY, minDataX, minDataY, maxX, maxY, minX, minY;
-
+	var chartDump = [], workingData = [], pointLabel = [], xData = [], yData = [];
+	var plotRadius = 10, initX = 1, initY = 2, padding = 50, widthX = 650, widthY = 600, color = "#f8981d", plotPoints = 51, chartStep = 0;
+	var plots, xScale, yScale, xAxis, yAxis;
+	var canvas = d3.select("#canvas")
+					.append("svg")
+					.attr({
+						width: widthX,
+						height: widthY
+					});
 
 	$(document).ready(function(){
 			Tabletop.init( { key: public_spreadsheet_url,
@@ -133,8 +133,8 @@
 			chartDump.push(insertRow);
 		});
 		grabData();
-		dataRange();
-		plotData();
+		dataScale();
+		initialPlot();
 	}
 
 	function grabData(){
@@ -142,35 +142,98 @@
 		cs = chartStep * plotPoints;
 		for (i=0 ; i < plotPoints ; i++){
 			var ii = i + cs;
-			console.log(ii)
-			xData[i] = chartDump[ii][initX];
-			yData[i] = chartDump[ii][initY];
+			workingData[i] = new Array();
+			workingData[i][0] = chartDump[ii][initX];
+			workingData[i][1]= chartDump[ii][initY];
 			pointLabel[i] = chartDump[ii][0] 
+			//xData[i] = chartDump[ii][initX];
+			//yData[i] = chartDump[ii][initY];
 		}
 	}
 	
-	function dataRange(){
-		maxDataX = Math.max.apply(null, xData);
-		maxDataY = Math.max.apply(null, yData);
-		minDataX = Math.min.apply(null, xData);
-		minDataY = Math.min.apply(null, yData);
-
-		//ESTABLISH AXIS LABELS
-		minX = Math.floor(minDataX/xAdjust) * xAdjust;
-		minY = Math.floor(minDataY/yAdjust) * yAdjust;
-		maxX = Math.ceil(maxDataX/xAdjust) * xAdjust;
-		maxY = Math.ceil(maxDataY/yAdjust) * yAdjust;	
+	function dataScale(){
+		xScale = d3.scale.linear()
+					.domain([0, d3.max(workingData, function(d){return d[0];})])
+					.range([padding, widthX - padding])
+					.clamp(true)
+					.nice();
+					
+		yScale = d3.scale.linear()
+					.domain([0, d3.max(workingData, function(d){return d[1];})])
+					.range([widthY - padding, padding])
+					.clamp(true)
+					.nice();
+					
+		xAxis = d3.svg.axis()
+					.scale(xScale)
+					.orient("bottom")
+					.ticks(5);
+		
+		yAxis = d3.svg.axis()
+					.scale(yScale)
+					.orient("left")
+					.ticks(5);
 	}
 	
-	function plotData(){
-		var i;
-		for (i=0 ; i < plotPoints ; i++){
+	function initialPlot(){									
+		plots = canvas.selectAll("circle")
+						.data(workingData)
+						.enter()
+						.append("circle")
+						.attr({
+							r: plotRadius,
+							cx: function(d){
+								return xScale(d[0]);
+							},
+							cy: function(d){
+								return yScale(d[1]);
+							},
+							fill: color
+						})
+		
+		//create x-axis
+		canvas.append("g")
+			.classed("axis", true)
+			.attr("transform", "translate(0," + (widthY - padding) + ")")
+			.call(xAxis);			
+						
+		//create x-axis
+		canvas.append("g")
+			.classed("axis", true)
+			.attr({
+				transform: "translate(" + padding + ",0)",
+			})
+			.call(yAxis);
+			
+			
+		/*for (i=0 ; i < plotPoints ; i++){
 			var posX = [], posY = [];
 			posX[i] = (xData[i] / maxX) * widthX;
 			posY[i] = widthY - ((yData[i] / maxY) * widthY);
-			$("#canvas g").append("<circle id=\"point"+ i + "\" fill=\"" + color + "\" data-point=\""+ pointLabel[i] +"\" data-x=\"" + xData[i] + "\" data-y=\"" + yData[i] + "\" class=\"plot-point\" cx=\"" + posX[i] + "\" cy=\"" + posY[i] + "\" r=\"" + plotRadius + "\" />");
-			$("#canvas").html($("#canvas").html()); //refresh page to load dynamic svgs
-		}
+			
+			
+			
+			
+			//draw shapes
+			plots[i] = paper.circle(posX[i],posY[i],plotRadius).mouseover(function(){
+				this.attr({
+					opacity:1
+				});
+			}).mouseout(function(){
+				this.attr({
+					opacity:0.5
+				});
+			}).data("data-label", pointLabel[i]).attr({
+				fill:"#f8981d",
+				stroke:"#ffffff",
+				opacity:0.5
+			}).click(function(){
+				alert(this.data("data-label"));
+			});
+		}*/
+			
+			//$("#canvas g").append("<circle id=\"point"+ i + "\" fill=\"" + color + "\" data-point=\""+ pointLabel[i] +"\" data-x=\"" + xData[i] + "\" data-y=\"" + yData[i] + "\" class=\"plot-point\" cx=\"" + posX[i] + "\" cy=\"" + posY[i] + "\" r=\"" + plotRadius + "\" />");
+		
 	}
 	
 	function determineStep(step){
@@ -180,15 +243,14 @@
 	
 	function animateChart(){
 		var i;
+		var time = 2000;
 		grabData();
 		var posX = [], posY = [];
 		posX[i] = (xData[i] / maxX) * widthX;
 		posY[i] = widthY - ((yData[i] / maxY) * widthY);
-		for (i=0 ; i < plotPoints ; i++){
-			$("#point"+i+"").animate({
-				svgCx:posX[i],
-				svgCy:posY[i]
-			}, 1000);
+		console.log(posX)
+		for (i=0 ; i < plotPoints ; i++){			
+		
 		}
 	}
 
