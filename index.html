@@ -20,6 +20,13 @@
 
 		#canvas circle {
 			cursor:pointer;
+			opacity:0.5;
+			fill:#f8981d;
+		}		
+		#canvas circle:nth-of-type(5) {
+			cursor:pointer;
+			opacity:0.5;
+			fill:#78a22f;
 		}
 		#canvas circle:hover {
 			z-index:1000;
@@ -95,9 +102,10 @@
 	}
 
 </style>
-<div id="canvas">
-
-</div>      
+<div id="canvas"></div>     
+<div id="navigation">
+	<p>Update</p>
+</div> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="http://www.edsource.org/wp-content/js/tabletop.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -107,8 +115,8 @@
 	"use strict";
 	//GLOBAL VARIABLES
 	var public_spreadsheet_url = "https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdDZOUWRhVXRiSjVrMjlqNzlPR1BJc0E&output=html";
-	var chartDump = [], workingData = [], pointLabel = [], xData = [], yData = [];
-	var plotRadius = 10, initX = 1, initY = 2, padding = 50, widthX = 650, widthY = 600, color = "#f8981d", plotPoints = 51, chartStep = 0;
+	var chartDump = [], workingData = [], pointLabel = [], scalingData = [], pointColors = [];
+	var plotRadius = 10, initX = 1, initY = 2, padding = 50, widthX = 650, widthY = 600, color = "#f8981d", plotPoints = 51, chartStep = 0, years = 42;
 	var plots, xScale, yScale, xAxis, yAxis;
 	var canvas = d3.select("#canvas")
 					.append("svg")
@@ -139,27 +147,43 @@
 
 	function grabData(){
 		var i, cs;
-		cs = chartStep * plotPoints;
+		if (chartStep === 0 || chartStep === 1){
+			cs = chartStep * plotPoints;
+		}
+		else {
+			cs = (chartStep * plotPoints) - 1;
+			console.log(cs)
+		}
 		for (i=0 ; i < plotPoints ; i++){
 			var ii = i + cs;
 			workingData[i] = new Array();
 			workingData[i][0] = chartDump[ii][initX];
 			workingData[i][1]= chartDump[ii][initY];
-			pointLabel[i] = chartDump[ii][0] 
-			//xData[i] = chartDump[ii][initX];
-			//yData[i] = chartDump[ii][initY];
+			pointLabel[i] = chartDump[ii][0];
 		}
+		console.log(workingData[4]);
+		
+	
 	}
 	
 	function dataScale(){
+		var i;
+		var maxData = chartDump.length;
+		
+		for (i=0 ; i < maxData ; i++){
+			scalingData[i] = new Array();
+			scalingData[i][0] = chartDump[i][initX];
+			scalingData[i][1]= chartDump[i][initY];
+		}
+		
 		xScale = d3.scale.linear()
-					.domain([0, d3.max(workingData, function(d){return d[0];})])
+					.domain([0, d3.max(scalingData, function(d){return d[0];})])
 					.range([padding, widthX - padding])
 					.clamp(true)
 					.nice();
 					
 		yScale = d3.scale.linear()
-					.domain([0, d3.max(workingData, function(d){return d[1];})])
+					.domain([0, d3.max(scalingData, function(d){return d[1];})])
 					.range([widthY - padding, padding])
 					.clamp(true)
 					.nice();
@@ -173,9 +197,10 @@
 					.scale(yScale)
 					.orient("left")
 					.ticks(5);
+					
 	}
 	
-	function initialPlot(){									
+	function initialPlot(){
 		plots = canvas.selectAll("circle")
 						.data(workingData)
 						.enter()
@@ -187,8 +212,7 @@
 							},
 							cy: function(d){
 								return yScale(d[1]);
-							},
-							fill: color
+							}
 						})
 		
 		//create x-axis
@@ -203,56 +227,42 @@
 			.attr({
 				transform: "translate(" + padding + ",0)",
 			})
-			.call(yAxis);
-			
-			
-		/*for (i=0 ; i < plotPoints ; i++){
-			var posX = [], posY = [];
-			posX[i] = (xData[i] / maxX) * widthX;
-			posY[i] = widthY - ((yData[i] / maxY) * widthY);
-			
-			
-			
-			
-			//draw shapes
-			plots[i] = paper.circle(posX[i],posY[i],plotRadius).mouseover(function(){
-				this.attr({
-					opacity:1
-				});
-			}).mouseout(function(){
-				this.attr({
-					opacity:0.5
-				});
-			}).data("data-label", pointLabel[i]).attr({
-				fill:"#f8981d",
-				stroke:"#ffffff",
-				opacity:0.5
-			}).click(function(){
-				alert(this.data("data-label"));
-			});
-		}*/
-			
-			//$("#canvas g").append("<circle id=\"point"+ i + "\" fill=\"" + color + "\" data-point=\""+ pointLabel[i] +"\" data-x=\"" + xData[i] + "\" data-y=\"" + yData[i] + "\" class=\"plot-point\" cx=\"" + posX[i] + "\" cy=\"" + posY[i] + "\" r=\"" + plotRadius + "\" />");
-		
+			.call(yAxis);		
 	}
 	
-	function determineStep(step){
-		chartStep = step;
-		animateChart();
-	}
+	//updating data
+	d3.select("#navigation p")
+		.on("click", function(){
+			updateData();
+		})
 	
-	function animateChart(){
-		var i;
-		var time = 2000;
+	function updateData(){
+		chartStep = chartStep + 1;
 		grabData();
-		var posX = [], posY = [];
-		posX[i] = (xData[i] / maxX) * widthX;
-		posY[i] = widthY - ((yData[i] / maxY) * widthY);
-		console.log(posX)
-		for (i=0 ; i < plotPoints ; i++){			
-		
+		canvas.selectAll("circle")
+			.data(workingData); //grab new data
+		plots = canvas.selectAll("circle") //update visuals
+						.data(workingData)
+						.transition()
+						.duration(1000)
+						.attr({
+							r: plotRadius,
+							cx: function(d){
+								return xScale(d[0]);
+							},
+							cy: function(d){
+								return yScale(d[1]);
+							}
+						})
+		if (chartStep === years){
+			return;
+		}
+		else {
+			setTimeout(updateData, 500);
 		}
 	}
+	
+
 
 
 </script>
