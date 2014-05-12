@@ -1,4 +1,38 @@
 <style>
+	auto	p,span,h1,h2,h3,a,tr {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: -moz-none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	::-webkit-scrollbar {
+	    -webkit-appearance: none;
+	}
+
+	::-webkit-scrollbar:vertical {
+	    width: 11px;
+	}
+
+	::-webkit-scrollbar:horizontal {
+	    height: 11px;
+	}
+
+	::-webkit-scrollbar-thumb {
+	    border-radius: 8px;
+	    border: 2px solid white; /* should match background, can't be transparent */
+	    background-color: rgba(0, 0, 0, .5);
+	}
+	
+	.guide line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	  opacity: 0;
+	}
+	
 	.axis path,
 	.axis line {
 		fill: none;
@@ -11,22 +45,48 @@
 		font-size: 11px;
 	}
 	
+	#year-area {
+		width:50px;
+		height:500px;
+		margin:0 0 0 5px;
+		float:left;
+		border:1px solid #aaa;
+		overflow:scroll;
+	}
+	
+		.year-label {
+			font:300 .5em "helvetica neue";
+			margin:5px 0;
+			cursor:pointer;
+			color:#333;
+		}
+		
+		.year-label:hover {
+			background:#333;
+			color:#fff;
+		}
+		
+		.year-label:first-of-type {
+			margin:0 0 5px 0;
+			color:#fff;
+			background:#333;
+		}
+	
 	#canvas {    
 		width:650px;
 		height:600px;
 		background:#fff;
 		margin:0 0 0 0;
+		float:left;
 	}
 
 		#canvas circle {
 			cursor:pointer;
 			opacity:0.5;
-			fill:#f8981d;
 		}		
 		#canvas circle:nth-of-type(5) {
 			cursor:pointer;
 			opacity:0.5;
-			fill:#78a22f;
 		}
 		#canvas circle:hover {
 			z-index:1000;
@@ -100,23 +160,62 @@
 		height:400px;
 		margin:0 0 18px 0;
 	}
+	
+	.year-display {
+		font: 700 2em/2em "Helvetica Neue";
+	}
+	#navigation {
+		clear:both;
+	}
+	
+	#navigation p {
+		margin:0 10px;
+		float:left;
+	}
+	
+	.tooltip {
+		background: 		#333;
+		position: 			absolute;
+		padding: 			5px;
+		border-radius: 		5px;
+		-moz-box-shadow:    -2px 1px 2px #333;
+		-webkit-box-shadow: -2px 1px 2px #333;
+		box-shadow:         -2px 1px 2px #333;
+	}
+	
+	.tooltip h4 {
+		text-align:			center;
+		font:				300 .8em "helvetica neue";
+		margin:				0 0 0 0;
+		color:				#fff;
+	}
 
 </style>
-<div id="canvas"></div>     
-<div id="navigation">
-	<p>Update</p>
-</div> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<h1></h1>
+<div id="chart-area">
+	<h2 class="year-display"></h2>
+	<div>
+		<div id="canvas"></div>     
+		<div id="year-area"></div>
+	</div>
+	<div id="navigation">
+		<p id="update-data">Update</p>
+		<p id="reset-data">Reset</p>
+	</div>
+</div>
+	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="http://www.edsource.org/wp-content/js/tabletop.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
+<script src="http://www.edsource.org/wp-content/js/underscore-min.js"></script>
+<script src="http://www.edsource.org/wp-content/js/caltip.min.js"></script>
 
 <script>	
 	"use strict";
 	//GLOBAL VARIABLES
 	var public_spreadsheet_url = "https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdDZOUWRhVXRiSjVrMjlqNzlPR1BJc0E&output=html";
-	var chartDump = [], workingData = [], pointLabel = [], scalingData = [], pointColors = [];
-	var plotRadius = 10, initX = 1, initY = 2, padding = 50, widthX = 650, widthY = 600, color = "#f8981d", plotPoints = 51, chartStep = 0, years = 42;
+	var chartDump = [], workingData = [], pointLabel = [], scalingData = [], pointColors = [], uniqueYears = [], uniqueLabels = [];
+	var plotRadius = 10, initX = 2, initY = 3, padding = 50, widthX = 650, widthY = 600, color = "#f8981d", plotPoints = 51, chartStep = 0, years = 42;
 	var plots, xScale, yScale, xAxis, yAxis;
 	var canvas = d3.select("#canvas")
 					.append("svg")
@@ -128,42 +227,54 @@
 	$(document).ready(function(){
 			Tabletop.init( { key: public_spreadsheet_url,
 		                     callback: showInfo,
+							 proxy:"https://s3.amazonaws.com/edsource-bridge",
 		                     wanted: ["Data"],
 		                     debug: true } );
 	});
 
-	function showInfo(data, tabletop) {		
+	function showInfo(data, tabletop) {
 		$.each( tabletop.sheets("Data").all(), function(i, data) {
 			var insertRow = [];
 			insertRow[0] = data.label;
-			insertRow[1] = parseFloat(data.data1);
-			insertRow[2] = parseFloat(data.data2);
+			insertRow[1] = data.year;
+			insertRow[2] = parseFloat(data.data1);
+			insertRow[3] = parseFloat(data.data2);
 			chartDump.push(insertRow);
 		});
+		
+		//grab unique years
+		var grabYears = [], i;
+		for (i=0 ; i < chartDump.length ; i++){
+			grabYears[i] = chartDump[i][1];
+		}
+		uniqueYears = _.uniq(grabYears);
+		
+		//grab unique labels
+		var grabLabels = [], i;
+		for (i=0 ; i < chartDump.length ; i++){
+			grabLabels[i] = chartDump[i][0];
+		}
+		uniqueLabels = _.uniq(grabLabels);		
+		
+		//inital functions		
 		grabData();
 		dataScale();
 		initialPlot();
 	}
 
-	function grabData(){
+	function grabData(cond){
 		var i, cs;
-		if (chartStep === 0 || chartStep === 1){
-			cs = chartStep * plotPoints;
-		}
-		else {
-			cs = (chartStep * plotPoints) - 1;
-			console.log(cs)
-		}
+		cs = (chartStep * plotPoints);
+				
 		for (i=0 ; i < plotPoints ; i++){
 			var ii = i + cs;
 			workingData[i] = new Array();
 			workingData[i][0] = chartDump[ii][initX];
-			workingData[i][1]= chartDump[ii][initY];
-			pointLabel[i] = chartDump[ii][0];
-		}
-		console.log(workingData[4]);
+			workingData[i][1] = chartDump[ii][initY];
+			workingData[i][2] = chartDump[ii][0];
+		}	
+		console.log(workingData)
 		
-	
 	}
 	
 	function dataScale(){
@@ -191,20 +302,22 @@
 		xAxis = d3.svg.axis()
 					.scale(xScale)
 					.orient("bottom")
-					.ticks(5);
+					.ticks(10);
 		
 		yAxis = d3.svg.axis()
 					.scale(yScale)
 					.orient("left")
-					.ticks(5);
+					.ticks(10);
 					
 	}
 	
 	function initialPlot(){
+		var i;
 		plots = canvas.selectAll("circle")
 						.data(workingData)
 						.enter()
 						.append("circle")
+						.classed("hover-over", true)
 						.attr({
 							r: plotRadius,
 							cx: function(d){
@@ -212,8 +325,25 @@
 							},
 							cy: function(d){
 								return yScale(d[1]);
+							},
+							id: function(d){
+								return d[2];
+							},
+						})
+						.style("fill", function(d){
+							if (d[2] === "California" || d[2] === "New York" || d[2] === "Alaska" || d[2] === "Texas"){
+								return "#78a22f";
+							}
+							else {
+								return "#f8981d";
 							}
 						})
+		
+		//year
+		$(".year-display").html(uniqueYears[chartStep]);
+		for (i=0 ; i < uniqueYears.length ; i++){
+			$("#year-area").append("<p id=\""+i+"\" class=\"year-label\">"+ uniqueYears[i] +"</p>");
+		}
 		
 		//create x-axis
 		canvas.append("g")
@@ -221,7 +351,7 @@
 			.attr("transform", "translate(0," + (widthY - padding) + ")")
 			.call(xAxis);			
 						
-		//create x-axis
+		//create y-axis
 		canvas.append("g")
 			.classed("axis", true)
 			.attr({
@@ -229,18 +359,10 @@
 			})
 			.call(yAxis);		
 	}
-	
-	//updating data
-	d3.select("#navigation p")
-		.on("click", function(){
-			updateData();
-		})
-	
-	function updateData(){
-		chartStep = chartStep + 1;
+
+	function shiftChart(selection){
+		chartStep = selection;		
 		grabData();
-		canvas.selectAll("circle")
-			.data(workingData); //grab new data
 		plots = canvas.selectAll("circle") //update visuals
 						.data(workingData)
 						.transition()
@@ -253,7 +375,57 @@
 							cy: function(d){
 								return yScale(d[1]);
 							}
-						})
+						});
+		//year
+		$(".year-display").html(uniqueYears[chartStep]);
+		$(".year-label").css("color","#333").css("background","#fff");
+		$(".year-label:eq("+selection+")").css("color","#fff").css("background","#333");
+	}
+	
+	function resetData(){
+		chartStep = 0;
+		grabData();
+		plots = canvas.selectAll("circle") //update visuals
+						.data(workingData)
+						.transition()
+						.duration(1000)
+						.attr({
+							r: plotRadius,
+							cx: function(d){
+								return xScale(d[0]);
+							},
+							cy: function(d){
+								return yScale(d[1]);
+							}
+						});
+		//year
+		$(".year-display").html(uniqueYears[chartStep]);
+		$(".year-label").css("color","#333").css("background","#fff");
+		$(".year-label:eq(0)").css("color","#fff").css("background","#333");
+	}
+	
+	function updateData(){
+		var i;
+		chartStep = chartStep + 1;
+		grabData();
+		canvas.selectAll("circle")
+			.data(workingData); //grab new data
+		plots = canvas.selectAll("circle") //update visuals
+						.data(workingData)
+						.transition()
+						.duration(500)
+						.attr({
+							r: plotRadius,
+							cx: function(d){
+								return xScale(d[0]);
+							},
+							cy: function(d){
+								return yScale(d[1]);
+							}
+						});
+		//year
+		$(".year-display").html(uniqueYears[chartStep]);
+		
 		if (chartStep === years){
 			return;
 		}
@@ -262,7 +434,88 @@
 		}
 	}
 	
-
-
+	//MOUSEOVER OPTIONS
+	$(document).ready(function(){
+		$("#canvas").on("mouseover", "svg > circle", function(){
+			var $selection = $(this).attr("id");
+			var xLoc = parseFloat(+$(this).attr("cx") + 10), yLoc = parseFloat(+$(this).attr("cy") + padding + 5);
+			var circle = d3.select(this);
+		
+			//add tooltip
+			$("#canvas").append($("<div class=\"tooltip\"><h4>"+ $selection +"</h4></div>").css({
+				top:yLoc,
+				left:xLoc
+			}));
+			
+			//enlarge circle			
+			circle.transition()
+				.duration(800)
+				.attr("r", 14)
+				.ease("elastic");
+				
+			//X Line Data
+			canvas.append("g")
+				.attr("class", "guide")
+			.append("line")
+				.attr("x1", circle.attr("cx"))
+				.attr("x2", padding)
+				.attr("y1", circle.attr("cy"))
+				.attr("y2", circle.attr("cy"))
+				.style("stroke", circle.style("fill"))
+				.transition().delay(200).duration(400).styleTween("opacity", 
+							function() { return d3.interpolate(0, .5); });
+							
+			//Y Line Data
+				canvas.append("g")
+					.attr("class", "guide")
+				.append("line")
+					.attr("x1", circle.attr("cx"))
+					.attr("x2", circle.attr("cx"))
+					.attr("y1", circle.attr("cy"))
+					.attr("y2", widthY - padding)
+					.style("stroke", circle.style("fill"))
+					.transition().delay(200).duration(400).styleTween("opacity", 
+								function() { return d3.interpolate(0, .5); })
+			
+			d3.selection.prototype.moveToFront = function() { 
+			  return this.each(function() { 
+				this.parentNode.appendChild(this); 
+			  }); 
+			};
+			circle.moveToFront();	
+						
+		});
+		$("#canvas").on("mouseleave", "svg > circle", function(){
+			var circle = d3.select(this);
+			
+			//remove tooltip and lines
+			$(".tooltip").remove();
+			$(".guide").remove();
+			
+			//restore circle			
+			circle.transition()
+				.duration(800)
+				.attr("r", 10)
+				.ease("elastic");
+		});
+	});
+	
+	//updating data
+	d3.select("#update-data")
+		.on("click", function(){
+			updateData();
+		});
+			
+	//reset data
+	d3.select("#reset-data")
+		.on("click", function(){
+			resetData();
+		});
+		
+	//pick year data
+	$("#year-area").on("click", "p", function(){
+		var selection = $(this).attr("id");
+		shiftChart(selection);
+	});
 
 </script>
