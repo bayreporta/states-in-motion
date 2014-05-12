@@ -89,7 +89,6 @@
 			opacity:0.5;
 		}
 		#canvas circle:hover {
-			z-index:1000;
 			opacity:1;
 		}		
 	#y-axis {
@@ -121,7 +120,6 @@
 				color:#aaa;
 			}
 			#y-axis-ticks {
-				background:pink;
 				width:40px;
 				height:402px;
 				margin:0 0 0 0;
@@ -188,6 +186,15 @@
 		font:				300 .8em "helvetica neue";
 		margin:				0 0 0 0;
 		color:				#fff;
+	}
+	
+	#blocker {
+		width: 				580px;
+		height: 			515px;
+		position: 			absolute;
+		top: 				134px;
+		left: 				59px;
+		z-index: 			1000;
 	}
 
 </style>
@@ -361,7 +368,7 @@
 	}
 
 	function shiftChart(selection){
-		chartStep = selection;		
+		chartStep = selection;	
 		grabData();
 		plots = canvas.selectAll("circle") //update visuals
 						.data(workingData)
@@ -380,6 +387,11 @@
 		$(".year-display").html(uniqueYears[chartStep]);
 		$(".year-label").css("color","#333").css("background","#fff");
 		$(".year-label:eq("+selection+")").css("color","#fff").css("background","#333");
+		
+		//nullify hover
+		setTimeout(function(){
+			$("#blocker").remove();
+		}, 1000);
 	}
 	
 	function resetData(){
@@ -427,6 +439,7 @@
 		$(".year-display").html(uniqueYears[chartStep]);
 		
 		if (chartStep === years){
+			$("#blocker").remove();
 			return;
 		}
 		else {
@@ -435,7 +448,7 @@
 	}
 	
 	//MOUSEOVER OPTIONS
-	$(document).ready(function(){
+	$(document).ready(function(selected){
 		$("#canvas").on("mouseover", "svg > circle", function(){
 			var $selection = $(this).attr("id");
 			var xLoc = parseFloat(+$(this).attr("cx") + 10), yLoc = parseFloat(+$(this).attr("cy") + padding + 5);
@@ -477,12 +490,13 @@
 					.transition().delay(200).duration(400).styleTween("opacity", 
 								function() { return d3.interpolate(0, .5); })
 			
-			d3.selection.prototype.moveToFront = function() { 
+			//Move to Front
+			/*d3.selection.prototype.moveToFront = function() { 
 			  return this.each(function() { 
 				this.parentNode.appendChild(this); 
 			  }); 
 			};
-			circle.moveToFront();	
+			circle.moveToFront();*/
 						
 		});
 		$("#canvas").on("mouseleave", "svg > circle", function(){
@@ -503,9 +517,12 @@
 	//updating data
 	d3.select("#update-data")
 		.on("click", function(){
+			$("#canvas").append("<div id=\"blocker\"></div>");
+			resetData();
 			updateData();
 		});
-			
+		
+		
 	//reset data
 	d3.select("#reset-data")
 		.on("click", function(){
@@ -515,6 +532,8 @@
 	//pick year data
 	$("#year-area").on("click", "p", function(){
 		var selection = $(this).attr("id");
+		$("#canvas").append("<div id=\"blocker\"></div>");
+		resetData();
 		shiftChart(selection);
 	});
 
