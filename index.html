@@ -221,7 +221,8 @@
 	"use strict";
 	//GLOBAL VARIABLES
 	var public_spreadsheet_url = "https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdDZOUWRhVXRiSjVrMjlqNzlPR1BJc0E&output=html";
-	var chartDump = [], workingData = [], pointLabel = [], scalingData = [], pointColors = [], uniqueYears = [], uniqueLabels = [];
+	var chartDump = [], workingData = [], pointLabel = [], scalingData = [], pointColors = [], uniqueYears = [], uniqueLabels = [], allPoints = [];
+	;
 	var plotRadius = 10, initX = 2, initY = 3, padding = 50, widthX = 650, widthY = 600, color = "#f8981d", plotPoints = 51, chartStep = 0, years = 42;
 	var plots, xScale, yScale, xAxis, yAxis;
 	var canvas = d3.select("#canvas")
@@ -246,6 +247,7 @@
 			insertRow[1] = data.year;
 			insertRow[2] = parseFloat(data.data1);
 			insertRow[3] = parseFloat(data.data2);
+			insertRow[4] = parseInt(data.id);
 			chartDump.push(insertRow);
 		});
 		
@@ -279,6 +281,7 @@
 			workingData[i][0] = chartDump[ii][initX];
 			workingData[i][1] = chartDump[ii][initY];
 			workingData[i][2] = chartDump[ii][0];
+			workingData[i][3] = chartDump[ii][4];
 		}	
 		console.log(workingData)
 		
@@ -336,14 +339,18 @@
 							id: function(d){
 								return d[2];
 							},
+							data: function(d){
+								return d[3];
+							}
 						})
 						.style("fill", function(d){
-							if (d[2] === "California" || d[2] === "New York" || d[2] === "Alaska" || d[2] === "Texas"){
+							/*if (d[2] === "California" || d[2] === "New York" || d[2] === "Alaska" || d[2] === "Texas"){
 								return "#78a22f";
 							}
 							else {
 								return "#f8981d";
-							}
+							}*/
+							return "#f8981d";
 						})
 		
 		//year
@@ -364,7 +371,13 @@
 			.attr({
 				transform: "translate(" + padding + ",0)",
 			})
-			.call(yAxis);		
+			.call(yAxis);	
+			
+		//grab all plots
+		for (i = 0 ; i < 51; i++){
+			allPoints[i] = $("svg circle:eq(" + i + ")");
+		}
+		console.log(allPoints);
 	}
 
 	function shiftChart(selection){
@@ -451,9 +464,11 @@
 	$(document).ready(function(selected){
 		$("#canvas").on("mouseover", "svg > circle", function(){
 			var $selection = $(this).attr("id");
+			var $dataPoint = $(this);
 			var xLoc = parseFloat(+$(this).attr("cx") + 10), yLoc = parseFloat(+$(this).attr("cy") + padding + 5);
 			var circle = d3.select(this);
-		
+			
+						
 			//add tooltip
 			$("#canvas").append($("<div class=\"tooltip\"><h4>"+ $selection +"</h4></div>").css({
 				top:yLoc,
@@ -498,10 +513,12 @@
 			};
 			circle.moveToFront();*/
 						
+			//move to front experiment
+			$dataPoint.insertBefore(".axis:eq(0)");
 		});
 		$("#canvas").on("mouseleave", "svg > circle", function(){
 			var circle = d3.select(this);
-			
+				
 			//remove tooltip and lines
 			$(".tooltip").remove();
 			$(".guide").remove();
@@ -512,6 +529,17 @@
 				.attr("r", 10)
 				.ease("elastic");
 		});
+	});
+	
+	$("#canvas").on("mouseout", "svg > circle", function(){
+		$("svg circle").remove();
+		
+		var i;
+		var ii = 50;
+		for (i = 0 ; i < 51 ; i++){
+			$("svg").prepend(allPoints[ii]);
+			ii = ii - 1;
+		}
 	});
 	
 	//updating data
