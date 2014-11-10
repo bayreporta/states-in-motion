@@ -143,7 +143,7 @@ var chartFunctions = {
 			}).attr("y1", y(startData)).attr("x2", function(d) {
 					return x(d);
 			}).attr("y2", y(startData) + 10);
-			chartFunctions.adjustNormalX();
+			chartFunctions.adjustNormalX(dataType);
 		}
 	},
 	populateLabels:function(){
@@ -173,26 +173,47 @@ var chartFunctions = {
 			});
 		}
 	},
-	adjustNormalX:function(){
-		//show certain labels
-		$(".xLabel").css("display","none");
-		$(".xLabel:first").css("display","block");
-		$(".xLabel:last").css("display","block");
-		$(".xLabel:eq(6)").css("display","block");
-		$(".xLabel:eq(13)").css("display","block");
-		$(".xLabel:eq(20)").css("display","block");
-		$(".xLabel:eq(27)").css("display","block");
-		$(".xLabel:eq(34)").css("display","block");
-		
-		//show certain ticks
-		$(".xTicks").css("display","none");
-		$(".xTicks:first").css("display","block");
-		$(".xTicks:last").css("display","block");
-		$(".xTicks:eq(6)").css("display","block");
-		$(".xTicks:eq(13)").css("display","block");
-		$(".xTicks:eq(20)").css("display","block");
-		$(".xTicks:eq(27)").css("display","block");
-		$(".xTicks:eq(34)").css("display","block");
+	adjustNormalX:function(dataType){
+		if (dataType === "Poverty"){
+			//show certain labels
+			$(".xLabel").css("display","none");
+			$(".xLabel:first").css("display","block");
+			$(".xLabel:last").css("display","block");
+			$(".xLabel:eq(8)").css("display","block");
+			$(".xLabel:eq(15)").css("display","block");
+			$(".xLabel:eq(22)").css("display","block");
+			$(".xLabel:eq(29)").css("display","block");
+
+			//show certain ticks
+			$(".xTicks").css("display","none");
+			$(".xTicks:first").css("display","block");
+			$(".xTicks:last").css("display","block");
+			$(".xTicks:eq(8)").css("display","block");
+			$(".xTicks:eq(15)").css("display","block");
+			$(".xTicks:eq(22)").css("display","block");
+			$(".xTicks:eq(29)").css("display","block");
+		}
+		else {
+			//show certain labels
+			$(".xLabel").css("display","none");
+			$(".xLabel:first").css("display","block");
+			$(".xLabel:last").css("display","block");
+			$(".xLabel:eq(6)").css("display","block");
+			$(".xLabel:eq(13)").css("display","block");
+			$(".xLabel:eq(20)").css("display","block");
+			$(".xLabel:eq(27)").css("display","block");
+			$(".xLabel:eq(34)").css("display","block");
+
+			//show certain ticks
+			$(".xTicks").css("display","none");
+			$(".xTicks:first").css("display","block");
+			$(".xTicks:last").css("display","block");
+			$(".xTicks:eq(6)").css("display","block");
+			$(".xTicks:eq(13)").css("display","block");
+			$(".xTicks:eq(20)").css("display","block");
+			$(".xTicks:eq(27)").css("display","block");
+			$(".xTicks:eq(34)").css("display","block");
+		}
 	}
 }
 
@@ -243,6 +264,12 @@ switch(dataType){
 		endData = 2;
 		startYear = 1970;
 		endYear = 2011;
+		chartFunctions.setDefaults();
+		break;
+	case "Poverty":
+		endData = 60;
+		startYear = 1977;
+		endYear = 2013;
 		chartFunctions.setDefaults();
 		break;
 }
@@ -638,6 +665,57 @@ switch(dataType){
 			chartFunctions.drawChart();
 		});
 		break;
+	case "Poverty":
+		case "Income":
+			d3.text('data/poverty.csv', 'text/csv', function(text) {
+				var thisData = d3.csv.parseRows(text);
+				for (i = 1; i < thisData.length; i++) {
+					var values = thisData[i].slice(1,45);
+					var tempData = [];
+					var started = false;
+					for (j = 0; j < values.length; j++) {
+						if (values[j] != '') {
+							tempData.push({
+								x: years[j],
+								y: values[j]
+							});
+							if (!started) {
+								startEnd[thisData[i][0]] = {
+									'startYear': years[j],
+									'startVal': values[j]
+								};
+								started = true;
+							} else if (j == values.length - 1) {
+								startEnd[thisData[i][0]]['endYear'] = years[j];
+								startEnd[thisData[i][0]]['endVal'] = values[j];
+							}
+						}
+
+					}
+
+					//populate state labels
+					states[i-1] = thisData[i][0];
+
+					chart.append("svg:path")
+						.data([tempData])
+						.attr("state", thisData[i][0])
+						.attr("d", line)
+						.attr("shape-rendering","auto")
+						.on("mouseover", chartFunctions.highlightLine)
+						.on("mouseleave", chartFunctions.unhightlightLine)
+
+					//populate end points for each line
+					var ii = i - 1;
+					var temp = $("#chart path:eq("+ii+")").attr("d");
+					var split = temp.split(",");
+					var end = split.length - 1;
+					endPoints[ii] = split[end];
+				}	
+
+				chartFunctions.populateLabels();
+				chartFunctions.drawChart();
+			});
+			break;
 }
 
 
