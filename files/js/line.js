@@ -226,6 +226,12 @@ switch(dataType){
 		endYear = 2012;
 		chartFunctions.setDefaults();
 		break;
+	case "Income":
+		endData = 80000;
+		startYear = 1970;
+		endYear = 2013;
+		chartFunctions.setDefaults();
+		break;
 	case "Salaries":
 		endData = 100000;
 		startYear = 1970;
@@ -577,6 +583,56 @@ switch(dataType){
 				.attr("y1", 200)
 				.attr("y2", 200)
 				.attr("shape-rendering","auto")
+
+			chartFunctions.populateLabels();
+			chartFunctions.drawChart();
+		});
+		break;
+	case "Income":
+		d3.text('data/income.csv', 'text/csv', function(text) {
+			var thisData = d3.csv.parseRows(text);
+			for (i = 1; i < thisData.length; i++) {
+				var values = thisData[i].slice(1,45);
+				var tempData = [];
+				var started = false;
+				for (j = 0; j < values.length; j++) {
+					if (values[j] != '') {
+						tempData.push({
+							x: years[j],
+							y: values[j]
+						});
+						if (!started) {
+							startEnd[thisData[i][0]] = {
+								'startYear': years[j],
+								'startVal': values[j]
+							};
+							started = true;
+						} else if (j == values.length - 1) {
+							startEnd[thisData[i][0]]['endYear'] = years[j];
+							startEnd[thisData[i][0]]['endVal'] = values[j];
+						}
+					}
+
+				}
+
+				//populate state labels
+				states[i-1] = thisData[i][0];
+
+				chart.append("svg:path")
+					.data([tempData])
+					.attr("state", thisData[i][0])
+					.attr("d", line)
+					.attr("shape-rendering","auto")
+					.on("mouseover", chartFunctions.highlightLine)
+					.on("mouseleave", chartFunctions.unhightlightLine)
+
+				//populate end points for each line
+				var ii = i - 1;
+				var temp = $("#chart path:eq("+ii+")").attr("d");
+				var split = temp.split(",");
+				var end = split.length - 1;
+				endPoints[ii] = split[end];
+			}	
 
 			chartFunctions.populateLabels();
 			chartFunctions.drawChart();
