@@ -10,18 +10,14 @@
 		<script src="http://edsource.org/wp-content/js/underscore-min.js"></script>
 	</head>
 	<body>
-
-	<div id="main-wrapper" class="sr-graphic">
-		<div id="content">
-			<div id="chart"></div>	
-		</div>
-		<div id="selection"></div> 
-	</div> 
-
-	<svg width="10000" height="10000">
-		<rect x="0" y="0" height="100" width="20", fill="blue" transform="rotate(45, 100, 100)"></rect>
-	</svg>
-
+		<div id="main-wrapper" class="sr-graphic">
+			<div id="content">
+				<div id="chart"></div>	
+			</div>
+			<div id="selection"></div> 
+			
+		</div> 
+		<input type="button" name="Go to 2013" value="Go to 2013">
 	</body>
 </html>
 
@@ -36,11 +32,14 @@
 			//append label
 			var clicked = $("#selection p[state='"+state+"']").attr("clicked");
 			if (clicked === "false"){
-				//var where = _.indexOf(states, state);
-				//var position = parseFloat(endPoints[where]) - 2;
-				//$("#main-wrapper").append("<span class=\"labels\" state=\""+state+"\" style=\"top:"+ position + "px;\">" + state + "</span>");
-				//$(".label[state='"+ state +"']").insertBefore("#selection");
-				//highlight and up front
+				//determine position
+				var whereY = parseInt($("#chart rect[state='" + state + "']").attr("y")) - 10;
+				var whereX = parseInt($("#chart rect[state='" + state + "']").attr("x")) + 7;
+			
+				//toggle layer
+				$("#chart").append("<span class=\"labels\" state=\""+state+"\" style=\"left:" + whereX + "px;top:" + whereY + "px\">" + state + "</span>");
+				$(".label[state='"+ state +"']").insertBefore("#selection");
+				
 				current.css("fill", "#4169E1");
 			}
 		},
@@ -50,9 +49,10 @@
 
 			//remove label abd highlight
 			var clicked = $("#selection p[state='"+state+"']").attr("clicked");
-			if (clicked === "false"){
+			if (clicked === "false"){				
+				//remove label
 				current.css("fill", "#e2e2e2");
-				//$("span[state='"+ state +"']").remove();
+				$("span[state='"+ state +"']").remove();
 			}
 
 		},
@@ -60,108 +60,222 @@
 			chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
 
 		},
-		drawChart:function(){
-			//Set Scales
-			yScale = d3.scale.linear()
-				.domain([startData, endData])
-				.range([0 + margin.top, h - margin.bottom]);
+		updateChart:function(position){
+			var newData = [];
 			
+			for (i = 0; i < states.length; i++) {
+				//populate state labels
+				newData[i] = parseInt(barData[i][position]);
+			}	
+			
+			//change year position
+			yearPosition = years[position + 1];
+						
+			//update chart
+			chartFunctions.drawChart(newData);
+			
+			//re-calc label positions
+			chartFunctions.updateLabels();
+			
+			if (fullMotion == true){
+				//DO IT AGAIN!
+				setTimeout(function(){
+					if (dataPosition !== years.length - 2){
+						dataPosition = dataPosition + 1;
+						chartFunctions.updateChart(dataPosition);
+					}
+				}, 500)
+			}
+	
+		},
+		rankBars:function(data){
+			var thisData = [];
+			
+			
+			for (i = 0 ; i < states.length ; i++){
+				//building data foundation for sorting
+				if (currentDataChk == false){
+					currentData[i] = new Object;
+				}
+				currentData[i]["state"] = states[i];
+				currentData[i]["data"] = data[i];
+				thisData[i] = data[i];
+				currentData[i]["rank"] = 0;
+			}
+			currentDataChk = true;
 
-			//create bars
-			chart.selectAll("rect")
-				.data(firstPlot)
-				.enter()
-				.append("rect")
-				.attr("x", function(d, i){
-					return (i * (540/firstPlot.length)) + 62
-				})
-				.attr("y", function(d, i){
-					return (h - yScale(d));
-				})
-				.attr("width", 8.58823552941)
-				.attr("height", function(d){
-					return yScale(d) - 30
-					
-				})
-				.on("mouseover", chartFunctions.highlightBar)
-				.on("mouseleave", chartFunctions.unhightlightBar)
+			
+			//sort data
+			thisData.sort(function(b, a){return a-b});
+			//determine rank for each state
+			for (i = 0 ; i < states.length ; i++){
+				for (ii = 0 ; ii < states.length ; ii++){
+					if (thisData[ii] == currentData[i]["data"]){
+						currentData[i]["rank"] = ii;
+					}
+				}
+				$("#chart rect[state='" + currentData[i]["state"] + "']").attr("rank", currentData[i]["rank"]).attr("x", xPosition[currentData[i]["rank"]]);
+				console.log(currentData[i]["state"])
+				console.log(currentData[i]["rank"])
 				
-			//meta data for bars
-			for (i=0 ; i < states.length ; i++){
-				$("#chart rect:eq("+i+")").attr("state", states[i]).attr("clicked","false").attr("data", firstPlot[i]);
 			}
 			
-			//Create Axes				
-			chart.append("svg:line")
-				.attr("x1", 60)
-				.attr("y1", h - 30)
-				.attr("x2", 600)
-				.attr("y2", h - 30)
-				.attr("class", "axis"); //X-Axis
-			chart.append("svg:line")
-				.attr("x1", 60)
-				.attr("y1", yScale(startData))
-				.attr("x2", 60)
-				.attr("y2", yScale(endData))
-				.attr("class", "axis"); //Y-Axis
-				
-			//Move Axes to Top//
-			$("svg line:eq(0)")
-				.add("svg line:eq(1)")
-				.detach()
-				.insertAfter("#chart svg g");
-				
-		
+		},
+		drawChart:function(data){
+			if (yearPosition !== startYear){
+				//create bars
+				chart.selectAll("rect")
+					.data(data)
+					.attr("x", function(d, i){
+						return (i * (540/data.length)) + 62
+					})
+					.attr("y-update", function(d, i){
+						return (h - yScale(d));
+					})
+					.transition()
+					.duration(200)
+					.attr("y", function(d, i){
+						return (h - yScale(d));
+					})
+					.attr("height", function(d){
+						return yScale(d) - 30
 
-			// Y Axis Labels //
-			chart.selectAll(".yLabel")
-				.data(yScale.ticks(4))
-				.enter().append("svg:text")
-				.attr("class", "yLabel")
-				.text(String)
-				.attr("x", 50)
-				.attr("y", function(d) {
-				return yScale(d)
-			}).attr("text-anchor", "end").attr("dy", 3);
+					})
+				
+				//meta data for bars
+				for (i=0 ; i < states.length ; i++){
+					$("#chart rect:eq("+i+")").attr("state", states[i]).attr("clicked","false").attr("data", data[i]);
+					xPosition[i] = $("#chart rect:eq("+i+")").attr("x");
 
-			utilityFunctions.churnLargeNumbers(true);
+				}
+			}
+			else {
+				//Set Scales
+				yScale = d3.scale.linear()
+					.domain([startData, endData])
+					.range([0 + margin.top, h - margin.bottom]);
+				//create bars
+				chart.selectAll("rect")
+					.data(data)
+					.enter()
+					.append("rect")
+					.attr("class", "barItem")
+					.attr("x", function(d, i){
+						return (i * (540/data.length)) + 62
+					})
+					.attr("y", function(d, i){
+						return (h - yScale(d));
+					})
+					.attr("width", 8.58823552941)
+					.attr("height", function(d){
+						return yScale(d) - 30
+
+					})
+					.on("mouseover", chartFunctions.highlightBar)
+					.on("mouseleave", chartFunctions.unhightlightBar)
+					
+				//meta data for bars
+				for (i=0 ; i < states.length ; i++){
+					$("#chart rect:eq("+i+")").attr("state", states[i]).attr("clicked","false").attr("data", data[i]);
+					xPosition[i] = $("#chart rect:eq("+i+")").attr("x");
+
+				}
+				
+				//Create Axes				
+				chart.append("svg:line")
+					.attr("x1", 60)
+					.attr("y1", h - 30)
+					.attr("x2", 600)
+					.attr("y2", h - 30)
+					.attr("class", "axis"); //X-Axis
+				chart.append("svg:line")
+					.attr("x1", 60)
+					.attr("y1", yScale(startData))
+					.attr("x2", 60)
+					.attr("y2", yScale(endData))
+					.attr("class", "axis"); //Y-Axis
+
+				//Move Axes to Top//
+				$("svg line:eq(0)")
+					.add("svg line:eq(1)")
+					.detach()
+					.insertAfter("#chart svg g");
+					
+				// Y Axis Labels //
+				chart.selectAll(".yLabel")
+					.data(yScale.ticks(4))
+					.enter().append("svg:text")
+					.attr("class", "yLabel")
+					.text(String)
+					.attr("x", 50)
+					.attr("y", function(d) {					
+						return h - yScale(d)
+				}).attr("text-anchor", "end").attr("dy", 3);
+
+				utilityFunctions.churnLargeNumbers(true);
+
+				// Y Axis Ticks //
+				chart.selectAll(".yTicks")
+					.data(yScale.ticks(4))
+					.enter()
+					.append("svg:line")
+					.attr("class", "yTicks")
+					.attr("y1", function(d) {
+						return yScale(d);
+				}).attr("x1", 55).attr("y2", function(d) {
+						return yScale(d);
+				}).attr("x2", 60);
+			}
+
+			//sort Bars
+			chartFunctions.rankBars(data)
 			
-			// Y Axis Ticks //
-			chart.selectAll(".yTicks")
-				.data(yScale.ticks(4))
-				.enter()
-				.append("svg:line")
-				.attr("class", "yTicks")
-				.attr("y1", function(d) {
-					return yScale(d);
-			}).attr("x1", 55).attr("y2", function(d) {
-					return yScale(d);
-			}).attr("x2", 60);
-		
+		},
+		updateLabels:function(){
+			for (i = 0 ; i < states.length ; i++){
+				//if any state labels are active, move them with data update
+				var active = $("#chart span[state='"+ states[i] + "']");
+
+				//determine position
+				var whereY = parseInt($("#chart rect[state='" + states[i] + "']").attr("y-update")) - 10;
+				var whereX = parseInt($("#chart rect[state='" + states[i] + "']").attr("x")) + 7;
+				active.animate({
+					top:whereY + "px",
+					left:whereX + "px"
+					
+				}, 100);
+			}
 		},
 		populateLabels:function(){
 			for (i=0 ; i < states.length ; i++){
 				$("#selection").append("<p state=\""+states[i]+"\"clicked=\"false\">" + states[i] + "</p>");
+				
 				$("#selection p:eq("+i+")").on("click", function(){
 					var clicked = $(this).attr("clicked");
 					var thisState = $(this).text();
-					if (clicked === "false"){
+					
+					if (clicked === "false"){				
 						//determine position
-						//var where = _.indexOf(states, thisState);
-						//var position = parseFloat(endPoints[where]) - 2;
+						var whereY = parseInt($("#chart rect[state='" + thisState + "']").attr("y")) - 10;
+						var whereX = parseInt($("#chart rect[state='" + thisState + "']").attr("x")) + 7;
 						//background and up front
 						$(this).css("background", "#ddd").attr("clicked","true");
 						$("#chart rect[state='"+ thisState +"']").css("fill","#4169E1");
+						$("#chart rect[state='"+ thisState +"']").attr("clicked", "true");
+						
 						//toggle layer
-						//$("#main-wrapper").append("<span class=\"labels\" state=\""+thisState+"\" style=\"top:"+ position + "px;\">" + thisState + "</span>");
-						//$(".label[state='"+ thisState +"']").insertBefore("#selection")
+						$("#chart").append("<span status=\"on\" class=\"labels\" state=\""+thisState+"\" style=\"left:" + whereX + "px;top:" + whereY + "px\">" + thisState + "</span>");
+		
+						$(".label[state='"+ thisState +"']").insertBefore("#selection");
 					}
 					else {
 						//background
 						$(this).css("background", "#fff").attr("clicked","false");
 						$("#chart rect[state='"+ thisState +"']").css("fill","#e2e2e2");
+						$("#chart rect[state='"+ thisState +"']").attr("clicked", "false");
+						
 						//remove label
-						//$("span[state='"+ thisState +"']").remove();
+						$("span[state='"+ thisState +"']").remove();
 					}
 				});
 			}
@@ -178,8 +292,12 @@
 			top:30,
 			bottom:30
 		},
-		padding = 60;
-	var barData = [], states = [], endPoints = [], firstPlot = [];
+		dataPosition = 1;
+		fullMotion = false;
+		padding = 60,
+		currentData = [], currentDataChk = false, 
+		years = [];
+	var barData = [], states = [], endPoints = [], firstPlot = [], xPosition = [];
 	switch(dataType){
 		case "Income":
 			startYear = 1970;
@@ -220,33 +338,41 @@
 			}
 
 		}
+	
 	}
 	//Populate Lines and Data//
 	switch(dataType){
 		case "Income":
 			d3.text('data/income.csv', 'text/csv', function(text) {
 				var thisData = d3.csv.parseRows(text);
+				var tempYears = [];
+				
+				//grab years
+				for (i = 0 ; i < thisData[0].length ; i++){
+					years[i] = thisData[0][i]
+				}
+				
+				//grab data
 				for (i = 1; i < thisData.length; i++) {
 					barData[i-1] = thisData[i].slice(1,45);
 					
 					//populate state labels
 					states[i-1] = thisData[i][0];
-/*
-				
-					//populate end points for each line
-					var ii = i - 1;
-					var temp = $("#chart path:eq("+ii+")").attr("d");
-					var split = temp.split(",");
-					var end = split.length - 1;
-					endPoints[ii] = split[end];*/
 					firstPlot[i-1] = parseInt(barData[i-1][0]);
 				}	
 				
 				chartFunctions.populateLabels();
-				chartFunctions.drawChart();
+				chartFunctions.drawChart(firstPlot);
 			});
 			break;
 	}
+	
+	$(document).ready(function(){
+		$("input").on("click", function(){
+			fullMotion = true;
+			chartFunctions.updateChart(dataPosition);
+		});
+	});
 
 	
 </script>
