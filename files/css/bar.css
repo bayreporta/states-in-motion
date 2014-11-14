@@ -8,22 +8,12 @@ body {
     user-select: none;
 }
 
-.sr-graphic h1 {
-	font-family: 'Roboto',san-serif;
-	font-size: 3.0em;
-	font-weight:700;
-	color:#4DC193;
-	margin:0;
-	padding:0;
-}
 
-.sr-graphic h2 {
+h2 {
 	font-family: 'Roboto',san-serif;
 	font-size: 1.5em;
 	text-transform: uppercase;
 	color:#57504E;
-	margin:0;
-	padding:0;
 }
 
 .sr-graphic p {
@@ -48,57 +38,6 @@ body {
 
 .sr-graphic #content {
 	float:left;
-}
-
-.sr-graphic #categories {
-	font-family: Arial,sans-serif;
-	margin:20px 0;
-}
-
-.sr-graphic #categories a {
-	color: #000;
-	font-size: 12px;
-	padding: 5px;
-	background: #e2e2e2;
-	cursor: pointer;
-	margin-right: 3px;
-}
-
-.sr-graphic #categories a {
-	text-decoration:none;
-}
-
-.sr-graphic #categories a:last-child {
-	margin-right: 0;
-}
-
-.sr-graphic #categories a.cat1 {
-	background: #895881;
-	color: #fff;
-}
-
-.sr-graphic #categories a.cat2 {
-	background: #ED7C31;
-	color: #fff;
-}
-
-.sr-graphic #categories a.cat3 {
-	background: #82A5C0;
-	color: #fff;
-}
-
-.sr-graphic #categories a.cat4 {
-	background: #6E9E75;
-	color: #fff;
-}
-
-.sr-graphic #categories a.cat5 {
-	background: #00BBD6;
-	color: #fff;
-}
-
-.sr-graphic #chart {
-	min-height: 550px;
 }
 
 .sr-graphic #info {
@@ -175,4 +114,33 @@ body {
 #chart rect {
 	fill:#e2e2e2;
 	cursor:pointer;
+}
+
+#nav-wrapper {
+	clear:both;
+}
+
+#nav-wrapper h2 {
+	margin: 10px auto;
+	display: block;
+	width: 140px;
+}
+
+#playMotion {
+	float:left;
+	margin: -10px 0 0 60px;
+	cursor:pointer;
+}
+
+#reloadChart {
+	margin: -3px 185px 0 0;
+	float: right;
+	cursor: pointer;
+}
+
+#yearSlider {
+	width: 500px;
+	margin: 0 0 0 20px;
+	display: block;
+	float:left;
 }
