@@ -77,7 +77,7 @@ var chartFunctions = {
 			.enter().append("svg:text")
 			.attr("class", "yLabel")
 			.text(String)
-			.attr("x", 60)
+			.attr("x", 100)
 			.attr("y", function(d) {
 			return y(d)
 		}).attr("text-anchor", "end").attr("dy", 3);
@@ -146,7 +146,57 @@ var chartFunctions = {
 			chartFunctions.adjustNormalX(dataType);
 		}
 	},
+	processData:function(thisData){
+		for (i = 1; i < thisData.length; i++) {
+			var values = thisData[i].slice(1,45);
+			var tempData = [];
+			var started = false;
+			for (j = 0; j < values.length; j++) {
+				if (values[j] != '') {
+					tempData.push({
+						x: years[j],
+						y: values[j]
+					});
+					if (!started) {
+						startEnd[thisData[i][0]] = {
+							'startYear': years[j],
+							'startVal': values[j]
+						};
+						started = true;
+					} else if (j == values.length - 1) {
+						startEnd[thisData[i][0]]['endYear'] = years[j];
+						startEnd[thisData[i][0]]['endVal'] = values[j];
+					}
+				}
+			}
+
+			//populate state labels
+			states[i-1] = thisData[i][0];
+
+			chart.append("svg:path")
+				.data([tempData])
+				.attr("state", thisData[i][0])
+				.attr("d", line)
+				.attr("shape-rendering","auto")
+				.on("mouseover", chartFunctions.highlightLine)
+				.on("mouseleave", chartFunctions.unhightlightLine)
+
+			//populate end points for each line
+			var ii = i - 1;
+			var temp = $("#chart path:eq("+ii+")").attr("d");
+			var split = temp.split(",");
+			var end = split.length - 1;
+			endPoints[ii] = split[end];
+		}	
+
+		chartFunctions.populateLabels();
+		chartFunctions.drawChart();
+	},
 	populateLabels:function(){
+		//Axis Labels
+		$("#y-axis").text(yAxisLabel);
+
+		//State Labels
 		for (i=0 ; i < states.length ; i++){
 			$("#selection").append("<p state=\""+states[i]+"\"clicked=\"false\">" + states[i] + "</p>");
 			$("#selection p:eq("+i+")").on("click", function(){
@@ -219,10 +269,10 @@ var chartFunctions = {
 
 //Globals//
 var dataType = $("meta").attr("content");
-var	w = 600,h = 400, startYear = 1970,endYear = 2013,startData = 0,endData = 0,
+var	w = 600,h = 400, startYear = 1970,endYear = 2013,startData = 0,endData = 0,yAxisLabel,
 	margin = {
 		all:-1,
-		left:70,
+		left:110,
 		right:15,
 		top:30,
 		bottom:30
@@ -231,30 +281,36 @@ var chart, line, x, y
 switch(dataType){
 	case "Population":
 		endData = 40000000;
+		yAxisLabel = "State Population"
 		chartFunctions.setDefaults();
 		break;
 	case "Students":
 		endData = 6500000;
+		yAxisLabel = "K-12 Students"
 		chartFunctions.setDefaults();
 		break;
 	case "Students per Capita":
 		endData = 40;
+		yAxisLabel = "Students per Capita"
 		chartFunctions.setDefaults();
 		break;
 	case "NAEP":
 		endData = 60;
+		yAxisLabel = "Average NAEP Proficency in Math and Reading, Grades 4 and 8"
 		startYear = 2003;
-		endYear = 2012;
+		endYear = 2014;
 		chartFunctions.setDefaults();
 		break;
 	case "Income":
 		endData = 80000;
+		yAxisLabel = "Income per Capita"
 		startYear = 1970;
 		endYear = 2013;
 		chartFunctions.setDefaults();
 		break;
 	case "Salaries":
 		endData = 100000;
+		yAxisLabel = "K-12 Teacher Salaries"
 		startYear = 1970;
 		endYear = 2011;
 		chartFunctions.setDefaults();
@@ -262,12 +318,14 @@ switch(dataType){
 	case "Salaries-Income":
 		startData = -2;
 		endData = 2;
+		yAxisLabel = "K-12 Teacher Salaries Against Income per Capita"
 		startYear = 1970;
 		endYear = 2011;
 		chartFunctions.setDefaults();
 		break;
 	case "Poverty":
 		endData = 60;
+		yAxisLabel = "Percentage of 6-17 Year-Olds in Poverty"
 		startYear = 1977;
 		endYear = 2013;
 		chartFunctions.setDefaults();
@@ -310,412 +368,45 @@ switch(dataType){
 	case "Population":
 		d3.text('data/population.csv', 'text/csv', function(text) {
 			var thisData = d3.csv.parseRows(text);
-			for (i = 1; i < thisData.length; i++) {
-				var values = thisData[i].slice(1,45);
-				var tempData = [];
-				var started = false;
-				for (j = 0; j < values.length; j++) {
-					if (values[j] != '') {
-						tempData.push({
-							x: years[j],
-							y: values[j]
-						});
-						if (!started) {
-							startEnd[thisData[i][0]] = {
-								'startYear': years[j],
-								'startVal': values[j]
-							};
-							started = true;
-						} else if (j == values.length - 1) {
-							startEnd[thisData[i][0]]['endYear'] = years[j];
-							startEnd[thisData[i][0]]['endVal'] = values[j];
-						}
-					}
-
-				}
-
-				//populate state labels
-				states[i-1] = thisData[i][0];
-
-				chart.append("svg:path")
-					.data([tempData])
-					.attr("state", thisData[i][0])
-					.attr("d", line)
-					.attr("shape-rendering","auto")
-					.on("mouseover", chartFunctions.highlightLine)
-					.on("mouseleave", chartFunctions.unhightlightLine)
-
-				//populate end points for each line
-				var ii = i - 1;
-				var temp = $("#chart path:eq("+ii+")").attr("d");
-				var split = temp.split(",");
-				var end = split.length - 1;
-				endPoints[ii] = split[end];
-			}	
-
-			chartFunctions.populateLabels();
-			chartFunctions.drawChart();
+			chartFunctions.processData(thisData);
 		});
 		break;
 	case "Students":
 		d3.text('data/students.csv', 'text/csv', function(text) {
 			var thisData = d3.csv.parseRows(text);
-			for (i = 1; i < thisData.length; i++) {
-				var values = thisData[i].slice(1,45);
-				var tempData = [];
-				var started = false;
-				for (j = 0; j < values.length; j++) {
-					if (values[j] != '') {
-						tempData.push({
-							x: years[j],
-							y: values[j]
-						});
-						if (!started) {
-							startEnd[thisData[i][0]] = {
-								'startYear': years[j],
-								'startVal': values[j]
-							};
-							started = true;
-						} else if (j == values.length - 1) {
-							startEnd[thisData[i][0]]['endYear'] = years[j];
-							startEnd[thisData[i][0]]['endVal'] = values[j];
-						}
-					}
-
-				}
-
-				//populate state labels
-				states[i-1] = thisData[i][0];
-
-				chart.append("svg:path")
-					.data([tempData])
-					.attr("state", thisData[i][0])
-					.attr("d", line)
-					.attr("shape-rendering","auto")
-					.on("mouseover", chartFunctions.highlightLine)
-					.on("mouseleave", chartFunctions.unhightlightLine)
-
-				//populate end points for each line
-				var ii = i - 1;
-				var temp = $("#chart path:eq("+ii+")").attr("d");
-				var split = temp.split(",");
-				var end = split.length - 1;
-				endPoints[ii] = split[end];
-			}	
-
-			chartFunctions.populateLabels();
-			chartFunctions.drawChart();
+			chartFunctions.processData(thisData);
 		});
 		break;
 	case "Students per Capita":
 		d3.text('data/studentspercapita.csv', 'text/csv', function(text) {
 			var thisData = d3.csv.parseRows(text);
-			for (i = 1; i < thisData.length; i++) {
-				var values = thisData[i].slice(1,45);
-				var tempData = [];
-				var started = false;
-				for (j = 0; j < values.length; j++) {
-					if (values[j] != '') {
-						tempData.push({
-							x: years[j],
-							y: values[j]
-						});
-						if (!started) {
-							startEnd[thisData[i][0]] = {
-								'startYear': years[j],
-								'startVal': values[j]
-							};
-							started = true;
-						} else if (j == values.length - 1) {
-							startEnd[thisData[i][0]]['endYear'] = years[j];
-							startEnd[thisData[i][0]]['endVal'] = values[j];
-						}
-					}
-
-				}
-
-				//populate state labels
-				states[i-1] = thisData[i][0];
-
-				chart.append("svg:path")
-					.data([tempData])
-					.attr("state", thisData[i][0])
-					.attr("d", line)
-					.attr("shape-rendering","auto")
-					.on("mouseover", chartFunctions.highlightLine)
-					.on("mouseleave", chartFunctions.unhightlightLine)
-
-				//populate end points for each line
-				var ii = i - 1;
-				var temp = $("#chart path:eq("+ii+")").attr("d");
-				var split = temp.split(",");
-				var end = split.length - 1;
-				endPoints[ii] = split[end];
-			}	
-
-			chartFunctions.populateLabels();
-			chartFunctions.drawChart();
+			chartFunctions.processData(thisData);
 		});
 		break;
 	case "NAEP":
 		d3.text('data/naep.csv', 'text/csv', function(text) {
 			var thisData = d3.csv.parseRows(text);
-			for (i = 1; i < thisData.length; i++) {
-				var values = thisData[i].slice(1,45);
-				var tempData = [];
-				var started = false;
-				for (j = 0; j < values.length; j++) {
-					if (values[j] != '') {
-						tempData.push({
-							x: years[j],
-							y: values[j]
-						});
-						if (!started) {
-							startEnd[thisData[i][0]] = {
-								'startYear': years[j],
-								'startVal': values[j]
-							};
-							started = true;
-						} else if (j == values.length - 1) {
-							startEnd[thisData[i][0]]['endYear'] = years[j];
-							startEnd[thisData[i][0]]['endVal'] = values[j];
-						}
-					}
-
-				}
-
-				//populate state labels
-				states[i-1] = thisData[i][0];
-
-				chart.append("svg:path")
-					.data([tempData])
-					.attr("state", thisData[i][0])
-					.attr("d", line)
-					.attr("shape-rendering","auto")
-					.on("mouseover", chartFunctions.highlightLine)
-					.on("mouseleave", chartFunctions.unhightlightLine)
-
-				//populate end points for each line
-				var ii = i - 1;
-				var temp = $("#chart path:eq("+ii+")").attr("d");
-				var split = temp.split(",");
-				var end = split.length - 1;
-				endPoints[ii] = split[end];
-			}	
-
-			chartFunctions.populateLabels();
-			chartFunctions.drawChart();
+			chartFunctions.processData(thisData);
 		});
 		break;
 	case "Salaries":
 		d3.text('data/salaries.csv', 'text/csv', function(text) {
 			var thisData = d3.csv.parseRows(text);
-			for (i = 1; i < thisData.length; i++) {
-				var values = thisData[i].slice(1,45);
-				var tempData = [];
-				var started = false;
-				for (j = 0; j < values.length; j++) {
-					if (values[j] != '') {
-						tempData.push({
-							x: years[j],
-							y: values[j]
-						});
-						if (!started) {
-							startEnd[thisData[i][0]] = {
-								'startYear': years[j],
-								'startVal': values[j]
-							};
-							started = true;
-						} else if (j == values.length - 1) {
-							startEnd[thisData[i][0]]['endYear'] = years[j];
-							startEnd[thisData[i][0]]['endVal'] = values[j];
-						}
-					}
-
-				}
-
-				//populate state labels
-				states[i-1] = thisData[i][0];
-
-				chart.append("svg:path")
-					.data([tempData])
-					.attr("state", thisData[i][0])
-					.attr("d", line)
-					.attr("shape-rendering","auto")
-					.on("mouseover", chartFunctions.highlightLine)
-					.on("mouseleave", chartFunctions.unhightlightLine)
-
-				//populate end points for each line
-				var ii = i - 1;
-				var temp = $("#chart path:eq("+ii+")").attr("d");
-				var split = temp.split(",");
-				var end = split.length - 1;
-				endPoints[ii] = split[end];
-			}	
-
-			chartFunctions.populateLabels();
-			chartFunctions.drawChart();
+			chartFunctions.processData(thisData);
 		});
 		break;
 	case "Salaries-Income":
 		d3.text('data/sVi.csv', 'text/csv', function(text) {
 			var thisData = d3.csv.parseRows(text);
-			for (i = 1; i < thisData.length; i++) {
-				var values = thisData[i].slice(1,45);
-				var tempData = [];
-				var started = false;
-				for (j = 0; j < values.length; j++) {
-					if (values[j] != '') {
-						tempData.push({
-							x: years[j],
-							y: values[j]
-						});
-						if (!started) {
-							startEnd[thisData[i][0]] = {
-								'startYear': years[j],
-								'startVal': values[j]
-							};
-							started = true;
-						} else if (j == values.length - 1) {
-							startEnd[thisData[i][0]]['endYear'] = years[j];
-							startEnd[thisData[i][0]]['endVal'] = values[j];
-						}
-					}
-
-				}
-
-				//populate state labels
-				states[i-1] = thisData[i][0];
-
-				chart.append("svg:path")
-					.data([tempData])
-					.attr("state", thisData[i][0])
-					.attr("d", line)
-					.attr("shape-rendering","auto")
-					.on("mouseover", chartFunctions.highlightLine)
-					.on("mouseleave", chartFunctions.unhightlightLine)
-
-				//populate end points for each line
-				var ii = i - 1;
-				var temp = $("#chart path:eq("+ii+")").attr("d");
-				var split = temp.split(",");
-				var end = split.length - 1;
-				endPoints[ii] = split[end];
-			}	
-			
-			chart.append("svg:line")
-				.attr("class","baseline")
-				.attr("x1", 70)
-				.attr("x2", 586)
-				.attr("y1", 200)
-				.attr("y2", 200)
-				.attr("shape-rendering","auto")
-
-			chartFunctions.populateLabels();
-			chartFunctions.drawChart();
-		});
-		break;
-	case "Income":
-		d3.text('data/income.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			for (i = 1; i < thisData.length; i++) {
-				var values = thisData[i].slice(1,45);
-				var tempData = [];
-				var started = false;
-				for (j = 0; j < values.length; j++) {
-					if (values[j] != '') {
-						tempData.push({
-							x: years[j],
-							y: values[j]
-						});
-						if (!started) {
-							startEnd[thisData[i][0]] = {
-								'startYear': years[j],
-								'startVal': values[j]
-							};
-							started = true;
-						} else if (j == values.length - 1) {
-							startEnd[thisData[i][0]]['endYear'] = years[j];
-							startEnd[thisData[i][0]]['endVal'] = values[j];
-						}
-					}
-
-				}
-
-				//populate state labels
-				states[i-1] = thisData[i][0];
-
-				chart.append("svg:path")
-					.data([tempData])
-					.attr("state", thisData[i][0])
-					.attr("d", line)
-					.attr("shape-rendering","auto")
-					.on("mouseover", chartFunctions.highlightLine)
-					.on("mouseleave", chartFunctions.unhightlightLine)
-
-				//populate end points for each line
-				var ii = i - 1;
-				var temp = $("#chart path:eq("+ii+")").attr("d");
-				var split = temp.split(",");
-				var end = split.length - 1;
-				endPoints[ii] = split[end];
-			}	
-
-			chartFunctions.populateLabels();
-			chartFunctions.drawChart();
+			chartFunctions.processData(thisData);
 		});
 		break;
 	case "Poverty":
-		case "Income":
-			d3.text('data/poverty.csv', 'text/csv', function(text) {
-				var thisData = d3.csv.parseRows(text);
-				for (i = 1; i < thisData.length; i++) {
-					var values = thisData[i].slice(1,45);
-					var tempData = [];
-					var started = false;
-					for (j = 0; j < values.length; j++) {
-						if (values[j] != '') {
-							tempData.push({
-								x: years[j],
-								y: values[j]
-							});
-							if (!started) {
-								startEnd[thisData[i][0]] = {
-									'startYear': years[j],
-									'startVal': values[j]
-								};
-								started = true;
-							} else if (j == values.length - 1) {
-								startEnd[thisData[i][0]]['endYear'] = years[j];
-								startEnd[thisData[i][0]]['endVal'] = values[j];
-							}
-						}
-
-					}
-
-					//populate state labels
-					states[i-1] = thisData[i][0];
-
-					chart.append("svg:path")
-						.data([tempData])
-						.attr("state", thisData[i][0])
-						.attr("d", line)
-						.attr("shape-rendering","auto")
-						.on("mouseover", chartFunctions.highlightLine)
-						.on("mouseleave", chartFunctions.unhightlightLine)
-
-					//populate end points for each line
-					var ii = i - 1;
-					var temp = $("#chart path:eq("+ii+")").attr("d");
-					var split = temp.split(",");
-					var end = split.length - 1;
-					endPoints[ii] = split[end];
-				}	
-
-				chartFunctions.populateLabels();
-				chartFunctions.drawChart();
-			});
-			break;
+		d3.text('data/poverty.csv', 'text/csv', function(text) {
+			var thisData = d3.csv.parseRows(text);
+			chartFunctions.processData(thisData);
+		});
+		break;
 }
 
 

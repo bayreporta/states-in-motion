@@ -1,15 +1,14 @@
 //Globals//
 var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0, startData, endData, chart,xScale,yScale,line,
 	margin = {
-		all:-1,
-		left:70,
-		right:15,
 		top:30,
 		bottom:30
 	},
+	yAxisLabel,
 	dataPosition = 0,
 	fullMotion = false,
 	padding = 60,
+	firstRun = true,
 	currentData = [], currentDataChk = false, 
 	years = [];
 var barData = [], states = [], endPoints = [], firstPlot = [], xPosition = [];
@@ -56,11 +55,22 @@ var chartFunctions = {
 		
 		for (i = 0; i < states.length; i++) {
 			//populate state labels
-			newData[i] = parseInt(barData[i][position]);
+			//update plot
+			if (dataType === "TeachStudent"){
+				newData[i]  = parseFloat(barData[i][position]);
+			}
+			else {
+				newData[i]  = parseInt(barData[i][position]);
+			}
 		}	
 		
 		//change year position
 		yearPosition = years[position + 1];
+		
+		//check to see if last loop in motion
+		if (yearPosition == endYear){
+			fullMotion = false;
+		}
 					
 		//update chart
 		chartFunctions.drawChart(newData);
@@ -87,7 +97,6 @@ var chartFunctions = {
 		var thisData = [];
 		var rankCheck = [];
 		
-		
 		for (i = 0 ; i < states.length ; i++){
 			//building data foundation for sorting
 			if (currentDataChk == false){
@@ -100,8 +109,7 @@ var chartFunctions = {
 			rankCheck[i] = false;
 		}
 		currentDataChk = true;
-
-		
+				
 		//sort data
 		thisData.sort(function(b, a){return a-b});
 		
@@ -116,38 +124,10 @@ var chartFunctions = {
 				}
 			}
 			$("#chart rect[state='" + currentData[i]["state"] + "']").attr("rank", currentData[i]["rank"]).attr("x", xPosition[currentData[i]["rank"]]);				
-		}
-		
+		}		
 	},
 	drawChart:function(data){
-		if (yearPosition !== startYear){
-			//create bars
-			chart.selectAll("rect")
-				.data(data)
-				.attr("x", function(d, i){
-					return (i * (540/data.length)) + 62
-				})
-				.attr("y-update", function(d, i){
-					return (h - yScale(d));
-				})
-				.transition()
-				.duration(200)
-				.attr("y", function(d, i){
-					return (h - yScale(d));
-				})
-				.attr("height", function(d){
-					return yScale(d) - 30
-
-				})
-			
-			//meta data for bars
-			for (i=0 ; i < states.length ; i++){
-				$("#chart rect:eq("+i+")").attr("state", states[i]).attr("clicked","false").attr("data", data[i]);
-				xPosition[i] = $("#chart rect:eq("+i+")").attr("x");
-
-			}
-		}
-		else {
+		 if (firstRun == true) {
 			//Set Scales
 			yScale = d3.scale.linear()
 				.domain([startData, endData])
@@ -223,6 +203,34 @@ var chartFunctions = {
 			}).attr("x1", 55).attr("y2", function(d) {
 					return yScale(d);
 			}).attr("x2", 60);
+			
+			firstRun = false;
+		}
+		else {
+			//create bars
+			chart.selectAll("rect")
+				.data(data)
+				.attr("x", function(d, i){
+					return (i * (540/data.length)) + 62
+				})
+				.attr("y-update", function(d, i){
+					return (h - yScale(d));
+				})
+				.transition()
+				.duration(200)
+				.attr("y", function(d, i){
+					return (h - yScale(d));
+				})
+				.attr("height", function(d){
+					return yScale(d) - 30
+
+				})
+
+			//meta data for bars
+			for (i=0 ; i < states.length ; i++){
+				$("#chart rect:eq("+i+")").attr("state", states[i]).attr("clicked","false").attr("data", data[i]);
+
+			}
 		}
 
 		//sort Bars
@@ -244,7 +252,44 @@ var chartFunctions = {
 			}, 100);
 		}
 	},
+	processData:function(thisData){
+		var tempYears = [];
+
+		//grab years
+		for (i = 0 ; i < thisData[0].length ; i++){
+			years[i] = parseInt(thisData[0][i]);
+		}
+
+		//populate year slider
+		$("#nav-wrapper h2").text(startYear); //default year
+		$("#yearSlider").attr("min", startYear).attr("max", endYear).attr("value", startYear);
+
+
+		//grab data
+		for (i = 1; i < thisData.length; i++) {
+			barData[i-1] = thisData[i].slice(1,45);
+
+			//populate state labels
+			states[i-1] = thisData[i][0];
+			
+			//initial plot
+			if (dataType === "TeachStudent"){
+				firstPlot[i-1] = parseFloat(barData[i-1][0]);
+			}
+			else {
+				firstPlot[i-1] = parseInt(barData[i-1][0]);
+			}
+			
+		}	
+
+		//process charts
+		chartFunctions.populateLabels();
+		chartFunctions.drawChart(firstPlot);
+	},
 	populateLabels:function(){
+		//Axis Labels
+		$("#y-axis").text(yAxisLabel);
+		//State Labels
 		for (i=0 ; i < states.length ; i++){
 			$("#selection").append("<p state=\""+states[i]+"\"clicked=\"false\">" + states[i] + "</p>");
 			
@@ -289,6 +334,14 @@ var utilityFunctions = {
 	},
 	updateSlider:function(val){
 		var index;
+		
+		//stop motion if in motion
+		if (fullMotion == true){
+			$("#playMotion").attr("src", "assets/play.png");
+			fullMotion = false;
+		}
+		
+		
 		$("#nav-wrapper h2").text(val); //update slider text
 		yearPosition = parseInt(val); //update year position
 		for (i=1 ; i < years.length ; i++){ //locate year index
@@ -328,9 +381,28 @@ switch(dataType){
 	case "Income":
 		startYear = 1970;
 		endYear = 2013;
+		yAxisLabel = "Income per Capita";
 		yearPosition = 1970;
 		startData = 0;
 		endData = 80000;
+		chartFunctions.setDefaults();
+		break;
+	case "ExpStudent":
+		startYear = 1970;
+		endYear = 2012;
+		yAxisLabel = "State Expenditures per Student";
+		yearPosition = 1970;
+		startData = 0;
+		endData = 30000;
+		chartFunctions.setDefaults();
+		break;
+	case "TeachStudent":
+		startYear = 1982;
+		endYear = 2010;
+		yAxisLabel = "Teachers per Student";
+		yearPosition = 1982;
+		startData = 0;
+		endData = 1.5;
 		chartFunctions.setDefaults();
 		break;
 }
@@ -340,30 +412,19 @@ switch(dataType){
 	case "Income":
 		d3.text('data/income.csv', 'text/csv', function(text) {
 			var thisData = d3.csv.parseRows(text);
-			var tempYears = [];
-			
-			//grab years
-			for (i = 0 ; i < thisData[0].length ; i++){
-				years[i] = thisData[0][i]
-			}
-			
-			//populate year slider
-			$("#nav-wrapper h2").text(startYear); //default year
-			$("#yearSlider").attr("min", startYear).attr("max", endYear).attr("value", startYear);
-			
-			
-			//grab data
-			for (i = 1; i < thisData.length; i++) {
-				barData[i-1] = thisData[i].slice(1,45);
-				
-				//populate state labels
-				states[i-1] = thisData[i][0];
-				firstPlot[i-1] = parseInt(barData[i-1][0]);
-			}	
-			
-			//process charts
-			chartFunctions.populateLabels();
-			chartFunctions.drawChart(firstPlot);
+			chartFunctions.processData(thisData);
+		});
+		break;
+	case "ExpStudent":
+		d3.text('data/expendstudent.csv', 'text/csv', function(text) {
+			var thisData = d3.csv.parseRows(text);
+			chartFunctions.processData(thisData);
+		});
+		break;
+	case "TeachStudent":
+		d3.text('data/teachstudents.csv', 'text/csv', function(text) {
+			var thisData = d3.csv.parseRows(text);
+			chartFunctions.processData(thisData);
 		});
 		break;
 }
@@ -394,15 +455,14 @@ $(document).ready(function(){
 			$(this).attr("src", "assets/play.png");
 		}
 	});
-	
 	$("#reloadChart").on("click", function(){
 		if (fullMotion == true){
-			fullMotion = false;	
+			fullMotion = false;	//stops motion
 			dataPosition = -1;
 			$("#playMotion").attr("src", "assets/play.png");
 			setTimeout(function(){
 				chartFunctions.updateChart(dataPosition);
-			},1000);
+			},1000);	
 		}
 		else if (dataPosition > 0){
 			dataPosition = 0;
@@ -414,6 +474,4 @@ $(document).ready(function(){
 		$(this).attr("src", "assets/reload.png");
 		
 	});
-	
-
 });

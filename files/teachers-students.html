@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>States in Motion: Income per Capita</title>
-		<meta name="description" content="Income">
+		<title>States in Motion: Teachers per Student, 13 years</title>
+		<meta name="description" content="TeachStudent">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic,100,400italic,500italic,500,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/bar.css"/>	
 	</head>
@@ -15,8 +15,9 @@
 			<div id="selection"></div> 
 		</div> 
 		<div id="nav-wrapper" class="">
+			<h3 id="x-axis"></h3>
 			<img id="playMotion" src="assets/play.png" width="30">
-			<input id="yearSlider" type="range" name="" min="" max="" value="" step="1" onchange="utilityFunctions.updateSlider(this.value)">
+			<input id="yearSlider" type="range" name="" min="" max="" value="" step="1" onchange="utilityFunctions.updateSlider(parseInt(this.value))">
 			<img id="reloadChart" src="assets/reload.png" width="30">
 			<h2></h2>
 		</div>

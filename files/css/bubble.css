@@ -8,22 +8,12 @@ body {
     user-select: none;
 }
 
-.sr-graphic h1 {
-	font-family: 'Roboto',san-serif;
-	font-size: 3.0em;
-	font-weight:700;
-	color:#4DC193;
-	margin:0;
-	padding:0;
-}
 
-.sr-graphic h2 {
+h2 {
 	font-family: 'Roboto',san-serif;
 	font-size: 1.5em;
 	text-transform: uppercase;
 	color:#57504E;
-	margin:0;
-	padding:0;
 }
 
 .sr-graphic p {
@@ -50,103 +40,10 @@ body {
 	float:left;
 }
 
-.sr-graphic #categories {
-	font-family: Arial,sans-serif;
-	margin:20px 0;
-}
-
-.sr-graphic #categories a {
-	color: #000;
-	font-size: 12px;
-	padding: 5px;
-	background: #e2e2e2;
-	cursor: pointer;
-	margin-right: 3px;
-}
-
-.sr-graphic #categories a {
-	text-decoration:none;
-}
-
-.sr-graphic #categories a:last-child {
-	margin-right: 0;
-}
-
-.sr-graphic #categories a.cat1 {
-	background: #895881;
-	color: #fff;
-}
-
-.sr-graphic #categories a.cat2 {
-	background: #ED7C31;
-	color: #fff;
-}
-
-.sr-graphic #categories a.cat3 {
-	background: #82A5C0;
-	color: #fff;
-}
-
-.sr-graphic #categories a.cat4 {
-	background: #6E9E75;
-	color: #fff;
-}
-
-.sr-graphic #categories a.cat5 {
-	background: #00BBD6;
-	color: #fff;
-}
-
-.sr-graphic #chart {
-	min-height: 550px;
-}
-
 .sr-graphic #info {
 	height: 60px;
 	border-top: 1px solid #e2e2e2;
 	padding: 20px 0 0 0;
-}
-
-.sr-graphic path {
-	stroke: #e2e2e2;
-	stroke-width: 2;
-	fill: none;
-	cursor:pointer;
-}
-
-.sr-graphic path.current, .sr-graphic path.highlight.current {
-	stroke: #57504E;
-	stroke-width: 1.7;
-}
-
-.cat1 {
-	stroke: #368d6a !important;
-}
-
-.cat2 {
-	stroke: #3d9f78 !important;
-}
-
-.cat3 {
-	stroke: #44b286 !important;
-}
-
-.cat4 {
-	stroke: #52bd92 !important;
-}
-
-.cat5 {
-	stroke: #64c49e !important;
-}
-.cat6 {
-	stroke: #77cba9 !important;
-}
-.cat7 {
-	stroke: #89d2b5 !important;
-}
-
-.cat8 {
-	stroke: #89d2b5 !important;
 }
 
 .highlight {
@@ -163,9 +60,11 @@ body {
 	fill:#666;
 }
 
-.axis {
-	stroke-width: 0.8;
-	stroke: #000;
+.axis path,
+.axis line {
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
 }
 
 .xTicks,.yTicks {
@@ -214,16 +113,76 @@ body {
 	stroke:#666 !important;
 }
 
-#y-axis {
+.plotPoint {
+	fill:#e2e2e2;
+	cursor:pointer;
+}
+
+#main-wrapper {
+	overflow:auto;
+}
+
+#nav-wrapper {
+	clear:both;
+	margin:30px 0 0 0;
+	width: 650px;
+}
+
+#nav-wrapper h2 {
+	margin: 10px auto;
+	display: block;
+	text-align: center;
+}
+
+#playMotion {
+	float:left;
+	margin: -10px 0 0 60px;
+	cursor:pointer;
+}
+
+#reloadChart {
+	margin: -3px 30px 0 0;
+	float: right;
+	cursor: pointer;
+}
+
+#yearSlider {
+	width: 470px;
+	margin: 0 0 0 20px;
+	display: block;
+	float:left;
+}
+
+.guide line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+  opacity: 0;
+}
+
+.plotLabels {
+	visibility:hidden;
+}
+
+#x-axis, #y-axis {
+	margin: -25px 0 20px 30px;
 	width: auto;
 	text-align: center;
-	font-family:'Roboto', san-serif;
+	font-family: roboto;
 	font-weight: 400;
 	color: #666666;
 	font-size: 12px;
+}
+
+#y-axis {
 	margin: 0;
 	transform: rotate(-90deg);
 	position: relative;
 	top: 208px;
-	left: -400px;
+	left: -410px;
 }
+
+svg {
+	margin:0 0 0 25px;
+}
+
