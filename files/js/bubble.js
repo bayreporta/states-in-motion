@@ -431,6 +431,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			maxX = 25000;
 			maxY = 80000;
 			xAdjust = 4;
+			$("#y-axis").css("left","-25px");
 			chartFunctions.setDefaults();
 			break;
 		case "TeacherPayStudents":
@@ -440,6 +441,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			maxX = 30;
 			maxY = 100000;
 			xAdjust = -10;
+			$("#y-axis").css("left","-40px");
 			chartFunctions.setDefaults();
 			break;
 		case "TeacherStudents":
@@ -449,6 +451,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			maxX = 400000;
 			maxY = 8000000;
 			xAdjust = -20;
+			$("#y-axis").css("left","-5px");
 			chartFunctions.setDefaults();
 			break;
 		case "PovertyIncome":
@@ -458,6 +461,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			maxX = 60;
 			maxY = 80000;
 			xAdjust = -10;
+			$("#y-axis").css("left","-20px");
 			chartFunctions.setDefaults();
 			break;
 		case "NAEPexpend":
@@ -467,6 +471,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			maxX = 60;
 			maxY = 20000;
 			xAdjust = -10;
+			$("#y-axis").css("left","-55px");
 			$("#yearSlider").attr("step", 2);
 			chartFunctions.setDefaults();
 			break;
@@ -477,6 +482,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			maxX = 60;
 			maxY = 80000;
 			xAdjust = -10;
+			$("#y-axis").css("left","-20px");
 			$("#yearSlider").attr("step", 2);
 			chartFunctions.setDefaults();
 			break;
@@ -487,6 +493,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			maxX = 60;
 			maxY = 60;
 			xAdjust = -10;
+			$("#y-axis").css("left","-65px");
 			$("#yearSlider").attr("step", 2);
 			chartFunctions.setDefaults();
 			break;
