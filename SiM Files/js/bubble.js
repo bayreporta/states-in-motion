@@ -15,7 +15,10 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 		padding = 20,
 		firstRun = true,
 		totalPoints = 0,
+		updatedPointData = [],
+		initReprocess = false,
 		currentData = [], 
+		curElemPos = [],
 		years = [];
 	var plotData = [], points = [], endPoints = [];
 	var startEnd = {}
@@ -117,7 +120,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 									function() { return d3.interpolate(0, .5); })
 					
 					//reorder to front	
-					//$point.insertBefore(".axis:eq(0)")
+					$point.insertBefore(".axis:eq(0)")
 
 					//toggle text
 					$text.css("visibility", "visible");
@@ -125,6 +128,8 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 
 					current.css("fill", "#4169E1");
 				}
+				//reorganize data based on new positions
+				chartFunctions.reprocessData();
 			}
 		},
 		unhightlightPoint:function(){
@@ -152,23 +157,38 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 				.duration(800)
 				.attr("r", 5)
 				.ease("elastic");
-
 		},
 		updateChart:function(position){	
 			currentData = [];
 			for (i = 0; i < points._wrapped.length; i++) {
 				//update plot
-				if (dataType === "TeachStudent"){
-					currentData[i] = new Array();
-					currentData[i][0]  = parseFloat(plotData[i][position][0]);
-					currentData[i][1]  = parseFloat(plotData[i][position][1]);
-					currentData[i][2]  = plotData[i][position][2];	
+				if (initReprocess == false){
+					if (dataType === "TeachStudent"){
+						currentData[i] = new Array();
+						currentData[i][0]  = parseFloat(plotData[i][position][0]);
+						currentData[i][1]  = parseFloat(plotData[i][position][1]);
+						currentData[i][2]  = plotData[i][position][2];	
+					}
+					else {		
+						currentData[i] = new Array();			
+						currentData[i][0]  = parseInt(plotData[i][position][0]);
+						currentData[i][1]  = parseInt(plotData[i][position][1]);
+						currentData[i][2]  = plotData[i][position][2];					
+					}
 				}
-				else {		
-					currentData[i] = new Array();			
-					currentData[i][0]  = parseInt(plotData[i][position][0]);
-					currentData[i][1]  = parseInt(plotData[i][position][1]);
-					currentData[i][2]  = plotData[i][position][2];					
+				else {
+					 if (dataType === "TeachStudent"){
+						currentData[i] = new Array();
+						currentData[i][0]  = parseFloat(updatedPointData[i][position][0]);
+						currentData[i][1]  = parseFloat(updatedPointData[i][position][1]);
+						currentData[i][2]  = updatedPointData[i][position][2];	
+					}
+					else {		
+						currentData[i] = new Array();			
+						currentData[i][0]  = parseInt(updatedPointData[i][position][0]);
+						currentData[i][1]  = parseInt(updatedPointData[i][position][1]);
+						currentData[i][2]  = updatedPointData[i][position][2];					
+					}
 				}
 			}	
 			//change year position
@@ -207,7 +227,6 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 					}
 				}, 200)
 			}
-
 		},
 		updateLabels:function(data){
 			chart.selectAll("text")
@@ -240,7 +259,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 							//unhide text
 							var $text = $("#chart text[state='"+ thisState +"']");
 							$text.css("visibility","visible");
-							//$text.insertBefore(".axis:eq(0)")
+							$text.insertBefore(".axis:eq(0)")
 										
 							//background and up front
 							$(this).css("background", "#ddd").attr("clicked","true");
@@ -249,7 +268,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 							
 							//reorder to front	
 							var $point = $("#chart circle[state='"+ thisState +"']");
-							//$point.insertBefore(".axis:eq(0)")
+							$point.insertBefore(".axis:eq(0)")
 						}
 						else {
 							//background
@@ -261,8 +280,42 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 							var $text = $("#chart text[state='"+ thisState +"']");
 							$text.css("visibility","hidden");
 						}
+						//reorganize data based on new positions
+						chartFunctions.reprocessData();
 					}
 				});
+			}
+		},
+		reprocessData:function(){
+			var curPos = [];
+			var tempData = [];
+
+			if (initReprocess == false){
+				for (i=0 ; i < totalPoints ; i++) {
+					// GRAB CURRENT ELEM POSITION
+					curElemPos[i] = $("svg circle:eq("+i+")").attr("elem-pos");
+
+					// UPDATE DATA BASED ON CURRENT ELEM POSITION
+					tempData[i] = plotData[curElemPos[i]]; 
+					updatedPointData[i] = tempData[i];
+				};
+				initReprocess = true;
+			}
+			else {
+				for (i=0 ; i < totalPoints ; i++) {
+
+					// GRAB CURRENT ELEM POSITION
+					curElemPos[i] = $("svg circle:eq("+i+")").attr("elem-pos");
+
+					// UPDATE DATA BASED ON CURRENT ELEM POSITION
+					tempData[i] = updatedPointData[curElemPos[i]]; 
+				};
+				updatedPointData = tempData;
+			}
+
+			//UPDATE ELEM POSITIONS
+			for(i=0 ; i < totalPoints ; i++){
+				$("svg circle:eq("+i+")").attr("elem-pos", i);
 			}
 		},
 		processData:function(thisData){
@@ -345,7 +398,13 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 					.attr("clicked","false")
 					.on("mouseover", chartFunctions.highlightPoint)
 					.on("mouseleave", chartFunctions.unhightlightPoint)	
-					
+
+				//Add Initial Element Position
+				for (i = 0 ; i < totalPoints ; i++){
+					$("svg circle:eq("+i+")").attr("elem-pos", i);
+				}
+				
+				//Plot Point Label	
 				chart.selectAll("text")
 				   .data(data)
 				   .enter()
