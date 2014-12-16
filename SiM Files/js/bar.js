@@ -386,8 +386,17 @@ var utilityFunctions = {
 
 		for (i=0 ; i < countY ; i++){
 			yTemp[i] = $(".yLabel:eq("+i+")").text();
-			yLabels[i] = utilityFunctions.commaSeparateNumber(yTemp[i]);
-			$(".yLabel:eq("+i+")").text(yLabels[i]);
+
+			//Shorten Axis Labels
+			switch(yTemp[i].length){
+				case 4: yTemp[i] = yTemp[i].slice(0,1); break;
+				case 5: yTemp[i] = yTemp[i].slice(0,2); break;
+				case 6: yTemp[i] = yTemp[i].slice(0,3); break;
+				case 7: yTemp[i] = yTemp[i].slice(0,1); break;
+				case 8: yTemp[i] = yTemp[i].slice(0,2); break;
+				case 9: yTemp[i] = yTemp[i].slice(0,3); break;
+			}
+			$(".yLabel:eq("+i+")").text(yTemp[i]);
 		}
 
 	}
@@ -399,7 +408,7 @@ switch(dataType){
 	case "Income":
 		startYear = 1970;
 		endYear = 2013;
-		yAxisLabel = "Income per Capita";
+		yAxisLabel = "Income per Capita (in thousands)";
 		yearPosition = 1970;
 		startData = 0;
 		endData = 80000;
@@ -408,7 +417,7 @@ switch(dataType){
 	case "ExpStudent":
 		startYear = 1970;
 		endYear = 2012;
-		yAxisLabel = "State Expenditures per Student";
+		yAxisLabel = "State Expenditures per Student (in thousands)";
 		yearPosition = 1970;
 		startData = 0;
 		endData = 30000;
@@ -426,7 +435,7 @@ switch(dataType){
 	case "Expend13":
 		startYear = 1982;
 		endYear = 2012;
-		yAxisLabel = "K-12 Expenditures per Student Over Course School Attendence (13 Years)";
+		yAxisLabel = "K-12 Expenditures per Student - 13 Years Cumulative (in thousands)";
 		yearPosition = 1982;
 		startData = 0;
 		endData = 250000;
@@ -435,7 +444,7 @@ switch(dataType){
 	case "Teachers13":
 		startYear = 1982;
 		endYear = 2010;
-		yAxisLabel = "Teachers per Student Over Course School Attendence (13 Years)";
+		yAxisLabel = "Teachers per Student - 13 Years Cumulative";
 		yearPosition = 1982;
 		startData = 0;
 		endData = 1.5;

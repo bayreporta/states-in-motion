@@ -25,12 +25,6 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 	var colors = ["#4169E1","#e14169","#e16941","#41e1b9"];
 	var colorStep = 0;
 	var utilityFunctions = {
-		commaSeparateNumber:function(val){
-		    while (/(\d+)(\d{3})/.test(val.toString())){
-		      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-		    }
-		    return val;
-		},
 		updateSlider:function(val){
 			var index;
 
@@ -51,23 +45,23 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 				}
 			}
 		},
-		churnLargeNumbers:function(line){
-			var countX = $(".xLabel").length;
-			var countY = $(".yLabel").length;
-			var xLabels = [], xTemp = [], yLabels = [], yTemp = [];
+		churnLargeNumbers:function(){
+			var temp = [];
 
-			if (!line){
-				for (i=0 ; i < countX ; i++){
-					xTemp[i] = $(".xLabel:eq("+i+")").text();
-					xLabels[i] = utilityFunctions.commaSeparateNumber(xTemp[i]);
-					$(".xLabel:eq("+i+")").text(xLabels[i]);
+			var totalLabels = $("text:not(.plotLabels)").length;
+
+			for (i=0 ; i < totalLabels ; i++){
+				temp[i] = $("text:not(.plotLabels):eq("+i+")").text();
+				//Shorten Axis Labels
+				switch(temp[i].length){
+					case 5: temp[i] = temp[i].slice(0,1); break;
+					case 6: temp[i] = temp[i].slice(0,2); break;
+					case 7: temp[i] = temp[i].slice(0,3); break;
+					case 9: temp[i] = temp[i].slice(0,1); break;
+					case 10: temp[i] = temp[i].slice(0,2); break;
+					case 11: temp[i] = temp[i].slice(0,3); break;
 				}
-			}
-
-			for (i=0 ; i < countY ; i++){
-				yTemp[i] = $(".yLabel:eq("+i+")").text();
-				yLabels[i] = utilityFunctions.commaSeparateNumber(yTemp[i]);
-				$(".yLabel:eq("+i+")").text(yLabels[i]);
+				$("text:not(.plotLabels):eq("+i+")").text(temp[i]);
 			}
 		}
 	}
@@ -347,10 +341,6 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 		processData:function(thisData){
 			var tempYears = [], tempStates = [];
 			
-			//grab axis labels
-			axisLabels.x = thisData[0][2];
-			axisLabels.y = thisData[0][3];
-
 			//grab Years and States
 			for (i = 1 ; i < thisData.length ; i++){
 				tempYears[i] = parseInt(thisData[i][1]);
@@ -477,6 +467,9 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 					.attr("transform", "translate(" + 60 + ",0)")
 					.call(yAxis);
 				
+				//Chrun larger numbers
+				utilityFunctions.churnLargeNumbers();
+
 				firstRun = false
 			}
 			else {
@@ -515,8 +508,9 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			yearPosition = 1970;
 			maxX = 25000;
 			maxY = 80000;
+			axisLabels.x = "K-12 Expenditures per Student (in thousands)";
+			axisLabels.y = "Income per Capita (in thousands)";
 			xAdjust = 4;
-			$("#y-axis").css("left","-25px");
 			chartFunctions.setDefaults();
 			break;
 		case "TeacherPayStudents":
@@ -525,18 +519,22 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			yearPosition = 1970;
 			maxX = 30;
 			maxY = 100000;
+			axisLabels.x = "K-12 Students per Teacher";
+			axisLabels.y = "Median Teacher Salary (in thousands)";
+			$("#y-axis").css("left", "-50px");
 			xAdjust = -10;
-			$("#y-axis").css("left","-40px");
 			chartFunctions.setDefaults();
 			break;
 		case "TeacherStudents":
 			startYear = 1970;
 			endYear = 2011;
 			yearPosition = 1970;
+			axisLabels.x = "K-12 Teachers (in thousands)";
+			axisLabels.y = "K-12 Students (in millions)";
+			$("#y-axis").css("left", "15px");
 			maxX = 400000;
 			maxY = 8000000;
 			xAdjust = -20;
-			$("#y-axis").css("left","-5px");
 			chartFunctions.setDefaults();
 			break;
 		case "PovertyIncome":
@@ -545,8 +543,9 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			yearPosition = 1977;
 			maxX = 60;
 			maxY = 80000;
+			axisLabels.x = "Percentage of 6-17 Year Olds in Poverty";
+			axisLabels.y = "Income per Capita (in thousands)";
 			xAdjust = -10;
-			$("#y-axis").css("left","-20px");
 			chartFunctions.setDefaults();
 			break;
 		case "NAEPexpend":
@@ -555,8 +554,10 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			yearPosition = 2003;
 			maxX = 60;
 			maxY = 20000;
+			axisLabels.x = "Average NAEP Proficency in Math and Reading, 4th and 8th Grades";
+			axisLabels.y = "K-12 Expenditures per Student (in thousands)";
+			$("#y-axis").css("left", "-65px");
 			xAdjust = -10;
-			$("#y-axis").css("left","-55px");
 			$("#yearSlider").attr("step", 2);
 			chartFunctions.setDefaults();
 			break;
@@ -566,8 +567,9 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			yearPosition = 2003;
 			maxX = 60;
 			maxY = 80000;
+			axisLabels.x = "Average NAEP Proficency in Math and Reading, 4th and 8th Grades";
+			axisLabels.y = "Income per Capita (in thousands)";
 			xAdjust = -10;
-			$("#y-axis").css("left","-20px");
 			$("#yearSlider").attr("step", 2);
 			chartFunctions.setDefaults();
 			break;
@@ -577,8 +579,10 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 			yearPosition = 2003;
 			maxX = 60;
 			maxY = 60;
+			axisLabels.x = "Average NAEP Proficency in Math and Reading, 4th and 8th Grades";
+			axisLabels.y = "Percentage of 6-17 Year Olds in Poverty";
 			xAdjust = -10;
-			$("#y-axis").css("left","-65px");
+			$("#y-axis").css("left", "-50px");
 			$("#yearSlider").attr("step", 2);
 			chartFunctions.setDefaults();
 			break;

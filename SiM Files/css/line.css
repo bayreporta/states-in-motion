@@ -219,11 +219,11 @@ body {
 	text-align: center;
 	font-family:'Roboto', san-serif;
 	font-weight: 400;
-	color: #666666;
+	color: #bbb;
 	font-size: 12px;
 	margin: 0;
 	transform: rotate(-90deg);
 	position: relative;
 	top: 208px;
-	left: -400px;
+	left: -360px;
 }

@@ -302,12 +302,12 @@ var chart, line, x, y
 switch(dataType){
 	case "Population":
 		endData = 40000000;
-		yAxisLabel = "State Population"
+		yAxisLabel = "State Population (in millions)"
 		chartFunctions.setDefaults();
 		break;
 	case "Students":
 		endData = 6500000;
-		yAxisLabel = "K-12 Students"
+		yAxisLabel = "K-12 Students (in millions)"
 		chartFunctions.setDefaults();
 		break;
 	case "Students per Capita":
@@ -324,14 +324,14 @@ switch(dataType){
 		break;
 	case "Income":
 		endData = 80000;
-		yAxisLabel = "Income per Capita"
+		yAxisLabel = "Income per Capita (in thousands)"
 		startYear = 1970;
 		endYear = 2013;
 		chartFunctions.setDefaults();
 		break;
 	case "Salaries":
 		endData = 100000;
-		yAxisLabel = "K-12 Teacher Salaries"
+		yAxisLabel = "K-12 Teacher Salaries (in thousands)"
 		startYear = 1970;
 		endYear = 2011;
 		chartFunctions.setDefaults();
@@ -359,7 +359,6 @@ switch(dataType){
 		chartFunctions.setDefaults();
 		break;
 }
-
 var startEnd = {}
 
 var utilityFunctions = {
@@ -377,17 +376,24 @@ var utilityFunctions = {
 		if (!line){
 			for (i=0 ; i < countX ; i++){
 				xTemp[i] = $(".xLabel:eq("+i+")").text();
-				xLabels[i] = utilityFunctions.commaSeparateNumber(xTemp[i]);
 				$(".xLabel:eq("+i+")").text(xLabels[i]);
 			}
 		}
 		
 		for (i=0 ; i < countY ; i++){
 			yTemp[i] = $(".yLabel:eq("+i+")").text();
-			yLabels[i] = utilityFunctions.commaSeparateNumber(yTemp[i]);
-			$(".yLabel:eq("+i+")").text(yLabels[i]);
-		}
 
+			//Shorten Axis Labels
+			switch(yTemp[i].length){
+				case 4: yTemp[i] = yTemp[i].slice(0,1); break;
+				case 5: yTemp[i] = yTemp[i].slice(0,2); break;
+				case 6: yTemp[i] = yTemp[i].slice(0,3); break;
+				case 7: yTemp[i] = yTemp[i].slice(0,1); break;
+				case 8: yTemp[i] = yTemp[i].slice(0,2); break;
+				case 9: yTemp[i] = yTemp[i].slice(0,3); break;
+			}
+			$(".yLabel:eq("+i+")").text(yTemp[i]);
+		}
 	}
 }
 
