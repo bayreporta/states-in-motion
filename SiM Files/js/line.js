@@ -10,12 +10,12 @@ var chartFunctions = {
 		var clicked = $("#selection p[state='"+state+"']").attr("clicked");
 		if (clicked === "false"){
 			var where = _.indexOf(states, state);
-			var position = parseFloat(endPoints[where]) - 2;
-			$("#main-wrapper").append("<span class=\"labels\" state=\""+state+"\" style=\"top:"+ position + "px;\">" + state + "</span>");
+			var position = parseFloat(endPoints[where]) + 15;
+			$("#main-wrapper").append("<span class=\"labels\" state=\""+state+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + state + "</span>");
 			$(".label[state='"+ state +"']").insertBefore("#selection");
 
 			//highlight and move to highlight group
-			current.css("stroke", "#4169E1").detach().insertAfter("svg path:last");			
+			current.css("stroke", colors[colorStep]).detach().insertAfter("svg path:last");			
 		}
 	},
 	unhightlightLine:function(){
@@ -207,20 +207,37 @@ var chartFunctions = {
 				if (clicked === "false"){
 					//determine position
 					var where = _.indexOf(states, thisState);
-					var position = parseFloat(endPoints[where]) - 2;
+					var position = parseFloat(endPoints[where]) + 15;
 					//background and up front
 					$(this).css("background", "#ddd").attr("clicked","true");
-					$("#chart path[state='"+ thisState +"']").css("stroke","#4169E1").detach().insertAfter("svg path:last");
+					$("#chart path[state='"+ thisState +"']").css("stroke",colors[colorStep]).detach().insertAfter("svg path:last");
 					//toggle layer
-					$("#main-wrapper").append("<span class=\"labels\" state=\""+thisState+"\" style=\"top:"+ position + "px;\">" + thisState + "</span>");
+					$("#main-wrapper").append("<span class=\"labels\" state=\""+thisState+"\" style=\"top:"+ position+ "px;color:"+colors[colorStep]+"\">" + thisState + "</span>");
 					$(".label[state='"+ thisState +"']").insertBefore("#selection")
+
+					//add to color step
+					if (colorStep != 3){
+						colorStep += 1;
+					}
+					else {
+						colorStep = 0;
+					}
 				}
 				else {
 					//background
 					$(this).css("background", "#fff").attr("clicked","false");
 					$("#chart path[state='"+ thisState +"']").css("stroke","#e2e2e2");
+					
 					//remove label
 					$("span[state='"+ thisState +"']").remove();
+
+					//remove to color step
+					if (colorStep != 0){
+						colorStep -= 1;
+					}
+					else {
+						colorStep = 3;
+					}
 				}
 			});
 		}
@@ -279,6 +296,8 @@ var	w = 600,h = 400, startYear = 1970,endYear = 2013,startData = 0,endData = 0,y
 		top:30,
 		bottom:30
 	};
+var colors = ["#4169E1","#e14169","#e16941","#41e1b9"];
+var colorStep = 0;
 var chart, line, x, y
 switch(dataType){
 	case "Population":

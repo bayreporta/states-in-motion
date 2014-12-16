@@ -13,7 +13,8 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 	years = [];
 var barData = [], states = [], endPoints = [], firstPlot = [], xPosition = [];
 var startEnd = {}
-
+var colors = ["#4169E1","#e14169","#e16941","#41e1b9"];
+var colorStep = 0;
 //base functions
 var chartFunctions = {
 	highlightBar:function(){
@@ -28,10 +29,12 @@ var chartFunctions = {
 			var whereX = parseInt($("#chart rect[state='" + state + "']").attr("x")) + 7;
 		
 			//toggle layer
-			$("#chart").append("<span class=\"labels\" state=\""+state+"\" style=\"left:" + whereX + "px;top:" + whereY + "px\">" + state + "</span>");
+			$("#chart").append("<span class=\"labels\" state=\""+state+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+colors[colorStep]+";\">" + state + "</span>");
 			$(".label[state='"+ state +"']").insertBefore("#selection");
 			
-			current.css("fill", "#4169E1");
+			//color
+			current.css("fill", colors[colorStep]);
+			
 		}
 	},
 	unhightlightBar:function(){
@@ -127,7 +130,7 @@ var chartFunctions = {
 		}		
 	},
 	drawChart:function(data){
-		 if (firstRun == true) {
+		if (firstRun == true) {
 			//Set Scales
 			yScale = d3.scale.linear()
 				.domain([startData, endData])
@@ -235,7 +238,6 @@ var chartFunctions = {
 
 		//sort Bars
 		chartFunctions.rankBars(data)
-		
 	},
 	updateLabels:function(){
 		for (i = 0 ; i < states.length ; i++){
@@ -303,13 +305,21 @@ var chartFunctions = {
 					var whereX = parseInt($("#chart rect[state='" + thisState + "']").attr("x")) + 7;
 					//background and up front
 					$(this).css("background", "#ddd").attr("clicked","true");
-					$("#chart rect[state='"+ thisState +"']").css("fill","#4169E1");
+					$("#chart rect[state='"+ thisState +"']").css("fill",colors[colorStep]);
 					$("#chart rect[state='"+ thisState +"']").attr("clicked", "true");
-					
+
 					//toggle layer
-					$("#chart").append("<span status=\"on\" class=\"labels\" state=\""+thisState+"\" style=\"left:" + whereX + "px;top:" + whereY + "px\">" + thisState + "</span>");
+					$("#chart").append("<span status=\"on\" class=\"labels\" state=\""+thisState+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+colors[colorStep]+";\">" + thisState + "</span>");
 	
 					$(".label[state='"+ thisState +"']").insertBefore("#selection");
+
+					//add to color step
+					if (colorStep != 3){
+						colorStep += 1;
+					}
+					else {
+						colorStep = 0;
+					}
 				}
 				else {
 					//background
@@ -319,6 +329,14 @@ var chartFunctions = {
 					
 					//remove label
 					$("span[state='"+ thisState +"']").remove();
+
+					//remove to color step
+					if (colorStep != 0){
+						colorStep -= 1;
+					}
+					else {
+						colorStep = 3;
+					}
 				}
 			});
 		}

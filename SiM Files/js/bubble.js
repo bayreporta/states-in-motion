@@ -22,7 +22,8 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 		years = [];
 	var plotData = [], points = [], endPoints = [];
 	var startEnd = {}
-	
+	var colors = ["#4169E1","#e14169","#e16941","#41e1b9"];
+	var colorStep = 0;
 	var utilityFunctions = {
 		commaSeparateNumber:function(val){
 		    while (/(\d+)(\d{3})/.test(val.toString())){
@@ -104,7 +105,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 						.attr("x2", 60)
 						.attr("y1", point.attr("cy"))
 						.attr("y2", point.attr("cy"))
-						.style("stroke", "#4169E1")
+						.style("stroke", colors[colorStep])
 						.transition().delay(200).duration(400).styleTween("opacity", 
 									function() { return d3.interpolate(0, .5); });
 					//Y Line Data
@@ -115,7 +116,7 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 						.attr("x2", point.attr("cx"))
 						.attr("y1", point.attr("cy"))
 						.attr("y2", h - 20)
-						.style("stroke", "#4169E1")
+						.style("stroke", colors[colorStep])
 						.transition().delay(200).duration(400).styleTween("opacity", 
 									function() { return d3.interpolate(0, .5); })
 					
@@ -123,10 +124,14 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 					$point.insertBefore(".axis:eq(0)")
 
 					//toggle text
-					$text.css("visibility", "visible");
+					$text.css({
+						visibility:"visible",
+						fill:colors[colorStep]
+					});
 					//$text.insertBefore(".axis:eq(0)")
 
-					current.css("fill", "#4169E1");
+					current.css("fill", colors[colorStep]);
+
 				}
 				//reorganize data based on new positions
 				chartFunctions.reprocessData();
@@ -258,17 +263,28 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 						if (clicked === "false"){	
 							//unhide text
 							var $text = $("#chart text[state='"+ thisState +"']");
-							$text.css("visibility","visible");
+							$text.css({
+								visibility:"visible",
+								fill:colors[colorStep]
+							});
 							$text.insertBefore(".axis:eq(0)")
 										
 							//background and up front
 							$(this).css("background", "#ddd").attr("clicked","true");
-							$("#chart circle[state='"+ thisState +"']").css("fill","#4169E1");
+							$("#chart circle[state='"+ thisState +"']").css("fill",colors[colorStep]);
 							$("#chart circle[state='"+ thisState +"']").attr("clicked", "true");
 							
 							//reorder to front	
 							var $point = $("#chart circle[state='"+ thisState +"']");
 							$point.insertBefore(".axis:eq(0)")
+
+							//add to color step
+							if (colorStep != 3){
+								colorStep += 1;
+							}
+							else {
+								colorStep = 0;
+							}
 						}
 						else {
 							//background
@@ -279,6 +295,14 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 							//remove label
 							var $text = $("#chart text[state='"+ thisState +"']");
 							$text.css("visibility","hidden");
+
+							//remove to color step
+							if (colorStep != 0){
+								colorStep -= 1;
+							}
+							else {
+								colorStep = 3;
+							}
 						}
 						//reorganize data based on new positions
 						chartFunctions.reprocessData();
