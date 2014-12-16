@@ -50,7 +50,6 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 					return chartFunctions.updateChart(index)
 				}
 			}
-
 		},
 		churnLargeNumbers:function(line){
 			var countX = $(".xLabel").length;
@@ -70,7 +69,6 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 				yLabels[i] = utilityFunctions.commaSeparateNumber(yTemp[i]);
 				$(".yLabel:eq("+i+")").text(yLabels[i]);
 			}
-
 		}
 	}
 	
@@ -149,19 +147,23 @@ var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0,
 				//toggle text
 				var $text = $("#chart text[state='"+ state +"']");
 				$text.css("visibility","hidden");
-			}
-			
-			//animations
-			var point = d3.select(this);
+
+				//animations
+				var point = d3.select(this);
+					
+				//remove tooltip and lines
+				$(".guide").remove();
 				
-			//remove tooltip and lines
-			$(".guide").remove();
-			
-			//restore circle			
-			point.transition()
-				.duration(800)
-				.attr("r", 5)
-				.ease("elastic");
+				//restore circle			
+				point.transition()
+					.duration(800)
+					.attr("r", 5)
+					.ease("elastic");
+
+				//update positioning
+				current.detach().insertBefore("circle:first");
+				chartFunctions.reprocessData();
+			}			
 		},
 		updateChart:function(position){	
 			currentData = [];
