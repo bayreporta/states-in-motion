@@ -245,7 +245,7 @@ var chartFunctions = {
 			var active = $("#chart span[state='"+ states[i] + "']");
 
 			//determine position
-			var whereY = parseInt($("#chart rect[state='" + states[i] + "']").attr("y-update")) - 10;
+			var whereY = parseInt($("#chart rect[state='" + states[i] + "']").attr("y-update"));
 			var whereX = parseInt($("#chart rect[state='" + states[i] + "']").attr("x")) + 7;
 			active.animate({
 				top:whereY + "px",
@@ -301,7 +301,7 @@ var chartFunctions = {
 				
 				if (clicked === "false"){				
 					//determine position
-					var whereY = parseInt($("#chart rect[state='" + thisState + "']").attr("y")) - 10;
+					var whereY = parseInt($("#chart rect[state='" + thisState + "']").attr("y"));
 					var whereX = parseInt($("#chart rect[state='" + thisState + "']").attr("x")) + 7;
 					//background and up front
 					$(this).css("background", "#ddd").attr("clicked","true");
@@ -519,7 +519,7 @@ $(document).ready(function(){
 			$("#playMotion").attr("src", "assets/play.png");
 			setTimeout(function(){
 				chartFunctions.updateChart(dataPosition);
-			},1000);	
+			},500);	
 		}
 		else if (dataPosition > 0){
 			dataPosition = 0;
