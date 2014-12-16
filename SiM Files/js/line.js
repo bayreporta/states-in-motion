@@ -13,9 +13,9 @@ var chartFunctions = {
 			var position = parseFloat(endPoints[where]) - 2;
 			$("#main-wrapper").append("<span class=\"labels\" state=\""+state+"\" style=\"top:"+ position + "px;\">" + state + "</span>");
 			$(".label[state='"+ state +"']").insertBefore("#selection");
-			//highlight and up front
-			current.css("stroke", "#4169E1").detach().insertAfter("svg path:last");
-			
+
+			//highlight and move to highlight group
+			current.css("stroke", "#4169E1").detach().insertAfter("svg path:last");			
 		}
 	},
 	unhightlightLine:function(){
@@ -27,8 +27,10 @@ var chartFunctions = {
 		if (clicked === "false"){
 			current.css("stroke", "#e2e2e2");
 			$("span[state='"+ state +"']").remove();
-		}
-		
+
+			//push to back
+			current.detach().insertBefore("svg path:first");	
+		}		
 	},
 	setDefaults:function(){
 		y = d3.scale.linear()
