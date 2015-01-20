@@ -449,6 +449,7 @@ var utilityFunctions = {
 	chartFunctions.setDefaults();
 }());
 
+
 /* ADDRESS CHART MOTION
 ===================================================================================*/
 $(document).ready(function(){

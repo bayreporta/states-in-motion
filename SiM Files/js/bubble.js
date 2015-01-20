@@ -573,6 +573,7 @@ var chartFunctions = {
 	}
 }
 
+
 /* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
 ===================================================================================*/
 chartFunctions.grabData();

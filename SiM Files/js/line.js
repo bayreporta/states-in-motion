@@ -288,6 +288,7 @@ var chartFunctions = {
 	}
 }
 
+
 /* GLOBAL VARIABLES
 ===================================================================================*/
 var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorStep = 0, chart, line, x, y, startEnd = {};
