@@ -1,14 +1,12 @@
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
 var chartFunctions = {
-
-	/* GLOBAL CHART FUNCTIONS
-	===================================================================================*/
 	highlightLine:function(){
 		var current = $(this); 
 		var label = current.attr("label");
 				
-		//append label
+		/* APPEND LABELS AND HIGHLIGHTS
+		------------------------------------*/
 		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 			var where = _.indexOf(lineLabels, label);
@@ -24,7 +22,8 @@ var chartFunctions = {
 		var current = $(this); 
 		var label = current.attr("label");
 		
-		//remove label abd highlight
+		/* REMOVE LABELS AND HIGHLIGHTS
+		------------------------------*/
 		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 			current.css("stroke", "#e2e2e2");
@@ -35,27 +34,21 @@ var chartFunctions = {
 		}		
 	},
 	setDefaults:function(){
-		y = d3.scale.linear()
-			.domain([endData, startData])
-			.range([0 + margin.top, h - margin.bottom]),
-		x = d3.scale.linear()
-				.domain([startYear, endYear])
-				.range([0 + margin.left, w - margin.right]),
+		/* SET SCALE AND GRAB LABELS
+		------------------------------*/
+		y = d3.scale.linear().domain([endData, startData]).range([0 + margin.top, h - margin.bottom]),
+		x = d3.scale.linear().domain([startYear, endYear]).range([0 + margin.left, w - margin.right]),
 		years = d3.range(startYear, endYear + 1),
-		lineLabels = [],
-		endPoints = [];
+		lineLabels = [], endPoints = [];
 
+		/* DRAW CHART
+		------------------------------*/
 		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
-
-		line = d3.svg.line()
-			.x(function(d, i) {
-				return x(d.x);
-		}).y(function(d) {
-				return y(d.y);
-		});
+		line = d3.svg.line().x(function(d, i) {return x(d.x);}).y(function(d) {return y(d.y);});
 	},
 	drawChart:function(){
-		//Draw Axes//
+		/* DRAW AXES
+		------------------------------*/
 		chart.append("svg:line")
 			.attr("x1", x(startYear))
 			.attr("y1", h - 30)
@@ -69,13 +62,15 @@ var chartFunctions = {
 			.attr("y2", y(endData))
 			.attr("class", "axis"); //Y-Axis
 
-		//Move Axes to Top//
+		/* AXES TO TOP
+		------------------------------*/
 		$("svg line:eq(0)")
 			.add("svg line:eq(1)")
 			.detach()
 			.insertAfter("#chart svg g");
 
-		// Y Axis Labels //
+		/* AXIS LABELS
+		------------------------------*/
 		chart.selectAll(".yLabel")
 			.data(y.ticks(4))
 			.enter().append("svg:text")
@@ -85,10 +80,10 @@ var chartFunctions = {
 			.attr("y", function(d) {
 			return y(d)
 		}).attr("text-anchor", "end").attr("dy", 3);
-
 		utilityFunctions.churnLargeNumbers(true);
 
-		// Y Axis Ticks //
+		/* Y-AXIS TICKS
+		------------------------------*/
 		chart.selectAll(".yTicks")
 			.data(y.ticks(4))
 			.enter()
@@ -100,6 +95,8 @@ var chartFunctions = {
 				return y(d);
 		}).attr("x2", x(2005));
 
+		/* X-AXIS TICKS
+		------------------------------*/
 		if (dataType === "NAEP"){
 			// X Axis Labels //
 			chart.selectAll(".xLabel")
@@ -248,6 +245,8 @@ var chartFunctions = {
 		}
 	},
 	adjustNormalX:function(dataType){
+		/* SPECIAL LABEL AND TICK CONSIDERATIONS
+		===================================================================================*/
 		if (dataType === "Poverty"){
 			//show certain labels
 			$(".xLabel").css("display","none");
@@ -367,12 +366,6 @@ var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear 
 /* GLOBAL UTILITY FUNCTIONS
 ===================================================================================*/
 var utilityFunctions = {
-	commaSeparateNumber:function(val){
-	    while (/(\d+)(\d{3})/.test(val.toString())){
-	      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-	    }
-	    return val;
-	},
 	churnLargeNumbers:function(line){
 		var countX = $(".xLabel").length;
 		var countY = $(".yLabel").length;
