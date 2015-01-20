@@ -1,24 +1,24 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], states = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorStep = 0;
+var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorStep = 0;
 
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
 var chartFunctions = {
 	highlightBar:function(){
 		var current = $(this); 
-		var state = current.attr("state");
+		var label = current.attr("label");
 
 		//append label
-		var clicked = $("#selection p[state='"+state+"']").attr("clicked");
+		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 			//determine position
-			var whereY = parseInt($("#chart rect[state='" + state + "']").attr("y")) - 10;
-			var whereX = parseInt($("#chart rect[state='" + state + "']").attr("x")) + 7;
+			var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) - 10;
+			var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + 7;
 		
 			//toggle layer
-			$("#chart").append("<span class=\"labels\" state=\""+state+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+colors[colorStep]+";\">" + state + "</span>");
-			$(".label[state='"+ state +"']").insertBefore("#selection");
+			$("#chart").append("<span class=\"labels\" label=\""+label+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+colors[colorStep]+";\">" + label + "</span>");
+			$(".label[label='"+ label +"']").insertBefore("#selection");
 			
 			//color
 			current.css("fill", colors[colorStep]);
@@ -27,14 +27,14 @@ var chartFunctions = {
 	},
 	unhightlightBar:function(){
 		var current = $(this); 
-		var state = current.attr("state");
+		var label = current.attr("label");
 
 		//remove label abd highlight
-		var clicked = $("#selection p[state='"+state+"']").attr("clicked");
+		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){				
 			//remove label
 			current.css("fill", "#e2e2e2");
-			$("span[state='"+ state +"']").remove();
+			$("span[label='"+ label +"']").remove();
 		}
 
 	},
@@ -44,7 +44,7 @@ var chartFunctions = {
 	updateChart:function(position){
 		var newData = [];
 		
-		for (i = 0; i < states.length; i++) {
+		for (i = 0; i < barLabels.length; i++) {
 			//populate state labels
 			//update plot
 			if (dataType === "TeachStudent" || dataType === "Teachers13"){
@@ -88,12 +88,12 @@ var chartFunctions = {
 		var thisData = [];
 		var rankCheck = [];
 		
-		for (i = 0 ; i < states.length ; i++){
+		for (i = 0 ; i < barLabels.length ; i++){
 			//building data foundation for sorting
 			if (currentDataChk == false){
 				currentData[i] = new Object;
 			}
-			currentData[i]["state"] = states[i];
+			currentData[i]["label"] = barLabels[i];
 			currentData[i]["data"] = data[i];
 			thisData[i] = data[i];
 			currentData[i]["rank"] = 0;
@@ -105,16 +105,16 @@ var chartFunctions = {
 		thisData.sort(function(b, a){return a-b});
 		
 		//determine rank for each state
-		for (i = 0 ; i < states.length ; i++){
+		for (i = 0 ; i < barLabels.length ; i++){
 
-			for (ii = 0 ; ii < states.length ; ii++){
+			for (ii = 0 ; ii < barLabels.length ; ii++){
 				if (thisData[ii] == currentData[i]["data"] && rankCheck[ii] == false){
 					currentData[i]["rank"] = ii;
 					rankCheck[ii] = true;
 					break;
 				}
 			}
-			$("#chart rect[state='" + currentData[i]["state"] + "']").attr("rank", currentData[i]["rank"]).attr("x", xPosition[currentData[i]["rank"]]);				
+			$("#chart rect[label='" + currentData[i]["label"] + "']").attr("rank", currentData[i]["rank"]).attr("x", xPosition[currentData[i]["rank"]]);				
 		}		
 	},
 	drawChart:function(data){
@@ -144,8 +144,8 @@ var chartFunctions = {
 				.on("mouseleave", chartFunctions.unhightlightBar)
 				
 			//meta data for bars
-			for (i=0 ; i < states.length ; i++){
-				$("#chart rect:eq("+i+")").attr("state", states[i]).attr("clicked","false").attr("data", data[i]);
+			for (i=0 ; i < barLabels.length ; i++){
+				$("#chart rect:eq("+i+")").attr("label", barLabels[i]).attr("clicked","false").attr("data", data[i]);
 				xPosition[i] = $("#chart rect:eq("+i+")").attr("x");
 
 			}
@@ -218,8 +218,8 @@ var chartFunctions = {
 				})
 
 			//meta data for bars
-			for (i=0 ; i < states.length ; i++){
-				$("#chart rect:eq("+i+")").attr("state", states[i]).attr("clicked","false").attr("data", data[i]);
+			for (i=0 ; i < barLabels.length ; i++){
+				$("#chart rect:eq("+i+")").attr("label", barLabels[i]).attr("clicked","false").attr("data", data[i]);
 
 			}
 		}
@@ -228,13 +228,13 @@ var chartFunctions = {
 		chartFunctions.rankBars(data)
 	},
 	updateLabels:function(){
-		for (i = 0 ; i < states.length ; i++){
+		for (i = 0 ; i < barLabels.length ; i++){
 			//if any state labels are active, move them with data update
-			var active = $("#chart span[state='"+ states[i] + "']");
+			var active = $("#chart span[label='"+ barLabels[i] + "']");
 
 			//determine position
-			var whereY = parseInt($("#chart rect[state='" + states[i] + "']").attr("y-update"));
-			var whereX = parseInt($("#chart rect[state='" + states[i] + "']").attr("x")) + 7;
+			var whereY = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("y-update"));
+			var whereX = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("x")) + 7;
 			active.animate({
 				top:whereY + "px",
 				left:whereX + "px"
@@ -260,7 +260,7 @@ var chartFunctions = {
 			barData[i-1] = thisData[i].slice(1,45);
 
 			//populate state labels
-			states[i-1] = thisData[i][0];
+			barLabels[i-1] = thisData[i][0];
 			
 			//initial plot
 			if (dataType === "TeachStudent" || dataType === "Teachers13"){
@@ -280,26 +280,26 @@ var chartFunctions = {
 		//Axis Labels
 		$("#y-axis").text(yAxisLabel);
 		//State Labels
-		for (i=0 ; i < states.length ; i++){
-			$("#selection").append("<p state=\""+states[i]+"\"clicked=\"false\">" + states[i] + "</p>");
+		for (i=0 ; i < barLabels.length ; i++){
+			$("#selection").append("<p label=\""+barLabels[i]+"\"clicked=\"false\">" + barLabels[i] + "</p>");
 			
 			$("#selection p:eq("+i+")").on("click", function(){
 				var clicked = $(this).attr("clicked");
-				var thisState = $(this).text();
+				var thisLabel = $(this).text();
 				
 				if (clicked === "false"){				
 					//determine position
-					var whereY = parseInt($("#chart rect[state='" + thisState + "']").attr("y"));
-					var whereX = parseInt($("#chart rect[state='" + thisState + "']").attr("x")) + 7;
+					var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y"));
+					var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + 7;
 					//background and up front
 					$(this).css("background", "#ddd").attr("clicked","true");
-					$("#chart rect[state='"+ thisState +"']").css("fill",colors[colorStep]);
-					$("#chart rect[state='"+ thisState +"']").attr("clicked", "true");
+					$("#chart rect[label='"+ thisLabel +"']").css("fill",colors[colorStep]);
+					$("#chart rect[label='"+ thisLabel +"']").attr("clicked", "true");
 
 					//toggle layer
-					$("#chart").append("<span status=\"on\" class=\"labels\" state=\""+thisState+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+colors[colorStep]+";\">" + thisState + "</span>");
+					$("#chart").append("<span status=\"on\" class=\"labels\" label=\""+thisLabel+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+colors[colorStep]+";\">" + thisLabel + "</span>");
 	
-					$(".label[state='"+ thisState +"']").insertBefore("#selection");
+					$(".label[label='"+ thisLabel +"']").insertBefore("#selection");
 
 					//add to color step
 					if (colorStep != 3){
@@ -312,11 +312,11 @@ var chartFunctions = {
 				else {
 					//background
 					$(this).css("background", "#fff").attr("clicked","false");
-					$("#chart rect[state='"+ thisState +"']").css("fill","#e2e2e2");
-					$("#chart rect[state='"+ thisState +"']").attr("clicked", "false");
+					$("#chart rect[label='"+ thisLabel +"']").css("fill","#e2e2e2");
+					$("#chart rect[label='"+ thisLabel +"']").attr("clicked", "false");
 					
 					//remove label
-					$("span[state='"+ thisState +"']").remove();
+					$("span[label='"+ thisLabel +"']").remove();
 
 					//remove to color step
 					if (colorStep != 0){
@@ -461,16 +461,16 @@ $(document).ready(function(){
 			chartFunctions.updateChart(dataPosition);
 		}
 		else {
-			fullMotion = false;
+			fullMotion = false; //pause motion
 		}
-	}).on("mouseover", function(){
+	}).on("mouseover", function(){ //change graphic
 		if (fullMotion == true){
 			$(this).attr("src", "assets/pause-hover.png");
 		}
 		else {
 			$(this).attr("src", "assets/play-hover.png");
 		}
-	}).on("mouseleave", function(){
+	}).on("mouseleave", function(){ //change graphic
 		if (fullMotion == true){
 			$(this).attr("src", "assets/pause.png");
 		}
@@ -478,6 +478,7 @@ $(document).ready(function(){
 			$(this).attr("src", "assets/play.png");
 		}
 	});
+
 	$("#reloadChart").on("click", function(){
 		if (fullMotion == true){
 			fullMotion = false;	//stops motion
