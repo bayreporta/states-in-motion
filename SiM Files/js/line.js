@@ -2,8 +2,7 @@
 ===================================================================================*/
 var chartFunctions = {
 	highlightLine:function(){
-		var current = $(this); 
-		var label = current.attr("label");
+		var current = $(this), label = current.attr("label");
 				
 		/* APPEND LABELS AND HIGHLIGHTS
 		------------------------------------*/
@@ -19,8 +18,7 @@ var chartFunctions = {
 		}
 	},
 	unhightlightLine:function(){
-		var current = $(this); 
-		var label = current.attr("label");
+		var current = $(this), label = current.attr("label");
 		
 		/* REMOVE LABELS AND HIGHLIGHTS
 		------------------------------*/
@@ -394,7 +392,3 @@ var utilityFunctions = {
 		}
 	}
 }
-
-
-
-
