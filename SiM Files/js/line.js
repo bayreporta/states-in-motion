@@ -6,15 +6,15 @@ var chartFunctions = {
 	===================================================================================*/
 	highlightLine:function(){
 		var current = $(this); 
-		var state = current.attr("state");
+		var label = current.attr("label");
 				
 		//append label
-		var clicked = $("#selection p[state='"+state+"']").attr("clicked");
+		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
-			var where = _.indexOf(states, state);
+			var where = _.indexOf(lineLabels, label);
 			var position = parseFloat(endPoints[where]) + 15;
-			$("#main-wrapper").append("<span class=\"labels\" state=\""+state+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + state + "</span>");
-			$(".label[state='"+ state +"']").insertBefore("#selection");
+			$("#main-wrapper").append("<span class=\"labels\" label=\""+label+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + label + "</span>");
+			$(".label[label='"+ label +"']").insertBefore("#selection");
 
 			//highlight and move to highlight group
 			current.css("stroke", colors[colorStep]).detach().insertAfter("svg path:last");			
@@ -22,13 +22,13 @@ var chartFunctions = {
 	},
 	unhightlightLine:function(){
 		var current = $(this); 
-		var state = current.attr("state");
+		var label = current.attr("label");
 		
 		//remove label abd highlight
-		var clicked = $("#selection p[state='"+state+"']").attr("clicked");
+		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 			current.css("stroke", "#e2e2e2");
-			$("span[state='"+ state +"']").remove();
+			$("span[label='"+ label +"']").remove();
 
 			//push to back
 			current.detach().insertBefore("svg path:first");	
@@ -42,7 +42,7 @@ var chartFunctions = {
 				.domain([startYear, endYear])
 				.range([0 + margin.left, w - margin.right]),
 		years = d3.range(startYear, endYear + 1),
-		states = [],
+		lineLabels = [],
 		endPoints = [];
 
 		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
@@ -152,9 +152,9 @@ var chartFunctions = {
 	},
 	processData:function(thisData){
 		for (i = 1; i < thisData.length; i++) {
-			var values = thisData[i].slice(1,45);
-			var tempData = [];
-			var started = false;
+			/* PARSING CSV FILE
+			------------------------------*/
+			var values = thisData[i].slice(1,45), tempData = [], started = false;
 			for (j = 0; j < values.length; j++) {
 				if (values[j] != '') {
 					tempData.push({
@@ -174,48 +174,51 @@ var chartFunctions = {
 				}
 			}
 
-			//populate state labels
-			states[i-1] = thisData[i][0];
+			/* POPULATE LABELS
+			------------------------------*/
+			lineLabels[i-1] = thisData[i][0];
 
 			chart.append("svg:path")
 				.data([tempData])
-				.attr("state", thisData[i][0])
+				.attr("label", thisData[i][0])
 				.attr("d", line)
 				.attr("shape-rendering","auto")
 				.on("mouseover", chartFunctions.highlightLine)
 				.on("mouseleave", chartFunctions.unhightlightLine)
 
-			//populate end points for each line
+			/* POPULATE END POINTS FOR LINES
+			------------------------------------*/
 			var ii = i - 1;
 			var temp = $("#chart path:eq("+ii+")").attr("d");
 			var split = temp.split(",");
 			var end = split.length - 1;
 			endPoints[ii] = split[end];
-		}	
-
+		}
 		chartFunctions.populateLabels();
 		chartFunctions.drawChart();
 	},
 	populateLabels:function(){
-		//Axis Labels
+		/* AXIS LABELS
+		------------------------------*/
 		$("#y-axis").text(yAxisLabel);
 
-		//State Labels
-		for (i=0 ; i < states.length ; i++){
-			$("#selection").append("<p state=\""+states[i]+"\"clicked=\"false\">" + states[i] + "</p>");
+		/* LINE LABELS
+		------------------------------*/
+		for (i=0 ; i < lineLabels.length ; i++){
+			$("#selection").append("<p label=\""+lineLabels[i]+"\"clicked=\"false\">" + lineLabels[i] + "</p>");
 			$("#selection p:eq("+i+")").on("click", function(){
 				var clicked = $(this).attr("clicked");
-				var thisState = $(this).text();
+				var thisLabel = $(this).text();
 				if (clicked === "false"){
 					//determine position
-					var where = _.indexOf(states, thisState);
+					var where = _.indexOf(lineLabels, thisLabel);
 					var position = parseFloat(endPoints[where]) + 15;
 					//background and up front
 					$(this).css("background", "#ddd").attr("clicked","true");
-					$("#chart path[state='"+ thisState +"']").css("stroke",colors[colorStep]).detach().insertAfter("svg path:last");
+					$("#chart path[label='"+ thisLabel +"']").css("stroke",colors[colorStep]).detach().insertAfter("svg path:last");
 					//toggle layer
-					$("#main-wrapper").append("<span class=\"labels\" state=\""+thisState+"\" style=\"top:"+ position+ "px;color:"+colors[colorStep]+"\">" + thisState + "</span>");
-					$(".label[state='"+ thisState +"']").insertBefore("#selection")
+					$("#main-wrapper").append("<span class=\"labels\" label=\""+thisLabel+"\" style=\"top:"+ position+ "px;color:"+colors[colorStep]+"\">" + thisLabel + "</span>");
+					$(".label[label='"+ thisLabel +"']").insertBefore("#selection")
 
 					//add to color step
 					if (colorStep != 3){
@@ -228,10 +231,10 @@ var chartFunctions = {
 				else {
 					//background
 					$(this).css("background", "#fff").attr("clicked","false");
-					$("#chart path[state='"+ thisState +"']").css("stroke","#e2e2e2");
+					$("#chart path[label='"+ thisLabel +"']").css("stroke","#e2e2e2");
 					
 					//remove label
-					$("span[state='"+ thisState +"']").remove();
+					$("span[label='"+ thisLabel +"']").remove();
 
 					//remove to color step
 					if (colorStep != 0){
@@ -287,7 +290,6 @@ var chartFunctions = {
 		}
 	}
 }
-
 
 /* GLOBAL VARIABLES
 ===================================================================================*/
