@@ -37,6 +37,9 @@ var chartFunctions = {
 			$("span[label='"+ label +"']").remove();
 		}
 	},
+	defaultToggle:function(chart){
+		$('#selection p[label="California"]').click();
+	},
 	grabData:function(){
 		switch(dataType){
 			case "Income":
@@ -208,6 +211,10 @@ var chartFunctions = {
 			utilityFunctions.churnLargeNumbers(true);
 			chart.selectAll(".yTicks").data(yScale.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return yScale(d);}).attr("x1", 55).attr("y2", function(d) {return yScale(d);}).attr("x2", 60); //yticks
 			
+			/* DEFAULT TOGGLES
+			------------------------------*/
+			chartFunctions.defaultToggle(dataType);
+
 			firstRun = false;
 		}
 		/* ANOTHER OTHER CHART STATE

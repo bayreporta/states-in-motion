@@ -51,6 +51,9 @@ var chartFunctions = {
 		------------------------------------*/
 		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h);
 	},
+	defaultToggle:function(chart){
+		$('#selection p[label="California"]').click();
+	},
 	grabData:function(){
 		switch(dataType){
 			case "IncomeExpendStudent":
@@ -459,6 +462,10 @@ var chartFunctions = {
 			chart.append("g").attr("class", "axis").attr("transform", "translate(0," + (h - padding) + ")").call(xAxis); //xaxis
 			chart.append("g").attr("class", "axis").attr("transform", "translate(" + 60 + ",0)").call(yAxis); //yaxis
 			
+			/* DEFAULT TOGGLES
+			------------------------------*/
+			chartFunctions.defaultToggle(dataType);
+
 			utilityFunctions.churnLargeNumbers();
 			firstRun = false;
 		}

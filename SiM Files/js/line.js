@@ -44,6 +44,9 @@ var chartFunctions = {
 		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
 		line = d3.svg.line().x(function(d, i) {return x(d.x);}).y(function(d) {return y(d.y);});
 	},
+	defaultToggle:function(chart){
+		$('#selection p[label="California"]').click();
+	},
 	drawChart:function(){
 		/* DRAW AXES
 		------------------------------*/
@@ -144,6 +147,10 @@ var chartFunctions = {
 			}).attr("y2", y(startData) + 10);
 			chartFunctions.adjustNormalX(dataType);
 		}
+
+		/* DEFAULT TOGGLES
+		------------------------------*/
+		chartFunctions.defaultToggle(dataType);
 	},
 	processData:function(thisData){
 		for (i = 1; i < thisData.length; i++) {
@@ -172,14 +179,7 @@ var chartFunctions = {
 			/* POPULATE LABELS
 			------------------------------*/
 			lineLabels[i-1] = thisData[i][0];
-
-			chart.append("svg:path")
-				.data([tempData])
-				.attr("label", thisData[i][0])
-				.attr("d", line)
-				.attr("shape-rendering","auto")
-				.on("mouseover", chartFunctions.highlightLine)
-				.on("mouseleave", chartFunctions.unhightlightLine)
+			chart.append("svg:path").data([tempData]).attr("label", thisData[i][0]).attr("d", line).attr("shape-rendering","auto").on("mouseover", chartFunctions.highlightLine).on("mouseleave", chartFunctions.unhightlightLine);
 
 			/* POPULATE END POINTS FOR LINES
 			------------------------------------*/
