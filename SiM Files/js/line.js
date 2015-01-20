@@ -1,7 +1,9 @@
-/* CODE TO DRAW D3.JS PATHS ADAPTED FROM NATHAN YAU'S LIFE EXPECTANCY CHART http://projects.flowingdata.com/life-expectancy/ */
-
-//base functions
+/* GLOBAL CHART FUNCTIONS
+===================================================================================*/
 var chartFunctions = {
+
+	/* GLOBAL CHART FUNCTIONS
+	===================================================================================*/
 	highlightLine:function(){
 		var current = $(this); 
 		var state = current.attr("state");
@@ -286,81 +288,81 @@ var chartFunctions = {
 	}
 }
 
-//Globals//
-var dataType = $("meta").attr("content");
-var	w = 600,h = 400, startYear = 1970,endYear = 2013,startData = 0,endData = 0,yAxisLabel,
-	margin = {
-		all:-1,
-		left:110,
-		right:15,
-		top:30,
-		bottom:30
-	};
-var colors = ["#4169E1","#e14169","#e16941","#41e1b9"];
-var colorStep = 0;
-var chart, line, x, y
-switch(dataType){
-	case "Population":
-		endData = 40000000;
-		yAxisLabel = "State Population (in millions)"
-		chartFunctions.setDefaults();
-		break;
-	case "Students":
-		endData = 6500000;
-		yAxisLabel = "K-12 Students (in millions)"
-		chartFunctions.setDefaults();
-		break;
-	case "Students per Capita":
-		endData = 40;
-		yAxisLabel = "Students per Capita"
-		chartFunctions.setDefaults();
-		break;
-	case "NAEP":
-		endData = 60;
-		yAxisLabel = "Average NAEP Proficency in Math and Reading, Grades 4 and 8"
-		startYear = 2003;
-		endYear = 2014;
-		chartFunctions.setDefaults();
-		break;
-	case "Income":
-		endData = 80000;
-		yAxisLabel = "Income per Capita (in thousands)"
-		startYear = 1970;
-		endYear = 2013;
-		chartFunctions.setDefaults();
-		break;
-	case "Salaries":
-		endData = 100000;
-		yAxisLabel = "K-12 Teacher Salaries (in thousands)"
-		startYear = 1970;
-		endYear = 2011;
-		chartFunctions.setDefaults();
-		break;
-	case "Salaries-Income":
-		startData = -2;
-		endData = 2;
-		yAxisLabel = "K-12 Teacher Salaries Against Income per Capita"
-		startYear = 1970;
-		endYear = 2011;
-		chartFunctions.setDefaults();
-		break;
-	case "Poverty":
-		endData = 60;
-		yAxisLabel = "Percentage of 6-17 Year-Olds in Poverty"
-		startYear = 1977;
-		endYear = 2013;
-		chartFunctions.setDefaults();
-		break;
-	case "Effort":
-		endData = 10;
-		yAxisLabel = "K-12 Expenditures Compared With State Income"
-		startYear = 1970;
-		endYear = 2012;
-		chartFunctions.setDefaults();
-		break;
-}
-var startEnd = {}
+/* GLOBAL VARIABLES
+===================================================================================*/
+var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorStep = 0, chart, line, x, y, startEnd = {};
 
+/* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
+===================================================================================*/
+(function() {
+	switch(dataType){
+		case "Population":
+			filename = 'data/population.csv';
+			endData = 40000000;
+			yAxisLabel = "State Population (in millions)"
+			break;
+		case "Students":
+			filename = 'data/students.csv';
+			endData = 6500000;
+			yAxisLabel = "K-12 Students (in millions)"
+			break;
+		case "Students per Capita":
+			filename = 'data/studentspercapita.csv';
+			endData = 40;
+			yAxisLabel = "Students per Capita"
+			break;
+		case "NAEP":
+			filename = 'data/naep.csv';
+			endData = 60;
+			yAxisLabel = "Average NAEP Proficency in Math and Reading, Grades 4 and 8"
+			startYear = 2003;
+			endYear = 2014;
+			break;
+		case "Income":
+			endData = 80000;
+			yAxisLabel = "Income per Capita (in thousands)"
+			startYear = 1970;
+			endYear = 2013;
+			break;
+		case "Salaries":
+			filename = 'data/salaries.csv';
+			endData = 100000;
+			yAxisLabel = "K-12 Teacher Salaries (in thousands)"
+			startYear = 1970;
+			endYear = 2011;
+			break;
+		case "Salaries-Income":
+			filename = 'data/sVi.csv';
+			startData = -2;
+			endData = 2;
+			yAxisLabel = "K-12 Teacher Salaries Against Income per Capita"
+			startYear = 1970;
+			endYear = 2011;
+			break;
+		case "Poverty":
+			filename = 'data/poverty.csv';
+			endData = 60;
+			yAxisLabel = "Percentage of 6-17 Year-Olds in Poverty"
+			startYear = 1977;
+			endYear = 2013;
+			break;
+		case "Effort":
+			filename = 'data/effort.csv';
+			endData = 10;
+			yAxisLabel = "K-12 Expenditures Compared With State Income"
+			startYear = 1970;
+			endYear = 2012;	
+			break;
+	}
+	d3.text(filename, 'text/csv', function(text) {
+		var thisData = d3.csv.parseRows(text);
+		chartFunctions.processData(thisData);
+	});	
+	chartFunctions.setDefaults();
+}());
+
+/* GLOBAL UTILITY FUNCTIONS
+===================================================================================*/
 var utilityFunctions = {
 	commaSeparateNumber:function(val){
 	    while (/(\d+)(\d{3})/.test(val.toString())){
@@ -397,56 +399,6 @@ var utilityFunctions = {
 	}
 }
 
-//Populate Lines and Data//
-switch(dataType){
-	case "Population":
-		d3.text('data/population.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "Students":
-		d3.text('data/students.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "Students per Capita":
-		d3.text('data/studentspercapita.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "NAEP":
-		d3.text('data/naep.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "Salaries":
-		d3.text('data/salaries.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "Salaries-Income":
-		d3.text('data/sVi.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "Poverty":
-		d3.text('data/poverty.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "Effort":
-		d3.text('data/effort.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-}
+
 
 

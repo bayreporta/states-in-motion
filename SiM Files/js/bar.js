@@ -1,21 +1,9 @@
-//Globals//
-var	w = 600,h = 400, barPadding = 2, startYear = 0,endYear = 0,yearPosition = 0, startData, endData, chart,xScale,yScale,line,
-	margin = {
-		top:30,
-		bottom:30
-	},
-	yAxisLabel,
-	dataPosition = 0,
-	fullMotion = false,
-	padding = 60,
-	firstRun = true,
-	currentData = [], currentDataChk = false, 
-	years = [];
-var barData = [], states = [], endPoints = [], firstPlot = [], xPosition = [];
-var startEnd = {}
-var colors = ["#4169E1","#e14169","#e16941","#41e1b9"];
-var colorStep = 0;
-//base functions
+/* GLOBAL VARIABLES
+===================================================================================*/
+var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], states = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorStep = 0;
+
+/* GLOBAL CHART FUNCTIONS
+===================================================================================*/
 var chartFunctions = {
 	highlightBar:function(){
 		var current = $(this); 
@@ -343,6 +331,8 @@ var chartFunctions = {
 	},
 }
 
+/* GLOBAL UTILITY FUNCTIONS
+===================================================================================*/
 var utilityFunctions = {
 	commaSeparateNumber:function(val){
 	    while (/(\d+)(\d{3})/.test(val.toString())){
@@ -402,90 +392,65 @@ var utilityFunctions = {
 	}
 }
 
-//determine what chart we're looking at by looking at the meta tag in HTML page
-var dataType = $("meta").attr("content");
-switch(dataType){
-	case "Income":
-		startYear = 1970;
-		endYear = 2013;
-		yAxisLabel = "Income per Capita (in thousands)";
-		yearPosition = 1970;
-		startData = 0;
-		endData = 80000;
-		chartFunctions.setDefaults();
-		break;
-	case "ExpStudent":
-		startYear = 1970;
-		endYear = 2012;
-		yAxisLabel = "State Expenditures per Student (in thousands)";
-		yearPosition = 1970;
-		startData = 0;
-		endData = 30000;
-		chartFunctions.setDefaults();
-		break;
-	case "TeachStudent":
-		startYear = 1982;
-		endYear = 2010;
-		yAxisLabel = "Teachers per Student";
-		yearPosition = 1982;
-		startData = 0;
-		endData = 1.5;
-		chartFunctions.setDefaults();
-		break;
-	case "Expend13":
-		startYear = 1982;
-		endYear = 2012;
-		yAxisLabel = "K-12 Expenditures per Student - 13 Years Cumulative (in thousands)";
-		yearPosition = 1982;
-		startData = 0;
-		endData = 250000;
-		chartFunctions.setDefaults();
-		break;
-	case "Teachers13":
-		startYear = 1982;
-		endYear = 2010;
-		yAxisLabel = "Teachers per Student - 13 Years Cumulative";
-		yearPosition = 1982;
-		startData = 0;
-		endData = 1.5;
-		chartFunctions.setDefaults();
-		break;
-}
+/* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
+===================================================================================*/
+(function() {
+	switch(dataType){
+		case "Income":
+			filename = 'data/income.csv';
+			startYear = 1970;
+			endYear = 2013;
+			yAxisLabel = "Income per Capita (in thousands)";
+			yearPosition = 1970;
+			startData = 0;
+			endData = 80000;
+			break;
+		case "ExpStudent":
+			filename = 'data/expendstudent.csv';
+			startYear = 1970;
+			endYear = 2012;
+			yAxisLabel = "State Expenditures per Student (in thousands)";
+			yearPosition = 1970;
+			startData = 0;
+			endData = 30000;
+			break;
+		case "TeachStudent":
+			filename = 'data/teachstudents.csv';
+			startYear = 1982;
+			endYear = 2010;
+			yAxisLabel = "Teachers per Student";
+			yearPosition = 1982;
+			startData = 0;
+			endData = 1.5;
+			break;
+		case "Expend13":
+			filename = 'data/expend13.csv';
+			startYear = 1982;
+			endYear = 2012;
+			yAxisLabel = "K-12 Expenditures per Student - 13 Years Cumulative (in thousands)";
+			yearPosition = 1982;
+			startData = 0;
+			endData = 250000;
+			break;
+		case "Teachers13":
+			filename = 'data/teachers13.csv';
+			startYear = 1982;
+			endYear = 2010;
+			yAxisLabel = "Teachers per Student - 13 Years Cumulative";
+			yearPosition = 1982;
+			startData = 0;
+			endData = 1.5;
+			break;
+	}
+	d3.text(filename, 'text/csv', function(text) {
+		var thisData = d3.csv.parseRows(text);
+		chartFunctions.processData(thisData);
+	});
+	chartFunctions.setDefaults();
+}());
 
-//Grab data
-switch(dataType){
-	case "Income":
-		d3.text('data/income.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "ExpStudent":
-		d3.text('data/expendstudent.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "TeachStudent":
-		d3.text('data/teachstudents.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "Expend13":
-		d3.text('data/expend13.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-	case "Teachers13":
-		d3.text('data/teachers13.csv', 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		break;
-}
-
+/* ADDRESS CHART MOTION
+===================================================================================*/
 $(document).ready(function(){
 	$("#playMotion").on("click", function(){
 		if (fullMotion == false){
