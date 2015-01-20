@@ -6,8 +6,9 @@ var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding
 ===================================================================================*/
 var utilityFunctions = {
 	updateSlider:function(val){
+		/* HANDLING INTERACTIONS W SLIDER
+		------------------------------------*/
 		var index;
-
 		//stop motion if in motion
 		if (fullMotion == true){
 			$("#playMotion").attr("src", "assets/play.png");
@@ -25,9 +26,7 @@ var utilityFunctions = {
 	},
 	churnLargeNumbers:function(){
 		var temp = [];
-
 		var totalLabels = $("text:not(.plotLabels)").length;
-
 		for (i=0 ; i < totalLabels ; i++){
 			temp[i] = $("text:not(.plotLabels):eq("+i+")").text();
 			//Shorten Axis Labels
@@ -48,6 +47,8 @@ var utilityFunctions = {
 ===================================================================================*/
 var chartFunctions = {
 	setDefaults:function(){
+		/* DRAW CHART
+		------------------------------------*/
 		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h);
 	},
 	grabData:function(){
@@ -144,92 +145,59 @@ var chartFunctions = {
 		chartFunctions.setDefaults();
 	},
 	highlightPoint:function(){
-		var current = $(this); 
-		var state = current.attr("state");
+		var current = $(this), label = current.attr("label");
+
+		/* DISBALES HOVER OVER IN MOTION
+		------------------------------------*/
 		if (fullMotion === true){
 			return;
 		}
 		else {	
-			//append label
-			var clicked = $("#selection p[state='"+state+"']").attr("clicked");
+			/* APPEND LABELS AND HIGHLIGHTS
+			------------------------------------*/
+			var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 			if (clicked === "false"){
 				//animation
-				var $point = $(this);
-				var $text = $("#chart text[state='"+ state +"']");
-				var point = d3.select(this)
-				point.transition()
-					.duration(800)
-					.attr("r", 8)
-					.ease("elastic");
-				
-				//X Line Data
-				chart.append("g")
-					.attr("class", "guide")					
-				.append("line")
-					.attr("x1", point.attr("cx"))
-					.attr("x2", 60)
-					.attr("y1", point.attr("cy"))
-					.attr("y2", point.attr("cy"))
-					.style("stroke", colors[colorStep])
-					.transition().delay(200).duration(400).styleTween("opacity", 
-								function() { return d3.interpolate(0, .5); });
-				//Y Line Data
-				chart.append("g")
-					.attr("class", "guide")
-				.append("line")
-					.attr("x1", point.attr("cx"))
-					.attr("x2", point.attr("cx"))
-					.attr("y1", point.attr("cy"))
-					.attr("y2", h - 20)
-					.style("stroke", colors[colorStep])
-					.transition().delay(200).duration(400).styleTween("opacity", 
-								function() { return d3.interpolate(0, .5); })
-				
-				//reorder to front	
-				$point.insertBefore(".axis:eq(0)")
+				var $point = $(this), $text = $("#chart text[label='"+ label +"']"), point = d3.select(this);
+				point.transition().duration(800).attr("r", 8).ease("elastic");
+
+				/* ADD GUIDING LINES ON HOVER
+				------------------------------------*/
+				chart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", 60).attr("y1", point.attr("cy")).attr("y2", point.attr("cy")).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity",function() { return d3.interpolate(0, .5); }); //x-axis
+				chart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", point.attr("cx")).attr("y1", point.attr("cy")).attr("y2", h - 20).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity", function() { return d3.interpolate(0, .5); }); //y-axis		
+				$point.insertBefore(".axis:eq(0)"); //reorder to front
 
 				//toggle text
-				$text.css({
-					visibility:"visible",
-					fill:colors[colorStep]
-				});
-				//$text.insertBefore(".axis:eq(0)")
+				$text.css({visibility:"visible",fill:colors[colorStep]});
 
+				//fill point
 				current.css("fill", colors[colorStep]);
-
 			}
 			//reorganize data based on new positions
 			chartFunctions.reprocessData();
 		}
 	},
 	unhightlightPoint:function(){
-		var current = $(this); 
-		var state = current.attr("state");
+		var current = $(this), label = current.attr("label");
 
-		//remove label abd highlight
-		var clicked = $("#selection p[state='"+state+"']").attr("clicked");
+		/* REMOVE LABELS AND HIGHLIGHTS
+		------------------------------------*/
+		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){				
 			//remove label
-			current.css("fill", "#e2e2e2");
+				current.css("fill", "#e2e2e2");
 			//toggle text
-			var $text = $("#chart text[state='"+ state +"']");
-			$text.css("visibility","hidden");
-
+				var $text = $("#chart text[label='"+ label +"']");
+				$text.css("visibility","hidden");
 			//animations
-			var point = d3.select(this);
-				
+				var point = d3.select(this);	
 			//remove tooltip and lines
-			$(".guide").remove();
-			
+				$(".guide").remove();
 			//restore circle			
-			point.transition()
-				.duration(800)
-				.attr("r", 5)
-				.ease("elastic");
-
+				point.transition().duration(800).attr("r", 5).ease("elastic");
 			//update positioning
-			current.detach().insertBefore("circle:first");
-			chartFunctions.reprocessData();
+				current.detach().insertBefore("circle:first");
+				chartFunctions.reprocessData();
 		}			
 	},
 	updateChart:function(position){	
@@ -303,35 +271,35 @@ var chartFunctions = {
 		}
 	},
 	updateLabels:function(data){
-		chart.selectAll("text")
-		   .data(data)
-		   .attr("x", function(d) {
-		   		return xScale(d[0]) + 5;
-		   })
-		   .attr("y", function(d) {
-		   		return yScale(d[1]) - 5;
-		   })
+		/* UPDATE LABEL POSITIONS
+		------------------------------------*/	
+		chart.selectAll("text").data(data).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;});
 	},
 	populateLabels:function(){
-		//axis labels
+		/* AXIS LABELS
+		------------------------------------*/
 		$("#x-axis").text(axisLabels.x);
 		$("#y-axis").text(axisLabels.y);
 
-		//point labels
+		/* POINT LABELS
+		------------------------------------*/
 		for (i=0 ; i < points._wrapped.length ; i++){
-			$("#selection").append("<p state=\""+points._wrapped[i]+"\"clicked=\"false\">" + points._wrapped[i] + "</p>");
-
+			$("#selection").append("<p label=\""+points._wrapped[i]+"\"clicked=\"false\">" + points._wrapped[i] + "</p>");
 			$("#selection p:eq("+i+")").on("click", function(){
 				var clicked = $(this).attr("clicked");
-				var thisState = $(this).text();
+				var thisPoint = $(this).text();
 
+				/* PREVENT LABEL CLICK ON MOTION
+				------------------------------------*/
 				if(fullMotion === true){
 					return;
 				}
-				else{							
+				else{		
+					/* TOGGLE LABEL BEHAVIOR
+					------------------------------------*/					
 					if (clicked === "false"){	
 						//unhide text
-						var $text = $("#chart text[state='"+ thisState +"']");
+						var $text = $("#chart text[label='"+ thisPoint +"']");
 						$text.css({
 							visibility:"visible",
 							fill:colors[colorStep]
@@ -340,11 +308,11 @@ var chartFunctions = {
 									
 						//background and up front
 						$(this).css("background", "#ddd").attr("clicked","true");
-						$("#chart circle[state='"+ thisState +"']").css("fill",colors[colorStep]);
-						$("#chart circle[state='"+ thisState +"']").attr("clicked", "true");
+						$("#chart circle[label='"+ thisPoint +"']").css("fill",colors[colorStep]);
+						$("#chart circle[label='"+ thisPoint +"']").attr("clicked", "true");
 						
 						//reorder to front	
-						var $point = $("#chart circle[state='"+ thisState +"']");
+						var $point = $("#chart circle[label='"+ thisPoint +"']");
 						$point.insertBefore(".axis:eq(0)")
 
 						//add to color step
@@ -358,11 +326,11 @@ var chartFunctions = {
 					else {
 						//background
 						$(this).css("background", "#fff").attr("clicked","false");
-						$("#chart circle[state='"+ thisState +"']").css("fill","#e2e2e2");
-						$("#chart circle[state='"+ thisState +"']").attr("clicked", "false");
+						$("#chart circle[label='"+ thisPoint +"']").css("fill","#e2e2e2");
+						$("#chart circle[label='"+ thisPoint +"']").attr("clicked", "false");
 
 						//remove label
-						var $text = $("#chart text[state='"+ thisState +"']");
+						var $text = $("#chart text[label='"+ thisPoint +"']");
 						$text.css("visibility","hidden");
 
 						//remove to color step
@@ -380,9 +348,10 @@ var chartFunctions = {
 		}
 	},
 	reprocessData:function(){
-		var curPos = [];
-		var tempData = [];
+		var curPos = [], tempData = [];
 
+		/* THIS ADDRESSES MOTION ISSUES WHEN MOVING POINTS TO TOP
+		-----------------------------------------------------------------*/
 		if (initReprocess == false){
 			for (i=0 ; i < totalPoints ; i++) {
 				// GRAB CURRENT ELEM POSITION
@@ -406,27 +375,31 @@ var chartFunctions = {
 			updatedPointData = tempData;
 		}
 
-		//UPDATE ELEM POSITIONS
+		/* UPDATE POSITION OF ALL ELEMENTS
+		------------------------------------*/
 		for(i=0 ; i < totalPoints ; i++){
 			$("svg circle:eq("+i+")").attr("elem-pos", i);
 		}
 	},
 	processData:function(thisData){
-		var tempYears = [], tempStates = [];
+		var tempYears = [], tempLabels = [];
 		
-		//grab Years and States
+		/* GRAB YEARS AND LABELS
+		------------------------------------*/
 		for (i = 1 ; i < thisData.length ; i++){
 			tempYears[i] = parseInt(thisData[i][1]);
-			tempStates[i] = thisData[i][0];
+			tempLabels[i] = thisData[i][0];
 		}
 		years = _.chain(tempYears).uniq().compact();
-		points = _.chain(tempStates).uniq().compact();
+		points = _.chain(tempLabels).uniq().compact();
 							
-		//populate year slider
+		/* POPULATE SLIDER
+		------------------------------------*/
 		$("#nav-wrapper h2").text(startYear); //default year
 		$("#yearSlider").attr("min", startYear).attr("max", endYear).attr("value", startYear);
 
-		//grab data
+		/* GRAB DATA
+		------------------------------------*/
 		totalPoints = points._wrapped.length;
 		for (i = 0 ; i < points._wrapped.length ; i++){
 			plotData[i] = new Array();
@@ -440,134 +413,64 @@ var chartFunctions = {
 			}
 		}
 		
-		//grab first year
+		/* GRAB FIRST YEAR IN DATA
+		------------------------------------*/
 		for (i = 0 ; i < totalPoints ; i++){
 			currentData.push(plotData[i][0])
 		}
 		
-		//process charts
 		chartFunctions.populateLabels();
 		chartFunctions.drawChart(currentData);
 	},
 	drawChart:function(data){
+		/* INIT CHART POSITION
+		------------------------------------*/
 		if (firstRun == true) {
-			//Set Scales
-			xScale = d3.scale.linear()
-				.domain([0, maxX])
-				.range([60, w+xAdjust])
-				.clamp(true)
-				.nice();
-				
-			yScale = d3.scale.linear()
-				.domain([0, maxY])
-				.range([h-padding,padding])
-				.clamp(true)
-				.nice();
-				
-			
-			//plot data
-			chart.selectAll("circle")
-				.data(data)
-				.enter()
-				.append("circle")
-				.attr("class", "plotPoint")
-				.attr("cx", function(d){
-					return xScale(d[0]);
-				})
-				.attr("cy", function(d){
-					return yScale(d[1]);
-				})
-				.attr("data-x", function(d){
-					return d[0];
-				})
-				.attr("data-y", function(d){
-					return d[1];
-				})
-				.attr("r", 5)
-				.attr("clicked","false")
-				.on("mouseover", chartFunctions.highlightPoint)
-				.on("mouseleave", chartFunctions.unhightlightPoint)	
 
-			//Add Initial Element Position
+			/* SET SCALES
+			------------------------------------*/
+			xScale = d3.scale.linear().domain([0, maxX]).range([60, w+xAdjust]).clamp(true).nice(); //xscale				
+			yScale = d3.scale.linear().domain([0, maxY]).range([h-padding,padding]).clamp(true).nice(); //yscale
+
+			/* DRAW PLOTS
+			------------------------------------*/
+			chart.selectAll("circle").data(data).enter().append("circle").attr("class", "plotPoint").attr("cx", function(d){return xScale(d[0]);}).attr("cy", function(d){return yScale(d[1]);}).attr("data-x", function(d){return d[0];}).attr("data-y", function(d){return d[1];}).attr("r", 5).attr("clicked","false").on("mouseover", chartFunctions.highlightPoint).on("mouseleave", chartFunctions.unhightlightPoint);
+			
+			/* ADD INIT ELEMENT POSITIONS
+			------------------------------------*/
 			for (i = 0 ; i < totalPoints ; i++){
 				$("svg circle:eq("+i+")").attr("elem-pos", i);
 			}
 			
-			//Plot Point Label	
-			chart.selectAll("text")
-			   .data(data)
-			   .enter()
-			   .append("text")
-			   .text(function(d) {
-			   		return d[2];
-			   })
-			   .attr("x", function(d) {
-			   		return xScale(d[0]) + 5;
-			   })
-			   .attr("y", function(d) {
-			   		return yScale(d[1]) - 5;
-			   })
-			   .attr("class", "plotLabels")		
-			   .attr("state", function(d){
-					return d[2];
-			   })
-			//meta data for bars
+			/* DRAW LABELS
+			------------------------------------*/	
+			chart.selectAll("text").data(data).enter().append("text").text(function(d) {return d[2];}).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;}).attr("class", "plotLabels").attr("label", function(d){return d[2];}) //meta data for bars
 			for (i=0 ; i < totalPoints ; i++){
-				$("#chart circle:eq("+i+")").attr("state", points._wrapped[i]);
+				$("#chart circle:eq("+i+")").attr("label", points._wrapped[i]);
 			}
 			
-			//Define X axis
-			var xAxis = d3.svg.axis()
-				.scale(xScale)
-				.orient("bottom")
-				.ticks(5)
-				
-			//Define X axis
-			var yAxis = d3.svg.axis()
-				.scale(yScale)
-				.orient("left")
-				.ticks(5)
-							
-			//Create X axis
-			chart.append("g")
-				.attr("class", "axis")
-				.attr("transform", "translate(0," + (h - padding) + ")")
-				.call(xAxis);
-				
-			//Create Y axis
-			chart.append("g")
-				.attr("class", "axis")
-				.attr("transform", "translate(" + 60 + ",0)")
-				.call(yAxis);
-			
-			//Chrun larger numbers
-			utilityFunctions.churnLargeNumbers();
+			/* DEFINE AXES
+			------------------------------------*/	
+			var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(5); //xaxis
+			var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5); //yaxis
 
-			firstRun = false
+			/* CREATE AXES
+			------------------------------------*/	
+			chart.append("g").attr("class", "axis").attr("transform", "translate(0," + (h - padding) + ")").call(xAxis); //xaxis
+			chart.append("g").attr("class", "axis").attr("transform", "translate(" + 60 + ",0)").call(yAxis); //yaxis
+			
+			utilityFunctions.churnLargeNumbers();
+			firstRun = false;
 		}
+		/* ALL OTHER CHART POSITIONS
+		------------------------------------*/
 		else {
-			//plot data
-			chart.selectAll("circle")
-				.data(data)
-				.attr("class", "plotPoint")
-				.transition()
-				.attr("cx", function(d){
-					return xScale(d[0]);
-				})
-				.attr("cy", function(d){
-					return yScale(d[1]);
-				})
-				.attr("data-x", function(d){
-					return d[0];
-				})
-				.attr("data-y", function(d){
-					return d[1];
-				})
-				.attr("r", 5)
-								
-			//meta data for bars
+
+			/* MODIFY PLOTS
+			------------------------------------*/	
+			chart.selectAll("circle").data(data).attr("class", "plotPoint").transition().attr("cx", function(d){return xScale(d[0]);}).attr("cy", function(d){return yScale(d[1]);}).attr("data-x", function(d){return d[0];}).attr("data-y", function(d){return d[1];}).attr("r", 5);
 			for (i=0 ; i < totalPoints ; i++){
-				$("#chart circle:eq("+i+")").attr("state", points._wrapped[i]);
+				$("#chart circle:eq("+i+")").attr("label", points._wrapped[i]);
 			}
 		}
 	}
@@ -590,9 +493,9 @@ $(document).ready(function(){
 			chartFunctions.updateChart(dataPosition);
 		}
 		else {
-			fullMotion = false;
+			fullMotion = false; //pause motion
 		}
-	}).on("mouseover", function(){
+	}).on("mouseover", function(){ 
 		if (fullMotion == true){
 			$(this).attr("src", "assets/pause-hover.png");
 		}
@@ -607,6 +510,7 @@ $(document).ready(function(){
 			$(this).attr("src", "assets/play.png");
 		}
 	});
+
 	$("#reloadChart").on("click", function(){
 		if (fullMotion == true){
 			fullMotion = false;	//stops motion				
