@@ -1,0 +1,15 @@
+#reset-button {position: absolute;
+	top: 410px;
+	left: 735px;
+	text-align: center;
+	width: 103px;
+	background: #ddd;
+	padding: 5px;
+	cursor: pointer;
+	color: #333;
+	font-weight: 400;
+}
+
+#reset-button:hover {
+	background: #aaa;
+}
