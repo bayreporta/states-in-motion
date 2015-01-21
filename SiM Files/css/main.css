@@ -2,7 +2,6 @@
 ==========================================*/
 
 body {
-	width:840px;
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -18,9 +17,51 @@ h2 {
 	color:#57504E;
 }
 
-#reset-button {position: absolute;
-	top: 410px;
-	left: 735px;
+#main-wrapper {
+	width: 896px;
+	height:450px;
+}
+
+#content {
+	float:left;
+}
+
+#selection {
+	width:110px;
+	height:370px;
+	background:#fff;
+	overflow:scroll;
+	border: solid 1px #aaa;
+	position: relative;
+	left: 100px;
+}
+
+#selection p {
+	margin:0;
+	cursor:pointer;
+	font-size:11px;
+	padding:0 0 0 5px;
+	color:#666;
+}
+
+#header h2 {
+	font-size: 1.3em;
+	margin: 0 0 0 15px;
+	padding: 0;
+	text-transform: none;
+}
+
+#header p {
+	font-size: .9em;
+	color: #666;
+	margin: 5px 0 0 40px;
+	padding: 0;
+}
+
+#reset-button {
+	position: absolute;
+	top: 450px;
+	left: 707px;
 	text-align: center;
 	width: 103px;
 	background: #ddd;
@@ -32,6 +73,20 @@ h2 {
 
 #reset-button:hover {
 	background: #aaa;
+}
+
+#y-axis {
+	width: auto;
+	text-align: center;
+	font-family:'Roboto', san-serif;
+	font-weight: 400;
+	color: #bbb;
+	font-size: 12px;
+	margin: 0;
+	transform: rotate(-90deg);
+	position: relative;
+	top: 208px;
+	left: -385px;
 }
 
 .highlight {
@@ -46,36 +101,6 @@ h2 {
 .xTicks,.yTicks {
 	stroke-width: 0.6;
 	stroke: #000;
-}
-
-
-#selection {
-	width:110px;
-	height:370px;
-	background:#fff;
-	float:right;
-	overflow:scroll;
-	border: solid 1px #aaa;
-}
-
-#content {
-	float:left;
-}
-
-#source {
-	font-size: 0.8em;
-	text-align: right;
-	margin-top: 10px;
-	padding-bottom: 20px;
-	font-weight:300;
-}
-
-#selection p {
-	margin:0;
-	cursor:pointer;
-	font-size:11px;
-	padding:0 0 0 5px;
-	color:#666;
 }
 
 .labels {
@@ -94,21 +119,7 @@ h2 {
 	stroke:#666 !important;
 }
 
-#y-axis {
-	width: auto;
-	text-align: center;
-	font-family:'Roboto', san-serif;
-	font-weight: 400;
-	color: #bbb;
-	font-size: 12px;
-	margin: 0;
-	transform: rotate(-90deg);
-	position: relative;
-	top: 208px;
-	left: -360px;
-}
-
-.sr-graphic p {
+.sr-graphic p, #header p {
 	line-height: 1.4em;
 	font-family:'Roboto', san-serif;
 	font-weight:300;
@@ -157,7 +168,7 @@ h2 {
 	transform: rotate(-90deg);
 	position: relative;
 	top: 208px;
-	left: -405px;
+	left: -435px;
 }
 
 /* BUBBLE SPECIFIC
@@ -184,7 +195,7 @@ h2 {
 ==========================================*/
 #nav-wrapper {
 	clear:both;
-	margin:30px 0 0 0;
+	margin:0;
 	width: 650px;
 }
 

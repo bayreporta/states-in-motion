@@ -13,8 +13,8 @@ var chartFunctions = {
 		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 			//determine position
-			var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) - 10;
-			var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + 7;
+			var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) + 50;
+			var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + 8;
 			
 			//address color issue
 			chartFunctions.processColors('highlight');
@@ -242,8 +242,8 @@ var chartFunctions = {
 			var active = $("#chart span[label='"+ barLabels[i] + "']");
 
 			//determine position
-			var whereY = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("y-update"));
-			var whereX = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("x")) + 7;
+			var whereY = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("y-update")) + 50;
+			var whereX = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("x")) + 8;
 			active.animate({top:whereY + "px",left:whereX + "px"}, 100);
 		}
 	},
@@ -313,7 +313,7 @@ var chartFunctions = {
 	populateLabels:function(){
 		/* AXIS LABEL
 		------------------------------------*/
-		$("#y-axis").text(yAxisLabel);
+		$("#bar-y-axis").text(yAxisLabel);
 
 		/* BAR LABELS
 		------------------------------------*/
@@ -323,8 +323,8 @@ var chartFunctions = {
 				var clicked = $(this).attr("clicked"), thisLabel = $(this).text();
 				if (clicked === "false"){				
 					//determine position
-					var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y"));
-					var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + 7;
+					var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y")) + 50;
+					var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + 8;
 
 					//address color issue
 					chartFunctions.processColors('add');

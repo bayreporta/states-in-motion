@@ -9,7 +9,7 @@ var chartFunctions = {
 		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 			var where = _.indexOf(lineLabels, label);
-			var position = parseFloat(endPoints[where]) + 15;
+			var position = parseFloat(endPoints[where]) + 66;
 			$("#main-wrapper").append("<span class=\"labels\" label=\""+label+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + label + "</span>");
 			$(".label[label='"+ label +"']").insertBefore("#selection");
 
@@ -241,7 +241,7 @@ var chartFunctions = {
 				if (clicked === "false"){
 					//determine position
 					var where = _.indexOf(lineLabels, thisLabel);
-					var position = parseFloat(endPoints[where]) + 15;
+					var position = parseFloat(endPoints[where]) + 66;
 
 					//address color issue
 					chartFunctions.processColors('add');
