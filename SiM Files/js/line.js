@@ -77,6 +77,10 @@ var chartFunctions = {
 			colorsInUse[parseInt(direct)] -= 1;
 		}
 	},
+	resetColors:function(){
+		$('#selection p[clicked="true"]').click();
+		toggledLabels = [];
+	},
 	drawChart:function(){
 		/* DRAW AXES
 		------------------------------*/
@@ -245,6 +249,8 @@ var chartFunctions = {
 					//background and up front
 					$(this).css("background", "#ddd").attr({clicked:"true",color:colorStep});
 					$("#chart path[label='"+ thisLabel +"']").css("stroke",thisColor).detach().insertAfter("svg path:last");
+					var index = _.indexOf(lineLabels, thisLabel);
+					toggledLabels.push(index); //push to toggled list
 
 					//toggle layer
 					$("#main-wrapper").append("<span class=\"labels\" label=\""+thisLabel+"\" style=\"top:"+ position+ "px;color:"+thisColor+"\">" + thisLabel + "</span>");
@@ -260,9 +266,20 @@ var chartFunctions = {
 					
 					//remove label
 					$("span[label='"+ thisLabel +"']").remove();
+
+					//remove from toggled list
+					var index = _.indexOf(lineLabels, thisLabel);
+					for (i=0;i<toggledLabels.length;i++){
+						if (toggledLabels[i] === index){
+							delete toggledLabels[i];
+							toggledLabels = _.compact(toggledLabels); 
+							break;
+						}
+					}
 				}
 			});
 		}
+		$('#main-wrapper').append('<p id="reset-button" onclick="chartFunctions.resetColors();">RESET</p>');
 	},
 	adjustNormalX:function(dataType){
 		/* SPECIAL LABEL AND TICK CONSIDERATIONS
@@ -312,7 +329,7 @@ var chartFunctions = {
 
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, chart, line, x, y, startEnd = {};
+var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, chart, line, x, y, startEnd = {}, toggledLabels = [];
 
 /* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
 ===================================================================================*/

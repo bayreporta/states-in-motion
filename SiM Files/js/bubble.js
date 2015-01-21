@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2;
+var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [];
 
 /* GLOABL UTILITY FUNCTIONS
 ===================================================================================*/
@@ -308,6 +308,10 @@ var chartFunctions = {
 			colorsInUse[parseInt(direct)] -= 1;
 		}
 	},
+	resetColors:function(){
+		$('#selection p[clicked="true"]').click();
+		toggledLabels = [];
+	},
 	populateLabels:function(){
 		/* AXIS LABELS
 		------------------------------------*/
@@ -342,6 +346,8 @@ var chartFunctions = {
 						//background and up front
 						$(this).css("background", "#ddd").attr({clicked:"true",color:colorStep});
 						$("#chart circle[label='"+ thisPoint +"']").css("fill",thisColor).attr("clicked", "true");
+						var index = _.indexOf(points._wrapped, thisPoint);
+						toggledLabels.push(index); //push to toggled list
 						
 						//reorder to front	
 						var $point = $("#chart circle[label='"+ thisPoint +"']");
@@ -359,12 +365,23 @@ var chartFunctions = {
 						//remove label
 						var $text = $("#chart text[label='"+ thisPoint +"']");
 						$text.css("visibility","hidden");
+
+						//remove from toggled list
+						var index = _.indexOf(points._wrapped, thisPoint);
+						for (i=0;i<toggledLabels.length;i++){
+							if (toggledLabels[i] === index){
+								delete toggledLabels[i];
+								toggledLabels = _.compact(toggledLabels); 
+								break;
+						}
+					}
 					}
 					//reorganize data based on new positions
 					chartFunctions.reprocessData();
 				}
 			});
 		}
+		$('#main-wrapper').append('<p id="reset-button" onclick="chartFunctions.resetColors();">RESET</p>');
 	},
 	reprocessData:function(){
 		var curPos = [], tempData = [];

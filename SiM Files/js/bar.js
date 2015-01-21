@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2;
+var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [];
 
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
@@ -306,6 +306,10 @@ var chartFunctions = {
 			colorsInUse[parseInt(direct)] -= 1;
 		}
 	},
+	resetColors:function(){
+		$('#selection p[clicked="true"]').click();
+		toggledLabels = [];
+	},
 	populateLabels:function(){
 		/* AXIS LABEL
 		------------------------------------*/
@@ -328,6 +332,8 @@ var chartFunctions = {
 					//background and up front
 					$(this).css("background", "#ddd").attr({clicked:'true', color:colorStep});
 					$("#chart rect[label='"+ thisLabel +"']").css("fill",thisColor).attr("clicked","true");
+					var index = _.indexOf(barLabels, thisLabel);
+					toggledLabels.push(index); //push to toggled list
 
 					//toggle layer
 					$("#chart").append("<span status=\"on\" class=\"labels\" label=\""+thisLabel+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + thisLabel + "</span>");
@@ -343,10 +349,21 @@ var chartFunctions = {
 					$("#chart rect[label='"+ thisLabel +"']").css("fill","#e2e2e2");
 					$("#chart rect[label='"+ thisLabel +"']").attr("clicked", "false");
 					//remove label
-					$("span[label='"+ thisLabel +"']").remove();			
+					$("span[label='"+ thisLabel +"']").remove();	
+
+					//remove from toggled list
+					var index = _.indexOf(barLabels, thisLabel);
+					for (i=0;i<toggledLabels.length;i++){
+						if (toggledLabels[i] === index){
+							delete toggledLabels[i];
+							toggledLabels = _.compact(toggledLabels); 
+							break;
+						}
+					}		
 				}
 			});
 		}
+		$('#main-wrapper').append('<p id="reset-button" onclick="chartFunctions.resetColors();">RESET</p>');
 	},
 }
 
