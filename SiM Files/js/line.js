@@ -13,8 +13,11 @@ var chartFunctions = {
 			$("#main-wrapper").append("<span class=\"labels\" label=\""+label+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + label + "</span>");
 			$(".label[label='"+ label +"']").insertBefore("#selection");
 
+			//address color issue
+			chartFunctions.processColors('highlight');
+
 			//highlight and move to highlight group
-			current.css("stroke", colors[colorStep]).detach().insertAfter("svg path:last");			
+			current.css("stroke", thisColor).detach().insertAfter("svg path:last");			
 		}
 	},
 	unhightlightLine:function(){
@@ -46,6 +49,33 @@ var chartFunctions = {
 	},
 	defaultToggle:function(chart){
 		$('#selection p[label="California"]').click();
+	},
+	processColors:function(direct){
+		if (direct === 'add' || direct === 'highlight'){
+			var w = 0, whileStatus = true;
+			while (w < colorLoops){
+				if (whileStatus == true){
+					for (i=0 ; i < colors.length ; i++){
+						if (colorsInUse[i] == w){
+							thisColor = colors[i];
+							colorStep = i;
+							whileStatus = false;
+							if (direct === 'add'){
+								colorsInUse[i] += 1;
+							}
+							break;
+						}
+					}
+					w += 1;
+				}
+				else {
+					break;
+				}				
+			}
+		}
+		else {
+			colorsInUse[parseInt(direct)] -= 1;
+		}
 	},
 	drawChart:function(){
 		/* DRAW AXES
@@ -208,36 +238,28 @@ var chartFunctions = {
 					//determine position
 					var where = _.indexOf(lineLabels, thisLabel);
 					var position = parseFloat(endPoints[where]) + 15;
-					//background and up front
-					$(this).css("background", "#ddd").attr("clicked","true");
-					$("#chart path[label='"+ thisLabel +"']").css("stroke",colors[colorStep]).detach().insertAfter("svg path:last");
-					//toggle layer
-					$("#main-wrapper").append("<span class=\"labels\" label=\""+thisLabel+"\" style=\"top:"+ position+ "px;color:"+colors[colorStep]+"\">" + thisLabel + "</span>");
-					$(".label[label='"+ thisLabel +"']").insertBefore("#selection")
 
-					//add to color step
-					if (colorStep != 3){
-						colorStep += 1;
-					}
-					else {
-						colorStep = 0;
-					}
+					//address color issue
+					chartFunctions.processColors('add');
+
+					//background and up front
+					$(this).css("background", "#ddd").attr({clicked:"true",color:colorStep});
+					$("#chart path[label='"+ thisLabel +"']").css("stroke",thisColor).detach().insertAfter("svg path:last");
+
+					//toggle layer
+					$("#main-wrapper").append("<span class=\"labels\" label=\""+thisLabel+"\" style=\"top:"+ position+ "px;color:"+thisColor+"\">" + thisLabel + "</span>");
+					$(".label[label='"+ thisLabel +"']").insertBefore("#selection")
 				}
 				else {
+					//address color issue
+					chartFunctions.processColors($(this).attr('color'));
+
 					//background
 					$(this).css("background", "#fff").attr("clicked","false");
 					$("#chart path[label='"+ thisLabel +"']").css("stroke","#e2e2e2");
 					
 					//remove label
 					$("span[label='"+ thisLabel +"']").remove();
-
-					//remove to color step
-					if (colorStep != 0){
-						colorStep -= 1;
-					}
-					else {
-						colorStep = 3;
-					}
 				}
 			});
 		}
@@ -290,7 +312,7 @@ var chartFunctions = {
 
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorStep = 0, chart, line, x, y, startEnd = {};
+var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, chart, line, x, y, startEnd = {};
 
 /* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
 ===================================================================================*/
