@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorStep = 0;
+var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2;
 
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
@@ -15,9 +15,12 @@ var chartFunctions = {
 			//determine position
 			var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) - 10;
 			var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + 7;
-		
+			
+			//address color issue
+			chartFunctions.processColors('highlight');
+
 			//toggle layer
-			$("#chart").append("<span class=\"labels\" label=\""+label+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+colors[colorStep]+";\">" + label + "</span>");
+			$("#chart").append("<span class=\"labels\" label=\""+label+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + label + "</span>");
 			$(".label[label='"+ label +"']").insertBefore("#selection");
 			
 			//color
@@ -276,6 +279,33 @@ var chartFunctions = {
 		chartFunctions.populateLabels();
 		chartFunctions.drawChart(firstPlot);
 	},
+	processColors:function(direct){
+		if (direct === 'add' || direct === 'highlight'){
+			var w = 0, whileStatus = true;
+			while (w < colorLoops){
+				if (whileStatus == true){
+					for (i=0 ; i < colors.length ; i++){
+						if (colorsInUse[i] == w){
+							thisColor = colors[i];
+							colorStep = i;
+							whileStatus = false;
+							if (direct === 'add'){
+								colorsInUse[i] += 1;
+							}
+							break;
+						}
+					}
+					w += 1;
+				}
+				else {
+					break;
+				}				
+			}
+		}
+		else {
+			colorsInUse[parseInt(direct)] -= 1;
+		}
+	},
 	populateLabels:function(){
 		/* AXIS LABEL
 		------------------------------------*/
@@ -288,38 +318,32 @@ var chartFunctions = {
 			$("#selection p:eq("+i+")").on("click", function(){
 				var clicked = $(this).attr("clicked"), thisLabel = $(this).text();
 				if (clicked === "false"){				
-				//determine position
+					//determine position
 					var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y"));
 					var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + 7;
-				//background and up front
-					$(this).css("background", "#ddd").attr("clicked","true");
-					$("#chart rect[label='"+ thisLabel +"']").css("fill",colors[colorStep]);
-					$("#chart rect[label='"+ thisLabel +"']").attr("clicked", "true");
-				//toggle layer
-					$("#chart").append("<span status=\"on\" class=\"labels\" label=\""+thisLabel+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+colors[colorStep]+";\">" + thisLabel + "</span>");
+
+					//address color issue
+					chartFunctions.processColors('add');
+					
+					//background and up front
+					$(this).css("background", "#ddd").attr({clicked:'true', color:colorStep});
+					$("#chart rect[label='"+ thisLabel +"']").css("fill",thisColor).attr("clicked","true");
+
+					//toggle layer
+					$("#chart").append("<span status=\"on\" class=\"labels\" label=\""+thisLabel+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + thisLabel + "</span>");
 					$(".label[label='"+ thisLabel +"']").insertBefore("#selection");
-				//add to color step
-					if (colorStep != 3){
-						colorStep += 1;
-					}
-					else {
-						colorStep = 0;
-					}
+
 				}
 				else {
-				//background
+					//address color issue
+					chartFunctions.processColors($(this).attr('color'));
+
+					//background
 					$(this).css("background", "#fff").attr("clicked","false");
 					$("#chart rect[label='"+ thisLabel +"']").css("fill","#e2e2e2");
 					$("#chart rect[label='"+ thisLabel +"']").attr("clicked", "false");
-				//remove label
-					$("span[label='"+ thisLabel +"']").remove();
-				//remove to color step
-					if (colorStep != 0){
-						colorStep -= 1;
-					}
-					else {
-						colorStep = 3;
-					}
+					//remove label
+					$("span[label='"+ thisLabel +"']").remove();			
 				}
 			});
 		}

@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorStep = 0;
+var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2;
 
 /* GLOABL UTILITY FUNCTIONS
 ===================================================================================*/
@@ -173,8 +173,11 @@ var chartFunctions = {
 				//toggle text
 				$text.css({visibility:"visible",fill:colors[colorStep]});
 
+				//address color issue
+				chartFunctions.processColors('highlight');
+
 				//fill point
-				current.css("fill", colors[colorStep]);
+				current.css("fill", thisColor);
 			}
 			//reorganize data based on new positions
 			chartFunctions.reprocessData();
@@ -278,6 +281,33 @@ var chartFunctions = {
 		------------------------------------*/	
 		chart.selectAll("text").data(data).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;});
 	},
+	processColors:function(direct){
+		if (direct === 'add' || direct === 'highlight'){
+			var w = 0, whileStatus = true;
+			while (w < colorLoops){
+				if (whileStatus == true){
+					for (i=0 ; i < colors.length ; i++){
+						if (colorsInUse[i] == w){
+							thisColor = colors[i];
+							colorStep = i;
+							whileStatus = false;
+							if (direct === 'add'){
+								colorsInUse[i] += 1;
+							}
+							break;
+						}
+					}
+					w += 1;
+				}
+				else {
+					break;
+				}				
+			}
+		}
+		else {
+			colorsInUse[parseInt(direct)] -= 1;
+		}
+	},
 	populateLabels:function(){
 		/* AXIS LABELS
 		------------------------------------*/
@@ -301,32 +331,26 @@ var chartFunctions = {
 					/* TOGGLE LABEL BEHAVIOR
 					------------------------------------*/					
 					if (clicked === "false"){	
+						//address color issue
+						chartFunctions.processColors('add');
+
 						//unhide text
 						var $text = $("#chart text[label='"+ thisPoint +"']");
-						$text.css({
-							visibility:"visible",
-							fill:colors[colorStep]
-						});
-						$text.insertBefore(".axis:eq(0)")
-									
+						$text.css({visibility:"visible",fill:thisColor});
+						$text.insertBefore(".axis:eq(0)");
+											
 						//background and up front
-						$(this).css("background", "#ddd").attr("clicked","true");
-						$("#chart circle[label='"+ thisPoint +"']").css("fill",colors[colorStep]);
-						$("#chart circle[label='"+ thisPoint +"']").attr("clicked", "true");
+						$(this).css("background", "#ddd").attr({clicked:"true",color:colorStep});
+						$("#chart circle[label='"+ thisPoint +"']").css("fill",thisColor).attr("clicked", "true");
 						
 						//reorder to front	
 						var $point = $("#chart circle[label='"+ thisPoint +"']");
-						$point.insertBefore(".axis:eq(0)")
-
-						//add to color step
-						if (colorStep != 3){
-							colorStep += 1;
-						}
-						else {
-							colorStep = 0;
-						}
+						$point.insertBefore(".axis:eq(0)");
 					}
 					else {
+						//address color issue
+						chartFunctions.processColors($(this).attr('color'));
+
 						//background
 						$(this).css("background", "#fff").attr("clicked","false");
 						$("#chart circle[label='"+ thisPoint +"']").css("fill","#e2e2e2");
@@ -335,14 +359,6 @@ var chartFunctions = {
 						//remove label
 						var $text = $("#chart text[label='"+ thisPoint +"']");
 						$text.css("visibility","hidden");
-
-						//remove to color step
-						if (colorStep != 0){
-							colorStep -= 1;
-						}
-						else {
-							colorStep = 3;
-						}
 					}
 					//reorganize data based on new positions
 					chartFunctions.reprocessData();
