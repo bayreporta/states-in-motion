@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [];
+var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [], progressBar = 0, progressStep = 2.3255813953;
 
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
@@ -11,21 +11,25 @@ var chartFunctions = {
 		/* APPEND LABELS AND HIGHLIGHTS
 		------------------------------------*/
 		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
-		if (clicked === "false"){
-			//determine position
-			var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) + 50;
-			var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + 8;
-			
-			//address color issue
-			chartFunctions.processColors('highlight');
+		if (fullMotion === true){
+			return;
+		}
+		else {
+			if (clicked === "false"){
+				//determine position
+				var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) + 50;
+				var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + 8;
+				
+				//address color issue
+				chartFunctions.processColors('highlight');
 
-			//toggle layer
-			$("#chart").append("<span class=\"labels\" label=\""+label+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + label + "</span>");
-			$(".label[label='"+ label +"']").insertBefore("#selection");
-			
-			//color
-			current.css("fill", colors[colorStep]);
-			
+				//toggle layer
+				$("#chart").append("<span class=\"labels\" label=\""+label+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + label + "</span>");
+				$(".label[label='"+ label +"']").insertBefore("#selection");
+				
+				//color
+				current.css("fill", colors[colorStep]);
+			}
 		}
 	},
 	unhightlightBar:function(){
@@ -62,15 +66,7 @@ var chartFunctions = {
 				yearPosition = 1970;
 				startData = 0;
 				endData = 30000;
-				break;
-			case "TeachStudent":
-				filename = 'data/teachstudents.csv';
-				startYear = 1982;
-				endYear = 2010;
-				yAxisLabel = "Teachers per Student";
-				yearPosition = 1982;
-				startData = 0;
-				endData = 1.5;
+				progressStep = 2.380952381;
 				break;
 			case "Expend13":
 				filename = 'data/expend13.csv';
@@ -80,6 +76,7 @@ var chartFunctions = {
 				yearPosition = 1982;
 				startData = 0;
 				endData = 250000;
+				progressStep = 3.3333333333;
 				break;
 			case "Teachers13":
 				filename = 'data/teachers13.csv';
@@ -89,6 +86,7 @@ var chartFunctions = {
 				yearPosition = 1982;
 				startData = 0;
 				endData = 1.5;
+				progressStep = 3.5714285714;
 				break;
 		}
 		d3.text(filename, 'text/csv', function(text) {
@@ -124,6 +122,10 @@ var chartFunctions = {
 		------------------------------------*/
 		if (yearPosition == endYear){
 			fullMotion = false;
+			$('#playMotion').attr("src", "assets/play.png");
+			//toggle change in slider
+			$('#yearSlider').css('display','block');
+			$('.progress').css('display','none');
 		}
 					
 		/* UPDATE CHART DATA
@@ -138,7 +140,17 @@ var chartFunctions = {
 		------------------------------------*/
 		$("#yearSlider").attr("value", yearPosition);
 		$("#nav-wrapper h2").text(yearPosition);
-		
+		//determine progress bar
+		if (dataPosition == 0){
+			progressBar = 0;
+		}
+		else {
+			progressBar = (dataPosition + 1) * progressStep;
+		}
+		$('.progress-bar').css('width', progressBar +'%');
+
+
+
 		/* REPEAT IF MOTION TRUE
 		------------------------------------*/
 		if (fullMotion == true){
@@ -321,46 +333,51 @@ var chartFunctions = {
 			$("#selection").append("<p label=\""+barLabels[i]+"\"clicked=\"false\">" + barLabels[i] + "</p>");			
 			$("#selection p:eq("+i+")").on("click", function(){
 				var clicked = $(this).attr("clicked"), thisLabel = $(this).text();
-				if (clicked === "false"){				
-					//determine position
-					var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y")) + 50;
-					var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + 8;
-
-					//address color issue
-					chartFunctions.processColors('add');
-					
-					//background and up front
-					$(this).css("background", "#ddd").attr({clicked:'true', color:colorStep});
-					$("#chart rect[label='"+ thisLabel +"']").css("fill",thisColor).attr("clicked","true");
-					var index = _.indexOf(barLabels, thisLabel);
-					toggledLabels.push(index); //push to toggled list
-
-					//toggle layer
-					$("#chart").append("<span status=\"on\" class=\"labels\" label=\""+thisLabel+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + thisLabel + "</span>");
-					$(".label[label='"+ thisLabel +"']").insertBefore("#selection");
-
+				if (fullMotion === true){
+					return;
 				}
 				else {
-					//address color issue
-					chartFunctions.processColors($(this).attr('color'));
+					if (clicked === "false"){				
+						//determine position
+						var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y")) + 50;
+						var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + 8;
 
-					//background
-					$(this).css("background", "#fff").attr("clicked","false");
-					$("#chart rect[label='"+ thisLabel +"']").css("fill","#e2e2e2");
-					$("#chart rect[label='"+ thisLabel +"']").attr("clicked", "false");
-					//remove label
-					$("span[label='"+ thisLabel +"']").remove();	
+						//address color issue
+						chartFunctions.processColors('add');
+						
+						//background and up front
+						$(this).css("background", "#ddd").attr({clicked:'true', color:colorStep});
+						$("#chart rect[label='"+ thisLabel +"']").css("fill",thisColor).attr("clicked","true");
+						var index = _.indexOf(barLabels, thisLabel);
+						toggledLabels.push(index); //push to toggled list
 
-					//remove from toggled list
-					var index = _.indexOf(barLabels, thisLabel);
-					for (i=0;i<toggledLabels.length;i++){
-						if (toggledLabels[i] === index){
-							delete toggledLabels[i];
-							toggledLabels = _.compact(toggledLabels); 
-							break;
-						}
-					}		
-				}
+						//toggle layer
+						$("#chart").append("<span status=\"on\" class=\"labels\" label=\""+thisLabel+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + thisLabel + "</span>");
+						$(".label[label='"+ thisLabel +"']").insertBefore("#selection");
+
+					}
+					else {
+						//address color issue
+						chartFunctions.processColors($(this).attr('color'));
+
+						//background
+						$(this).css("background", "#fff").attr("clicked","false");
+						$("#chart rect[label='"+ thisLabel +"']").css("fill","#e2e2e2");
+						$("#chart rect[label='"+ thisLabel +"']").attr("clicked", "false");
+						//remove label
+						$("span[label='"+ thisLabel +"']").remove();	
+
+						//remove from toggled list
+						var index = _.indexOf(barLabels, thisLabel);
+						for (i=0;i<toggledLabels.length;i++){
+							if (toggledLabels[i] === index){
+								delete toggledLabels[i];
+								toggledLabels = _.compact(toggledLabels); 
+								break;
+							}
+						}		
+					}
+				}					
 			});
 		}
 		$('#main-wrapper').append('<p id="reset-button" onclick="chartFunctions.resetColors();">RESET</p>');
@@ -380,9 +397,10 @@ var utilityFunctions = {
 		}
 		$("#nav-wrapper h2").text(val); //update slider text
 		yearPosition = parseInt(val); //update year position
+
 		for (i=1 ; i < years.length ; i++){ //locate year index
-			if (val === years[i]){
-				index = _.indexOf(years, val) - 1
+			if (yearPosition === years[i]){
+				index = _.indexOf(years, yearPosition) - 1
 				dataPosition = index;
 				return chartFunctions.updateChart(index);
 			}
@@ -417,13 +435,23 @@ chartFunctions.grabData();
 $(document).ready(function(){
 	$("#playMotion").on("click", function(){
 		if (fullMotion == false){
-			dataPosition = 1;
+			if (yearPosition == endYear){
+				dataPosition = 0;
+			}
 			fullMotion = true;
 			$(this).attr("src","assets/pause.png");
 			chartFunctions.updateChart(dataPosition);
+
+			//toggle change in slider
+			$('#yearSlider').css('display','none');
+			$('.progress').css('display','block');
 		}
 		else {
 			fullMotion = false; //pause motion
+
+			//toggle change in slider
+			$('#yearSlider').css('display','block');
+			$('.progress').css('display','none');
 		}
 	}).on("mouseover", function(){ //change graphic
 		if (fullMotion == true){

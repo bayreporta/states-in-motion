@@ -329,7 +329,7 @@ var chartFunctions = {
 
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, chart, line, x, y, startEnd = {}, toggledLabels = [];
+var filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, chart, line, x, y, startEnd = {}, toggledLabels = [];
 
 /* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
 ===================================================================================*/
@@ -356,12 +356,6 @@ var dataType = $("meta").attr("content"), filename, w = 600, h = 400, startYear 
 			yAxisLabel = "Average NAEP Proficency in Math and Reading, Grades 4 and 8"
 			startYear = 2003;
 			endYear = 2014;
-			break;
-		case "Income":
-			endData = 80000;
-			yAxisLabel = "Income per Capita (in thousands)"
-			startYear = 1970;
-			endYear = 2013;
 			break;
 		case "Salaries":
 			filename = 'data/salaries.csv';

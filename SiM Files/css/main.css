@@ -19,7 +19,7 @@ h2 {
 
 #main-wrapper {
 	width: 896px;
-	height:450px;
+	height:420px;
 }
 
 #content {
@@ -200,9 +200,11 @@ h2 {
 }
 
 #nav-wrapper h2 {
-	margin: 10px auto;
+	margin: 0 auto 15px auto;
 	display: block;
 	text-align: center;
+	clear: both;
+	font-size: 2em;
 }
 
 #playMotion {
@@ -222,5 +224,38 @@ h2 {
 	margin: 0 0 0 20px;
 	display: block;
 	float:left;
+	display:block;
 }
+
+.progress {
+	display: none;
+	height: 10px;
+	width: 450px;
+	float: left;
+	margin: 2px 0 0 20px;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+
+.progress-bar {
+	background:#4169E1;
+	float: left;
+	height: 100%;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff;
+	text-align: center;
+	-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+	-webkit-transition: width .6s ease;
+	-o-transition: width .6s ease;
+	transition: width .6s ease;
+}
+
+
+
+
 

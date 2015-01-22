@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [];
+var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [],progressBar = 0, progressStep = 2.3255813953;
 
 /* GLOABL UTILITY FUNCTIONS
 ===================================================================================*/
@@ -66,6 +66,7 @@ var chartFunctions = {
 				axisLabels.x = "K-12 Expenditures per Student (in thousands)";
 				axisLabels.y = "Income per Capita (in thousands)";
 				xAdjust = 4;
+				progressStep = 2.380952381;
 				break;
 			case "TeacherPayStudents":
 				filename = 'data/teacherpaystudents.csv';
@@ -78,8 +79,9 @@ var chartFunctions = {
 				axisLabels.y = "Median Teacher Salary (in thousands)";
 				$("#y-axis").css("left", "-50px");
 				xAdjust = -10;
+				progressStep = 2.4390243902;
 				break;
-			case "TeacherStudents":
+			case "TeachersStudents":
 				filename = 'data/teacherstudents.csv';
 				startYear = 1970;
 				endYear = 2011;
@@ -90,6 +92,7 @@ var chartFunctions = {
 				maxX = 400000;
 				maxY = 8000000;
 				xAdjust = -20;
+				progressStep = 2.4390243902;
 				break;
 			case "PovertyIncome":
 				filename = 'data/povertyincome.csv';
@@ -101,6 +104,7 @@ var chartFunctions = {
 				axisLabels.x = "Percentage of 6-17 Year Olds in Poverty";
 				axisLabels.y = "Income per Capita (in thousands)";
 				xAdjust = -10;
+				progressStep =  2.7777777778;
 				break;
 			case "NAEPexpend":
 				filename = 'data/NAEPexpend.csv';
@@ -114,6 +118,7 @@ var chartFunctions = {
 				$("#y-axis").css("left", "-65px");
 				xAdjust = -10;
 				$("#yearSlider").attr("step", 2);
+				progressStep = 20;
 				break;
 			case "NAEPincome":
 				filename = 'data/NAEPincome.csv';
@@ -126,6 +131,7 @@ var chartFunctions = {
 				axisLabels.y = "Income per Capita (in thousands)";
 				xAdjust = -10;
 				$("#yearSlider").attr("step", 2);
+				progressStep = 20;
 				break;
 			case "NAEPpoverty":
 				filename = 'data/NAEPpoverty.csv';
@@ -139,6 +145,7 @@ var chartFunctions = {
 				xAdjust = -10;
 				$("#y-axis").css("left", "-50px");
 				$("#yearSlider").attr("step", 2);
+				progressStep = 20;
 				break;
 		}
 		d3.text(filename, 'text/csv', function(text) {
@@ -208,6 +215,7 @@ var chartFunctions = {
 	},
 	updateChart:function(position){	
 		currentData = [];
+		
 		for (i = 0; i < points._wrapped.length; i++) {
 			//update plot
 			if (initReprocess == false){
@@ -218,7 +226,7 @@ var chartFunctions = {
 					currentData[i][2]  = plotData[i][position][2];	
 				}
 				else {		
-					currentData[i] = new Array();			
+					currentData[i] = new Array();		
 					currentData[i][0]  = parseInt(plotData[i][position][0]);
 					currentData[i][1]  = parseInt(plotData[i][position][1]);
 					currentData[i][2]  = plotData[i][position][2];					
@@ -239,24 +247,44 @@ var chartFunctions = {
 				}
 			}
 		}	
-		//change year position
+
+		/* UPDATE YEAR
+		------------------------------------*/
 		yearPosition = years._wrapped[position];
 
-		//check to see if last loop in motion
+		/* END MOTION IF END YEAR
+		------------------------------------*/
 		if (yearPosition == endYear){
 			fullMotion = false;
+			$('#playMotion').attr("src", "assets/play.png");
+			//toggle change in slider
+			$('#yearSlider').css('display','block');
+			$('.progress').css('display','none');
 		}
 
-		//update chart
-		chartFunctions.drawChart(currentData);
-
-		//re-calc label positions
+		/* RECALC LABEL POSITIONS
+		------------------------------------*/
 		chartFunctions.updateLabels(currentData);
 
-		//update slider
+		/* UPDATE CHART DATA
+		------------------------------------*/
+		chartFunctions.drawChart(currentData);
+
+		/* UPDATE SLIDER
+		------------------------------------*/
 		$("#yearSlider").attr("value", yearPosition);
 		$("#nav-wrapper h2").text(yearPosition);
+		//determine progress bar
+		if (dataPosition == 0){
+			progressBar = 0;
+		}
+		else {
+			progressBar = (dataPosition + 1) * progressStep;
+		}
+		$('.progress-bar').css('width', progressBar +'%');
 
+		/* REPEAT IF MOTION TRUE
+		------------------------------------*/
 		if (fullMotion == true){
 			//DO IT AGAIN!
 			if (dataType === "NAEPexpend" || dataType === "NAEPincome" || dataType === "NAEPpoverty"){
@@ -267,7 +295,6 @@ var chartFunctions = {
 			else if (yearPosition === endYear - 1){
 				$("#playMotion").attr("src", "assets/play.png");
 			}
-
 			setTimeout(function(){
 				if (dataPosition !== years.length - 1){
 					dataPosition = dataPosition + 1;
@@ -280,6 +307,12 @@ var chartFunctions = {
 		/* UPDATE LABEL POSITIONS
 		------------------------------------*/	
 		chart.selectAll("text").data(data).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;});
+
+		/* UPDATE LABELS
+		------------------------------------*/	
+		for (i=0 ; i < data.length ; i++){
+			points._wrapped[i] = data[i][2];
+		}
 	},
 	processColors:function(direct){
 		if (direct === 'add' || direct === 'highlight'){
@@ -397,6 +430,7 @@ var chartFunctions = {
 				tempData[i] = plotData[curElemPos[i]]; 
 				updatedPointData[i] = tempData[i];
 			};
+			console.log(tempData)
 			initReprocess = true;
 		}
 		else {
@@ -527,13 +561,21 @@ chartFunctions.grabData();
 $(document).ready(function(){
 	$("#playMotion").on("click", function(){
 		if (fullMotion == false){
-			dataPosition = 1;
+			if (yearPosition == endYear){
+				dataPosition = 0;
+			}
 			fullMotion = true;
 			$(this).attr("src","assets/pause.png");
 			chartFunctions.updateChart(dataPosition);
+			//toggle change in slider
+			$('#yearSlider').css('display','none');
+			$('.progress').css('display','block');
 		}
 		else {
 			fullMotion = false; //pause motion
+			//toggle change in slider
+			$('#yearSlider').css('display','block');
+			$('.progress').css('display','none');
 		}
 	}).on("mouseover", function(){ 
 		if (fullMotion == true){
