@@ -18,7 +18,7 @@ var utilityFunctions = {
 		yearPosition = parseInt(val); //update year position
 		for (i=0 ; i < years._wrapped.length ; i++){ //locate year index
 			if (yearPosition === years._wrapped[i]){
-				index = _.indexOf(years._wrapped, val);					
+				index = _.indexOf(years._wrapped, yearPosition);					
 				dataPosition = index;
 				return chartFunctions.updateChart(index)
 			}
@@ -59,14 +59,14 @@ var chartFunctions = {
 			case "IncomeExpendStudent":
 				filename = 'data/income-expendstudent.csv';
 				startYear = 1970;
-				endYear = 2012;
+				endYear = 2010;
 				yearPosition = 1970;
 				maxX = 25000;
 				maxY = 80000;
 				axisLabels.x = "K-12 Expenditures per Student (in thousands)";
 				axisLabels.y = "Income per Capita (in thousands)";
 				xAdjust = 4;
-				progressStep = 2.380952381;
+				progressStep = 2.5;
 				break;
 			case "TeacherPayStudents":
 				filename = 'data/teacherpaystudents.csv';
@@ -84,15 +84,14 @@ var chartFunctions = {
 			case "TeachersStudents":
 				filename = 'data/teacherstudents.csv';
 				startYear = 1970;
-				endYear = 2011;
+				endYear = 2012;
 				yearPosition = 1970;
 				axisLabels.x = "K-12 Teachers (in thousands)";
 				axisLabels.y = "K-12 Students (in millions)";
-				$("#y-axis").css("left", "15px");
 				maxX = 400000;
 				maxY = 8000000;
 				xAdjust = -20;
-				progressStep = 2.4390243902;
+				progressStep = 2.380952381;
 				break;
 			case "PovertyIncome":
 				filename = 'data/povertyincome.csv';
@@ -240,7 +239,7 @@ var chartFunctions = {
 					currentData[i][2]  = updatedPointData[i][position][2];	
 				}
 				else {		
-					currentData[i] = new Array();			
+					currentData[i] = new Array();		
 					currentData[i][0]  = parseInt(updatedPointData[i][position][0]);
 					currentData[i][1]  = parseInt(updatedPointData[i][position][1]);
 					currentData[i][2]  = updatedPointData[i][position][2];					

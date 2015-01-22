@@ -33,7 +33,7 @@ h2 {
 	overflow:scroll;
 	border: solid 1px #aaa;
 	position: relative;
-	left: 100px;
+	left: 120px;
 }
 
 #selection p {
@@ -61,7 +61,7 @@ h2 {
 #reset-button {
 	position: absolute;
 	top: 450px;
-	left: 707px;
+	left: 727px;
 	text-align: center;
 	width: 103px;
 	background: #ddd;

@@ -71,12 +71,12 @@ var chartFunctions = {
 			case "Expend13":
 				filename = 'data/expend13.csv';
 				startYear = 1982;
-				endYear = 2012;
+				endYear = 2010;
 				yAxisLabel = "K-12 Expenditures per Student - 13 Years Cumulative (in thousands)";
 				yearPosition = 1982;
 				startData = 0;
-				endData = 250000;
-				progressStep = 3.3333333333;
+				endData = 300000;
+				progressStep = 3.5714285714;
 				break;
 			case "Teachers13":
 				filename = 'data/teachers13.csv';

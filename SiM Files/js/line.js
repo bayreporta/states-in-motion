@@ -10,14 +10,23 @@ var chartFunctions = {
 		if (clicked === "false"){
 			var where = _.indexOf(lineLabels, label);
 			var position = parseFloat(endPoints[where]) + 66;
-			$("#main-wrapper").append("<span class=\"labels\" label=\""+label+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + label + "</span>");
-			$(".label[label='"+ label +"']").insertBefore("#selection");
 
-			//address color issue
-			chartFunctions.processColors('highlight');
+			/* SPECIAL COLOR RULES
+			------------------------------------*/
+			if (label==="Average Income"){
+				return;
+			}	
+			else {				
+				$("#main-wrapper").append("<span class=\"labels\" label=\""+label+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + label + "</span>");
+				$(".label[label='"+ label +"']").insertBefore("#selection");	
 
-			//highlight and move to highlight group
-			current.css("stroke", thisColor).detach().insertAfter("svg path:last");			
+				//address color issue
+				chartFunctions.processColors('highlight');	
+				$(".label[label='"+ label +"']").insertBefore("#selection");	
+
+				//highlight and move to highlight group
+				current.css("stroke", thisColor).detach().insertAfter("svg path:last");			
+			}	
 		}
 	},
 	unhightlightLine:function(){
@@ -27,11 +36,19 @@ var chartFunctions = {
 		------------------------------*/
 		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
-			current.css("stroke", "#e2e2e2");
-			$("span[label='"+ label +"']").remove();
 
-			//push to back
-			current.detach().insertBefore("svg path:first");	
+			/* SPECIAL COLOR RULES
+			------------------------------------*/
+			if (label==="Average Income"){
+				return;
+			}
+			else {
+				current.css("stroke", "#e2e2e2");
+				$("span[label='"+ label +"']").remove();
+
+				//push to back
+				current.detach().insertBefore("svg path:first");	
+			}			
 		}		
 	},
 	setDefaults:function(){
@@ -143,6 +160,12 @@ var chartFunctions = {
 				.attr("x", function(d) {
 				return x(d)
 			}).attr("y", h - 10).attr("text-anchor", "middle");
+
+			//Fix NAEP
+			var naepFix = [2003,2005,2007,2009,2011,2013];
+			for (i=0; i < 6 ; i++){
+				$('.xLabel:eq('+i+')').text(naepFix[i])
+			}
 			
 			// X Axis Ticks //
 			chart.selectAll(".xTicks")
@@ -234,50 +257,55 @@ var chartFunctions = {
 		/* LINE LABELS
 		------------------------------*/
 		for (i=0 ; i < lineLabels.length ; i++){
-			$("#selection").append("<p label=\""+lineLabels[i]+"\"clicked=\"false\">" + lineLabels[i] + "</p>");
-			$("#selection p:eq("+i+")").on("click", function(){
-				var clicked = $(this).attr("clicked");
-				var thisLabel = $(this).text();
-				if (clicked === "false"){
-					//determine position
-					var where = _.indexOf(lineLabels, thisLabel);
-					var position = parseFloat(endPoints[where]) + 66;
+			if (lineLabels[i]==="Average Income"){
+				$('path[label="Average Income"]').css('stroke','#666');
+			}
+			else {
+				$("#selection").append("<p label=\""+lineLabels[i]+"\"clicked=\"false\">" + lineLabels[i] + "</p>");
+				$("#selection p:eq("+i+")").on("click", function(){
+					var clicked = $(this).attr("clicked");
+					var thisLabel = $(this).text();
+					if (clicked === "false"){
+						//determine position
+						var where = _.indexOf(lineLabels, thisLabel);
+						var position = parseFloat(endPoints[where]) + 66;
 
-					//address color issue
-					chartFunctions.processColors('add');
+						//address color issue
+						chartFunctions.processColors('add');
 
-					//background and up front
-					$(this).css("background", "#ddd").attr({clicked:"true",color:colorStep});
-					$("#chart path[label='"+ thisLabel +"']").css("stroke",thisColor).detach().insertAfter("svg path:last");
-					var index = _.indexOf(lineLabels, thisLabel);
-					toggledLabels.push(index); //push to toggled list
+						//background and up front
+						$(this).css("background", "#ddd").attr({clicked:"true",color:colorStep});
+						$("#chart path[label='"+ thisLabel +"']").css("stroke",thisColor).detach().insertAfter("svg path:last");
+						var index = _.indexOf(lineLabels, thisLabel);
+						toggledLabels.push(index); //push to toggled list
 
-					//toggle layer
-					$("#main-wrapper").append("<span class=\"labels\" label=\""+thisLabel+"\" style=\"top:"+ position+ "px;color:"+thisColor+"\">" + thisLabel + "</span>");
-					$(".label[label='"+ thisLabel +"']").insertBefore("#selection")
-				}
-				else {
-					//address color issue
-					chartFunctions.processColors($(this).attr('color'));
+						//toggle layer
+						$("#main-wrapper").append("<span class=\"labels\" label=\""+thisLabel+"\" style=\"top:"+ position+ "px;color:"+thisColor+"\">" + thisLabel + "</span>");
+						$(".label[label='"+ thisLabel +"']").insertBefore("#selection")
+					}
+					else {
+						//address color issue
+						chartFunctions.processColors($(this).attr('color'));
 
-					//background
-					$(this).css("background", "#fff").attr("clicked","false");
-					$("#chart path[label='"+ thisLabel +"']").css("stroke","#e2e2e2");
-					
-					//remove label
-					$("span[label='"+ thisLabel +"']").remove();
+						//background
+						$(this).css("background", "#fff").attr("clicked","false");
+						$("#chart path[label='"+ thisLabel +"']").css("stroke","#e2e2e2");
+						
+						//remove label
+						$("span[label='"+ thisLabel +"']").remove();
 
-					//remove from toggled list
-					var index = _.indexOf(lineLabels, thisLabel);
-					for (i=0;i<toggledLabels.length;i++){
-						if (toggledLabels[i] === index){
-							delete toggledLabels[i];
-							toggledLabels = _.compact(toggledLabels); 
-							break;
+						//remove from toggled list
+						var index = _.indexOf(lineLabels, thisLabel);
+						for (i=0;i<toggledLabels.length;i++){
+							if (toggledLabels[i] === index){
+								delete toggledLabels[i];
+								toggledLabels = _.compact(toggledLabels); 
+								break;
+							}
 						}
 					}
-				}
-			});
+				});
+			}
 		}
 		$('#main-wrapper').append('<p id="reset-button" onclick="chartFunctions.resetColors();">RESET</p>');
 	},
@@ -347,30 +375,30 @@ var filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0,
 			break;
 		case "Students per Capita":
 			filename = 'data/studentspercapita.csv';
-			endData = 40;
-			yAxisLabel = "Students per Capita"
+			endData = 300;
+			yAxisLabel = "K-12 Students per 1,000 Residents"
 			break;
 		case "NAEP":
 			filename = 'data/naep.csv';
 			endData = 60;
 			yAxisLabel = "Average NAEP Proficency in Math and Reading, Grades 4 and 8"
-			startYear = 2003;
-			endYear = 2014;
+			startYear = 1;
+			endYear = 6;
 			break;
 		case "Salaries":
 			filename = 'data/salaries.csv';
 			endData = 100000;
-			yAxisLabel = "K-12 Teacher Salaries (in thousands)"
+			yAxisLabel = "Average K-12 Teacher Salaries (in thousands)"
 			startYear = 1970;
-			endYear = 2011;
+			endYear = 2012;
 			break;
 		case "Salaries-Income":
 			filename = 'data/sVi.csv';
 			startData = -2;
 			endData = 2;
-			yAxisLabel = "K-12 Teacher Salaries Against Income per Capita"
+			yAxisLabel = "Average K-12 Teacher Salaries Against Income per Capita"
 			startYear = 1970;
-			endYear = 2011;
+			endYear = 2012;
 			break;
 		case "Poverty":
 			filename = 'data/poverty.csv';
