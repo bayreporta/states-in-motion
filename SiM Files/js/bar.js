@@ -81,12 +81,12 @@ var chartFunctions = {
 			case "Teachers13":
 				filename = 'data/teachers13.csv';
 				startYear = 1982;
-				endYear = 2010;
+				endYear = 2012;
 				yAxisLabel = "Teachers per Student - 13 Years Cumulative";
 				yearPosition = 1982;
 				startData = 0;
 				endData = 1.5;
-				progressStep = 3.5714285714;
+				progressStep = 3.3333333333;
 				break;
 		}
 		d3.text(filename, 'text/csv', function(text) {

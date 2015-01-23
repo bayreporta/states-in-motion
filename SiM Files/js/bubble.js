@@ -71,15 +71,15 @@ var chartFunctions = {
 			case "TeacherPayStudents":
 				filename = 'data/teacherpaystudents.csv';
 				startYear = 1970;
-				endYear = 2011;
+				endYear = 2012;
 				yearPosition = 1970;
 				maxX = 30;
 				maxY = 100000;
 				axisLabels.x = "K-12 Students per Teacher";
-				axisLabels.y = "Median Teacher Salary (in thousands)";
+				axisLabels.y = "Average Teacher Salary (in thousands)";
 				$("#y-axis").css("left", "-50px");
 				xAdjust = -10;
-				progressStep = 2.4390243902;
+				progressStep = 2.380952381;
 				break;
 			case "TeachersStudents":
 				filename = 'data/teacherstudents.csv';
