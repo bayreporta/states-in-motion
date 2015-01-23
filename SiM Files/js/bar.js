@@ -71,12 +71,12 @@ var chartFunctions = {
 			case "Expend13":
 				filename = 'data/expend13.csv';
 				startYear = 1982;
-				endYear = 2010;
+				endYear = 2012;
 				yAxisLabel = "K-12 Expenditures per Student - 13 Years Cumulative (in thousands)";
 				yearPosition = 1982;
 				startData = 0;
 				endData = 300000;
-				progressStep = 3.5714285714;
+				progressStep = 3.3333333333;
 				break;
 			case "Teachers13":
 				filename = 'data/teachers13.csv';
@@ -226,10 +226,6 @@ var chartFunctions = {
 			utilityFunctions.churnLargeNumbers(true);
 			chart.selectAll(".yTicks").data(yScale.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return yScale(d);}).attr("x1", 55).attr("y2", function(d) {return yScale(d);}).attr("x2", 60); //yticks
 			
-			/* DEFAULT TOGGLES
-			------------------------------*/
-			chartFunctions.defaultToggle(dataType);
-
 			firstRun = false;
 		}
 		/* ANOTHER OTHER CHART STATE
@@ -290,6 +286,7 @@ var chartFunctions = {
 		}	
 		chartFunctions.populateLabels();
 		chartFunctions.drawChart(firstPlot);
+		chartFunctions.defaultToggle(dataType);
 	},
 	processColors:function(direct){
 		if (direct === 'add' || direct === 'highlight'){
