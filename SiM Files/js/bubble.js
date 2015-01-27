@@ -98,10 +98,10 @@ var chartFunctions = {
 				startYear = 1977;
 				endYear = 2013;
 				yearPosition = 1977;
-				maxX = 60;
-				maxY = 80000;
-				axisLabels.x = "Percentage of 6-17 Year Olds in Poverty";
-				axisLabels.y = "Income per Capita (in thousands)";
+				maxX = 80000;
+				maxY = 60;
+				axisLabels.y = "Percentage of 6-17 Year Olds in Poverty";
+				axisLabels.x = "Income per Capita (in thousands)";
 				xAdjust = -10;
 				progressStep =  2.7777777778;
 				break;
@@ -429,7 +429,6 @@ var chartFunctions = {
 				tempData[i] = plotData[curElemPos[i]]; 
 				updatedPointData[i] = tempData[i];
 			};
-			console.log(tempData)
 			initReprocess = true;
 		}
 		else {
@@ -488,8 +487,10 @@ var chartFunctions = {
 			currentData.push(plotData[i][0])
 		}
 		
-		chartFunctions.populateLabels();
 		chartFunctions.drawChart(currentData);
+		chartFunctions.populateLabels();
+		chartFunctions.defaultToggle(dataType);
+
 	},
 	drawChart:function(data){
 		/* INIT CHART POSITION
@@ -528,9 +529,7 @@ var chartFunctions = {
 			chart.append("g").attr("class", "axis").attr("transform", "translate(0," + (h - padding) + ")").call(xAxis); //xaxis
 			chart.append("g").attr("class", "axis").attr("transform", "translate(" + 60 + ",0)").call(yAxis); //yaxis
 			
-			/* DEFAULT TOGGLES
-			------------------------------*/
-			chartFunctions.defaultToggle(dataType);
+			
 
 			utilityFunctions.churnLargeNumbers();
 			firstRun = false;
