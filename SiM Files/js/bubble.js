@@ -77,7 +77,7 @@ var chartFunctions = {
 				maxY = 100000;
 				axisLabels.x = "K-12 Students per Teacher";
 				axisLabels.y = "Average Teacher Salary (in thousands)";
-				$("#y-axis").css("left", "-50px");
+				$("#y-axis").css("left", "-85px");
 				xAdjust = -10;
 				progressStep = 2.380952381;
 				break;
@@ -114,7 +114,7 @@ var chartFunctions = {
 				maxY = 20000;
 				axisLabels.x = "Average NAEP Proficency in Math and Reading, 4th and 8th Grades";
 				axisLabels.y = "K-12 Expenditures per Student (in thousands)";
-				$("#y-axis").css("left", "-65px");
+				$("#y-axis").css("left", "-100px");
 				xAdjust = -10;
 				$("#yearSlider").attr("step", 2);
 				progressStep = 20;
@@ -142,7 +142,7 @@ var chartFunctions = {
 				axisLabels.x = "Average NAEP Proficency in Math and Reading, 4th and 8th Grades";
 				axisLabels.y = "Percentage of 6-17 Year Olds in Poverty";
 				xAdjust = -10;
-				$("#y-axis").css("left", "-50px");
+				$("#y-axis").css("left", "-85px");
 				$("#yearSlider").attr("step", 2);
 				progressStep = 20;
 				break;

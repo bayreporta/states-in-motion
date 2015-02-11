@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [], progressBar = 0, progressStep = 2.3255813953;
+var	dataType = $("meta").attr("content"), xOffset = 8, yOffset = 97,filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [], progressBar = 0, progressStep = 2.3255813953;
 
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
@@ -17,8 +17,8 @@ var chartFunctions = {
 		else {
 			if (clicked === "false"){
 				//determine position
-				var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) + 50;
-				var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + 8;
+				var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) + yOffset;
+				var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + xOffset;
 				
 				//address color issue
 				chartFunctions.processColors('highlight');
@@ -48,6 +48,7 @@ var chartFunctions = {
 		$('#selection p[label="California"]').click();
 	},
 	grabData:function(){
+		$('#selection').css('left','60px');
 		switch(dataType){
 			case "Income":
 				filename = 'data/income.csv';
@@ -250,8 +251,8 @@ var chartFunctions = {
 			var active = $("#chart span[label='"+ barLabels[i] + "']");
 
 			//determine position
-			var whereY = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("y-update")) + 50;
-			var whereX = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("x")) + 8;
+			var whereY = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("y-update")) + yOffset;
+			var whereX = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("x")) + xOffset;
 			active.animate({top:whereY + "px",left:whereX + "px"}, 100);
 		}
 	},
@@ -336,8 +337,8 @@ var chartFunctions = {
 				else {
 					if (clicked === "false"){				
 						//determine position
-						var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y")) + 50;
-						var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + 8;
+						var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y")) + yOffset;
+						var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + xOffset;
 
 						//address color issue
 						chartFunctions.processColors('add');

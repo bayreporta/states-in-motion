@@ -9,7 +9,7 @@ var chartFunctions = {
 		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 			var where = _.indexOf(lineLabels, label);
-			var position = parseFloat(endPoints[where]) + 66;
+			var position = parseFloat(endPoints[where]) + offset;
 
 			/* SPECIAL COLOR RULES
 			------------------------------------*/
@@ -101,65 +101,37 @@ var chartFunctions = {
 	drawChart:function(){
 		/* DRAW AXES
 		------------------------------*/
-		chart.append("svg:line")
-			.attr("x1", x(startYear))
-			.attr("y1", h - 30)
-			.attr("x2", 586)
-			.attr("y2", h - 30)
-			.attr("class", "axis"); //X-Axis
-		chart.append("svg:line")
-			.attr("x1", x(startYear))
-			.attr("y1", y(startData))
-			.attr("x2", x(startYear))
-			.attr("y2", y(endData))
-			.attr("class", "axis"); //Y-Axis
+		chart.append("svg:line").attr("x1", x(startYear)).attr("y1", h - 30).attr("x2", 586).attr("y2", h - 30).attr("class", "axis"); //X-Axis	
+		chart.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startData)).attr("x2", x(startYear)).attr("y2", y(endData)).attr("class", "axis"); //Y-Axis
 
 		/* AXES TO TOP
 		------------------------------*/
-		$("svg line:eq(0)")
-			.add("svg line:eq(1)")
-			.detach()
-			.insertAfter("#chart svg g");
+		$("svg line:eq(0)").add("svg line:eq(1)").detach().insertAfter("#chart svg g");	
 
 		/* AXIS LABELS
 		------------------------------*/
-		chart.selectAll(".yLabel")
-			.data(y.ticks(4))
-			.enter().append("svg:text")
-			.attr("class", "yLabel")
-			.text(String)
-			.attr("x", 100)
-			.attr("y", function(d) {
-			return y(d)
-		}).attr("text-anchor", "end").attr("dy", 3);
+		if (dataType === "Effort"){
+			chart.selectAll(".yLabel").data(y.ticks(5)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 100).attr("y", function(d) {return y(d)}).attr("text-anchor", "end").attr("dy", 3);
+		}
+		else {
+			chart.selectAll(".yLabel").data(y.ticks(4)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 100).attr("y", function(d) {return y(d)}).attr("text-anchor", "end").attr("dy", 3);
+		}
 		utilityFunctions.churnLargeNumbers(true);
 
 		/* Y-AXIS TICKS
-		------------------------------*/
-		chart.selectAll(".yTicks")
-			.data(y.ticks(4))
-			.enter()
-			.append("svg:line")
-			.attr("class", "yTicks")
-			.attr("y1", function(d) {
-				return y(d);
-		}).attr("x1", x(2004.95)).attr("y2", function(d) {
-				return y(d);
-		}).attr("x2", x(2005));
+		------------------------------
+		if (dataType === "Effort"){
+			chart.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return y(d);}).attr("x1", x(2004.95)).attr("y2", function(d) {return y(d);}).attr("x2", x(2005));
+		}
+		else {
+			chart.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return y(d);}).attr("x1", x(2004.95)).attr("y2", function(d) {return y(d);}).attr("x2", x(2005));
+		}*/
 
 		/* X-AXIS TICKS
 		------------------------------*/
 		if (dataType === "NAEP"){
 			// X Axis Labels //
-			chart.selectAll(".xLabel")
-				.data(x.ticks(5))
-				.enter()
-				.append("svg:text")
-				.attr("class", "xLabel")
-				.text(String)
-				.attr("x", function(d) {
-				return x(d)
-			}).attr("y", h - 10).attr("text-anchor", "middle");
+			chart.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
 
 			//Fix NAEP
 			var naepFix = [2003,2005,2007,2009,2011,2013];
@@ -168,40 +140,14 @@ var chartFunctions = {
 			}
 			
 			// X Axis Ticks //
-			chart.selectAll(".xTicks")
-				.data(x.ticks(5))
-				.enter()
-				.append("svg:line")
-				.attr("class", "xTicks")
-				.attr("x1", function(d) {
-					return x(d);
-			}).attr("y1", y(startData)).attr("x2", function(d) {
-					return x(d);
-			}).attr("y2", y(startData) + 10);
+			chart.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
 		}
 		else {
 			// X Axis Labels //
-			chart.selectAll(".xLabel")
-				.data(x.ticks(50))
-				.enter()
-				.append("svg:text")
-				.attr("class", "xLabel")
-				.text(String)
-				.attr("x", function(d) {
-				return x(d)
-			}).attr("y", h - 10).attr("text-anchor", "middle");
+			chart.selectAll(".xLabel").data(x.ticks(50)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
 			
 			// X Axis Ticks //
-			chart.selectAll(".xTicks")
-				.data(x.ticks(50))
-				.enter()
-				.append("svg:line")
-				.attr("class", "xTicks")
-				.attr("x1", function(d) {
-					return x(d);
-			}).attr("y1", y(startData)).attr("x2", function(d) {
-					return x(d);
-			}).attr("y2", y(startData) + 10);
+			chart.selectAll(".xTicks").data(x.ticks(50)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
 			chartFunctions.adjustNormalX(dataType);
 		}
 
@@ -268,7 +214,7 @@ var chartFunctions = {
 					if (clicked === "false"){
 						//determine position
 						var where = _.indexOf(lineLabels, thisLabel);
-						var position = parseFloat(endPoints[where]) + 66;
+						var position = parseFloat(endPoints[where]) + offset;
 
 						//address color issue
 						chartFunctions.processColors('add');
@@ -307,7 +253,7 @@ var chartFunctions = {
 				});
 			}
 		}
-		$('#main-wrapper').append('<p id="reset-button" onclick="chartFunctions.resetColors();">RESET</p>');
+		$('#main-wrapper').append('<p id="reset-button" type="line" onclick="chartFunctions.resetColors();">RESET</p>');
 	},
 	adjustNormalX:function(dataType){
 		/* SPECIAL LABEL AND TICK CONSIDERATIONS
@@ -357,7 +303,7 @@ var chartFunctions = {
 
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, chart, line, x, y, startEnd = {}, toggledLabels = [];
+var filename, offset = 115, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, chart, line, x, y, startEnd = {}, toggledLabels = [];
 
 /* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
 ===================================================================================*/
@@ -376,6 +322,7 @@ var filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0,
 		case "Students per Capita":
 			filename = 'data/studentspercapita.csv';
 			endData = 300;
+			endYear = 2012;
 			yAxisLabel = "K-12 Students per 1,000 Residents"
 			break;
 		case "NAEP":
@@ -387,6 +334,7 @@ var filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0,
 			break;
 		case "Salaries":
 			filename = 'data/salaries.csv';
+			startData = 20000;
 			endData = 100000;
 			yAxisLabel = "Average K-12 Teacher Salaries (in thousands)"
 			startYear = 1970;
@@ -394,9 +342,9 @@ var filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0,
 			break;
 		case "Salaries-Income":
 			filename = 'data/sVi.csv';
-			startData = -2;
-			endData = 2;
-			yAxisLabel = "Average K-12 Teacher Salaries Against Income per Capita"
+			startData = -50;
+			endData = 200;
+			yAxisLabel = "Average Teacher Salary as Percentage of Income per Capita"
 			startYear = 1970;
 			endYear = 2012;
 			break;
@@ -409,10 +357,11 @@ var filename, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0,
 			break;
 		case "Effort":
 			filename = 'data/effort.csv';
-			endData = 10;
+			startData = 2;
+			endData = 8;
 			yAxisLabel = "K-12 Expenditures Compared With State Income"
 			startYear = 1970;
-			endYear = 2012;	
+			endYear = 2010;	
 			break;
 	}
 	d3.text(filename, 'text/csv', function(text) {
