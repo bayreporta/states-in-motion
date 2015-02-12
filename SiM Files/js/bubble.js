@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [],progressBar = 0, progressStep = 2.3255813953;
+var	dataType = $("meta").attr("content"), speed = 500, filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [],progressBar = 0, progressStep = 2.3255813953;
 
 /* GLOABL UTILITY FUNCTIONS
 ===================================================================================*/
@@ -118,6 +118,7 @@ var chartFunctions = {
 				xAdjust = -10;
 				$("#yearSlider").attr("step", 2);
 				progressStep = 20;
+				speed = 1000;
 				break;
 			case "NAEPincome":
 				filename = 'data/NAEPincome.csv';
@@ -131,6 +132,7 @@ var chartFunctions = {
 				xAdjust = -10;
 				$("#yearSlider").attr("step", 2);
 				progressStep = 20;
+				speed = 1000;
 				break;
 			case "NAEPpoverty":
 				filename = 'data/NAEPpoverty.csv';
@@ -145,6 +147,7 @@ var chartFunctions = {
 				$("#y-axis").css("left", "-85px");
 				$("#yearSlider").attr("step", 2);
 				progressStep = 20;
+				speed = 1000;
 				break;
 		}
 		d3.text(filename, 'text/csv', function(text) {
@@ -165,7 +168,13 @@ var chartFunctions = {
 			/* APPEND LABELS AND HIGHLIGHTS
 			------------------------------------*/
 			var clicked = $("#selection p[label='"+label+"']").attr("clicked");
+			var thisPoint = label;
+
 			if (clicked === "false"){
+				//text
+				var $text = $("#chart text[label='"+ thisPoint +"']");
+				$text.insertBefore(".axis:eq(0)");
+
 				//animation
 				var $point = $(this), $text = $("#chart text[label='"+ label +"']"), point = d3.select(this);
 				point.transition().duration(800).attr("r", 8).ease("elastic");
@@ -176,14 +185,12 @@ var chartFunctions = {
 				chart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", point.attr("cx")).attr("y1", point.attr("cy")).attr("y2", h - 20).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity", function() { return d3.interpolate(0, .5); }); //y-axis		
 				$point.insertBefore(".axis:eq(0)"); //reorder to front
 
-				//toggle text
-				$text.css({visibility:"visible",fill:colors[colorStep]});
-
 				//address color issue
 				chartFunctions.processColors('highlight');
 
 				//fill point
 				current.css("fill", thisColor);
+				$text.css({visibility:"visible",fill:thisColor});
 			}
 			//reorganize data based on new positions
 			chartFunctions.reprocessData();
@@ -200,7 +207,7 @@ var chartFunctions = {
 				current.css("fill", "#e2e2e2");
 			//toggle text
 				var $text = $("#chart text[label='"+ label +"']");
-				$text.css("visibility","hidden");
+				$text.detach().insertBefore("text:first").css("visibility","hidden");
 			//animations
 				var point = d3.select(this);	
 			//remove tooltip and lines
@@ -299,13 +306,15 @@ var chartFunctions = {
 					dataPosition = dataPosition + 1;
 					chartFunctions.updateChart(dataPosition);
 				}
-			}, 200)
+			}, speed)
 		}
 	},
 	updateLabels:function(data){
 		/* UPDATE LABEL POSITIONS
 		------------------------------------*/	
 		chart.selectAll("text").data(data).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;});
+
+		console.log(data)
 
 		/* UPDATE LABELS
 		------------------------------------*/	
