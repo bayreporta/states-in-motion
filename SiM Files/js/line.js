@@ -1,12 +1,12 @@
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
-var chartFunctions = {
+var lineFunctions = {
 	highlightLine:function(){
 		var current = $(this), label = current.attr("label");
 				
 		/* APPEND LABELS AND HIGHLIGHTS
 		------------------------------------*/
-		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
+		var clicked = $("section[role='line'] #selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 			var where = _.indexOf(lineLabels, label);
 			var position = parseFloat(endPoints[where]) + offset;
@@ -17,15 +17,15 @@ var chartFunctions = {
 				return;
 			}	
 			else {				
-				$("#main-wrapper").append("<span class=\"labels\" label=\""+label+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + label + "</span>");
-				$(".label[label='"+ label +"']").insertBefore("#selection");	
+				$("section[role='line'] #main-wrapper").append("<span class=\"labels\" label=\""+label+"\" style=\"top:"+ position + "px;color:"+colors[colorStep]+"\">" + label + "</span>");
+				$("section[role='line'] .label[label='"+ label +"']").insertBefore("section[role='line'] #selection");	
 
 				//address color issue
-				chartFunctions.processColors('highlight');	
-				$(".label[label='"+ label +"']").insertBefore("#selection");	
+				lineFunctions.processColors('highlight');	
+				$("section[role='line'] .label[label='"+ label +"']").insertBefore("section[role='line'] #selection");	
 
 				//highlight and move to highlight group
-				current.css("stroke", thisColor).detach().insertAfter("svg path:last");			
+				current.css("stroke", thisColor).detach().insertAfter("section[role='line'] svg path:last");			
 			}	
 		}
 	},
@@ -34,7 +34,7 @@ var chartFunctions = {
 		
 		/* REMOVE LABELS AND HIGHLIGHTS
 		------------------------------*/
-		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
+		var clicked = $("section[role='line'] #selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){
 
 			/* SPECIAL COLOR RULES
@@ -47,25 +47,62 @@ var chartFunctions = {
 				$("span[label='"+ label +"']").remove();
 
 				//push to back
-				current.detach().insertBefore("svg path:first");	
+				current.detach().insertBefore("section[role='line'] svg path:first");	
 			}			
 		}		
+
+		lineFunctions.liftHighlighted();	
+
 	},
-	setDefaults:function(){
+	setDefaults:function(config){
+		startData = config[6];
+		endData = config[7];
+		startYear = config[8];
+		endYear = config[9];
+		yAxisLabel = config[10]
+		var endYearAdj = endYear + 1;
+
+		if (config[16]){
+			$('section[role="line"] #y-axis').css('left', config[16] + 'px');
+		}
+
+		/* APPEND CONTENT */
+		if (contentAppended == false){
+			var content = config[20].split('|');
+			$('body').append('<div class="sim-content"></div>');
+			
+			$('.sim-content').detach().insertAfter('section:last-of-type');
+						
+			for (var i=0; i < content.length; i++){
+				$('.sim-content').append('<p>'+content[i]+'</p>');
+			}
+			contentAppended = true;
+		}
+
 		/* SET SCALE AND GRAB LABELS
 		------------------------------*/
 		y = d3.scale.linear().domain([endData, startData]).range([0 + margin.top, h - margin.bottom]),
 		x = d3.scale.linear().domain([startYear, endYear]).range([0 + margin.left, w - margin.right]),
-		years = d3.range(startYear, endYear + 1),
+		years = d3.range(startYear, endYearAdj),
 		lineLabels = [], endPoints = [];
 
 		/* DRAW CHART
 		------------------------------*/
-		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
+		lineChart = d3.select("section[role='line'] #chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");	
 		line = d3.svg.line().x(function(d, i) {return x(d.x);}).y(function(d) {return y(d.y);});
+		console.log(chart)
 	},
 	defaultToggle:function(chart){
-		$('#selection p[label="California"]').click();
+		
+		/* HIGHLIGHT AVERAGE
+		------------------------------------*/
+		$('section[role="line"] #main-wrapper path[label="US Average"]').attr('style','stroke:#333').attr('clicked','true');
+		$('section[role="line"] .label[label="US Average"]').add('section[role="line"] #selection p[label="US Average"]').remove();
+
+		$('section[role="line"] #selection p[label="California"]').click();		
+
+		lineFunctions.liftHighlighted();
+
 	},
 	processColors:function(direct){
 		if (direct === 'add' || direct === 'highlight'){
@@ -95,43 +132,39 @@ var chartFunctions = {
 		}
 	},
 	resetColors:function(){
-		$('#selection p[clicked="true"]').click();
+		$('section[role="line"] #selection p[clicked="true"]').click();
 		toggledLabels = [];
+	},
+	liftHighlighted: function(){
+		var allHigh = $('section[role="line"] path[clicked="true"]');
+		allHigh.detach().insertAfter("section[role='line'] svg path:last");
 	},
 	drawChart:function(){
 		/* DRAW AXES
 		------------------------------*/
-		chart.append("svg:line").attr("x1", x(startYear)).attr("y1", h - 30).attr("x2", 586).attr("y2", h - 30).attr("class", "axis"); //X-Axis	
-		chart.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startData)).attr("x2", x(startYear)).attr("y2", y(endData)).attr("class", "axis"); //Y-Axis
+		lineChart.append("svg:line").attr("x1", x(startYear)).attr("y1", h - 30).attr("x2", 586).attr("y2", h - 30).attr("class", "axis"); //X-Axis	
+		lineChart.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startData)).attr("x2", x(startYear)).attr("y2", y(endData)).attr("class", "axis"); //Y-Axis
+
 
 		/* AXES TO TOP
 		------------------------------*/
-		$("svg line:eq(0)").add("svg line:eq(1)").detach().insertAfter("#chart svg g");	
+		$("section[role='line'] svg line:eq(0)").add("section[role='line'] svg line:eq(1)").detach().insertAfter("section[role='line'] #chart svg g");	
+
 
 		/* AXIS LABELS
 		------------------------------*/
-		if (dataType === "Effort"){
-			chart.selectAll(".yLabel").data(y.ticks(5)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 100).attr("y", function(d) {return y(d)}).attr("text-anchor", "end").attr("dy", 3);
-		}
-		else {
-			chart.selectAll(".yLabel").data(y.ticks(4)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 100).attr("y", function(d) {return y(d)}).attr("text-anchor", "end").attr("dy", 3);
-		}
+		lineChart.selectAll(".yLabel").data(y.ticks(8)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 100).attr("y", function(d) {return y(d)}).attr("text-anchor", "end").attr("dy", 3);
 		utilityFunctions.churnLargeNumbers(true);
 
 		/* Y-AXIS TICKS
-		------------------------------
-		if (dataType === "Effort"){
-			chart.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return y(d);}).attr("x1", x(2004.95)).attr("y2", function(d) {return y(d);}).attr("x2", x(2005));
-		}
-		else {
-			chart.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return y(d);}).attr("x1", x(2004.95)).attr("y2", function(d) {return y(d);}).attr("x2", x(2005));
-		}*/
+		------------------------------*/
+		lineChart.selectAll(".yTicks").data(y.ticks(8)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return y(d);}).attr("x1", 105).attr("y2", function(d) {return y(d);}).attr("x2", 110); //yticks
 
 		/* X-AXIS TICKS
 		------------------------------*/
 		if (dataType === "NAEP"){
 			// X Axis Labels //
-			chart.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
+			lineChart.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
 
 			//Fix NAEP
 			var naepFix = [2003,2005,2007,2009,2011,2013];
@@ -140,60 +173,59 @@ var chartFunctions = {
 			}
 			
 			// X Axis Ticks //
-			chart.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
+			lineChart.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
 		}
 		else {
 			// X Axis Labels //
-			chart.selectAll(".xLabel").data(x.ticks(50)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
+			lineChart.selectAll(".xLabel").data(x.ticks(50)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
 			
 			// X Axis Ticks //
-			chart.selectAll(".xTicks").data(x.ticks(50)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
-			chartFunctions.adjustNormalX(dataType);
+			lineChart.selectAll(".xTicks").data(x.ticks(50)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
+			lineFunctions.adjustNormalX(dataType);
 		}
 
 		/* DEFAULT TOGGLES
 		------------------------------*/
-		chartFunctions.defaultToggle(dataType);
+		lineFunctions.defaultToggle(dataType);
 	},
-	processData:function(thisData){
-		for (i = 1; i < thisData.length; i++) {
-			/* PARSING CSV FILE
+	processData:function(d){
+		for (i = 1; i < d.length; i++) {
+			/* GRAB ROW DATA
 			------------------------------*/
-			var values = thisData[i].slice(1,45), tempData = [], started = false;
-			for (j = 0; j < values.length; j++) {
-				if (values[j] != '') {
-					tempData.push({
-						x: years[j],
-						y: values[j]
-					});
+			var val = d[i].slice(1), lineData = [], started = false;
+
+			/* CONFIG DATA FOR D3
+			------------------------------*/
+			for (j = 0; j < val.length; j++) {
+				if (val[j] != '') {
+					lineData.push({x: years[j],y: val[j]});
 					if (!started) {
-						startEnd[thisData[i][0]] = {
-							'startYear': years[j],
-							'startVal': values[j]
-						};
+						startEnd[d[i][0]] = new Object();
+						startEnd[d[i][0]]['startYear'] = years[j];
+						startEnd[d[i][0]]['startVal'] = val[j];
 						started = true;
-					} else if (j == values.length - 1) {
-						startEnd[thisData[i][0]]['endYear'] = years[j];
-						startEnd[thisData[i][0]]['endVal'] = values[j];
+					} else if (j == val.length - 1) {
+						startEnd[d[i][0]]['endYear'] = years[j];
+						startEnd[d[i][0]]['endVal'] = val[j];
 					}
 				}
 			}
 
 			/* POPULATE LABELS
 			------------------------------*/
-			lineLabels[i-1] = thisData[i][0];
-			chart.append("svg:path").data([tempData]).attr("label", thisData[i][0]).attr("d", line).attr("shape-rendering","auto").on("mouseover", chartFunctions.highlightLine).on("mouseleave", chartFunctions.unhightlightLine);
+			lineLabels[i-1] = d[i][0];
+			lineChart.append("svg:path").data([lineData]).attr("label", d[i][0]).attr("d", line).attr("shape-rendering","auto").on("mouseover", lineFunctions.highlightLine).on("mouseleave", lineFunctions.unhightlightLine);
 
 			/* POPULATE END POINTS FOR LINES
 			------------------------------------*/
 			var ii = i - 1;
-			var temp = $("#chart path:eq("+ii+")").attr("d");
+			var temp = $("section[role='line'] #chart path:eq("+ii+")").attr("d");
 			var split = temp.split(",");
 			var end = split.length - 1;
 			endPoints[ii] = split[end];
 		}
-		chartFunctions.populateLabels();
-		chartFunctions.drawChart();
+		lineFunctions.populateLabels();
+		lineFunctions.drawChart();
 	},
 	populateLabels:function(){
 		/* AXIS LABELS
@@ -204,11 +236,11 @@ var chartFunctions = {
 		------------------------------*/
 		for (i=0 ; i < lineLabels.length ; i++){
 			if (lineLabels[i]==="Average Income"){
-				$('path[label="Average Income"]').css('stroke','#666');
+				$('section[role="line"] path[label="Average Income"]').css('stroke','#666');
 			}
 			else {
-				$("#selection").append("<p label=\""+lineLabels[i]+"\"clicked=\"false\">" + lineLabels[i] + "</p>");
-				$("#selection p:eq("+i+")").on("click", function(){
+				$("section[role='line'] #selection").append("<p label=\""+lineLabels[i]+"\"clicked=\"false\">" + lineLabels[i] + "</p>");
+				$("section[role='line'] #selection p:eq("+i+")").on("click", function(){
 					var clicked = $(this).attr("clicked");
 					var thisLabel = $(this).text();
 					if (clicked === "false"){
@@ -217,28 +249,28 @@ var chartFunctions = {
 						var position = parseFloat(endPoints[where]) + offset;
 
 						//address color issue
-						chartFunctions.processColors('add');
+						lineFunctions.processColors('add');
 
 						//background and up front
 						$(this).css("background", "#ddd").attr({clicked:"true",color:colorStep});
-						$("#chart path[label='"+ thisLabel +"']").css("stroke",thisColor).detach().insertAfter("svg path:last");
+						$("section[role='line'] #chart path[label='"+ thisLabel +"']").css("stroke",thisColor).detach().insertAfter("section[role='line'] svg path:last");
 						var index = _.indexOf(lineLabels, thisLabel);
 						toggledLabels.push(index); //push to toggled list
 
 						//toggle layer
-						$("#main-wrapper").append("<span class=\"labels\" label=\""+thisLabel+"\" style=\"top:"+ position+ "px;color:"+thisColor+"\">" + thisLabel + "</span>");
-						$(".label[label='"+ thisLabel +"']").insertBefore("#selection")
+						$("section[role='line'] #main-wrapper").append("<span class=\"labels\" label=\""+thisLabel+"\" style=\"top:"+ position+ "px;color:"+thisColor+"\">" + thisLabel + "</span>");
+						$("section[role='line'] .label[label='"+ thisLabel +"']").insertBefore("section[role='line'] #selection")
 					}
 					else {
 						//address color issue
-						chartFunctions.processColors($(this).attr('color'));
+						lineFunctions.processColors($(this).attr('color'));
 
 						//background
 						$(this).css("background", "#fff").attr("clicked","false");
-						$("#chart path[label='"+ thisLabel +"']").css("stroke","#e2e2e2");
+						$("section[role='line'] #chart path[label='"+ thisLabel +"']").css("stroke","#e2e2e2");
 						
 						//remove label
-						$("span[label='"+ thisLabel +"']").remove();
+						$("section[role='line'] span[label='"+ thisLabel +"']").remove();
 
 						//remove from toggled list
 						var index = _.indexOf(lineLabels, thisLabel);
@@ -250,10 +282,11 @@ var chartFunctions = {
 							}
 						}
 					}
+					lineFunctions.liftHighlighted();
 				});
 			}
 		}
-		$('#main-wrapper').append('<p id="reset-button" type="line" onclick="chartFunctions.resetColors();">RESET</p>');
+		$('section[role="line"] #main-wrapper').append('<p id="reset-button" type="line" onclick="lineFunctions.resetColors();">RESET</p>');
 	},
 	adjustNormalX:function(dataType){
 		/* SPECIAL LABEL AND TICK CONSIDERATIONS
@@ -298,78 +331,23 @@ var chartFunctions = {
 			$(".xTicks:eq(27)").css("display","block");
 			$(".xTicks:eq(34)").css("display","block");
 		}
+	},
+	executeChart: function(config){
+		lineFunctions.setDefaults(config);
+
+		/* LOAD CHART DATA
+		===============================*/
+		d3.text('data/' + config[5] + '.csv', 'text/csv', function(text) {
+			var d = d3.csv.parseRows(text);
+			lineFunctions.processData(d);
+		});	
+		
 	}
 }
 
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var filename, offset = 115, w = 600, h = 400, startYear = 1970, endYear = 2013, startData = 0, endData = 0, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, chart, line, x, y, startEnd = {}, toggledLabels = [];
-
-/* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
-===================================================================================*/
-(function() {
-	switch(dataType){
-		case "Population":
-			filename = 'data/population.csv';
-			endData = 40000000;
-			yAxisLabel = "State Population (in millions)"
-			break;
-		case "Students":
-			filename = 'data/students.csv';
-			endData = 6500000;
-			yAxisLabel = "K-12 Students (in millions)"
-			break;
-		case "Students per Capita":
-			filename = 'data/studentspercapita.csv';
-			endData = 300;
-			endYear = 2012;
-			yAxisLabel = "K-12 Students per 1,000 Residents"
-			break;
-		case "NAEP":
-			filename = 'data/naep.csv';
-			endData = 60;
-			yAxisLabel = "Average NAEP Proficency in Math and Reading, Grades 4 and 8"
-			startYear = 1;
-			endYear = 6;
-			break;
-		case "Salaries":
-			filename = 'data/salaries.csv';
-			startData = 20000;
-			endData = 100000;
-			yAxisLabel = "Average K-12 Teacher Salaries (in thousands)"
-			startYear = 1970;
-			endYear = 2012;
-			break;
-		case "Salaries-Income":
-			filename = 'data/sVi.csv';
-			startData = -50;
-			endData = 200;
-			yAxisLabel = "Average Teacher Salary as Percentage of Income per Capita"
-			startYear = 1970;
-			endYear = 2012;
-			break;
-		case "Poverty":
-			filename = 'data/poverty.csv';
-			endData = 60;
-			yAxisLabel = "Percentage of 6-17 Year-Olds in Poverty"
-			startYear = 1977;
-			endYear = 2013;
-			break;
-		case "Effort":
-			filename = 'data/effort.csv';
-			startData = 2;
-			endData = 8;
-			yAxisLabel = "K-12 Expenditures Compared With State Income"
-			startYear = 1970;
-			endYear = 2010;	
-			break;
-	}
-	d3.text(filename, 'text/csv', function(text) {
-		var thisData = d3.csv.parseRows(text);
-		chartFunctions.processData(thisData);
-	});	
-	chartFunctions.setDefaults();
-}());
+var lineChart, offset = -10, w = 600, h = 400, startYear, endYear, startData, endData, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, line, x, y, startEnd = {}, toggledLabels = [];
 
 /* GLOBAL UTILITY FUNCTIONS
 ===================================================================================*/

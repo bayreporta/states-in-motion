@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), speed = 500, filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [],progressBar = 0, progressStep = 2.3255813953;
+var	dataType, speed, filename, w = 600, h = 400, barPadding, startYear, endYear, yearPosition, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [],progressBar = 0, progressStep = 2.3255813953;
 
 /* GLOABL UTILITY FUNCTIONS
 ===================================================================================*/
@@ -46,115 +46,36 @@ var utilityFunctions = {
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
 var chartFunctions = {
-	setDefaults:function(){
+	setDefaults:function(config){
+		dataType = config[0];
+		startYear = config[8];
+		endYear = config[9];
+		axisLabels.y  = config[10]
+		axisLabels.x = config[11]
+		progressStep = config[12];
+		maxX = parseInt(config[13]);
+		maxY = parseInt(config[14]);
+		xAdjust = parseInt(config[15]);
+		$("#y-axis").css("left", config[16] + 'px');
+		$("#yearSlider").attr("step", config[17]);
+		speed = parseInt(config[18]);
+		yearPosition = startYear;
+
+		/* APPEND CONTENT */
+		var content = config[20].split('|');
+		$('body').append('<div class="sim-content"></div>');
+		$('.sim-content').detach().insertAfter('#nav-wrapper');
+
+		for (var i=0; i < content.length; i++){
+			$('.sim-content').append('<p>'+content[i]+'</p>');
+		}
+
 		/* DRAW CHART
 		------------------------------------*/
 		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h);
 	},
-	defaultToggle:function(chart){
+	defaultToggle:function(){
 		$('#selection p[label="California"]').click();
-	},
-	grabData:function(){
-		switch(dataType){
-			case "IncomeExpendStudent":
-				filename = 'data/income-expendstudent.csv';
-				startYear = 1970;
-				endYear = 2010;
-				yearPosition = 1970;
-				maxX = 25000;
-				maxY = 80000;
-				axisLabels.x = "K-12 Expenditures per Student (in thousands)";
-				axisLabels.y = "Income per Capita (in thousands)";
-				xAdjust = 4;
-				progressStep = 2.5;
-				break;
-			case "TeacherPayStudents":
-				filename = 'data/teacherpaystudents.csv';
-				startYear = 1970;
-				endYear = 2012;
-				yearPosition = 1970;
-				maxX = 30;
-				maxY = 100000;
-				axisLabels.x = "K-12 Students per Teacher";
-				axisLabels.y = "Average Teacher Salary (in thousands)";
-				$("#y-axis").css("left", "-85px");
-				xAdjust = -10;
-				progressStep = 2.380952381;
-				break;
-			case "TeachersStudents":
-				filename = 'data/teacherstudents.csv';
-				startYear = 1970;
-				endYear = 2012;
-				yearPosition = 1970;
-				axisLabels.x = "K-12 Teachers (in thousands)";
-				axisLabels.y = "K-12 Students (in millions)";
-				maxX = 400000;
-				maxY = 8000000;
-				xAdjust = -20;
-				progressStep = 2.380952381;
-				break;
-			case "PovertyIncome":
-				filename = 'data/povertyincome.csv';
-				startYear = 1977;
-				endYear = 2013;
-				yearPosition = 1977;
-				maxX = 80000;
-				maxY = 60;
-				axisLabels.y = "Percentage of 6-17 Year Olds in Poverty";
-				axisLabels.x = "Income per Capita (in thousands)";
-				xAdjust = -10;
-				progressStep =  2.7777777778;
-				break;
-			case "NAEPexpend":
-				filename = 'data/NAEPexpend.csv';
-				startYear = 2003;
-				endYear = 2011;
-				yearPosition = 2003;
-				maxX = 60;
-				maxY = 20000;
-				axisLabels.x = "Average NAEP Proficency in Math and Reading, 4th and 8th Grades";
-				axisLabels.y = "K-12 Expenditures per Student (in thousands)";
-				$("#y-axis").css("left", "-100px");
-				xAdjust = -10;
-				$("#yearSlider").attr("step", 2);
-				progressStep = 20;
-				speed = 1000;
-				break;
-			case "NAEPincome":
-				filename = 'data/NAEPincome.csv';
-				startYear = 2003;
-				endYear = 2013;
-				yearPosition = 2003;
-				maxX = 60;
-				maxY = 80000;
-				axisLabels.x = "Average NAEP Proficency in Math and Reading, 4th and 8th Grades";
-				axisLabels.y = "Income per Capita (in thousands)";
-				xAdjust = -10;
-				$("#yearSlider").attr("step", 2);
-				progressStep = 20;
-				speed = 1000;
-				break;
-			case "NAEPpoverty":
-				filename = 'data/NAEPpoverty.csv';
-				startYear = 2003;
-				endYear = 2013;
-				yearPosition = 2003;
-				maxX = 60;
-				maxY = 60;
-				axisLabels.x = "Average NAEP Proficency in Math and Reading, 4th and 8th Grades";
-				axisLabels.y = "Percentage of 6-17 Year Olds in Poverty";
-				xAdjust = -10;
-				$("#y-axis").css("left", "-85px");
-				$("#yearSlider").attr("step", 2);
-				progressStep = 20;
-				speed = 1000;
-				break;
-		}
-		d3.text(filename, 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);		
-		});
-		chartFunctions.setDefaults();
 	},
 	highlightPoint:function(){
 		var current = $(this), label = current.attr("label");
@@ -313,9 +234,7 @@ var chartFunctions = {
 		/* UPDATE LABEL POSITIONS
 		------------------------------------*/	
 		chart.selectAll("text").data(data).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;});
-
 		console.log(data)
-
 		/* UPDATE LABELS
 		------------------------------------*/	
 		for (i=0 ; i < data.length ; i++){
@@ -460,7 +379,6 @@ var chartFunctions = {
 	},
 	processData:function(thisData){
 		var tempYears = [], tempLabels = [];
-		
 		/* GRAB YEARS AND LABELS
 		------------------------------------*/
 		for (i = 1 ; i < thisData.length ; i++){
@@ -498,7 +416,7 @@ var chartFunctions = {
 		
 		chartFunctions.drawChart(currentData);
 		chartFunctions.populateLabels();
-		chartFunctions.defaultToggle(dataType);
+		chartFunctions.defaultToggle();
 
 	},
 	drawChart:function(data){
@@ -506,10 +424,16 @@ var chartFunctions = {
 		------------------------------------*/
 		if (firstRun == true) {
 
+
 			/* SET SCALES
 			------------------------------------*/
 			xScale = d3.scale.linear().domain([0, maxX]).range([60, w+xAdjust]).clamp(true).nice(); //xscale				
 			yScale = d3.scale.linear().domain([0, maxY]).range([h-padding,padding]).clamp(true).nice(); //yscale
+
+			/* DEFINE AXES
+			------------------------------------*/	
+			var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(10);//.innerTickSize(-360).outerTickSize(0); //xaxis
+			var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(10);//.innerTickSize(-450).outerTickSize(0);//yaxis
 
 			/* DRAW PLOTS
 			------------------------------------*/
@@ -528,17 +452,14 @@ var chartFunctions = {
 				$("#chart circle:eq("+i+")").attr("label", points._wrapped[i]);
 			}
 			
-			/* DEFINE AXES
-			------------------------------------*/	
-			var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(5); //xaxis
-			var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5); //yaxis
-
 			/* CREATE AXES
 			------------------------------------*/	
 			chart.append("g").attr("class", "axis").attr("transform", "translate(0," + (h - padding) + ")").call(xAxis); //xaxis
 			chart.append("g").attr("class", "axis").attr("transform", "translate(" + 60 + ",0)").call(yAxis); //yaxis
 			
-			
+			/* MOVE AXES BACK
+			------------------------------------*/	
+			//$('.axis').detach().insertBefore('circle:eq(0)');
 
 			utilityFunctions.churnLargeNumbers();
 			firstRun = false;
@@ -554,14 +475,18 @@ var chartFunctions = {
 				$("#chart circle:eq("+i+")").attr("label", points._wrapped[i]);
 			}
 		}
+	},
+	executeChart: function(config){
+		chartFunctions.setDefaults(config);
+
+		/* LOAD CHART DATA
+		===============================*/
+		d3.text('data/' + config[5] + '.csv', 'text/csv', function(text) {
+			var d = d3.csv.parseRows(text);
+			chartFunctions.processData(d);
+		});	
 	}
 }
-
-
-/* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
-===================================================================================*/
-chartFunctions.grabData();
-
 
 /* ADDRESS CHART MOTION
 ===================================================================================*/

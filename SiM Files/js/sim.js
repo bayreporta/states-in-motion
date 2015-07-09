@@ -1,11 +1,23 @@
-var totalViews = 16;
+var totalViews = 13;
 
-window.onload = function(){
-	//seed click events
-	for (i=0; i < totalViews ; i++){
-		$('.sim-views:eq('+i+') .data-option:eq(0)').on('click', function(){
-			window.location = $(this).attr('href');
+function statesInMotion(){
+	for (var i=0 ; i < totalViews; i++){
+		
+		jQuery('.data-option').on('click', function(i){
+			var type = jQuery(this).attr('type'); 
+			var state = jQuery('.sr-embed[type='+type+']').attr('state');
+			
+			if (state === 'false'){
+				jQuery('.sr-embed[type='+type+']').css('display', 'block');
+				jQuery('.sr-embed[type='+type+']').attr('state', 'true');
+			}
+			else {
+				jQuery('.sr-embed[type='+type+']').css('display', 'none');
+				jQuery('.sr-embed[type='+type+']').attr('state', 'false');
+			}
 		})
 	}
+
 }
 
+statesInMotion();

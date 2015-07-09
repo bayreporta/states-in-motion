@@ -8,8 +8,12 @@ h2 {font-family: 'Roboto',san-serif;font-size: 1.5em;text-transform: uppercase;c
 #header h2 {font-size: 1.3em;margin: 0 0 0 15px;padding: 0;text-transform: none;}
 #header p {font-size: .9em;color: #666;margin: 5px 0 0 15px;padding: 0;font-family:'Roboto', san-serif;font-weight:300;}
 
+.sim-content {max-width: 650px;clear: both;margin-top: 100px;}
+.sim-content p {font-family:'roboto',san-serif;font-size: 1em;line-height: 1.5em;color: #222;}
+
 #chart {margin-left: -30px;}
-#main-wrapper {width: 896px;height:450px;overflow: auto;}
+#main-wrapper {height:450px;overflow: auto;}
+section {width:800px;}
 
 #selection {width:110px;height:370px;background:#fff;overflow:scroll;border: solid 1px #aaa;position: relative;left: 20px;}
 #selection p {margin:0;cursor:pointer;font-size:11px;padding:0 0 0 5px;color:#666;}
@@ -33,17 +37,17 @@ h2 {font-family: 'Roboto',san-serif;font-size: 1.5em;text-transform: uppercase;c
 ==========================================*/
 .guide line {fill: none;stroke: #000;shape-rendering: crispEdges;opacity: 0;}
 .plotLabels {visibility:hidden;}
+.tick line {stroke:#e2e2e2;}
 
 #x-axis, #y-axis {margin: -40px 0 20px 30px;width: auto;text-align: center;font-family: roboto;font-weight: 400;color: #bbb;font-size: 12px;}
 #y-axis {margin: 0;transform: rotate(-90deg);-ms-transform: rotate(-90deg);-webkit-transform: rotate(-90deg);position: absolute;top: 255px;left: -75px;}
 
 svg {margin:0 0 0 25px;}
 
-.axis path, .axis line {fill: none;stroke: black;shape-rendering: crispEdges;}
+.axis path {fill: none;stroke: black;shape-rendering: crispEdges;}
 
 .xTicks,.yTicks {stroke-width: 0.6;stroke: #000;}
 
-.sr-graphic line {stroke: #000;}
 .sr-graphic text {font-family: Helvetica,Arial,sans-serif;font-size: 11px;fill:#666;}
 
 /* MOTION AND SLIDER STYLE

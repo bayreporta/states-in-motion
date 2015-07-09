@@ -1,256 +1,205 @@
-State,Year,"Average NAEP Proficency in Math and Reading, Grades 4 and 8",State Expenditures per Student
-Alabama,2003,19.75,7974
-Alaska,2003,28.75,12256
-Arizona,2003,23.5,7269
-Arkansas,2003,25,8289
-California,2003,22.5,9297
-Colorado,2003,35.25,9061
-Connecticut,2003,39,13855
-Delaware,2003,30.25,12373
-District of Columbia,2003,8.25,15701
-Florida,2003,28.25,8231
-Georgia,2003,25.5,9381
-Hawaii,2003,20.75,10339
-Idaho,2003,30.25,7473
-Illinois,2003,31.75,10427
-Indiana,2003,33,10215
-Iowa,2003,35,9240
-Kansas,2003,35.75,9421
-Kentucky,2003,27.75,8316
-Louisiana,2003,20,8809
-Maine,2003,34,11808
-Maryland,2003,31,11429
-Massachusetts,2003,40.5,13346
-Michigan,2003,31.5,11018
-Minnesota,2003,40,10183
-Mississippi,2003,17,7511
-Missouri,2003,31.5,9138
-Montana,2003,34.5,9480
-Nebraska,2003,33.25,10240
-Nevada,2003,21,7767
-New Hampshire,2003,39.5,11100
-New Jersey,2003,37,16160
-New Mexico,2003,17.75,9174
-New York,2003,33.5,15312
-North Carolina,2003,33.75,8012
-North Dakota,2003,35,8885
-Ohio,2003,33.5,10940
-Oklahoma,2003,24.75,7456
-Oregon,2003,32.25,9230
-Pennsylvania,2003,32.75,11763
-Rhode Island,2003,27.75,13422
-South Carolina,2003,27,8695
-South Dakota,2003,35.25,8564
-Tennessee,2003,24.25,7834
-Texas,2003,27.75,8664
-Utah,2003,31.5,6047
-Vermont,2003,38.25,13583
-Virginia,2003,34.5,9958
-Washington,2003,33.5,8955
-West Virginia,2003,24.5,10405
-Wisconsin,2003,35,11195
-Wyoming,2003,34.75,11277
-Alabama,2005,20,8828
-Alaska,2005,29,13186
-Arizona,2005,25.25,7486
-Arkansas,2005,28,9227
-California,2005,23,9538
-Colorado,2005,35,9383
-Connecticut,2005,37.25,15019
-Delaware,2005,32.5,13353
-District of Columbia,2005,10,15801
-Florida,2005,29.5,8976
-Georgia,2005,26,9876
-Hawaii,2005,21.5,11348
-Idaho,2005,33.75,7433
-Illinois,2005,30.25,10471
-Indiana,2005,31.5,10259
-Iowa,2005,34.5,9600
-Kansas,2005,37,9927
-Kentucky,2005,27.75,8811
-Louisiana,2005,20,9750
-Maine,2005,35.5,12456
-Maryland,2005,32.5,12534
-Massachusetts,2005,45,13887
-Michigan,2005,31.75,11001
-Minnesota,2005,41.25,10524
-Mississippi,2005,17.25,8242
-Missouri,2005,30.25,9506
-Montana,2005,36.75,9911
-Nebraska,2005,35,10713
-Nevada,2005,22.5,8246
-New Hampshire,2005,39.75,11945
-New Jersey,2005,39,17182
-New Mexico,2005,18,9599
-New York,2005,33.25,16793
-North Carolina,2005,32,8498
-North Dakota,2005,36.75,10028
-Ohio,2005,36.5,11136
-Oklahoma,2005,25,7976
-Oregon,2005,33.25,9933
-Pennsylvania,2005,36,12321
-Rhode Island,2005,28.5,14487
-South Carolina,2005,29.25,9330
-South Dakota,2005,36.25,8934
-Tennessee,2005,25.5,8048
-Texas,2005,31.5,8595
-Utah,2005,32.5,6279
-Vermont,2005,39.5,14713
-Virginia,2005,36.25,10860
-Washington,2005,37,9174
-West Virginia,2005,22.75,10847
-Wisconsin,2005,36,11481
-Wyoming,2005,35.5,13141
-Alabama,2007,24.28,9854
-Alaska,2007,30.2,15728
-Arizona,2007,25.85,8301
-Arkansas,2007,29.03,9321
-California,2007,23.9,10427
-Colorado,2007,36.65,9832
-Connecticut,2007,40.03,15695
-Delaware,2007,33.7,13055
-District of Columbia,2007,12.88,17567
-Florida,2007,32.58,9758
-Georgia,2007,27.78,10439
-Hawaii,2007,24.9,12676
-Idaho,2007,34.6,7467
-Illinois,2007,32.03,11122
-Indiana,2007,35.38,9525
-Iowa,2007,37.63,9963
-Kansas,2007,39.4,10629
-Kentucky,2007,29.93,9389
-Louisiana,2007,20.9,10749
-Maine,2007,37.85,12634
-Maryland,2007,35.6,14241
-Massachusetts,2007,48.2,14707
-Michigan,2007,31.48,10823
-Minnesota,2007,40.18,10807
-Mississippi,2007,18.7,8475
-Missouri,2007,33.05,9987
-Montana,2007,40.18,10473
-Nebraska,2007,35.63,10956
-Nevada,2007,24.38,8794
-New Hampshire,2007,41.83,12838
-New Jersey,2007,43.23,18928
-New Mexico,2007,20.78,9981
-New York,2007,35.93,18041
-North Carolina,2007,31.53,8282
-North Dakota,2007,36.35,10016
-Ohio,2007,38.5,11107
-Oklahoma,2007,27.9,8253
-Oregon,2007,32.83,10275
-Pennsylvania,2007,40,12613
-Rhode Island,2007,29.8,15533
-South Carolina,2007,27.73,9733
-South Dakota,2007,36.98,9168
-Tennessee,2007,26.7,8400
-Texas,2007,31.2,8970
-Utah,2007,33.38,6422
-Vermont,2007,43.53,15492
-Virginia,2007,36.73,11456
-Washington,2007,37.08,9730
-West Virginia,2007,26.55,10806
-Wisconsin,2007,37.23,11504
-Wyoming,2007,36.78,14814
-Alabama,2009,24.23,8942
-Alaska,2009,31.38,15990
-Arizona,2009,27.15,7907
-Arkansas,2009,29.7,8996
-California,2009,24.88,9390
-Colorado,2009,39.38,9062
-Connecticut,2009,42.73,15581
-Delaware,2009,33.45,12483
-District of Columbia,2009,14.68,19735
-Florida,2009,34.25,9021
-Georgia,2009,29.2,9725
-Hawaii,2009,27.43,12646
-Idaho,2009,36,6929
-Illinois,2009,33.93,11126
-Indiana,2009,35.9,9619
-Iowa,2009,35.43,10037
-Kansas,2009,38.48,10176
-Kentucky,2009,33.3,8926
-Louisiana,2009,20.45,10748
-Maine,2009,37.6,12316
-Maryland,2009,39.13,14105
-Massachusetts,2009,49.65,14772
-Michigan,2009,31.45,10412
-Minnesota,2009,44.08,10802
-Mississippi,2009,19.6,8043
-Missouri,2009,36.65,9792
-Montana,2009,40.35,10316
-Nebraska,2009,35.48,10718
-Nevada,2009,25.83,8531
-New Hampshire,2009,44.93,12838
-New Jersey,2009,43.75,17742
-New Mexico,2009,21.98,9552
-New York,2009,35.8,17879
-North Carolina,2009,34.93,8283
-North Dakota,2009,39.13,10218
-Ohio,2009,38.35,10827
-Oklahoma,2009,27.48,7835
-Oregon,2009,34.48,9702
-Pennsylvania,2009,40.5,12474
-Rhode Island,2009,32.6,14978
-South Carolina,2009,29.08,9206
-South Dakota,2009,38.25,8663
-Tennessee,2009,27.38,8175
-Texas,2009,32.35,8629
-Utah,2009,35.05,6388
-Vermont,2009,44.15,15284
-Virginia,2009,37.2,10918
-Washington,2009,37.95,9724
-West Virginia,2009,23.9,10786
-Wisconsin,2009,37.75,11003
-Wyoming,2009,35.55,15023
-Alabama,2011,26.13,8076
-Alaska,2011,32.1,15835
-Arizona,2011,29.85,6939
-Arkansas,2011,31.13,8468
-California,2011,26.85,8293
-Colorado,2011,42.28,8817
-Connecticut,2011,42.55,14628
-Delaware,2011,34.83,12120
-District of Columbia,2011,18.38,18000
-Florida,2011,32.5,8515
-Georgia,2011,31.2,8991
-Hawaii,2011,30.73,12000
-Idaho,2011,35.73,5898
-Illinois,2011,34.58,10192
-Indiana,2011,35.68,9500
-Iowa,2011,35.65,9813
-Kansas,2011,40.03,9183
-Kentucky,2011,35.33,8401
-Louisiana,2011,23.25,10019
-Maine,2011,38.68,11463
-Maryland,2011,42.73,13580
-Massachusetts,2011,51.53,13914
-Michigan,2011,32.23,9539
-Minnesota,2011,43.78,9433
-Mississippi,2011,21.8,7261
-Missouri,2011,35.53,9261
-Montana,2011,42.03,9779
-Nebraska,2011,35.83,10324
-Nevada,2011,29.03,8189
-New Hampshire,2011,45.95,12192
-New Jersey,2011,46.53,17721
-New Mexico,2011,24,8474
-New York,2011,34,16516
-North Carolina,2011,36.53,7145
-North Dakota,2011,39.73,10150
-Ohio,2011,38.7,10163
-Oklahoma,2011,28.53,7026
-Oregon,2011,33.1,9003
-Pennsylvania,2011,41.55,11695
-Rhode Island,2011,36.33,14144
-South Carolina,2011,30.7,8314
-South Dakota,2011,37.08,8120
-Tennessee,2011,26.55,7808
-Texas,2011,33.45,7977
-Utah,2011,36.7,5566
-Vermont,2011,45.2,14275
-Virginia,2011,40.13,9895
-Washington,2011,39.15,9122
-West Virginia,2011,25.83,10173
-Wisconsin,2011,39.08,9795
-Wyoming,2011,38.35,14629
+State,Year,State Expenditures per Student,"Average NAEP Proficency in Math and Reading, Grades 4 and 8"
+Alabama,2003,8488,20
+Alaska,2003,13199,29
+Arizona,2003,7834,24
+Arkansas,2003,8871,25
+California,2003,10144,23
+Colorado,2003,9881,35
+Connecticut,2003,15019,39
+Delaware,2003,13209,30
+District of Columbia,2003,19082,8
+Florida,2003,8910,28
+Georgia,2003,10204,26
+Hawaii,2003,11053,21
+Idaho,2003,8019,30
+Illinois,2003,11459,32
+Indiana,2003,10924,33
+Iowa,2003,10030,35
+Kansas,2003,10385,36
+Kentucky,2003,9357,28
+Louisiana,2003,9661,20
+Maine,2003,12651,34
+Maryland,2003,12516,31
+Massachusetts,2003,14503,41
+Michigan,2003,12159,32
+Minnesota,2003,10953,40
+Mississippi,2003,8239,17
+Missouri,2003,9833,32
+Montana,2003,10135,35
+Nebraska,2003,11103,33
+Nevada,2003,8319,21
+New Hampshire,2003,11945,40
+New Jersey,2003,18400,37
+New Mexico,2003,9862,18
+New York,2003,17309,34
+North Carolina,2003,8580,34
+North Dakota,2003,9503,35
+Ohio,2003,11782,34
+Oklahoma,2003,8376,25
+Oregon,2003,9858,32
+Pennsylvania,2003,12548,33
+Rhode Island,2003,14384,28
+South Carolina,2003,9505,27
+South Dakota,2003,9250,35
+Tennessee,2003,8584,24
+Texas,2003,9630,28
+Utah,2003,6700,32
+Vermont,2003,14920,38
+Virginia,2003,10726,35
+Washington,2003,9615,34
+West Virginia,2003,11368,25
+Wisconsin,2003,12258,35
+Wyoming,2003,12281,35
+Alabama,2005,9369,20
+Alaska,2005,14112,29
+Arizona,2005,7970,25
+Arkansas,2005,9966,28
+California,2005,10346,23
+Colorado,2005,10201,35
+Connecticut,2005,16203,37
+Delaware,2005,14165,33
+District of Columbia,2005,19574,10
+Florida,2005,9638,30
+Georgia,2005,10675,26
+Hawaii,2005,12075,22
+Idaho,2005,7925,34
+Illinois,2005,11439,30
+Indiana,2005,10932,32
+Iowa,2005,10271,35
+Kansas,2005,10878,37
+Kentucky,2005,9925,28
+Louisiana,2005,10665,20
+Maine,2005,13268,36
+Maryland,2005,13604,33
+Massachusetts,2005,15029,45
+Michigan,2005,12039,32
+Minnesota,2005,11260,41
+Mississippi,2005,8951,17
+Missouri,2005,10226,30
+Montana,2005,10533,37
+Nebraska,2005,11561,35
+Nevada,2005,8780,23
+New Hampshire,2005,12795,40
+New Jersey,2005,19347,39
+New Mexico,2005,10316,18
+New York,2005,18692,33
+North Carolina,2005,9027,32
+North Dakota,2005,10692,37
+Ohio,2005,11939,37
+Oklahoma,2005,8937,25
+Oregon,2005,10519,33
+Pennsylvania,2005,13091,36
+Rhode Island,2005,15451,29
+South Carolina,2005,10154,29
+South Dakota,2005,9518,36
+Tennessee,2005,8713,26
+Texas,2005,9503,32
+Utah,2005,6674,33
+Vermont,2005,16221,40
+Virginia,2005,11646,36
+Washington,2005,9798,37
+West Virginia,2005,11827,23
+Wisconsin,2005,12559,36
+Wyoming,2005,13933,36
+Alabama,2007,10552,24
+Alaska,2007,16934,30
+Arizona,2007,8955,26
+Arkansas,2007,10192,29
+California,2007,11216,24
+Colorado,2007,10795,37
+Connecticut,2007,17107,40
+Delaware,2007,13942,34
+District of Columbia,2007,22240,13
+Florida,2007,10558,33
+Georgia,2007,11371,28
+Hawaii,2007,13604,25
+Idaho,2007,8022,35
+Illinois,2007,12274,32
+Indiana,2007,10230,35
+Iowa,2007,10870,38
+Kansas,2007,11689,39
+Kentucky,2007,10260,30
+Louisiana,2007,11890,21
+Maine,2007,13612,38
+Maryland,2007,15639,36
+Massachusetts,2007,16074,48
+Michigan,2007,11832,31
+Minnesota,2007,11665,40
+Mississippi,2007,9223,19
+Missouri,2007,10884,33
+Montana,2007,11180,40
+Nebraska,2007,12063,36
+Nevada,2007,9437,24
+New Hampshire,2007,13825,42
+New Jersey,2007,21440,43
+New Mexico,2007,10785,21
+New York,2007,20332,36
+North Carolina,2007,8904,32
+North Dakota,2007,10749,36
+Ohio,2007,12022,39
+Oklahoma,2007,9338,28
+Oregon,2007,10964,33
+Pennsylvania,2007,13514,40
+Rhode Island,2007,16710,30
+South Carolina,2007,10688,28
+South Dakota,2007,9853,37
+Tennessee,2007,9190,27
+Texas,2007,10000,31
+Utah,2007,6940,33
+Vermont,2007,17305,44
+Virginia,2007,12467,37
+Washington,2007,10444,37
+West Virginia,2007,12006,27
+Wisconsin,2007,12779,37
+Wyoming,2007,15821,37
+Alabama,2009,9932,24
+Alaska,2009,17802,31
+Arizona,2009,8869,27
+Arkansas,2009,10548,30
+California,2009,10392,25
+Colorado,2009,10214,39
+Connecticut,2009,17819,43
+Delaware,2009,13568,33
+District of Columbia,2009,26488,15
+Florida,2009,9975,34
+Georgia,2009,10677,29
+Hawaii,2009,13052,27
+Idaho,2009,7911,36
+Illinois,2009,13495,34
+Indiana,2009,10586,36
+Iowa,2009,11255,35
+Kansas,2009,11362,38
+Kentucky,2009,10313,33
+Louisiana,2009,12334,20
+Maine,2009,14022,38
+Maryland,2009,15996,39
+Massachusetts,2009,16721,50
+Michigan,2009,11850,31
+Minnesota,2009,11968,44
+Mississippi,2009,9158,20
+Missouri,2009,11034,37
+Montana,2009,11759,40
+Nebraska,2009,12646,35
+Nevada,2009,9340,26
+New Hampshire,2009,14646,45
+New Jersey,2009,20424,44
+New Mexico,2009,10857,22
+New York,2009,21336,36
+North Carolina,2009,9246,35
+North Dakota,2009,11767,39
+Ohio,2009,12595,38
+Oklahoma,2009,9342,27
+Oregon,2009,10612,34
+Pennsylvania,2009,14187,41
+Rhode Island,2009,16486,33
+South Carolina,2009,10370,29
+South Dakota,2009,10064,38
+Tennessee,2009,9112,27
+Texas,2009,10200,32
+Utah,2009,7120,35
+Vermont,2009,18649,44
+Virginia,2009,11985,37
+Washington,2009,10593,38
+West Virginia,2009,13613,24
+Wisconsin,2009,13261,38
+Wyoming,2009,16809,36

@@ -1,31 +1,31 @@
 /* GLOBAL VARIABLES
 ===================================================================================*/
-var	dataType = $("meta").attr("content"), xOffset = 8, yOffset = 97,filename, w = 600, h = 400, barPadding = 2, startYear = 0, endYear = 0, yearPosition = 0, startData, endData, chart, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [], progressBar = 0, progressStep = 2.3255813953;
+var	barChart, dataType, xOffset = 0, yOffset = -25,filename, w = 600, h = 400, barPadding = 2, startYear, endYear, yearPosition, startData, endData, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [], progressBar = 0, progressStep;
 
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
-var chartFunctions = {
+var barFunctions = {
 	highlightBar:function(){
 		var current = $(this), label = current.attr("label");
 
 		/* APPEND LABELS AND HIGHLIGHTS
 		------------------------------------*/
-		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
+		var clicked = $("section[role='bar'] #selection p[label='"+label+"']").attr("clicked");
 		if (fullMotion === true){
 			return;
 		}
 		else {
 			if (clicked === "false"){
 				//determine position
-				var whereY = parseInt($("#chart rect[label='" + label + "']").attr("y")) + yOffset;
-				var whereX = parseInt($("#chart rect[label='" + label + "']").attr("x")) + xOffset;
+				var whereY = parseInt($("section[role='bar'] #chart rect[label='" + label + "']").attr("y")) + yOffset;
+				var whereX = parseInt($("section[role='bar'] #chart rect[label='" + label + "']").attr("x")) + xOffset;
 				
 				//address color issue
-				chartFunctions.processColors('highlight');
+				barFunctions.processColors('highlight');
 
 				//toggle layer
-				$("#chart").append("<span class=\"labels\" label=\""+label+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + label + "</span>");
-				$(".label[label='"+ label +"']").insertBefore("#selection");
+				$("section[role='bar'] #chart").append("<span class=\"labels\" label=\""+label+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + label + "</span>");
+				$("section[role='bar'] .label[label='"+ label +"']").insertBefore("section[role='bar'] #selection");
 				
 				//color
 				current.css("fill", colors[colorStep]);
@@ -37,7 +37,7 @@ var chartFunctions = {
 
 		/* REMOVE LABELS AND HIGHLIGHTS
 		------------------------------------*/
-		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
+		var clicked = $("section[role='bar'] #selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){				
 			//remove label
 			current.css("fill", "#e2e2e2");
@@ -45,61 +45,44 @@ var chartFunctions = {
 		}
 	},
 	defaultToggle:function(chart){
-		$('#selection p[label="California"]').click();
+		$('section[role="bar"] #selection p[label="California"]').click();
 	},
-	grabData:function(){
-		$('#selection').css('left','60px');
-		switch(dataType){
-			case "Income":
-				filename = 'data/income.csv';
-				startYear = 1970;
-				endYear = 2013;
-				yAxisLabel = "Income per Capita (in thousands)";
-				yearPosition = 1970;
-				startData = 0;
-				endData = 80000;
-				break;
-			case "ExpStudent":
-				filename = 'data/expendstudent.csv';
-				startYear = 1970;
-				endYear = 2012;
-				yAxisLabel = "State Expenditures per Student (in thousands)";
-				yearPosition = 1970;
-				startData = 0;
-				endData = 30000;
-				progressStep = 2.380952381;
-				break;
-			case "Expend13":
-				filename = 'data/expend13.csv';
-				startYear = 1982;
-				endYear = 2012;
-				yAxisLabel = "K-12 Expenditures per Student - 13 Years Cumulative (in thousands)";
-				yearPosition = 1982;
-				startData = 0;
-				endData = 300000;
-				progressStep = 3.3333333333;
-				break;
-			case "Teachers13":
-				filename = 'data/teachers13.csv';
-				startYear = 1982;
-				endYear = 2012;
-				yAxisLabel = "Teachers per Student - 13 Years Cumulative";
-				yearPosition = 1982;
-				startData = 0;
-				endData = 1.5;
-				progressStep = 3.3333333333;
-				break;
+	setDefaults:function(config){
+		dataType = config[0];
+		startData = config[6];
+		endData = config[7];
+		startYear = config[8];
+		endYear = config[9];
+		yAxisLabel = config[10]
+		progressStep = config[12];
+		yearPosition = startYear;
+
+		if (config[16]){
+			$('#bar-y-axis').css('left', config[16] + 'px');
 		}
-		d3.text(filename, 'text/csv', function(text) {
-			var thisData = d3.csv.parseRows(text);
-			chartFunctions.processData(thisData);
-		});
-		chartFunctions.setDefaults();
-	},
-	setDefaults:function(){
+
+		/* APPEND CONTENT */
+		if (contentAppended == false){
+			var content = config[20].split('|');
+			$('body').append('<div class="sim-content"></div>');
+			
+			$('.sim-content').detach().insertAfter('section:last-of-type');
+						
+			for (var i=0; i < content.length; i++){
+				$('.sim-content').append('<p>'+content[i]+'</p>');
+			}
+			contentAppended = true;
+		}
+
+
+
+		/* SELECTION ADJUST */
+		$('section[role="bar"] #selection').css('left','40px');
+
 		/* DRAW CHART
 		------------------------------------*/
-		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
+		barChart = d3.select("section[role='bar'] #chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
+		console.log(barChart)
 	},
 	updateChart:function(position){
 		var newData = [];
@@ -131,11 +114,11 @@ var chartFunctions = {
 					
 		/* UPDATE CHART DATA
 		------------------------------------*/
-		chartFunctions.drawChart(newData);
+		barFunctions.drawChart(newData);
 		
 		/* RECALC LABEL POSITIONS
 		------------------------------------*/
-		chartFunctions.updateLabels();
+		barFunctions.updateLabels();
 		
 		/* UPDATE SLIDER
 		------------------------------------*/
@@ -159,7 +142,7 @@ var chartFunctions = {
 			setTimeout(function(){
 				if (dataPosition !== years.length - 2){
 					dataPosition = dataPosition + 1;
-					chartFunctions.updateChart(dataPosition);
+					barFunctions.updateChart(dataPosition);
 				}
 			}, 500);
 		}
@@ -196,7 +179,7 @@ var chartFunctions = {
 					break;
 				}
 			}
-			$("#chart rect[label='" + currentData[i]["label"] + "']").attr("rank", currentData[i]["rank"]).attr("x", xPosition[currentData[i]["rank"]]);				
+			$("section[role='bar'] #chart rect[label='" + currentData[i]["label"] + "']").attr("rank", currentData[i]["rank"]).attr("x", xPosition[currentData[i]["rank"]]);				
 		}		
 	},
 	drawChart:function(data){
@@ -209,24 +192,26 @@ var chartFunctions = {
 
 			/* DRAW BARS
 			------------------------------------*/
-			chart.selectAll("rect").data(data).enter().append("rect").attr("class", "barItem").attr("x", function(d, i){return (i * (540/data.length)) + 62}).attr("y", function(d, i){return (h - yScale(d));}).attr("width", 8.58823552941).attr("height", function(d){return yScale(d) - 30}).on("mouseover", chartFunctions.highlightBar).on("mouseleave", chartFunctions.unhightlightBar);
+			barChart.selectAll("rect").data(data).enter().append("rect").attr("class", "barItem").attr("x", function(d, i){return (i * (540/data.length)) + 62}).attr("y", function(d, i){return (h - yScale(d));}).attr("width", 8.58823552941).attr("height", function(d){return yScale(d) - 30}).on("mouseover", barFunctions.highlightBar).on("mouseleave", barFunctions.unhightlightBar);
 			for (i=0 ; i < barLabels.length ; i++){
-				$("#chart rect:eq("+i+")").attr("label", barLabels[i]).attr("clicked","false").attr("data", data[i]);
-				xPosition[i] = $("#chart rect:eq("+i+")").attr("x");
+				$("section[role='bar'] #chart rect:eq("+i+")").attr("label", barLabels[i]).attr("clicked","false").attr("data", data[i]);
+				xPosition[i] = $("section[role='bar'] #chart rect:eq("+i+")").attr("x");
 			}			
 
 			/* CREATE AXES
 			------------------------------------*/				
-			chart.append("svg:line").attr("x1", 60).attr("y1", h - 30).attr("x2", 600).attr("y2", h - 30).attr("class", "axis"); //X-Axis
-			chart.append("svg:line").attr("x1", 60).attr("y1", yScale(startData)).attr("x2", 60).attr("y2", yScale(endData)).attr("class", "axis"); //Y-Axis
-			$("svg line:eq(0)").add("svg line:eq(1)").detach().insertAfter("#chart svg g"); //move axes to top
+			barChart.append("svg:line").attr("x1", 60).attr("y1", h - 30).attr("x2", 600).attr("y2", h - 30).attr("class", "axis"); //X-Axis
+			barChart.append("svg:line").attr("x1", 60).attr("y1", yScale(startData)).attr("x2", 60).attr("y2", yScale(endData)).attr("class", "axis"); //Y-Axis
+			$("section[role='bar'] svg line:eq(0)").add("section[role='bar'] svg line:eq(1)").detach().insertAfter("section[role='bar'] #chart svg g"); //move axes to top
 
 			/* Y-AXIS LABELS AND TICKS
 			------------------------------------*/
-			chart.selectAll(".yLabel").data(yScale.ticks(4)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 50).attr("y", function(d) {return h - yScale(d)}).attr("text-anchor", "end").attr("dy", 3); // ylabels
+			barChart.selectAll(".yLabel").data(yScale.ticks(8)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 50).attr("y", function(d) {return h - yScale(d)}).attr("text-anchor", "end").attr("dy", 3); // ylabels
 			utilityFunctions.churnLargeNumbers(true);
-			chart.selectAll(".yTicks").data(yScale.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return yScale(d);}).attr("x1", 55).attr("y2", function(d) {return yScale(d);}).attr("x2", 60); //yticks
+			barChart.selectAll(".yTicks").data(yScale.ticks(8)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return yScale(d);}).attr("x1", 55).attr("y2", function(d) {return yScale(d);}).attr("x2", 60); //yticks
 			
+			
+
 			firstRun = false;
 		}
 		/* ANOTHER OTHER CHART STATE
@@ -234,25 +219,25 @@ var chartFunctions = {
 		else {
 			/* MODIFY BARS
 			------------------------------------*/
-			chart.selectAll("rect").data(data).attr("x", function(d, i){return (i * (540/data.length)) + 62}).attr("y-update", function(d, i){return (h - yScale(d));}).transition().duration(200).attr("y", function(d, i){return (h - yScale(d));}).attr("height", function(d){return yScale(d) - 30});
+			barChart.selectAll("rect").data(data).attr("x", function(d, i){return (i * (540/data.length)) + 62}).attr("y-update", function(d, i){return (h - yScale(d));}).transition().duration(200).attr("y", function(d, i){return (h - yScale(d));}).attr("height", function(d){return yScale(d) - 30});
 			for (i=0 ; i < barLabels.length ; i++){
-				$("#chart rect:eq("+i+")").attr("label", barLabels[i]).attr("clicked","false").attr("data", data[i]);
+				$("section[role='bar'] #chart rect:eq("+i+")").attr("label", barLabels[i]).attr("clicked","false").attr("data", data[i]);
 			}
 		}
 
 		/* RANK-SORT BARS
 		------------------------------------*/
-		chartFunctions.rankBars(data);
+		barFunctions.rankBars(data);
 	},
 	updateLabels:function(){
 		for (i = 0 ; i < barLabels.length ; i++){
 			/* MOVE ACTIVE LABELS WITH BAR MOTION
 			------------------------------------------*/
-			var active = $("#chart span[label='"+ barLabels[i] + "']");
+			var active = $("section[role='bar'] #chart span[label='"+ barLabels[i] + "']");
 
 			//determine position
-			var whereY = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("y-update")) + yOffset;
-			var whereX = parseInt($("#chart rect[label='" + barLabels[i] + "']").attr("x")) + xOffset;
+			var whereY = parseInt($("section[role='bar'] #chart rect[label='" + barLabels[i] + "']").attr("y-update")) + yOffset;
+			var whereX = parseInt($("section[role='bar'] #chart rect[label='" + barLabels[i] + "']").attr("x")) + xOffset;
 			active.animate({top:whereY + "px",left:whereX + "px"}, 100);
 		}
 	},
@@ -285,9 +270,9 @@ var chartFunctions = {
 			}
 			
 		}	
-		chartFunctions.populateLabels();
-		chartFunctions.drawChart(firstPlot);
-		chartFunctions.defaultToggle(dataType);
+		barFunctions.populateLabels();
+		barFunctions.drawChart(firstPlot);
+		barFunctions.defaultToggle(dataType);
 	},
 	processColors:function(direct){
 		if (direct === 'add' || direct === 'highlight'){
@@ -317,7 +302,7 @@ var chartFunctions = {
 		}
 	},
 	resetColors:function(){
-		$('#selection p[clicked="true"]').click();
+		$('section[role="bar"] #selection p[clicked="true"]').click();
 		toggledLabels = [];
 	},
 	populateLabels:function(){
@@ -328,8 +313,8 @@ var chartFunctions = {
 		/* BAR LABELS
 		------------------------------------*/
 		for (i=0 ; i < barLabels.length ; i++){
-			$("#selection").append("<p label=\""+barLabels[i]+"\"clicked=\"false\">" + barLabels[i] + "</p>");			
-			$("#selection p:eq("+i+")").on("click", function(){
+			$("section[role='bar'] #selection").append("<p label=\""+barLabels[i]+"\"clicked=\"false\">" + barLabels[i] + "</p>");			
+			$("section[role='bar'] #selection p:eq("+i+")").on("click", function(){
 				var clicked = $(this).attr("clicked"), thisLabel = $(this).text();
 				if (fullMotion === true){
 					return;
@@ -337,33 +322,33 @@ var chartFunctions = {
 				else {
 					if (clicked === "false"){				
 						//determine position
-						var whereY = parseInt($("#chart rect[label='" + thisLabel + "']").attr("y")) + yOffset;
-						var whereX = parseInt($("#chart rect[label='" + thisLabel + "']").attr("x")) + xOffset;
+						var whereY = parseInt($("section[role='bar'] #chart rect[label='" + thisLabel + "']").attr("y")) + yOffset;
+						var whereX = parseInt($("section[role='bar'] #chart rect[label='" + thisLabel + "']").attr("x")) + xOffset;
 
 						//address color issue
-						chartFunctions.processColors('add');
+						barFunctions.processColors('add');
 						
 						//background and up front
 						$(this).css("background", "#ddd").attr({clicked:'true', color:colorStep});
-						$("#chart rect[label='"+ thisLabel +"']").css("fill",thisColor).attr("clicked","true");
+						$("section[role='bar'] #chart rect[label='"+ thisLabel +"']").css("fill",thisColor).attr("clicked","true");
 						var index = _.indexOf(barLabels, thisLabel);
 						toggledLabels.push(index); //push to toggled list
 
 						//toggle layer
-						$("#chart").append("<span status=\"on\" class=\"labels\" label=\""+thisLabel+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + thisLabel + "</span>");
-						$(".label[label='"+ thisLabel +"']").insertBefore("#selection");
+						$("section[role='bar'] #chart").append("<span status=\"on\" class=\"labels\" label=\""+thisLabel+"\" style=\"left:" + whereX + "px;top:" + whereY + "px;color:"+thisColor+";\">" + thisLabel + "</span>");
+						$("section[role='bar'] .label[label='"+ thisLabel +"']").insertBefore("section[role='bar'] #selection");
 
 					}
 					else {
 						//address color issue
-						chartFunctions.processColors($(this).attr('color'));
+						barFunctions.processColors($(this).attr('color'));
 
 						//background
 						$(this).css("background", "#fff").attr("clicked","false");
-						$("#chart rect[label='"+ thisLabel +"']").css("fill","#e2e2e2");
-						$("#chart rect[label='"+ thisLabel +"']").attr("clicked", "false");
+						$("section[role='bar'] #chart rect[label='"+ thisLabel +"']").css("fill","#e2e2e2");
+						$("section[role='bar'] #chart rect[label='"+ thisLabel +"']").attr("clicked", "false");
 						//remove label
-						$("span[label='"+ thisLabel +"']").remove();	
+						$("section[role='bar'] span[label='"+ thisLabel +"']").remove();	
 
 						//remove from toggled list
 						var index = _.indexOf(barLabels, thisLabel);
@@ -378,8 +363,20 @@ var chartFunctions = {
 				}					
 			});
 		}
-		$('#main-wrapper').append('<p id="reset-button" onclick="chartFunctions.resetColors();">RESET</p>');
+		$('section[role="bar"] #main-wrapper').append('<p id="reset-button" onclick="barFunctions.resetColors();">RESET</p>');
+		
+		
 	},
+	executeChart: function(config){
+		barFunctions.setDefaults(config);
+
+		/* LOAD CHART DATA
+		===============================*/
+		d3.text('data/' + config[5] + '.csv', 'text/csv', function(text) {
+			var d = d3.csv.parseRows(text);
+			barFunctions.processData(d);
+		});	
+	}
 }
 
 /* GLOBAL UTILITY FUNCTIONS
@@ -400,7 +397,7 @@ var utilityFunctions = {
 			if (yearPosition === years[i]){
 				index = _.indexOf(years, yearPosition) - 1
 				dataPosition = index;
-				return chartFunctions.updateChart(index);
+				return barFunctions.updateChart(index);
 			}
 		}
 	},
@@ -423,10 +420,6 @@ var utilityFunctions = {
 	}
 }
 
-/* DETERMINES SPECIFIC CHART ONLOAD AND ADDS CUSTOMIZATION
-===================================================================================*/
-chartFunctions.grabData();
-
 
 /* ADDRESS CHART MOTION
 ===================================================================================*/
@@ -438,7 +431,7 @@ $(document).ready(function(){
 			}
 			fullMotion = true;
 			$(this).attr("src","assets/pause.png");
-			chartFunctions.updateChart(dataPosition);
+			barFunctions.updateChart(dataPosition);
 
 			//toggle change in slider
 			$('#yearSlider').css('display','none');
@@ -473,12 +466,12 @@ $(document).ready(function(){
 			dataPosition = -1;
 			$("#playMotion").attr("src", "assets/play.png");
 			setTimeout(function(){
-				chartFunctions.updateChart(dataPosition);
+				barFunctions.updateChart(dataPosition);
 			},500);	
 		}
 		else if (dataPosition > 0){
 			dataPosition = 0;
-			chartFunctions.updateChart(dataPosition);
+			barFunctions.updateChart(dataPosition);
 		}
 	}).on("mouseover", function(){
 		$(this).attr("src", "assets/reload-hover.png");
