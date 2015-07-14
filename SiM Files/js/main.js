@@ -25,7 +25,7 @@ d3.text('data/config.csv', 'text/csv', function(text) {
 	var isBar = $('meta[bar="true"]'), isLine = $('meta[line="true"]'), isBubble = $('meta[bubble="true"]');
 	if (isLine.length > 0){lineFunctions.executeChart(thisConfig);}
 	if (isBar.length > 0){barFunctions.executeChart(thisConfig);}
-	if (isBubble.length > 0){chartFunctions.executeChart(thisConfig);}	
+	if (isBubble.length > 0){bubbleFunctions.executeChart(thisConfig);}	
 });	
 
 

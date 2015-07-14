@@ -2,33 +2,33 @@
 ===================================================================================*/
 var	dataType, speed, filename, w = 600, h = 400, barPadding, startYear, endYear, yearPosition, chart, xScale, yScale, line, maxX, maxY, xAdjust, margin = {all:-1,left:70,right:15,top:30,bottom:30}, axisLabels = {x:"",y:""}, dataPosition = 0, fullMotion = false, padding = 20,	firstRun = true, totalPoints = 0, updatedPointData = [], initReprocess = false, currentData = [], curElemPos = [], years = [], plotData = [], points = [], endPoints = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [],progressBar = 0, progressStep = 2.3255813953;
 
-/* GLOABL UTILITY FUNCTIONS
+/* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
-var utilityFunctions = {
+var bubbleFunctions = {
 	updateSlider:function(val){
 		/* HANDLING INTERACTIONS W SLIDER
 		------------------------------------*/
 		var index;
 		//stop motion if in motion
 		if (fullMotion == true){
-			$("#playMotion").attr("src", "assets/play.png");
+			$("section[role='bubble'] #playMotion").attr("src", "assets/play.png");
 			fullMotion = false;
 		}
-		$("#nav-wrapper h2").text(val); //update slider text
+		$("section[role='bubble'] #nav-wrapper h2").text(val); //update slider text
 		yearPosition = parseInt(val); //update year position
 		for (i=0 ; i < years._wrapped.length ; i++){ //locate year index
 			if (yearPosition === years._wrapped[i]){
 				index = _.indexOf(years._wrapped, yearPosition);					
 				dataPosition = index;
-				return chartFunctions.updateChart(index)
+				return bubbleFunctions.updateChart(index)
 			}
 		}
 	},
 	churnLargeNumbers:function(){
 		var temp = [];
-		var totalLabels = $("text:not(.plotLabels)").length;
+		var totalLabels = $("section[role='bubble'] text:not(.plotLabels)").length;
 		for (i=0 ; i < totalLabels ; i++){
-			temp[i] = $("text:not(.plotLabels):eq("+i+")").text();
+			temp[i] = $("section[role='bubble'] text:not(.plotLabels):eq("+i+")").text();
 			//Shorten Axis Labels
 			switch(temp[i].length){
 				case 5: temp[i] = temp[i].slice(0,1); break;
@@ -38,14 +38,9 @@ var utilityFunctions = {
 				case 10: temp[i] = temp[i].slice(0,2); break;
 				case 11: temp[i] = temp[i].slice(0,3); break;
 			}
-			$("text:not(.plotLabels):eq("+i+")").text(temp[i]);
+			$("section[role='bubble'] text:not(.plotLabels):eq("+i+")").text(temp[i]);
 		}
-	}
-}
-
-/* GLOBAL CHART FUNCTIONS
-===================================================================================*/
-var chartFunctions = {
+	},
 	setDefaults:function(config){
 		dataType = config[0];
 		startYear = config[8];
@@ -56,15 +51,15 @@ var chartFunctions = {
 		maxX = parseInt(config[13]);
 		maxY = parseInt(config[14]);
 		xAdjust = parseInt(config[15]);
-		$("#y-axis").css("left", config[16] + 'px');
-		$("#yearSlider").attr("step", config[17]);
+		$("section[role='bubble'] #y-axis").css("left", config[16] + 'px');
+		$("section[role='bubble'] #yearSlider").attr("step", config[17]);
 		speed = parseInt(config[18]);
 		yearPosition = startYear;
 
 		/* APPEND CONTENT */
 		var content = config[20].split('|');
 		$('body').append('<div class="sim-content"></div>');
-		$('.sim-content').detach().insertAfter('#nav-wrapper');
+		$('.sim-content').detach().insertAfter('section[role="bubble"] #nav-wrapper');
 
 		for (var i=0; i < content.length; i++){
 			$('.sim-content').append('<p>'+content[i]+'</p>');
@@ -72,7 +67,7 @@ var chartFunctions = {
 
 		/* DRAW CHART
 		------------------------------------*/
-		chart = d3.select("#chart").append("svg:svg").attr("width", w).attr("height", h);
+		chart = d3.select("section[role='bubble'] #chart").append("svg:svg").attr("width", w).attr("height", h);
 	},
 	defaultToggle:function(){
 		$('#selection p[label="California"]').click();
@@ -88,33 +83,33 @@ var chartFunctions = {
 		else {	
 			/* APPEND LABELS AND HIGHLIGHTS
 			------------------------------------*/
-			var clicked = $("#selection p[label='"+label+"']").attr("clicked");
+			var clicked = $("section[role='bubble'] #selection p[label='"+label+"']").attr("clicked");
 			var thisPoint = label;
 
 			if (clicked === "false"){
 				//text
-				var $text = $("#chart text[label='"+ thisPoint +"']");
-				$text.insertBefore(".axis:eq(0)");
+				var $text = $("section[role='bubble'] #chart text[label='"+ thisPoint +"']");
+				$text.insertBefore("section[role='bubble'] .axis:eq(0)");
 
 				//animation
-				var $point = $(this), $text = $("#chart text[label='"+ label +"']"), point = d3.select(this);
+				var $point = $(this), $text = $("section[role='bubble'] #chart text[label='"+ label +"']"), point = d3.select(this);
 				point.transition().duration(800).attr("r", 8).ease("elastic");
 
 				/* ADD GUIDING LINES ON HOVER
 				------------------------------------*/
 				chart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", 60).attr("y1", point.attr("cy")).attr("y2", point.attr("cy")).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity",function() { return d3.interpolate(0, .5); }); //x-axis
 				chart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", point.attr("cx")).attr("y1", point.attr("cy")).attr("y2", h - 20).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity", function() { return d3.interpolate(0, .5); }); //y-axis		
-				$point.insertBefore(".axis:eq(0)"); //reorder to front
+				$point.insertBefore("section[role='bubble'] .axis:eq(0)"); //reorder to front
 
 				//address color issue
-				chartFunctions.processColors('highlight');
+				bubbleFunctions.processColors('highlight');
 
 				//fill point
 				current.css("fill", thisColor);
 				$text.css({visibility:"visible",fill:thisColor});
 			}
 			//reorganize data based on new positions
-			chartFunctions.reprocessData();
+			bubbleFunctions.reprocessData();
 		}
 	},
 	unhightlightPoint:function(){
@@ -122,22 +117,22 @@ var chartFunctions = {
 
 		/* REMOVE LABELS AND HIGHLIGHTS
 		------------------------------------*/
-		var clicked = $("#selection p[label='"+label+"']").attr("clicked");
+		var clicked = $("section[role='bubble'] #selection p[label='"+label+"']").attr("clicked");
 		if (clicked === "false"){				
 			//remove label
 				current.css("fill", "#e2e2e2");
 			//toggle text
-				var $text = $("#chart text[label='"+ label +"']");
-				$text.detach().insertBefore("text:first").css("visibility","hidden");
+				var $text = $("section[role='bubble'] #chart text[label='"+ label +"']");
+				$text.detach().insertBefore("section[role='bubble'] text:first").css("visibility","hidden");
 			//animations
 				var point = d3.select(this);	
 			//remove tooltip and lines
-				$(".guide").remove();
+				$("section[role='bubble'] .guide").remove();
 			//restore circle			
 				point.transition().duration(800).attr("r", 5).ease("elastic");
 			//update positioning
-				current.detach().insertBefore("circle:first");
-				chartFunctions.reprocessData();
+				current.detach().insertBefore("section[role='bubble'] circle:first");
+				bubbleFunctions.reprocessData();
 		}			
 	},
 	updateChart:function(position){	
@@ -191,11 +186,11 @@ var chartFunctions = {
 
 		/* RECALC LABEL POSITIONS
 		------------------------------------*/
-		chartFunctions.updateLabels(currentData);
+		bubbleFunctions.updateLabels(currentData);
 
 		/* UPDATE CHART DATA
 		------------------------------------*/
-		chartFunctions.drawChart(currentData);
+		bubbleFunctions.drawChart(currentData);
 
 		/* UPDATE SLIDER
 		------------------------------------*/
@@ -225,7 +220,7 @@ var chartFunctions = {
 			setTimeout(function(){
 				if (dataPosition !== years.length - 1){
 					dataPosition = dataPosition + 1;
-					chartFunctions.updateChart(dataPosition);
+					bubbleFunctions.updateChart(dataPosition);
 				}
 			}, speed)
 		}
@@ -269,20 +264,20 @@ var chartFunctions = {
 		}
 	},
 	resetColors:function(){
-		$('#selection p[clicked="true"]').click();
+		$('section[role="bubble"] #selection p[clicked="true"]').click();
 		toggledLabels = [];
 	},
 	populateLabels:function(){
 		/* AXIS LABELS
 		------------------------------------*/
-		$("#x-axis").text(axisLabels.x);
-		$("#y-axis").text(axisLabels.y);
+		$("section[role='bubble'] #x-axis").text(axisLabels.x);
+		$("section[role='bubble'] #y-axis").text(axisLabels.y);
 
 		/* POINT LABELS
 		------------------------------------*/
 		for (i=0 ; i < points._wrapped.length ; i++){
-			$("#selection").append("<p label=\""+points._wrapped[i]+"\"clicked=\"false\">" + points._wrapped[i] + "</p>");
-			$("#selection p:eq("+i+")").on("click", function(){
+			$("section[role='bubble'] #selection").append("<p label=\""+points._wrapped[i]+"\"clicked=\"false\">" + points._wrapped[i] + "</p>");
+			$("section[role='bubble'] #selection p:eq("+i+")").on("click", function(){
 				var clicked = $(this).attr("clicked");
 				var thisPoint = $(this).text();
 
@@ -296,34 +291,34 @@ var chartFunctions = {
 					------------------------------------*/					
 					if (clicked === "false"){	
 						//address color issue
-						chartFunctions.processColors('add');
+						bubbleFunctions.processColors('add');
 
 						//unhide text
-						var $text = $("#chart text[label='"+ thisPoint +"']");
+						var $text = $("section[role='bubble'] #chart text[label='"+ thisPoint +"']");
 						$text.css({visibility:"visible",fill:thisColor});
-						$text.insertBefore(".axis:eq(0)");
+						$text.insertBefore("section[role='bubble'] .axis:eq(0)");
 											
 						//background and up front
 						$(this).css("background", "#ddd").attr({clicked:"true",color:colorStep});
-						$("#chart circle[label='"+ thisPoint +"']").css("fill",thisColor).attr("clicked", "true");
+						$("section[role='bubble'] #chart circle[label='"+ thisPoint +"']").css("fill",thisColor).attr("clicked", "true");
 						var index = _.indexOf(points._wrapped, thisPoint);
 						toggledLabels.push(index); //push to toggled list
 						
 						//reorder to front	
-						var $point = $("#chart circle[label='"+ thisPoint +"']");
-						$point.insertBefore(".axis:eq(0)");
+						var $point = $("section[role='bubble'] #chart circle[label='"+ thisPoint +"']");
+						$point.insertBefore("section[role='bubble'] .axis:eq(0)");
 					}
 					else {
 						//address color issue
-						chartFunctions.processColors($(this).attr('color'));
+						bubbleFunctions.processColors($(this).attr('color'));
 
 						//background
 						$(this).css("background", "#fff").attr("clicked","false");
-						$("#chart circle[label='"+ thisPoint +"']").css("fill","#e2e2e2");
-						$("#chart circle[label='"+ thisPoint +"']").attr("clicked", "false");
+						$("section[role='bubble'] #chart circle[label='"+ thisPoint +"']").css("fill","#e2e2e2");
+						$("section[role='bubble'] #chart circle[label='"+ thisPoint +"']").attr("clicked", "false");
 
 						//remove label
-						var $text = $("#chart text[label='"+ thisPoint +"']");
+						var $text = $("section[role='bubble'] #chart text[label='"+ thisPoint +"']");
 						$text.css("visibility","hidden");
 
 						//remove from toggled list
@@ -337,11 +332,11 @@ var chartFunctions = {
 					}
 					}
 					//reorganize data based on new positions
-					chartFunctions.reprocessData();
+					bubbleFunctions.reprocessData();
 				}
 			});
 		}
-		$('#main-wrapper').append('<p id="reset-button" onclick="chartFunctions.resetColors();">RESET</p>');
+		$('section[role="bubble"] #main-wrapper').append('<p id="reset-button" onclick="bubbleFunctions.resetColors();">RESET</p>');
 	},
 	reprocessData:function(){
 		var curPos = [], tempData = [];
@@ -351,7 +346,7 @@ var chartFunctions = {
 		if (initReprocess == false){
 			for (i=0 ; i < totalPoints ; i++) {
 				// GRAB CURRENT ELEM POSITION
-				curElemPos[i] = $("svg circle:eq("+i+")").attr("elem-pos");
+				curElemPos[i] = $("section[role='bubble'] svg circle:eq("+i+")").attr("elem-pos");
 
 				// UPDATE DATA BASED ON CURRENT ELEM POSITION
 				tempData[i] = plotData[curElemPos[i]]; 
@@ -363,7 +358,7 @@ var chartFunctions = {
 			for (i=0 ; i < totalPoints ; i++) {
 
 				// GRAB CURRENT ELEM POSITION
-				curElemPos[i] = $("svg circle:eq("+i+")").attr("elem-pos");
+				curElemPos[i] = $("section[role='bubble'] svg circle:eq("+i+")").attr("elem-pos");
 
 				// UPDATE DATA BASED ON CURRENT ELEM POSITION
 				tempData[i] = updatedPointData[curElemPos[i]]; 
@@ -374,7 +369,7 @@ var chartFunctions = {
 		/* UPDATE POSITION OF ALL ELEMENTS
 		------------------------------------*/
 		for(i=0 ; i < totalPoints ; i++){
-			$("svg circle:eq("+i+")").attr("elem-pos", i);
+			$("section[role='bubble'] svg circle:eq("+i+")").attr("elem-pos", i);
 		}
 	},
 	processData:function(thisData){
@@ -390,8 +385,8 @@ var chartFunctions = {
 							
 		/* POPULATE SLIDER
 		------------------------------------*/
-		$("#nav-wrapper h2").text(startYear); //default year
-		$("#yearSlider").attr("min", startYear).attr("max", endYear).attr("value", startYear);
+		$("section[role='bubble'] #nav-wrapper h2").text(startYear); //default year
+		$("section[role='bubble'] #yearSlider").attr("min", startYear).attr("max", endYear).attr("value", startYear);
 
 		/* GRAB DATA
 		------------------------------------*/
@@ -414,9 +409,9 @@ var chartFunctions = {
 			currentData.push(plotData[i][0])
 		}
 		
-		chartFunctions.drawChart(currentData);
-		chartFunctions.populateLabels();
-		chartFunctions.defaultToggle();
+		bubbleFunctions.drawChart(currentData);
+		bubbleFunctions.populateLabels();
+		bubbleFunctions.defaultToggle();
 
 	},
 	drawChart:function(data){
@@ -437,19 +432,19 @@ var chartFunctions = {
 
 			/* DRAW PLOTS
 			------------------------------------*/
-			chart.selectAll("circle").data(data).enter().append("circle").attr("class", "plotPoint").attr("cx", function(d){return xScale(d[0]);}).attr("cy", function(d){return yScale(d[1]);}).attr("data-x", function(d){return d[0];}).attr("data-y", function(d){return d[1];}).attr("r", 5).attr("clicked","false").on("mouseover", chartFunctions.highlightPoint).on("mouseleave", chartFunctions.unhightlightPoint);
+			chart.selectAll("circle").data(data).enter().append("circle").attr("class", "plotPoint").attr("cx", function(d){return xScale(d[0]);}).attr("cy", function(d){return yScale(d[1]);}).attr("data-x", function(d){return d[0];}).attr("data-y", function(d){return d[1];}).attr("r", 5).attr("clicked","false").on("mouseover", bubbleFunctions.highlightPoint).on("mouseleave", bubbleFunctions.unhightlightPoint);
 			
 			/* ADD INIT ELEMENT POSITIONS
 			------------------------------------*/
 			for (i = 0 ; i < totalPoints ; i++){
-				$("svg circle:eq("+i+")").attr("elem-pos", i);
+				$("section[role='bubble'] svg circle:eq("+i+")").attr("elem-pos", i);
 			}
 			
 			/* DRAW LABELS
 			------------------------------------*/	
 			chart.selectAll("text").data(data).enter().append("text").text(function(d) {return d[2];}).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;}).attr("class", "plotLabels").attr("label", function(d){return d[2];}) //meta data for bars
 			for (i=0 ; i < totalPoints ; i++){
-				$("#chart circle:eq("+i+")").attr("label", points._wrapped[i]);
+				$("section[role='bubble'] #chart circle:eq("+i+")").attr("label", points._wrapped[i]);
 			}
 			
 			/* CREATE AXES
@@ -461,7 +456,9 @@ var chartFunctions = {
 			------------------------------------*/	
 			//$('.axis').detach().insertBefore('circle:eq(0)');
 
-			utilityFunctions.churnLargeNumbers();
+			bubbleFunctions.churnLargeNumbers();
+			bubbleFunctions.tickSymbols();
+
 			firstRun = false;
 		}
 		/* ALL OTHER CHART POSITIONS
@@ -477,37 +474,91 @@ var chartFunctions = {
 		}
 	},
 	executeChart: function(config){
-		chartFunctions.setDefaults(config);
+		bubbleFunctions.setDefaults(config);
 
 		/* LOAD CHART DATA
 		===============================*/
 		d3.text('data/' + config[5] + '.csv', 'text/csv', function(text) {
 			var d = d3.csv.parseRows(text);
-			chartFunctions.processData(d);
+			bubbleFunctions.processData(d);
 		});	
+	},
+	tickSymbols: function(){
+		// SYBMOLS //
+		if (dataType === 'IncomeExpendStudent'){
+			var xlabels = $('section[role="bubble"] .axis:eq(0) g').size();
+			var ylabels = $('section[role="bubble"] .axis:eq(1) g').size();
+
+			for (var i=0 ; i < xlabels; i++){
+				var text = $('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text();
+				$('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text('$' + text);
+			}
+
+			for (var i=0 ; i < ylabels; i++){
+				var text = $('section[role="bubble"] .axis:eq(1) g:eq('+i+') text').text();
+				$('section[role="bubble"] .axis:eq(1) g:eq('+i+') text').text('$' + text);
+			}
+		}
+		else if (dataType === 'NAEPpoverty'){
+			var xlabels = $('section[role="bubble"] .axis:eq(0) g').size();
+			var ylabels = $('section[role="bubble"] .axis:eq(1) g').size();
+
+			for (var i=0 ; i < xlabels; i++){
+				var text = $('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text();
+				$('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text(text + '%');
+			}
+
+			for (var i=0 ; i < ylabels; i++){
+				var text = $('section[role="bubble"] .axis:eq(1) g:eq('+i+') text').text();
+				$('section[role="bubble"] .axis:eq(1) g:eq('+i+') text').text(text + '%');
+			}
+		}
+		else if (dataType === 'NAEPexpend'){
+			var xlabels = $('section[role="bubble"] .axis:eq(0) g').size();
+			var ylabels = $('section[role="bubble"] .axis:eq(1) g').size();
+
+			for (var i=0 ; i < xlabels; i++){
+				var text = $('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text();
+				$('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text('$' + text);
+			}
+
+			for (var i=0 ; i < ylabels; i++){
+				var text = $('section[role="bubble"] .axis:eq(1) g:eq('+i+') text').text();
+				$('section[role="bubble"] .axis:eq(1) g:eq('+i+') text').text(text + '%');
+			}
+		}
+		else if (dataType === 'TeacherPayStudents'){
+			var xlabels = $('section[role="bubble"] .axis:eq(0) g').size();
+			var ylabels = $('section[role="bubble"] .axis:eq(1) g').size();
+
+			for (var i=0 ; i < xlabels; i++){
+				var text = $('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text();
+				$('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text('$' + text);
+			}
+		}
 	}
 }
 
 /* ADDRESS CHART MOTION
 ===================================================================================*/
 $(document).ready(function(){
-	$("#playMotion").on("click", function(){
+	$("section[role='bubble'] #playMotion").on("click", function(){
 		if (fullMotion == false){
 			if (yearPosition == endYear){
 				dataPosition = 0;
 			}
 			fullMotion = true;
 			$(this).attr("src","assets/pause.png");
-			chartFunctions.updateChart(dataPosition);
+			bubbleFunctions.updateChart(dataPosition);
 			//toggle change in slider
-			$('#yearSlider').css('display','none');
-			$('.progress').css('display','block');
+			$('section[role="bubble"] #yearSlider').css('display','none');
+			$('section[role="bubble"] .progress').css('display','block');
 		}
 		else {
 			fullMotion = false; //pause motion
 			//toggle change in slider
-			$('#yearSlider').css('display','block');
-			$('.progress').css('display','none');
+			$('section[role="bubble"] #yearSlider').css('display','block');
+			$('section[role="bubble"] .progress').css('display','none');
 		}
 	}).on("mouseover", function(){ 
 		if (fullMotion == true){
@@ -528,15 +579,15 @@ $(document).ready(function(){
 	$("#reloadChart").on("click", function(){
 		if (fullMotion == true){
 			fullMotion = false;	//stops motion				
-			$("#playMotion").attr("src", "assets/play.png");
+			$("section[role='bubble'] #playMotion").attr("src", "assets/play.png");
 			setTimeout(function(){
 				dataPosition = 0
-				chartFunctions.updateChart(dataPosition);
+				bubbleFunctions.updateChart(dataPosition);
 			},500);	
 		}
 		else if (dataPosition > 0){
 			dataPosition = 0
-			chartFunctions.updateChart(dataPosition);
+			bubbleFunctions.updateChart(dataPosition);
 		}
 	}).on("mouseover", function(){
 		$(this).attr("src", "assets/reload-hover.png");

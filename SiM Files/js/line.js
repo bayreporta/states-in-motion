@@ -90,19 +90,17 @@ var lineFunctions = {
 		------------------------------*/
 		lineChart = d3.select("section[role='line'] #chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");	
 		line = d3.svg.line().x(function(d, i) {return x(d.x);}).y(function(d) {return y(d.y);});
-		console.log(chart)
 	},
 	defaultToggle:function(chart){
 		
 		/* HIGHLIGHT AVERAGE
 		------------------------------------*/
-		$('section[role="line"] #main-wrapper path[label="US Average"]').attr('style','stroke:#333').attr('clicked','true');
-		$('section[role="line"] .label[label="US Average"]').add('section[role="line"] #selection p[label="US Average"]').remove();
+		$('section[role="line"] #main-wrapper path[label="US Average"]').add('section[role="line"] #main-wrapper path[label="US Avg Minus CA"]').attr('style','stroke:#333').attr('clicked','true');
+		$('section[role="line"] .label[label="US Average"]').add('section[role="line"] #selection p[label="US Average"]').add('section[role="line"] .label[label="US Avg Minus CA"]').add('section[role="line"] #selection p[label="US Avg Minus CA"]').remove();
 
 		$('section[role="line"] #selection p[label="California"]').click();		
 
 		lineFunctions.liftHighlighted();
-
 	},
 	processColors:function(direct){
 		if (direct === 'add' || direct === 'highlight'){
@@ -151,15 +149,6 @@ var lineFunctions = {
 		$("section[role='line'] svg line:eq(0)").add("section[role='line'] svg line:eq(1)").detach().insertAfter("section[role='line'] #chart svg g");	
 
 
-		/* AXIS LABELS
-		------------------------------*/
-		lineChart.selectAll(".yLabel").data(y.ticks(8)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 100).attr("y", function(d) {return y(d)}).attr("text-anchor", "end").attr("dy", 3);
-		utilityFunctions.churnLargeNumbers(true);
-
-		/* Y-AXIS TICKS
-		------------------------------*/
-		lineChart.selectAll(".yTicks").data(y.ticks(8)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return y(d);}).attr("x1", 105).attr("y2", function(d) {return y(d);}).attr("x2", 110); //yticks
-
 		/* X-AXIS TICKS
 		------------------------------*/
 		if (dataType === "NAEP"){
@@ -169,21 +158,52 @@ var lineFunctions = {
 			//Fix NAEP
 			var naepFix = [2003,2005,2007,2009,2011,2013];
 			for (i=0; i < 6 ; i++){
-				$('.xLabel:eq('+i+')').text(naepFix[i])
+				$('section[role="line"] .xLabel:eq('+i+')').text(naepFix[i])
 			}
 			
 			// X Axis Ticks //
 			lineChart.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
 		}
+		else if (dataType === "Expend13"){
+			lineChart.selectAll(".xLabel").data(x.ticks(10)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
+			lineChart.selectAll(".xTicks").data(x.ticks(10)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
+		}
 		else {
 			// X Axis Labels //
 			lineChart.selectAll(".xLabel").data(x.ticks(50)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
-			
+
 			// X Axis Ticks //
 			lineChart.selectAll(".xTicks").data(x.ticks(50)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
 			lineFunctions.adjustNormalX(dataType);
 		}
 
+		/* Y-AXIS LABELS
+		------------------------------*/
+		lineChart.selectAll(".yLabel").data(y.ticks(5)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 100).attr("y", function(d) {return y(d)}).attr("text-anchor", "end").attr("dy", 3);
+		lineFunctions.churnLargeNumbers(true);
+
+		// SYBMOLS //
+		if (dataType === 'Effort' || dataType === 'Poverty'|| dataType === 'NAEP' || dataType === 'Salaries-Income'){
+			var labels = $('section[role="line"] .yLabel').size();
+			for (var i=0 ; i < labels; i++){
+				var text = $('section[role="line"] .yLabel:eq('+i+')').text();
+				$('section[role="line"] .yLabel:eq('+i+')').text(text + '%');
+			}
+		}
+		else if (dataType === 'Income' || dataType === 'ExpStudent' || dataType === 'Expend13' || dataType === 'Salaries' ){
+			var labels = $('section[role="line"] .yLabel').size();
+			for (var i=0 ; i < labels; i++){
+				var text = $('section[role="line"] .yLabel:eq('+i+')').text();
+				$('section[role="line"] .yLabel:eq('+i+')').text('$'+ text);
+			}
+		}
+
+		
+		/* Y-AXIS TICKS
+		------------------------------*/
+		lineChart.selectAll(".yTicks").data(y.ticks(5)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return y(d);}).attr("x1", 105).attr("y2", function(d) {return y(d);}).attr("x2", 110); //yticks
+
+		
 		/* DEFAULT TOGGLES
 		------------------------------*/
 		lineFunctions.defaultToggle(dataType);
@@ -293,43 +313,43 @@ var lineFunctions = {
 		===================================================================================*/
 		if (dataType === "Poverty"){
 			//show certain labels
-			$(".xLabel").css("display","none");
-			$(".xLabel:first").css("display","block");
-			$(".xLabel:last").css("display","block");
-			$(".xLabel:eq(8)").css("display","block");
-			$(".xLabel:eq(15)").css("display","block");
-			$(".xLabel:eq(22)").css("display","block");
-			$(".xLabel:eq(29)").css("display","block");
+			$("section[role='line'] .xLabel").css("display","none");
+			$("section[role='line'] .xLabel:first").css("display","block");
+			$("section[role='line'] .xLabel:last").css("display","block");
+			$("section[role='line'] .xLabel:eq(8)").css("display","block");
+			$("section[role='line'] .xLabel:eq(15)").css("display","block");
+			$("section[role='line'] .xLabel:eq(22)").css("display","block");
+			$("section[role='line'] .xLabel:eq(29)").css("display","block");
 
 			//show certain ticks
-			$(".xTicks").css("display","none");
-			$(".xTicks:first").css("display","block");
-			$(".xTicks:last").css("display","block");
-			$(".xTicks:eq(8)").css("display","block");
-			$(".xTicks:eq(15)").css("display","block");
-			$(".xTicks:eq(22)").css("display","block");
-			$(".xTicks:eq(29)").css("display","block");
+			$("section[role='line'] .xTicks").css("display","none");
+			$("section[role='line'] .xTicks:first").css("display","block");
+			$("section[role='line'] .xTicks:last").css("display","block");
+			$("section[role='line'] .xTicks:eq(8)").css("display","block");
+			$("section[role='line'] .xTicks:eq(15)").css("display","block");
+			$("section[role='line'] .xTicks:eq(22)").css("display","block");
+			$("section[role='line'] .xTicks:eq(29)").css("display","block");
 		}
 		else {
 			//show certain labels
-			$(".xLabel").css("display","none");
-			$(".xLabel:first").css("display","block");
-			$(".xLabel:last").css("display","block");
-			$(".xLabel:eq(6)").css("display","block");
-			$(".xLabel:eq(13)").css("display","block");
-			$(".xLabel:eq(20)").css("display","block");
-			$(".xLabel:eq(27)").css("display","block");
-			$(".xLabel:eq(34)").css("display","block");
+			$("section[role='line'] .xLabel").css("display","none");
+			$("section[role='line'] .xLabel:first").css("display","block");
+			$("section[role='line'] .xLabel:last").css("display","block");
+			$("section[role='line'] .xLabel:eq(6)").css("display","block");
+			$("section[role='line'] .xLabel:eq(13)").css("display","block");
+			$("section[role='line'] .xLabel:eq(20)").css("display","block");
+			$("section[role='line'] .xLabel:eq(27)").css("display","block");
+			$("section[role='line'] .xLabel:eq(34)").css("display","block");
 
 			//show certain ticks
-			$(".xTicks").css("display","none");
-			$(".xTicks:first").css("display","block");
-			$(".xTicks:last").css("display","block");
-			$(".xTicks:eq(6)").css("display","block");
-			$(".xTicks:eq(13)").css("display","block");
-			$(".xTicks:eq(20)").css("display","block");
-			$(".xTicks:eq(27)").css("display","block");
-			$(".xTicks:eq(34)").css("display","block");
+			$("section[role='line'] .xTicks").css("display","none");
+			$("section[role='line'] .xTicks:first").css("display","block");
+			$("section[role='line'] .xTicks:last").css("display","block");
+			$("section[role='line'] .xTicks:eq(6)").css("display","block");
+			$("section[role='line'] .xTicks:eq(13)").css("display","block");
+			$("section[role='line'] .xTicks:eq(20)").css("display","block");
+			$("section[role='line'] .xTicks:eq(27)").css("display","block");
+			$("section[role='line'] .xTicks:eq(34)").css("display","block");
 		}
 	},
 	executeChart: function(config){
@@ -342,30 +362,21 @@ var lineFunctions = {
 			lineFunctions.processData(d);
 		});	
 		
-	}
-}
-
-/* GLOBAL VARIABLES
-===================================================================================*/
-var lineChart, offset = -10, w = 600, h = 400, startYear, endYear, startData, endData, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, line, x, y, startEnd = {}, toggledLabels = [];
-
-/* GLOBAL UTILITY FUNCTIONS
-===================================================================================*/
-var utilityFunctions = {
+	},
 	churnLargeNumbers:function(line){
-		var countX = $(".xLabel").length;
-		var countY = $(".yLabel").length;
+		var countX = $("section[role='line'] .xLabel").length;
+		var countY = $("section[role='line'] .yLabel").length;
 		var xLabels = [], xTemp = [], yLabels = [], yTemp = [];
 		
 		if (!line){
 			for (i=0 ; i < countX ; i++){
-				xTemp[i] = $(".xLabel:eq("+i+")").text();
-				$(".xLabel:eq("+i+")").text(xLabels[i]);
+				xTemp[i] = $("section[role='line'] .xLabel:eq("+i+")").text();
+				$("section[role='line'] .xLabel:eq("+i+")").text(xLabels[i]);
 			}
 		}
 		
 		for (i=0 ; i < countY ; i++){
-			yTemp[i] = $(".yLabel:eq("+i+")").text();
+			yTemp[i] = $("section[role='line'] .yLabel:eq("+i+")").text();
 
 			//Shorten Axis Labels
 			switch(yTemp[i].length){
@@ -376,7 +387,11 @@ var utilityFunctions = {
 				case 8: yTemp[i] = yTemp[i].slice(0,2); break;
 				case 9: yTemp[i] = yTemp[i].slice(0,3); break;
 			}
-			$(".yLabel:eq("+i+")").text(yTemp[i]);
+			$("section[role='line'] .yLabel:eq("+i+")").text(yTemp[i]);
 		}
 	}
 }
+
+/* GLOBAL VARIABLES
+===================================================================================*/
+var lineChart, offset = -10, w = 600, h = 400, startYear, endYear, startData, endData, yAxisLabel, margin = {all:-1,left:110,right:15,top:30,bottom:30}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2, line, x, y, startEnd = {}, toggledLabels = [];

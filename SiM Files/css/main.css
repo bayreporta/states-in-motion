@@ -47,7 +47,7 @@ hr {margin:50px 0;width: 800px;border: 1px solid #aaa;}
 /* BAR SPECIFIC
 ==========================================*/
 #chart rect {fill:#e2e2e2;cursor:pointer;}
-#bar-y-axis {width: auto;text-align: center;font-family:'Roboto', san-serif;font-weight: 400;color: #bbb;font-size: 12px;margin: 0;transform: rotate(-90deg);-ms-transform: rotate(-90deg);-webkit-transform: rotate(-90deg);position: absolute;top: 180px;left: -100px;}
+#bar-y-axis {width: auto;text-align: center;font-family:'Roboto', san-serif;font-weight: 400;color: #bbb;font-size: 12px;margin: 0;transform: rotate(-90deg);-ms-transform: rotate(-90deg);-webkit-transform: rotate(-90deg);position: absolute;top: 180px;left: -115px;}
 
 /* MOTION AND SLIDER STYLES
 ==========================================*/
@@ -62,7 +62,15 @@ hr {margin:50px 0;width: 800px;border: 1px solid #aaa;}
 .progress-bar {background:#4169E1;float: left;height: 100%;font-size: 12px;line-height: 20px;color: #fff;text-align: center;-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
 				-webkit-transition: width .6s ease;-o-transition: width .6s ease;transition: width .6s ease;}
 
+/* D3 TIP
+==========================================*/
+.d3-tip {  line-height: 1;  font-weight: bold;  padding: 12px;  background: rgba(0, 0, 0, 0.8);  color: #fff;  border-radius: 2px;}
 
+.d3-tip p {color:#fff;font-family: 'Roboto',san-serif;font-size: .9em;margin:5px 0;}
 
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {  box-sizing: border-box;  display: inline;  font-size: 10px;  width: 100%;  line-height: 1;  color: rgba(0, 0, 0, 0.8);  content: "\25BC";  position: absolute;  text-align: center;}
 
+/* Style northward tooltips differently */
+.d3-tip.n:after {  margin: -1px 0 0 0;  top: 100%;  left: 0;}
 

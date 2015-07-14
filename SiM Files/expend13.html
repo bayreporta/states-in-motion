@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>States in Motion</title>
-		<meta bar="true"  name="description" content="Expend13">
+		<meta bar="true" line="true" content="Expend13">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,400italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	</head>
@@ -11,6 +11,16 @@
 			<h2></h2>
 			<p></p>
 		</div>
+		<section role="line">
+			<div id="main-wrapper" class="sr-graphic">
+				<h3 id="y-axis"></h3>
+				<div id="content">
+					<div id="chart" type="line"></div>
+				</div>
+				<div id="selection"></div> 
+			</div>
+		</section>
+		<hr \>
 		<section role="bar">
 			<div id="main-wrapper" class="sr-graphic">
 				<h3 id="bar-y-axis"></h3>
@@ -35,6 +45,7 @@
 		<script src="http://edsource.org/wp-content/js/underscore-min.js"></script>
 		<script type="text/javascript">var contentAppended = false;</script>
 		<script src="js/bar.js"></script>
+		<script src="js/line.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>

@@ -2,11 +2,12 @@
 ===================================================================================*/
 var	barChart, dataType, xOffset = 0, yOffset = -25,filename, w = 600, h = 400, barPadding = 2, startYear, endYear, yearPosition, startData, endData, xScale, yScale, line, margin = {top:30,bottom:30}, yAxisLabel, dataPosition = 0, fullMotion = false,	padding = 60, firstRun = true, currentData = [], currentDataChk = false, years = [], barData = [], barLabels = [], endPoints = [], firstPlot = [], xPosition = [], startEnd = {}, colors = ["#4169E1","#e14169","#e16941","#41e1b9"], colorsInUse = [0,0,0,0], colorStep = 0, thisColor, colorLoops = 2,toggledLabels = [], progressBar = 0, progressStep;
 
+
 /* GLOBAL CHART FUNCTIONS
 ===================================================================================*/
 var barFunctions = {
 	highlightBar:function(){
-		var current = $(this), label = current.attr("label");
+		var current = $(this), label = current.attr("label");	
 
 		/* APPEND LABELS AND HIGHLIGHTS
 		------------------------------------*/
@@ -82,7 +83,6 @@ var barFunctions = {
 		/* DRAW CHART
 		------------------------------------*/
 		barChart = d3.select("section[role='bar'] #chart").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
-		console.log(barChart)
 	},
 	updateChart:function(position){
 		var newData = [];
@@ -186,13 +186,49 @@ var barFunctions = {
 		/* INIT CHART STATE
 		------------------------------------*/
 		if (firstRun == true) {
+			
+			/* TOOLTIP
+			------------------------------------*/
+			var tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function(d) {
+				var clicked = $(this).attr('clicked');
+				var hover = $(this).attr('hover');
+				var name = $(this).attr('label');
+
+				if (hover !== 'true'){
+					$(this).attr('hover', 'true');
+				}
+				else {
+					$(this).attr('hover', 'false');
+				}
+
+				if (clicked !== 'true' && hover !== 'true'){
+					$(this).css('fill', thisColor);
+					$('.d3-tip').css('display', 'block');
+
+				}
+				else if (clicked !== 'true' && hover !== 'false'){
+					$(this).css('fill', '#e2e2e2');
+					$('.d3-tip').css('display', 'none');
+				}
+				else if (clicked === 'true' && hover !== 'true'){
+					$('.d3-tip').css('display', 'block');
+				}
+				else if (clicked === 'true' && hover !== 'false'){
+					$('.d3-tip').css('display', 'none');
+				}
+ 			   	
+ 			   	return "<p>"+name+"</p><p>" + barFunctions.commaSeparateNumber(d) + "</p>";
+			})
+			barChart.call(tip);
+
+
 			/* SET SCALE
 			------------------------------------*/
 			yScale = d3.scale.linear().domain([startData, endData]).range([0 + margin.top, h - margin.bottom]);
 
 			/* DRAW BARS
 			------------------------------------*/
-			barChart.selectAll("rect").data(data).enter().append("rect").attr("class", "barItem").attr("x", function(d, i){return (i * (540/data.length)) + 62}).attr("y", function(d, i){return (h - yScale(d));}).attr("width", 8.58823552941).attr("height", function(d){return yScale(d) - 30}).on("mouseover", barFunctions.highlightBar).on("mouseleave", barFunctions.unhightlightBar);
+			barChart.selectAll("rect").data(data).enter().append("rect").attr("class", "barItem").attr("x", function(d, i){return (i * (540/data.length)) + 62}).attr("y", function(d, i){return (h - yScale(d));}).attr("width", 8.58823552941).attr("height", function(d){return yScale(d) - 30}).on("mouseover", tip.show).on("mouseleave", tip.show);
 			for (i=0 ; i < barLabels.length ; i++){
 				$("section[role='bar'] #chart rect:eq("+i+")").attr("label", barLabels[i]).attr("clicked","false").attr("data", data[i]);
 				xPosition[i] = $("section[role='bar'] #chart rect:eq("+i+")").attr("x");
@@ -207,10 +243,24 @@ var barFunctions = {
 			/* Y-AXIS LABELS AND TICKS
 			------------------------------------*/
 			barChart.selectAll(".yLabel").data(yScale.ticks(8)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 50).attr("y", function(d) {return h - yScale(d)}).attr("text-anchor", "end").attr("dy", 3); // ylabels
-			utilityFunctions.churnLargeNumbers(true);
+			barFunctions.churnLargeNumbers(true);
 			barChart.selectAll(".yTicks").data(yScale.ticks(8)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {return yScale(d);}).attr("x1", 55).attr("y2", function(d) {return yScale(d);}).attr("x2", 60); //yticks
 			
-			
+			// SYBMOLS //
+			if (dataType === 'Effort' || dataType === 'Poverty'){
+				var labels = $('section[role="bar"] .yLabel').size();
+				for (var i=0 ; i < labels; i++){
+					var text = $('section[role="bar"] .yLabel:eq('+i+')').text();
+					$('section[role="bar"] .yLabel:eq('+i+')').text(text + '%');
+				}
+			}
+			else if (dataType === 'Income' || dataType === 'ExpStudent' || dataType === 'Expend13'){
+				var labels = $('section[role="bar"] .yLabel').size();
+				for (var i=0 ; i < labels; i++){
+					var text = $('section[role="bar"] .yLabel:eq('+i+')').text();
+					$('section[role="bar"] .yLabel:eq('+i+')').text('$'+ text);
+				}
+			}
 
 			firstRun = false;
 		}
@@ -221,7 +271,7 @@ var barFunctions = {
 			------------------------------------*/
 			barChart.selectAll("rect").data(data).attr("x", function(d, i){return (i * (540/data.length)) + 62}).attr("y-update", function(d, i){return (h - yScale(d));}).transition().duration(200).attr("y", function(d, i){return (h - yScale(d));}).attr("height", function(d){return yScale(d) - 30});
 			for (i=0 ; i < barLabels.length ; i++){
-				$("section[role='bar'] #chart rect:eq("+i+")").attr("label", barLabels[i]).attr("clicked","false").attr("data", data[i]);
+				$("section[role='bar'] #chart rect:eq("+i+")").attr("label", barLabels[i]).attr("data", data[i]);
 			}
 		}
 
@@ -376,21 +426,33 @@ var barFunctions = {
 			var d = d3.csv.parseRows(text);
 			barFunctions.processData(d);
 		});	
-	}
-}
+	},
+	churnLargeNumbers:function(bar){
+		var countX = $("section[role='bar'] .xLabel").length, countY = $("section[role='bar'] .yLabel").length, xLabels = [], xTemp = [], yLabels = [], yTemp = [];
 
-/* GLOBAL UTILITY FUNCTIONS
-===================================================================================*/
-var utilityFunctions = {
+		for (i=0 ; i < countY ; i++){
+			yTemp[i] = $("section[role='bar'] .yLabel:eq("+i+")").text();
+			//Shorten Axis Labels
+			switch(yTemp[i].length){
+				case 4: yTemp[i] = yTemp[i].slice(0,1); break;
+				case 5: yTemp[i] = yTemp[i].slice(0,2); break;
+				case 6: yTemp[i] = yTemp[i].slice(0,3); break;
+				case 7: yTemp[i] = yTemp[i].slice(0,1); break;
+				case 8: yTemp[i] = yTemp[i].slice(0,2); break;
+				case 9: yTemp[i] = yTemp[i].slice(0,3); break;
+			}
+			$("section[role='bar'] .yLabel:eq("+i+")").text(yTemp[i]);
+		}
+	},
 	updateSlider:function(val){
 		/* HANDLING INTERACTIONS W SLIDER
 		------------------------------------*/
 		var index;
 		if (fullMotion == true){ //stops motion
-			$("#playMotion").attr("src", "assets/play.png");
+			$("section[role='bar'] #playMotion").attr("src", "assets/play.png");
 			fullMotion = false;
 		}
-		$("#nav-wrapper h2").text(val); //update slider text
+		$("section[role='bar'] #nav-wrapper h2").text(val); //update slider text
 		yearPosition = parseInt(val); //update year position
 
 		for (i=1 ; i < years.length ; i++){ //locate year index
@@ -401,22 +463,11 @@ var utilityFunctions = {
 			}
 		}
 	},
-	churnLargeNumbers:function(bar){
-		var countX = $(".xLabel").length, countY = $(".yLabel").length, xLabels = [], xTemp = [], yLabels = [], yTemp = [];
-
-		for (i=0 ; i < countY ; i++){
-			yTemp[i] = $(".yLabel:eq("+i+")").text();
-			//Shorten Axis Labels
-			switch(yTemp[i].length){
-				case 4: yTemp[i] = yTemp[i].slice(0,1); break;
-				case 5: yTemp[i] = yTemp[i].slice(0,2); break;
-				case 6: yTemp[i] = yTemp[i].slice(0,3); break;
-				case 7: yTemp[i] = yTemp[i].slice(0,1); break;
-				case 8: yTemp[i] = yTemp[i].slice(0,2); break;
-				case 9: yTemp[i] = yTemp[i].slice(0,3); break;
-			}
-			$(".yLabel:eq("+i+")").text(yTemp[i]);
-		}
+	commaSeparateNumber:function(val){
+	    while (/(\d+)(\d{3})/.test(val.toString())){
+	      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+	    }
+	    return val;
 	}
 }
 
@@ -424,7 +475,7 @@ var utilityFunctions = {
 /* ADDRESS CHART MOTION
 ===================================================================================*/
 $(document).ready(function(){
-	$("#playMotion").on("click", function(){
+	$("section[role='bar'] #playMotion").on("click", function(){
 		if (fullMotion == false){
 			if (yearPosition == endYear){
 				dataPosition = 0;
@@ -434,15 +485,15 @@ $(document).ready(function(){
 			barFunctions.updateChart(dataPosition);
 
 			//toggle change in slider
-			$('#yearSlider').css('display','none');
-			$('.progress').css('display','block');
+			$('section[role="bar"] #yearSlider').css('display','none');
+			$('section[role="bar"] .progress').css('display','block');
 		}
 		else {
 			fullMotion = false; //pause motion
 
 			//toggle change in slider
-			$('#yearSlider').css('display','block');
-			$('.progress').css('display','none');
+			$('section[role="bar"] #yearSlider').css('display','block');
+			$('section[role="bar"] .progress').css('display','none');
 		}
 	}).on("mouseover", function(){ //change graphic
 		if (fullMotion == true){
@@ -464,7 +515,7 @@ $(document).ready(function(){
 		if (fullMotion == true){
 			fullMotion = false;	//stops motion
 			dataPosition = -1;
-			$("#playMotion").attr("src", "assets/play.png");
+			$("section[role='bar'] #playMotion").attr("src", "assets/play.png");
 			setTimeout(function(){
 				barFunctions.updateChart(dataPosition);
 			},500);	

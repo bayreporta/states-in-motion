@@ -1,2194 +1,2245 @@
-State,Year,Students per Teacher,Average Teacher Salary
-Alabama,1970,24,43204
-Alaska,1970,21,79478
-Arizona,1970,23,54356
-Arkansas,1970,22,38214
-California,1970,24,64574
-Colorado,1970,22,50457
-Connecticut,1970,21,59029
-Delaware,1970,22,56954
-District of Columbia,1970,19,62122
-Florida,1970,23,51525
-Georgia,1970,25,43893
-Hawaii,1970,23,60236
-Idaho,1970,23,41398
-Illinois,1970,21,60029
-Indiana,1970,24,55179
-Iowa,1970,20,53209
-Kansas,1970,20,47011
-Kentucky,1970,24,42155
-Louisiana,1970,23,48646
-Maine,1970,22,47596
-Maryland,1970,22,59102
-Massachusetts,1970,21,56289
-Michigan,1970,23,64202
-Minnesota,1970,21,57266
-Mississippi,1970,24,35163
-Missouri,1970,22,47926
-Montana,1970,21,47615
-Nebraska,1970,19,47584
-Nevada,1970,26,55740
-New Hampshire,1970,21,48676
-New Jersey,1970,21,58711
-New Mexico,1970,24,47523
-New York,1970,20,64623
-North Carolina,1970,24,45516
-North Dakota,1970,19,42478
-Ohio,1970,23,50817
-Oklahoma,1970,22,44845
-Oregon,1970,22,52995
-Pennsylvania,1970,22,53800
-Rhode Island,1970,21,54472
-South Carolina,1970,22,40703
-South Dakota,1970,19,43295
-Tennessee,1970,25,44217
-Texas,1970,22,47718
-Utah,1970,26,47139
-Vermont,1970,18,48353
-Virginia,1970,23,50256
-Washington,1970,24,57979
-West Virginia,1970,24,44662
-Wisconsin,1970,22,56424
-Wyoming,1970,19,50921
-Alabama,1971,24,44429
-Alaska,1971,21,81133
-Arizona,1971,24,56937
-Arkansas,1971,23,39286
-California,1971,23,65563
-Colorado,1971,23,53196
-Connecticut,1971,20,59117
-Delaware,1971,22,59835
-District of Columbia,1971,22,63278
-Florida,1971,23,51326
-Georgia,1971,24,45464
-Hawaii,1971,22,59269
-Idaho,1971,23,42302
-Illinois,1971,22,61004
-Indiana,1971,24,56113
-Iowa,1971,20,52752
-Kansas,1971,20,47381
-Kentucky,1971,23,42273
-Louisiana,1971,23,50338
-Maine,1971,22,49076
-Maryland,1971,22,60081
-Massachusetts,1971,22,58444
-Michigan,1971,24,66726
-Minnesota,1971,21,58672
-Mississippi,1971,23,37498
-Missouri,1971,23,49853
-Montana,1971,21,48976
-Nebraska,1971,20,48608
-Nevada,1971,24,58526
-New Hampshire,1971,22,48561
-New Jersey,1971,20,61589
-New Mexico,1971,23,47241
-New York,1971,20,67918
-North Carolina,1971,24,49310
-North Dakota,1971,19,43559
-Ohio,1971,24,50414
-Oklahoma,1971,23,44213
-Oregon,1971,21,54423
-Pennsylvania,1971,22,56855
-Rhode Island,1971,21,56907
-South Carolina,1971,25,42226
-South Dakota,1971,20,43804
-Tennessee,1971,25,45908
-Texas,1971,22,48649
-Utah,1971,25,48544
-Vermont,1971,17,48772
-Virginia,1971,22,52162
-Washington,1971,24,58433
-West Virginia,1971,23,46569
-Wisconsin,1971,22,57492
-Wyoming,1971,18,53027
-Alabama,1972,23,45358
-Alaska,1972,21,82058
-Arizona,1972,24,56315
-Arkansas,1972,22,41037
-California,1972,23,67556
-Colorado,1972,23,54096
-Connecticut,1972,20,59345
-Delaware,1972,22,59283
-District of Columbia,1972,21,67867
-Florida,1972,23,51768
-Georgia,1972,24,48603
-Hawaii,1972,22,58937
-Idaho,1972,24,42849
-Illinois,1972,21,63467
-Indiana,1972,23,56225
-Iowa,1972,20,53705
-Kansas,1972,19,47595
-Kentucky,1972,23,43631
-Louisiana,1972,20,49452
-Maine,1972,21,50239
-Maryland,1972,22,62448
-Massachusetts,1972,20,58869
-Michigan,1972,24,66469
-Minnesota,1972,21,59056
-Mississippi,1972,23,38659
-Missouri,1972,23,50698
-Montana,1972,20,50081
-Nebraska,1972,19,48710
-Nevada,1972,24,60800
-New Hampshire,1972,20,51247
-New Jersey,1972,19,65693
-New Mexico,1972,23,48773
-New York,1972,19,69164
-North Carolina,1972,23,50817
-North Dakota,1972,19,45064
-Ohio,1972,23,53880
-Oklahoma,1972,22,43620
-Oregon,1972,21,53444
-Pennsylvania,1972,21,58139
-Rhode Island,1972,20,59356
-South Carolina,1972,23,44792
-South Dakota,1972,20,43988
-Tennessee,1972,25,46440
-Texas,1972,22,48580
-Utah,1972,25,47561
-Vermont,1972,17,49622
-Virginia,1972,21,53235
-Washington,1972,24,59271
-West Virginia,1972,23,45324
-Wisconsin,1972,21,58280
-Wyoming,1972,18,52012
-Alabama,1973,23,45842
-Alaska,1973,20,77839
-Arizona,1973,24,51807
-Arkansas,1973,22,38853
-California,1973,22,65114
-Colorado,1973,22,50336
-Connecticut,1973,19,54841
-Delaware,1973,21,56158
-District of Columbia,1973,21,63264
-Florida,1973,23,49627
-Georgia,1973,24,46530
-Hawaii,1973,23,55219
-Idaho,1973,23,41039
-Illinois,1973,21,59543
-Indiana,1973,23,52127
-Iowa,1973,19,48955
-Kansas,1973,19,44195
-Kentucky,1973,23,41241
-Louisiana,1973,20,45538
-Maine,1973,21,45895
-Maryland,1973,21,58333
-Massachusetts,1973,18,55289
-Michigan,1973,23,61968
-Minnesota,1973,21,55027
-Mississippi,1973,22,37787
-Missouri,1973,22,47329
-Montana,1973,19,46839
-Nebraska,1973,19,45549
-Nevada,1973,24,57512
-New Hampshire,1973,20,47750
-New Jersey,1973,19,59106
-New Mexico,1973,23,45613
-New York,1973,19,66388
-North Carolina,1973,23,50821
-North Dakota,1973,18,42089
-Ohio,1973,23,50187
-Oklahoma,1973,22,40889
-Oregon,1973,21,49318
-Pennsylvania,1973,21,54260
-Rhode Island,1973,20,56675
-South Carolina,1973,23,42478
-South Dakota,1973,19,40287
-Tennessee,1973,24,43923
-Texas,1973,21,44328
-Utah,1973,25,45415
-Vermont,1973,17,44403
-Virginia,1973,21,49281
-Washington,1973,24,56115
-West Virginia,1973,22,41300
-Wisconsin,1973,20,53807
-Wyoming,1973,18,48140
-Alabama,1974,22,39725
-Alaska,1974,21,69939
-Arizona,1974,23,46140
-Arkansas,1974,22,36936
-California,1974,22,61119
-Colorado,1974,22,46663
-Connecticut,1974,19,50403
-Delaware,1974,21,51272
-District of Columbia,1974,19,61292
-Florida,1974,22,43922
-Georgia,1974,23,43273
-Hawaii,1974,23,58426
-Idaho,1974,22,39461
-Illinois,1974,20,56208
-Indiana,1974,24,47758
-Iowa,1974,19,45492
-Kansas,1974,18,39845
-Kentucky,1974,22,38174
-Louisiana,1974,20,41843
-Maine,1974,21,41867
-Maryland,1974,21,53908
-Massachusetts,1974,18,54369
-Michigan,1974,24,59185
-Minnesota,1974,20,50341
-Mississippi,1974,22,34300
-Missouri,1974,21,42654
-Montana,1974,19,42668
-Nebraska,1974,18,39552
-Nevada,1974,24,52204
-New Hampshire,1974,18,42688
-New Jersey,1974,18,53774
-New Mexico,1974,22,42716
-New York,1974,18,62762
-North Carolina,1974,23,46922
-North Dakota,1974,18,39447
-Ohio,1974,22,45813
-Oklahoma,1974,21,38179
-Oregon,1974,21,46149
-Pennsylvania,1974,20,49606
-Rhode Island,1974,19,52818
-South Carolina,1974,23,40412
-South Dakota,1974,19,37181
-Tennessee,1974,22,42337
-Texas,1974,21,41790
-Utah,1974,25,42918
-Vermont,1974,17,41324
-Virginia,1974,21,45559
-Washington,1974,23,53005
-West Virginia,1974,21,38880
-Wisconsin,1974,20,48814
-Wyoming,1974,17,44051
-Alabama,1975,21,42536
-Alaska,1975,20,78208
-Arizona,1975,21,47701
-Arkansas,1975,21,38866
-California,1975,22,61916
-Colorado,1975,20,48735
-Connecticut,1975,18,51920
-Delaware,1975,20,50789
-District of Columbia,1975,20,63517
-Florida,1975,21,42540
-Georgia,1975,23,43886
-Hawaii,1975,22,61608
-Idaho,1975,22,41365
-Illinois,1975,20,57081
-Indiana,1975,22,48453
-Iowa,1975,18,49144
-Kansas,1975,18,44005
-Kentucky,1975,22,39632
-Louisiana,1975,21,43169
-Maine,1975,20,43020
-Maryland,1975,21,55501
-Massachusetts,1975,19,54762
-Michigan,1975,23,59149
-Minnesota,1975,20,51550
-Mississippi,1975,21,37573
-Missouri,1975,20,43754
-Montana,1975,19,44735
-Nebraska,1975,18,42162
-Nevada,1975,24,51718
-New Hampshire,1975,20,41519
-New Jersey,1975,18,55114
-New Mexico,1975,21,43772
-New York,1975,19,66087
-North Carolina,1975,23,45611
-North Dakota,1975,17,41783
-Ohio,1975,22,46812
-Oklahoma,1975,20,39297
-Oregon,1975,20,49755
-Pennsylvania,1975,19,51093
-Rhode Island,1975,19,52664
-South Carolina,1975,22,40164
-South Dakota,1975,19,38110
-Tennessee,1975,22,41832
-Texas,1975,20,45844
-Utah,1975,25,45285
-Vermont,1975,16,40917
-Virginia,1975,19,45783
-Washington,1975,23,55440
-West Virginia,1975,21,42272
-Wisconsin,1975,19,50028
-Wyoming,1975,17,48831
-Alabama,1976,20,41562
-Alaska,1976,20,82658
-Arizona,1976,21,51109
-Arkansas,1976,21,38529
-California,1976,21,64591
-Colorado,1976,19,52261
-Connecticut,1976,17,54071
-Delaware,1976,20,52066
-District of Columbia,1976,21,67553
-Florida,1976,21,48080
-Georgia,1976,24,44220
-Hawaii,1976,22,66388
-Idaho,1976,22,43434
-Illinois,1976,20,58023
-Indiana,1976,22,50576
-Iowa,1976,18,49615
-Kansas,1976,18,44653
-Kentucky,1976,21,43247
-Louisiana,1976,21,43064
-Maine,1976,19,44004
-Maryland,1976,20,58177
-Massachusetts,1976,19,56654
-Michigan,1976,23,61459
-Minnesota,1976,19,55273
-Mississippi,1976,21,37206
-Missouri,1976,20,45322
-Montana,1976,18,46475
-Nebraska,1976,17,44224
-Nevada,1976,24,53330
-New Hampshire,1976,18,41545
-New Jersey,1976,18,57474
-New Mexico,1976,22,46924
-New York,1976,19,67886
-North Carolina,1976,23,47078
-North Dakota,1976,17,42290
-Ohio,1976,21,49528
-Oklahoma,1976,20,41674
-Oregon,1976,20,51637
-Pennsylvania,1976,19,53168
-Rhode Island,1976,19,55851
-South Carolina,1976,20,41566
-South Dakota,1976,18,40310
-Tennessee,1976,21,44174
-Texas,1976,20,45776
-Utah,1976,25,48168
-Vermont,1976,17,42768
-Virginia,1976,18,47689
-Washington,1976,23,59067
-West Virginia,1976,20,45239
-Wisconsin,1976,19,52419
-Wyoming,1976,18,51787
-Alabama,1977,20,43059
-Alaska,1977,18,83200
-Arizona,1977,21,50250
-Arkansas,1977,20,38380
-California,1977,21,63296
-Colorado,1977,19,51742
-Connecticut,1977,17,52777
-Delaware,1977,20,50719
-District of Columbia,1977,20,67307
-Florida,1977,22,47172
-Georgia,1977,21,44703
-Hawaii,1977,22,65413
-Idaho,1977,21,43282
-Illinois,1977,20,58784
-Indiana,1977,22,49488
-Iowa,1977,18,49238
-Kansas,1977,17,44414
-Kentucky,1977,21,43270
-Louisiana,1977,21,46055
-Maine,1977,18,43329
-Maryland,1977,20,58355
-Massachusetts,1977,17,56105
-Michigan,1977,23,60679
-Minnesota,1977,19,52289
-Mississippi,1977,20,38505
-Missouri,1977,19,44860
-Montana,1977,17,46758
-Nebraska,1977,17,43750
-Nevada,1977,22,52738
-New Hampshire,1977,18,40969
-New Jersey,1977,18,56726
-New Mexico,1977,20,47391
-New York,1977,18,65815
-North Carolina,1977,22,47133
-North Dakota,1977,17,41700
-Ohio,1977,21,49113
-Oklahoma,1977,19,42516
-Oregon,1977,19,51078
-Pennsylvania,1977,19,53367
-Rhode Island,1977,18,58999
-South Carolina,1977,21,42153
-South Dakota,1977,18,40048
-Tennessee,1977,22,43993
-Texas,1977,19,46278
-Utah,1977,25,51269
-Vermont,1977,17,41727
-Virginia,1977,18,46301
-Washington,1977,23,59476
-West Virginia,1977,19,44516
-Wisconsin,1977,17,51840
-Wyoming,1977,17,52097
-Alabama,1978,19,43405
-Alaska,1978,18,80954
-Arizona,1978,20,48371
-Arkansas,1978,20,37280
-California,1978,20,58928
-Colorado,1978,19,50248
-Connecticut,1978,17,51900
-Delaware,1978,18,50676
-District of Columbia,1978,19,65321
-Florida,1978,21,44203
-Georgia,1978,21,44497
-Hawaii,1978,22,61535
-Idaho,1978,21,42261
-Illinois,1978,18,55367
-Indiana,1978,21,47885
-Iowa,1978,17,47554
-Kansas,1978,16,42726
-Kentucky,1978,21,44149
-Louisiana,1978,20,43590
-Maine,1978,17,41147
-Maryland,1978,19,55603
-Massachusetts,1978,16,57011
-Michigan,1978,22,60351
-Minnesota,1978,18,51987
-Mississippi,1978,19,37208
-Missouri,1978,18,42610
-Montana,1978,17,45761
-Nebraska,1978,17,42356
-Nevada,1978,23,51410
-New Hampshire,1978,19,39684
-New Jersey,1978,17,54259
-New Mexico,1978,20,47220
-New York,1978,20,62054
-North Carolina,1978,21,45837
-North Dakota,1978,17,40264
-Ohio,1978,20,47866
-Oklahoma,1978,18,41009
-Oregon,1978,19,50026
-Pennsylvania,1978,18,51994
-Rhode Island,1978,17,56242
-South Carolina,1978,21,40631
-South Dakota,1978,17,38279
-Tennessee,1978,21,43314
-Texas,1978,19,43706
-Utah,1978,24,46563
-Vermont,1978,16,39509
-Virginia,1978,19,44490
-Washington,1978,22,58184
-West Virginia,1978,20,42748
-Wisconsin,1978,19,49968
-Wyoming,1978,16,48502
-Alabama,1979,24,37262
-Alaska,1979,17,77638
-Arizona,1979,19,42952
-Arkansas,1979,19,35091
-California,1979,21,51415
-Colorado,1979,19,46238
-Connecticut,1979,16,46306
-Delaware,1979,17,46075
-District of Columbia,1979,18,63312
-Florida,1979,21,40369
-Georgia,1979,21,39525
-Hawaii,1979,23,56837
-Idaho,1979,21,38837
-Illinois,1979,19,50219
-Indiana,1979,20,44507
-Iowa,1979,17,43379
-Kansas,1979,16,39062
-Kentucky,1979,21,41429
-Louisiana,1979,18,39261
-Maine,1979,21,37295
-Maryland,1979,19,50098
-Massachusetts,1979,15,49228
-Michigan,1979,21,56104
-Minnesota,1979,18,45400
-Mississippi,1979,19,33810
-Missouri,1979,18,39039
-Montana,1979,17,41478
-Nebraska,1979,16,38563
-Nevada,1979,21,46492
-New Hampshire,1979,18,37142
-New Jersey,1979,17,48964
-New Mexico,1979,19,42476
-New York,1979,19,56528
-North Carolina,1979,20,40278
-North Dakota,1979,16,37843
-Ohio,1979,20,43568
-Oklahoma,1979,18,37396
-Oregon,1979,19,46411
-Pennsylvania,1979,18,47122
-Rhode Island,1979,17,51363
-South Carolina,1979,20,37272
-South Dakota,1979,16,35231
-Tennessee,1979,21,39864
-Texas,1979,19,40321
-Utah,1979,24,42538
-Vermont,1979,15,35619
-Virginia,1979,18,40115
-Washington,1979,22,53698
-West Virginia,1979,18,39117
-Wisconsin,1979,18,45667
-Wyoming,1979,18,45687
-Alabama,1980,21,38714
-Alaska,1980,17,72524
-Arizona,1980,20,42865
-Arkansas,1980,19,33161
-California,1980,21,52198
-Colorado,1980,18,44304
-Connecticut,1980,15,43479
-Delaware,1980,18,45030
-District of Columbia,1980,19,57167
-Florida,1980,20,38490
-Georgia,1980,19,38587
-Hawaii,1980,23,52832
-Idaho,1980,20,37746
-Illinois,1980,18,48532
-Indiana,1980,20,42997
-Iowa,1980,16,42373
-Kansas,1980,16,38099
-Kentucky,1980,20,39349
-Louisiana,1980,18,39998
-Maine,1980,19,34962
-Maryland,1980,18,47464
-Massachusetts,1980,16,46964
-Michigan,1980,21,54409
-Minnesota,1980,17,44413
-Mississippi,1980,18,32520
-Missouri,1980,17,38527
-Montana,1980,17,39891
-Nebraska,1980,17,37180
-Nevada,1980,21,44220
-New Hampshire,1980,20,34232
-New Jersey,1980,16,45582
-New Mexico,1980,19,42000
-New York,1980,18,53278
-North Carolina,1980,20,39624
-North Dakota,1980,16,37177
-Ohio,1980,19,42230
-Oklahoma,1980,17,37929
-Oregon,1980,21,45088
-Pennsylvania,1980,17,44694
-Rhode Island,1980,16,50187
-South Carolina,1980,19,35858
-South Dakota,1980,16,34146
-Tennessee,1980,21,37769
-Texas,1980,18,39294
-Utah,1980,24,42221
-Vermont,1980,15,33827
-Virginia,1980,18,38811
-Washington,1980,21,53134
-West Virginia,1980,18,37343
-Wisconsin,1980,17,43985
-Wyoming,1980,15,46763
-Alabama,1981,21,37226
-Alaska,1981,16,76122
-Arizona,1981,20,45809
-Arkansas,1981,19,34588
-California,1981,23,54259
-Colorado,1981,18,46681
-Connecticut,1981,15,44965
-Delaware,1981,18,45996
-District of Columbia,1981,19,57860
-Florida,1981,20,40012
-Georgia,1981,19,39018
-Hawaii,1981,23,53751
-Idaho,1981,21,39106
-Illinois,1981,19,50121
-Indiana,1981,20,44437
-Iowa,1981,17,43564
-Kansas,1981,16,39848
-Kentucky,1981,21,41229
-Louisiana,1981,20,42754
-Maine,1981,18,36018
-Maryland,1981,18,50361
-Massachusetts,1981,15,48283
-Michigan,1981,22,57951
-Minnesota,1981,17,47468
-Mississippi,1981,19,33703
-Missouri,1981,17,39135
-Montana,1981,16,42372
-Nebraska,1981,16,39510
-Nevada,1981,21,47546
-New Hampshire,1981,17,35513
-New Jersey,1981,16,47475
-New Mexico,1981,19,44564
-New York,1981,18,55884
-North Carolina,1981,20,40408
-North Dakota,1981,17,41551
-Ohio,1981,20,44231
-Oklahoma,1981,17,38653
-Oregon,1981,20,48415
-Pennsylvania,1981,17,46455
-Rhode Island,1981,16,51644
-South Carolina,1981,19,37234
-South Dakota,1981,16,35091
-Tennessee,1981,21,38830
-Texas,1981,18,41924
-Utah,1981,25,43174
-Vermont,1981,15,35088
-Virginia,1981,18,40554
-Washington,1981,22,54733
-West Virginia,1981,17,40843
-Wisconsin,1981,17,46228
-Wyoming,1981,15,50668
-Alabama,1982,20,41568
-Alaska,1982,16,80176
-Arizona,1982,19,49827
-Arkansas,1982,18,35458
-California,1982,23,55712
-Colorado,1982,19,50654
-Connecticut,1982,15,48910
-Delaware,1982,17,48660
-District of Columbia,1982,17,62835
-Florida,1982,18,43116
-Georgia,1982,19,41080
-Hawaii,1982,23,58500
-Idaho,1982,21,41488
-Illinois,1982,18,52648
-Indiana,1982,20,47541
-Iowa,1982,16,45434
-Kansas,1982,16,43013
-Kentucky,1982,20,43376
-Louisiana,1982,18,43460
-Maine,1982,16,38333
-Maryland,1982,19,54080
-Massachusetts,1982,16,51529
-Michigan,1982,21,60661
-Minnesota,1982,18,53973
-Mississippi,1982,19,33786
-Missouri,1982,17,41338
-Montana,1982,16,46484
-Nebraska,1982,15,41080
-Nevada,1982,21,52069
-New Hampshire,1982,16,39044
-New Jersey,1982,16,50811
-New Mexico,1982,19,48083
-New York,1982,17,58984
-North Carolina,1982,20,41488
-North Dakota,1982,17,44284
-Ohio,1982,20,47195
-Oklahoma,1982,17,43104
-Oregon,1982,19,51306
-Pennsylvania,1982,17,49965
-Rhode Island,1982,16,54676
-South Carolina,1982,19,38983
-South Dakota,1982,16,36793
-Tennessee,1982,21,41004
-Texas,1982,18,46123
-Utah,1982,25,46854
-Vermont,1982,15,38387
-Virginia,1982,17,43729
-Washington,1982,22,55415
-West Virginia,1982,17,40867
-Wisconsin,1982,17,50715
-Wyoming,1982,15,55893
-Alabama,1983,20,41729
-Alaska,1983,16,89224
-Arizona,1983,19,51076
-Arkansas,1983,18,39951
-California,1983,23,58628
-Colorado,1983,19,54931
-Connecticut,1983,15,53400
-Delaware,1983,17,49405
-District of Columbia,1983,16,67654
-Florida,1983,18,46014
-Georgia,1983,19,43968
-Hawaii,1983,23,57483
-Idaho,1983,21,42444
-Illinois,1983,18,57091
-Indiana,1983,19,50829
-Iowa,1983,16,47552
-Kansas,1983,16,45810
-Kentucky,1983,20,46397
-Louisiana,1983,19,43424
-Maine,1983,16,40895
-Maryland,1983,18,56333
-Massachusetts,1983,15,54182
-Michigan,1983,20,63966
-Minnesota,1983,18,57466
-Mississippi,1983,19,37316
-Missouri,1983,17,45474
-Montana,1983,16,48828
-Nebraska,1983,15,44331
-Nevada,1983,20,52770
-New Hampshire,1983,16,41007
-New Jersey,1983,16,54902
-New Mexico,1983,19,48547
-New York,1983,17,64472
-North Carolina,1983,20,43214
-North Dakota,1983,17,45453
-Ohio,1983,19,50244
-Oklahoma,1983,17,43968
-Oregon,1983,18,54645
-Pennsylvania,1983,17,53578
-Rhode Island,1983,15,59795
-South Carolina,1983,19,41026
-South Dakota,1983,15,38894
-Tennessee,1983,21,42269
-Texas,1983,18,47601
-Utah,1983,25,47216
-Vermont,1983,14,41551
-Virginia,1983,17,46435
-Washington,1983,21,57502
-West Virginia,1983,16,41275
-Wisconsin,1983,17,53835
-Wyoming,1983,14,59465
-Alabama,1984,19,45324
-Alaska,1984,17,85891
-Arizona,1984,20,52213
-Arkansas,1984,18,41752
-California,1984,23,61212
-Colorado,1984,19,54612
-Connecticut,1984,14,54641
-Delaware,1984,16,51195
-District of Columbia,1984,15,70814
-Florida,1984,18,46531
-Georgia,1984,19,46028
-Hawaii,1984,23,54999
-Idaho,1984,21,44738
-Illinois,1984,18,56897
-Indiana,1984,19,51035
-Iowa,1984,15,46750
-Kansas,1984,15,47167
-Kentucky,1984,20,45178
-Louisiana,1984,19,43526
-Maine,1984,16,40934
-Maryland,1984,18,57753
-Massachusetts,1984,15,54976
-Michigan,1984,20,63513
-Minnesota,1984,17,56835
-Mississippi,1984,18,35560
-Missouri,1984,17,45675
-Montana,1984,16,48472
-Nebraska,1984,15,44326
-Nevada,1984,20,50292
-New Hampshire,1984,16,41487
-New Jersey,1984,15,55450
-New Mexico,1984,19,48709
-New York,1984,16,63007
-North Carolina,1984,19,46479
-North Dakota,1984,15,44866
-Ohio,1984,18,51092
-Oklahoma,1984,17,42474
-Oregon,1984,18,54441
-Pennsylvania,1984,17,54026
-Rhode Island,1984,15,61845
-South Carolina,1984,18,44984
-South Dakota,1984,14,38813
-Tennessee,1984,21,45723
-Texas,1984,18,51953
-Utah,1984,25,47276
-Vermont,1984,14,42428
-Virginia,1984,17,47504
-Washington,1984,21,56958
-West Virginia,1984,16,43688
-Wisconsin,1984,16,54885
-Wyoming,1984,14,58952
-Alabama,1985,20,50440
-Alaska,1985,16,85445
-Arizona,1985,20,53913
-Arkansas,1985,17,42639
-California,1985,23,63634
-Colorado,1985,18,56559
-Connecticut,1985,14,58128
-Delaware,1985,16,53790
-District of Columbia,1985,14,72548
-Florida,1985,18,48605
-Georgia,1985,19,50343
-Hawaii,1985,23,56458
-Idaho,1985,20,45807
-Illinois,1985,18,58755
-Indiana,1985,19,53137
-Iowa,1985,15,47322
-Kansas,1985,15,49465
-Kentucky,1985,19,45761
-Louisiana,1985,19,44350
-Maine,1985,14,42778
-Maryland,1985,17,58544
-Massachusetts,1985,15,57879
-Michigan,1985,19,65680
-Minnesota,1985,17,59767
-Mississippi,1985,18,40351
-Missouri,1985,17,47938
-Montana,1985,16,49111
-Nebraska,1985,15,45741
-Nevada,1985,20,55943
-New Hampshire,1985,16,44265
-New Jersey,1985,15,59351
-New Mexico,1985,19,48020
-New York,1985,16,66604
-North Carolina,1985,19,48801
-North Dakota,1985,15,45472
-Ohio,1985,18,53559
-Oklahoma,1985,17,46788
-Oregon,1985,18,56053
-Pennsylvania,1985,17,56476
-Rhode Island,1985,15,64375
-South Carolina,1985,18,47173
-South Dakota,1985,15,39528
-Tennessee,1985,20,46713
-Texas,1985,17,53438
-Utah,1985,25,49267
-Vermont,1985,14,45428
-Virginia,1985,17,50451
-Washington,1985,21,57252
-West Virginia,1985,16,45059
-Wisconsin,1985,17,57554
-Wyoming,1985,14,59470
-Alabama,1986,20,50504
-Alaska,1986,17,86575
-Arizona,1986,18,56538
-Arkansas,1986,18,43329
-California,1986,23,67961
-Colorado,1986,18,59620
-Connecticut,1986,14,62918
-Delaware,1986,16,59793
-District of Columbia,1986,14,73574
-Florida,1986,17,51882
-Georgia,1986,19,52681
-Hawaii,1986,23,58374
-Idaho,1986,20,46761
-Illinois,1986,17,61473
-Indiana,1986,18,49156
-Iowa,1986,16,49156
-Kansas,1986,15,51068
-Kentucky,1986,19,48927
-Louisiana,1986,19,46141
-Maine,1986,15,46275
-Maryland,1986,17,62898
-Massachusetts,1986,14,62961
-Michigan,1986,19,68382
-Minnesota,1986,17,61693
-Mississippi,1986,19,42334
-Missouri,1986,16,51016
-Montana,1986,16,50517
-Nebraska,1986,15,47530
-Nevada,1986,20,58689
-New Hampshire,1986,16,47608
-New Jersey,1986,15,62516
-New Mexico,1986,19,52193
-New York,1986,15,69662
-North Carolina,1986,19,51983
-North Dakota,1986,15,46334
-Ohio,1986,18,57227
-Oklahoma,1986,17,46733
-Oregon,1986,18,58102
-Pennsylvania,1986,16,59695
-Rhode Island,1986,15,67656
-South Carolina,1986,17,50506
-South Dakota,1986,16,40885
-Tennessee,1986,20,49258
-Texas,1986,17,54212
-Utah,1986,25,49973
-Vermont,1986,14,47532
-Virginia,1986,17,54508
-Washington,1986,21,59397
-West Virginia,1986,15,46686
-Wisconsin,1986,16,60551
-Wyoming,1986,14,61177
-Alabama,1987,19,47861
-Alaska,1987,17,82964
-Arizona,1987,19,56208
-Arkansas,1987,17,41743
-California,1987,23,68053
-Colorado,1987,18,58800
-Connecticut,1987,13,68726
-Delaware,1987,16,60694
-District of Columbia,1987,14,71225
-Florida,1987,17,51714
-Georgia,1987,18,53749
-Hawaii,1987,22,59075
-Idaho,1987,21,45648
-Illinois,1987,17,60877
-Indiana,1987,18,55472
-Iowa,1987,16,50984
-Kansas,1987,15,50584
-Kentucky,1987,18,49776
-Louisiana,1987,18,43527
-Maine,1987,15,48076
-Maryland,1987,17,63484
-Massachusetts,1987,14,62346
-Michigan,1987,20,68037
-Minnesota,1987,17,61365
-Mississippi,1987,19,42202
-Missouri,1987,16,50711
-Montana,1987,16,48840
-Nebraska,1987,15,46552
-Nevada,1987,20,56643
-New Hampshire,1987,16,49294
-New Jersey,1987,14,63046
-New Mexico,1987,19,50328
-New York,1987,15,70806
-North Carolina,1987,18,51103
-North Dakota,1987,16,44452
-Ohio,1987,18,56656
-Oklahoma,1987,17,44392
-Oregon,1987,18,57587
-Pennsylvania,1987,16,59881
-Rhode Island,1987,15,67434
-South Carolina,1987,17,50749
-South Dakota,1987,16,40549
-Tennessee,1987,20,48815
-Texas,1987,17,52453
-Utah,1987,25,46290
-Vermont,1987,14,50297
-Virginia,1987,16,55800
-Washington,1987,20,57910
-West Virginia,1987,15,44608
-Wisconsin,1987,16,59767
-Wyoming,1987,14,55687
-Alabama,1988,19,48454
-Alaska,1988,17,81528
-Arizona,1988,18,55648
-Arkansas,1988,16,41776
-California,1988,23,67725
-Colorado,1988,18,57714
-Connecticut,1988,13,72915
-Delaware,1988,16,61672
-District of Columbia,1988,14,72697
-Florida,1988,17,52668
-Georgia,1988,18,52564
-Hawaii,1988,19,60097
-Idaho,1988,21,44391
-Illinois,1988,17,60814
-Indiana,1988,18,56940
-Iowa,1988,16,50333
-Kansas,1988,15,53423
-Kentucky,1988,18,48679
-Louisiana,1988,18,43875
-Maine,1988,15,48695
-Maryland,1988,17,66184
-Massachusetts,1988,14,62915
-Michigan,1988,20,67697
-Minnesota,1988,17,59867
-Mississippi,1988,18,44085
-Missouri,1988,16,50779
-Montana,1988,16,47684
-Nebraska,1988,15,46560
-Nevada,1988,20,56312
-New Hampshire,1988,16,52138
-New Jersey,1988,14,64507
-New Mexico,1988,19,47442
-New York,1988,15,71570
-North Carolina,1988,17,50255
-North Dakota,1988,15,43442
-Ohio,1988,18,57934
-Oklahoma,1988,17,43680
-Oregon,1988,18,57386
-Pennsylvania,1988,16,61014
-Rhode Island,1988,14,66842
-South Carolina,1988,17,50031
-South Dakota,1988,15,40087
-Tennessee,1988,19,50023
-Texas,1988,17,51796
-Utah,1988,24,44621
-Vermont,1988,14,52926
-Virginia,1988,16,56560
-Washington,1988,20,57014
-West Virginia,1988,15,42770
-Wisconsin,1988,16,60099
-Wyoming,1988,15,53959
-Alabama,1989,18,45895
-Alaska,1989,17,79768
-Arizona,1989,19,54349
-Arkansas,1989,17,41318
-California,1989,22,70239
-Colorado,1989,18,56856
-Connecticut,1989,13,74791
-Delaware,1989,16,61697
-District of Columbia,1989,13,70985
-Florida,1989,17,53242
-Georgia,1989,18,51769
-Hawaii,1989,19,59238
-Idaho,1989,20,44106
-Illinois,1989,17,60620
-Indiana,1989,18,57121
-Iowa,1989,16,49442
-Kansas,1989,15,53133
-Kentucky,1989,18,48600
-Louisiana,1989,18,44918
-Maine,1989,14,49690
-Maryland,1989,17,67135
-Massachusetts,1989,14,64165
-Michigan,1989,20,68527
-Minnesota,1989,17,59503
-Mississippi,1989,18,44904
-Missouri,1989,16,50083
-Montana,1989,16,46363
-Nebraska,1989,15,47178
-Nevada,1989,20,56545
-New Hampshire,1989,16,53580
-New Jersey,1989,14,65946
-New Mexico,1989,18,45761
-New York,1989,15,71953
-North Carolina,1989,17,51541
-North Dakota,1989,15,42545
-Ohio,1989,17,57705
-Oklahoma,1989,16,42644
-Oregon,1989,18,57007
-Pennsylvania,1989,16,61624
-Rhode Island,1989,14,66650
-South Carolina,1989,17,50310
-South Dakota,1989,16,39372
-Tennessee,1989,19,50005
-Texas,1989,17,50826
-Utah,1989,25,43784
-Vermont,1989,14,53628
-Virginia,1989,16,57188
-Washington,1989,20,56300
-West Virginia,1989,15,42222
-Wisconsin,1989,16,59005
-Wyoming,1989,15,52019
-Alabama,1990,20,46996
-Alaska,1990,17,75945
-Arizona,1990,19,53814
-Arkansas,1990,17,41291
-California,1990,23,69248
-Colorado,1990,18,55644
-Connecticut,1990,13,76610
-Delaware,1990,17,61638
-District of Columbia,1990,14,69072
-Florida,1990,17,53434
-Georgia,1990,18,50672
-Hawaii,1990,19,56908
-Idaho,1990,20,44567
-Illinois,1990,17,60517
-Indiana,1990,17,57284
-Iowa,1990,16,48926
-Kansas,1990,15,52056
-Kentucky,1990,17,50915
-Louisiana,1990,17,45888
-Maine,1990,14,49894
-Maryland,1990,17,67122
-Massachusetts,1990,15,63760
-Michigan,1990,20,68987
-Minnesota,1990,17,57931
-Mississippi,1990,18,42611
-Missouri,1990,16,49466
-Montana,1990,16,46822
-Nebraska,1990,15,46503
-Nevada,1990,19,56326
-New Hampshire,1990,16,54562
-New Jersey,1990,14,67172
-New Mexico,1990,18,45006
-New York,1990,15,73589
-North Carolina,1990,17,51197
-North Dakota,1990,16,41226
-Ohio,1990,17,57036
-Oklahoma,1990,16,42769
-Oregon,1990,18,56486
-Pennsylvania,1990,17,63056
-Rhode Island,1990,15,61202
-South Carolina,1990,17,49491
-South Dakota,1990,15,39131
-Tennessee,1990,19,49399
-Texas,1990,15,49528
-Utah,1990,25,44730
-Vermont,1990,13,54626
-Virginia,1990,16,56228
-Washington,1990,20,57848
-West Virginia,1990,15,45411
-Wisconsin,1990,16,58076
-Wyoming,1990,14,50623
-Alabama,1991,18,45906
-Alaska,1991,17,76015
-Arizona,1991,19,53063
-Arkansas,1991,17,46075
-California,1991,23,67950
-Colorado,1991,18,56290
-Connecticut,1991,14,79948
-Delaware,1991,17,58803
-District of Columbia,1991,13,66036
-Florida,1991,18,52882
-Georgia,1991,18,49992
-Hawaii,1991,18,58768
-Idaho,1991,19,44822
-Illinois,1991,17,62058
-Indiana,1991,18,57880
-Iowa,1991,16,49704
-Kansas,1991,15,52305
-Kentucky,1991,17,52543
-Louisiana,1991,17,44191
-Maine,1991,14,51226
-Maryland,1991,17,65916
-Massachusetts,1991,15,64415
-Michigan,1991,19,70619
-Minnesota,1991,17,58638
-Mississippi,1991,18,41475
-Missouri,1991,16,49180
-Montana,1991,16,46959
-Nebraska,1991,15,46349
-Nevada,1991,19,57627
-New Hampshire,1991,15,56457
-New Jersey,1991,14,69830
-New Mexico,1991,18,44660
-New York,1991,15,73758
-North Carolina,1991,17,49003
-North Dakota,1991,15,41692
-Ohio,1991,17,56052
-Oklahoma,1991,16,43129
-Oregon,1991,19,58040
-Pennsylvania,1991,17,65895
-Rhode Island,1991,15,61983
-South Carolina,1991,17,47773
-South Dakota,1991,15,39643
-Tennessee,1991,19,48715
-Texas,1991,16,49429
-Utah,1991,25,44830
-Vermont,1991,14,57267
-Virginia,1991,16,54064
-Washington,1991,20,59271
-West Virginia,1991,15,46579
-Wisconsin,1991,16,59959
-Wyoming,1991,16,51786
-Alabama,1992,17,45214
-Alaska,1992,16,78340
-Arizona,1992,18,52594
-Arkansas,1992,17,46019
-California,1992,23,67158
-Colorado,1992,18,56265
-Connecticut,1992,14,81095
-Delaware,1992,17,60754
-District of Columbia,1992,12,64923
-Florida,1992,18,52292
-Georgia,1992,18,50699
-Hawaii,1992,16,61179
-Idaho,1992,19,45310
-Illinois,1992,16,64805
-Indiana,1992,17,58824
-Iowa,1992,15,50544
-Kansas,1992,15,55128
-Kentucky,1992,17,52195
-Louisiana,1992,16,43787
-Maine,1992,14,50745
-Maryland,1992,16,65009
-Massachusetts,1992,15,65044
-Michigan,1992,19,73644
-Minnesota,1992,17,58868
-Mississippi,1992,18,40875
-Missouri,1992,16,49277
-Montana,1992,16,46328
-Nebraska,1992,14,48236
-Nevada,1992,19,57235
-New Hampshire,1992,15,56919
-New Jersey,1992,13,71595
-New Mexico,1992,16,44507
-New York,1992,14,75486
-North Carolina,1992,16,49176
-North Dakota,1992,15,42292
-Ohio,1992,17,57906
-Oklahoma,1992,15,43478
-Oregon,1992,19,60189
-Pennsylvania,1992,17,69139
-Rhode Island,1992,14,63632
-South Carolina,1992,17,49024
-South Dakota,1992,15,40745
-Tennessee,1992,19,48580
-Texas,1992,16,50217
-Utah,1992,24,45693
-Vermont,1992,13,58417
-Virginia,1992,15,54112
-Washington,1992,20,59986
-West Virginia,1992,15,50831
-Wisconsin,1992,15,60267
-Wyoming,1992,17,50459
-Alabama,1993,17,46980
-Alaska,1993,17,77760
-Arizona,1993,19,52046
-Arkansas,1993,17,45987
-California,1993,23,65898
-Colorado,1993,18,55362
-Connecticut,1993,14,81454
-Delaware,1993,16,61324
-District of Columbia,1993,12,69627
-Florida,1993,18,52282
-Georgia,1993,17,50266
-Hawaii,1993,18,59843
-Idaho,1993,19,45427
-Illinois,1993,16,64463
-Indiana,1993,17,58448
-Iowa,1993,15,50344
-Kansas,1993,15,55506
-Kentucky,1993,17,51759
-Louisiana,1993,16,42709
-Maine,1993,14,50729
-Maryland,1993,17,64571
-Massachusetts,1993,15,63866
-Michigan,1993,19,73413
-Minnesota,1993,17,58002
-Mississippi,1993,17,41166
-Missouri,1993,15,49622
-Montana,1993,16,46154
-Nebraska,1993,14,48387
-Nevada,1993,19,55573
-New Hampshire,1993,15,55845
-New Jersey,1993,13,73148
-New Mexico,1993,17,44521
-New York,1993,14,74914
-North Carolina,1993,16,48654
-North Dakota,1993,15,41744
-Ohio,1993,17,58384
-Oklahoma,1993,15,44205
-Oregon,1993,19,61724
-Pennsylvania,1993,17,69411
-Rhode Island,1993,14,64256
-South Carolina,1993,16,48390
-South Dakota,1993,15,41340
-Tennessee,1993,18,49941
-Texas,1993,16,49966
-Utah,1993,24,45345
-Vermont,1993,14,56492
-Virginia,1993,14,54025
-Washington,1993,20,58695
-West Virginia,1993,15,49999
-Wisconsin,1993,16,58903
-Wyoming,1993,15,50657
-Alabama,1994,17,49761
-Alaska,1994,17,76616
-Arizona,1994,19,51410
-Arkansas,1994,17,46230
-California,1994,23,65634
-Colorado,1994,18,55238
-Connecticut,1994,14,79962
-Delaware,1994,17,62435
-District of Columbia,1994,12,69823
-Florida,1994,19,52069
-Georgia,1994,16,51595
-Hawaii,1994,18,61544
-Idaho,1994,19,47588
-Illinois,1994,16,63003
-Indiana,1994,17,58776
-Iowa,1994,15,50347
-Kansas,1994,15,55367
-Kentucky,1994,16,51541
-Louisiana,1994,16,42279
-Maine,1994,14,51085
-Maryland,1994,16,64968
-Massachusetts,1994,14,65182
-Michigan,1994,19,66940
-Minnesota,1994,17,57437
-Mississippi,1994,17,42850
-Missouri,1994,15,49833
-Montana,1994,16,45992
-Nebraska,1994,14,49407
-Nevada,1994,19,55661
-New Hampshire,1994,15,55476
-New Jersey,1994,13,73637
-New Mexico,1994,17,45526
-New York,1994,14,76075
-North Carolina,1994,16,49201
-North Dakota,1994,15,42065
-Ohio,1994,16,58803
-Oklahoma,1994,15,45013
-Oregon,1994,20,61603
-Pennsylvania,1994,17,71119
-Rhode Island,1994,14,65077
-South Carolina,1994,16,48380
-South Dakota,1994,14,41533
-Tennessee,1994,18,51892
-Texas,1994,15,49887
-Utah,1994,24,46468
-Vermont,1994,13,56572
-Virginia,1994,14,54304
-Washington,1994,20,57762
-West Virginia,1994,14,51041
-Wisconsin,1994,16,60311
-Wyoming,1994,15,49987
-Alabama,1995,17,48545
-Alaska,1995,17,76928
-Arizona,1995,19,50361
-Arkansas,1995,17,45459
-California,1995,23,65515
-Colorado,1995,18,54826
-Connecticut,1995,14,77911
-Delaware,1995,17,62839
-District of Columbia,1995,13,67748
-Florida,1995,18,51672
-Georgia,1995,16,52714
-Hawaii,1995,18,55513
-Idaho,1995,19,47891
-Illinois,1995,16,63438
-Indiana,1995,17,58408
-Iowa,1995,15,50187
-Kansas,1995,15,54469
-Kentucky,1995,16,51285
-Louisiana,1995,16,41548
-Maine,1995,14,50957
-Maryland,1995,16,63811
-Massachusetts,1995,14,65523
-Michigan,1995,19,69449
-Minnesota,1995,18,57265
-Mississippi,1995,17,42932
-Missouri,1995,15,51689
-Montana,1995,16,45524
-Nebraska,1995,14,48829
-Nevada,1995,19,56070
-New Hampshire,1995,16,55489
-New Jersey,1995,13,74276
-New Mexico,1995,16,45074
-New York,1995,14,74593
-North Carolina,1995,16,47147
-North Dakota,1995,16,41811
-Ohio,1995,17,58656
-Oklahoma,1995,15,44035
-Oregon,1995,20,61558
-Pennsylvania,1995,17,71450
-Rhode Island,1995,14,65361
-South Carolina,1995,16,49024
-South Dakota,1995,15,40845
-Tennessee,1995,16,51356
-Texas,1995,15,49611
-Utah,1995,23,47421
-Vermont,1995,13,56269
-Virginia,1995,14,53939
-Washington,1995,20,58684
-West Virginia,1995,14,49850
-Wisconsin,1995,15,59195
-Wyoming,1995,15,48946
-Alabama,1996,16,49104
-Alaska,1996,17,76406
-Arizona,1996,19,50312
-Arkansas,1996,17,45220
-California,1996,22,65585
-Colorado,1996,18,54574
-Connecticut,1996,14,76073
-Delaware,1996,17,62511
-District of Columbia,1996,13,67905
-Florida,1996,18,51113
-Georgia,1996,16,54373
-Hawaii,1996,18,54071
-Idaho,1996,19,48001
-Illinois,1996,16,64386
-Indiana,1996,17,58194
-Iowa,1996,15,50199
-Kansas,1996,15,54064
-Kentucky,1996,16,51217
-Louisiana,1996,16,42764
-Maine,1996,13,50991
-Maryland,1996,16,62076
-Massachusetts,1996,14,66086
-Michigan,1996,19,66757
-Minnesota,1996,17,57289
-Mississippi,1996,17,41819
-Missouri,1996,15,51808
-Montana,1996,16,45183
-Nebraska,1996,14,47925
-Nevada,1996,19,56331
-New Hampshire,1996,15,55618
-New Jersey,1996,13,74448
-New Mexico,1996,16,44828
-New York,1996,14,74766
-North Carolina,1996,16,47106
-North Dakota,1996,15,41805
-Ohio,1996,17,58581
-Oklahoma,1996,16,44157
-Oregon,1996,20,61702
-Pennsylvania,1996,17,71552
-Rhode Island,1996,14,64899
-South Carolina,1996,16,49270
-South Dakota,1996,15,40376
-Tennessee,1996,16,50974
-Texas,1996,15,49247
-Utah,1996,24,47898
-Vermont,1996,13,56120
-Virginia,1996,14,54064
-Washington,1996,20,57116
-West Virginia,1996,14,50024
-Wisconsin,1996,16,58760
-Wyoming,1996,15,47854
-Alabama,1997,16,48399
-Alaska,1997,17,70200
-Arizona,1997,20,50748
-Arkansas,1997,17,46591
-California,1997,21,65752
-Colorado,1997,18,54920
-Connecticut,1997,14,74815
-Delaware,1997,16,62588
-District of Columbia,1997,16,68355
-Florida,1997,18,50843
-Georgia,1997,16,55405
-Hawaii,1997,18,56597
-Idaho,1997,18,48422
-Illinois,1997,16,64433
-Indiana,1997,17,58622
-Iowa,1997,15,50266
-Kansas,1997,15,54288
-Kentucky,1997,16,51046
-Louisiana,1997,15,44376
-Maine,1997,13,50657
-Maryland,1997,17,61555
-Massachusetts,1997,14,64786
-Michigan,1997,18,70051
-Minnesota,1997,16,55941
-Mississippi,1997,17,42314
-Missouri,1997,15,50062
-Montana,1997,16,45157
-Nebraska,1997,14,48178
-Nevada,1997,18,54705
-New Hampshire,1997,15,54069
-New Jersey,1997,13,74390
-New Mexico,1997,17,44467
-New York,1997,14,71839
-North Carolina,1997,16,48858
-North Dakota,1997,15,41633
-Ohio,1997,16,57494
-Oklahoma,1997,15,45264
-Oregon,1997,20,62235
-Pennsylvania,1997,17,70113
-Rhode Island,1997,14,65332
-South Carolina,1997,15,49695
-South Dakota,1997,15,41109
-Tennessee,1997,16,52118
-Texas,1997,15,50338
-Utah,1997,22,47774
-Vermont,1997,13,53533
-Virginia,1997,14,54056
-Washington,1997,20,57169
-West Virginia,1997,14,49253
-Wisconsin,1997,15,58042
-Wyoming,1997,14,47225
-Alabama,1998,15,52016
-Alaska,1998,16,68026
-Arizona,1998,20,50861
-Arkansas,1998,16,46977
-California,1998,20,65927
-Colorado,1998,17,55218
-Connecticut,1998,14,74908
-Delaware,1998,16,62680
-District of Columbia,1998,12,68469
-Florida,1998,18,51110
-Georgia,1998,15,57614
-Hawaii,1998,18,58633
-Idaho,1998,18,49464
-Illinois,1998,16,66173
-Indiana,1998,17,59775
-Iowa,1998,15,50719
-Kansas,1998,14,54318
-Kentucky,1998,15,51589
-Louisiana,1998,15,47209
-Maine,1998,13,50689
-Maryland,1998,16,61754
-Massachusetts,1998,13,65456
-Michigan,1998,17,70004
-Minnesota,1998,16,57299
-Mississippi,1998,16,42882
-Missouri,1998,14,50456
-Montana,1998,16,45534
-Nebraska,1998,14,47747
-Nevada,1998,19,56464
-New Hampshire,1998,15,54318
-New Jersey,1998,13,74340
-New Mexico,1998,16,47047
-New York,1998,14,71790
-North Carolina,1998,16,52420
-North Dakota,1998,14,42077
-Ohio,1998,16,58908
-Oklahoma,1998,15,45233
-Oregon,1998,20,62200
-Pennsylvania,1998,16,70367
-Rhode Island,1998,14,66291
-South Carolina,1998,15,50108
-South Dakota,1998,14,41462
-Tennessee,1998,15,53003
-Texas,1998,15,50885
-Utah,1998,22,47848
-Vermont,1998,12,53439
-Virginia,1998,14,54419
-Washington,1998,20,56186
-West Virginia,1998,14,49727
-Wisconsin,1998,14,59040
-Wyoming,1998,14,48647
-Alabama,1999,15,52127
-Alaska,1999,17,66012
-Arizona,1999,19,52429
-Arkansas,1999,14,47434
-California,1999,20,67742
-Colorado,1999,17,54221
-Connecticut,1999,14,73567
-Delaware,1999,15,63132
-District of Columbia,1999,14,66884
-Florida,1999,18,52173
-Georgia,1999,15,58284
-Hawaii,1999,17,57652
-Idaho,1999,18,50504
-Illinois,1999,16,66046
-Indiana,1999,17,59459
-Iowa,1999,14,50690
-Kansas,1999,14,49700
-Kentucky,1999,15,51688
-Louisiana,1999,15,47040
-Maine,1999,13,50524
-Maryland,1999,16,62582
-Massachusetts,1999,12,66179
-Michigan,1999,17,69680
-Minnesota,1999,15,56549
-Mississippi,1999,16,45261
-Missouri,1999,14,50659
-Montana,1999,15,45636
-Nebraska,1999,14,47222
-Nevada,1999,19,55964
-New Hampshire,1999,15,53611
-New Jersey,1999,12,73901
-New Mexico,1999,16,46252
-New York,1999,13,72488
-North Carolina,1999,15,55984
-North Dakota,1999,14,42428
-Ohio,1999,16,58871
-Oklahoma,1999,15,44467
-Oregon,1999,19,60150
-Pennsylvania,1999,16,68653
-Rhode Island,1999,14,66834
-South Carolina,1999,14,51263
-South Dakota,1999,14,41303
-Tennessee,1999,15,51614
-Texas,1999,14,53374
-Utah,1999,21,49650
-Vermont,1999,12,53645
-Virginia,1999,13,55046
-Washington,1999,20,58313
-West Virginia,1999,14,49740
-Wisconsin,1999,14,58469
-Wyoming,1999,13,48487
-Alabama,2000,15,50954
-Alaska,2000,17,66148
-Arizona,2000,20,51088
-Arkansas,2000,14,47616
-California,2000,20,72137
-Colorado,2000,17,53861
-Connecticut,2000,13,72430
-Delaware,2000,15,64669
-District of Columbia,2000,12,66947
-Florida,2000,18,52550
-Georgia,2000,16,58029
-Hawaii,2000,17,55054
-Idaho,2000,18,51477
-Illinois,2000,16,65769
-Indiana,2000,17,59534
-Iowa,2000,14,50143
-Kansas,2000,14,49348
-Kentucky,2000,16,50294
-Louisiana,2000,14,46206
-Maine,2000,12,49997
-Maryland,2000,16,63179
-Massachusetts,2000,14,66871
-Michigan,2000,17,70539
-Minnesota,2000,16,58023
-Mississippi,2000,16,43923
-Missouri,2000,14,50467
-Montana,2000,15,45703
-Nebraska,2000,13,46976
-Nevada,2000,18,55592
-New Hampshire,2000,14,52647
-New Jersey,2000,12,71846
-New Mexico,2000,15,46440
-New York,2000,13,70790
-North Carolina,2000,15,57017
-North Dakota,2000,13,42462
-Ohio,2000,15,58782
-Oklahoma,2000,14,47421
-Oregon,2000,19,61840
-Pennsylvania,2000,15,68079
-Rhode Island,2000,14,66631
-South Carolina,2000,15,52148
-South Dakota,2000,14,41601
-Tennessee,2000,15,51451
-Texas,2000,14,52730
-Utah,2000,21,50091
-Vermont,2000,12,52581
-Virginia,2000,13,55223
-Washington,2000,20,57920
-West Virginia,2000,13,49330
-Wisconsin,2000,14,57899
-Wyoming,2000,13,47667
-Alabama,2001,16,49711
-Alaska,2001,17,66049
-Arizona,2001,20,53425
-Arkansas,2001,14,49401
-California,2001,20,72638
-Colorado,2001,16,54342
-Connecticut,2001,13,71573
-Delaware,2001,15,64639
-District of Columbia,2001,12,62883
-Florida,2001,18,52492
-Georgia,2001,15,58905
-Hawaii,2001,17,56956
-Idaho,2001,18,52915
-Illinois,2001,16,66072
-Indiana,2001,17,59068
-Iowa,2001,14,51096
-Kansas,2001,14,49576
-Kentucky,2001,15,50723
-Louisiana,2001,14,48554
-Maine,2001,12,49853
-Maryland,2001,16,64489
-Massachusetts,2001,14,67218
-Michigan,2001,17,70403
-Minnesota,2001,16,56394
-Mississippi,2001,15,44500
-Missouri,2001,14,50783
-Montana,2001,15,45949
-Nebraska,2001,13,48431
-Nevada,2001,18,54482
-New Hampshire,2001,14,53348
-New Jersey,2001,12,71093
-New Mexico,2001,15,48703
-New York,2001,13,69500
-North Carolina,2001,15,57043
-North Dakota,2001,13,43107
-Ohio,2001,15,58846
-Oklahoma,2001,14,46437
-Oregon,2001,19,61589
-Pennsylvania,2001,15,67627
-Rhode Island,2001,14,66503
-South Carolina,2001,14,53358
-South Dakota,2001,13,41827
-Tennessee,2001,15,51477
-Texas,2001,14,52435
-Utah,2001,21,50005
-Vermont,2001,12,52446
-Virginia,2001,13,55775
-Washington,2001,19,58091
-West Virginia,2001,14,49119
-Wisconsin,2001,14,56444
-Wyoming,2001,13,50570
-Alabama,2002,15,50321
-Alaska,2002,16,65372
-Arizona,2002,20,53806
-Arkansas,2002,15,49673
-California,2002,20,74053
-Colorado,2002,16,54307
-Connecticut,2002,13,71526
-Delaware,2002,15,66802
-District of Columbia,2002,13,66790
-Florida,2002,18,51925
-Georgia,2002,15,59909
-Hawaii,2002,17,58503
-Idaho,2002,18,52824
-Illinois,2002,15,67483
-Indiana,2002,17,59336
-Iowa,2002,14,51210
-Kansas,2002,14,50160
-Kentucky,2002,15,51289
-Louisiana,2002,14,48522
-Maine,2002,12,50157
-Maryland,2002,15,65362
-Massachusetts,2002,13,68475
-Michigan,2002,19,71143
-Minnesota,2002,16,56357
-Mississippi,2002,15,45465
-Missouri,2002,13,51085
-Montana,2002,14,47043
-Nebraska,2002,13,49861
-Nevada,2002,18,54991
-New Hampshire,2002,14,53312
-New Jersey,2002,12,71268
-New Mexico,2002,15,48270
-New York,2002,13,69207
-North Carolina,2002,15,56676
-North Dakota,2002,13,43695
-Ohio,2002,14,59803
-Oklahoma,2002,15,45858
-Oregon,2002,20,62629
-Pennsylvania,2002,15,68155
-Rhode Island,2002,14,67202
-South Carolina,2002,14,54312
-South Dakota,2002,14,42651
-Tennessee,2002,15,52204
-Texas,2002,14,52631
-Utah,2002,21,50541
-Vermont,2002,11,54738
-Virginia,2002,12,56776
-Washington,2002,19,59141
-West Virginia,2002,14,50666
-Wisconsin,2002,14,56407
-Wyoming,2002,13,49835
-Alabama,2003,13,49302
-Alaska,2003,17,66554
-Arizona,2003,21,53827
-Arkansas,2003,15,50574
-California,2003,21,72610
-Colorado,2003,16,55726
-Connecticut,2003,13,73759
-Delaware,2003,15,63505
-District of Columbia,2003,12,73337
-Florida,2003,18,52234
-Georgia,2003,15,59160
-Hawaii,2003,16,58505
-Idaho,2003,18,52846
-Illinois,2003,16,69762
-Indiana,2003,17,58906
-Iowa,2003,14,50726
-Kansas,2003,14,49685
-Kentucky,2003,15,51765
-Louisiana,2003,14,48778
-Maine,2003,11,51282
-Maryland,2003,15,64656
-Massachusetts,2003,13,68413
-Michigan,2003,17,69996
-Minnesota,2003,16,58371
-Mississippi,2003,15,45904
-Missouri,2003,14,48891
-Montana,2003,14,47834
-Nebraska,2003,13,49337
-Nevada,2003,19,54356
-New Hampshire,2003,14,54916
-New Jersey,2003,12,71514
-New Mexico,2003,15,48970
-New York,2003,12,70986
-North Carolina,2003,15,55587
-North Dakota,2003,13,45592
-Ohio,2003,15,61081
-Oklahoma,2003,15,45103
-Oregon,2003,21,63252
-Pennsylvania,2003,15,66681
-Rhode Island,2003,13,67229
-South Carolina,2003,15,52951
-South Dakota,2003,13,42755
-Tennessee,2003,15,51866
-Texas,2003,14,52069
-Utah,2003,21,50139
-Vermont,2003,11,54038
-Virginia,2003,13,56158
-Washington,2003,19,58447
-West Virginia,2003,14,49477
-Wisconsin,2003,15,55164
-Wyoming,2003,13,50854
-Alabama,2004,14,47849
-Alaska,2004,17,65690
-Arizona,2004,21,53762
-Arkansas,2004,15,50742
-California,2004,20,72521
-Colorado,2004,16,55070
-Connecticut,2004,15,72347
-Delaware,2004,15,63398
-District of Columbia,2004,12,73248
-Florida,2004,17,52114
-Georgia,2004,14,58299
-Hawaii,2004,16,57827
-Idaho,2004,18,52781
-Illinois,2004,15,69445
-Indiana,2004,17,58371
-Iowa,2004,14,49225
-Kansas,2004,14,49301
-Kentucky,2004,15,50776
-Louisiana,2004,14,48896
-Maine,2004,12,49633
-Maryland,2004,15,65573
-Massachusetts,2004,13,68515
-Michigan,2004,17,71390
-Minnesota,2004,16,58775
-Mississippi,2004,15,45849
-Missouri,2004,14,48953
-Montana,2004,14,48223
-Nebraska,2004,13,49440
-Nevada,2004,19,54375
-New Hampshire,2004,13,55060
-New Jersey,2004,11,71025
-New Mexico,2004,15,49359
-New York,2004,12,70421
-North Carolina,2004,15,54317
-North Dakota,2004,12,45980
-Ohio,2004,15,61013
-Oklahoma,2004,15,47464
-Oregon,2004,20,60560
-Pennsylvania,2004,15,66735
-Rhode Island,2004,13,67004
-South Carolina,2004,15,52865
-South Dakota,2004,13,42654
-Tennessee,2004,15,52723
-Texas,2004,14,51389
-Utah,2004,22,49440
-Vermont,2004,11,55804
-Virginia,2004,13,53590
-Washington,2004,19,57287
-West Virginia,2004,14,48067
-Wisconsin,2004,14,55509
-Wyoming,2004,13,50745
-Alabama,2005,13,48900
-Alaska,2005,17,64905
-Arizona,2005,21,54142
-Arkansas,2005,14,51016
-California,2005,20,71925
-Colorado,2005,17,55286
-Connecticut,2005,14,72112
-Delaware,2005,15,65767
-District of Columbia,2005,12,74167
-Florida,2005,17,52481
-Georgia,2005,14,58539
-Hawaii,2005,16,62537
-Idaho,2005,18,52588
-Illinois,2005,15,70076
-Indiana,2005,17,57272
-Iowa,2005,14,49542
-Kansas,2005,13,50138
-Kentucky,2005,15,50786
-Louisiana,2005,14,48786
-Maine,2005,12,49372
-Maryland,2005,15,66036
-Massachusetts,2005,13,68582
-Michigan,2005,17,70879
-Minnesota,2005,16,58768
-Mississippi,2005,15,45963
-Missouri,2005,13,48385
-Montana,2005,14,48276
-Nebraska,2005,13,49723
-Nevada,2005,19,53843
-New Hampshire,2005,13,54858
-New Jersey,2005,12,69940
-New Mexico,2005,15,50463
-New York,2005,12,69512
-North Carolina,2005,15,53233
-North Dakota,2005,12,45780
-Ohio,2005,15,60980
-Oklahoma,2005,14,46991
-Oregon,2005,19,59364
-Pennsylvania,2005,15,65480
-Rhode Island,2005,11,66332
-South Carolina,2005,14,52409
-South Dakota,2005,13,42067
-Tennessee,2005,16,51554
-Texas,2005,14,50593
-Utah,2005,22,48862
-Vermont,2005,10,56505
-Virginia,2005,11,53113
-Washington,2005,19,56146
-West Virginia,2005,14,46400
-Wisconsin,2005,14,56224
-Wyoming,2005,13,52388
-Alabama,2006,13,50943
-Alaska,2006,17,64174
-Arizona,2006,20,53940
-Arkansas,2006,13,51948
-California,2006,20,74720
-Colorado,2006,16,53813
-Connecticut,2006,14,71412
-Delaware,2006,15,64200
-District of Columbia,2006,12,69272
-Florida,2006,16,53196
-Georgia,2006,14,58594
-Hawaii,2006,16,60962
-Idaho,2006,18,50249
-Illinois,2006,14,68387
-Indiana,2006,17,56159
-Iowa,2006,13,50639
-Kansas,2006,13,50879
-Kentucky,2006,15,51245
-Louisiana,2006,14,50271
-Maine,2006,11,48838
-Maryland,2006,14,66838
-Massachusetts,2006,13,68831
-Michigan,2006,17,64453
-Minnesota,2006,16,58276
-Mississippi,2006,15,47178
-Missouri,2006,13,49123
-Montana,2006,14,48403
-Nebraska,2006,13,49364
-Nevada,2006,18,53236
-New Hampshire,2006,13,54628
-New Jersey,2006,12,70353
-New Mexico,2006,15,50228
-New York,2006,12,68729
-North Carolina,2006,13,54490
-North Dakota,2006,12,45581
-Ohio,2006,16,60980
-Oklahoma,2006,14,49757
-Oregon,2006,19,59775
-Pennsylvania,2006,15,64541
-Rhode Island,2006,13,65698
-South Carolina,2006,14,51817
-South Dakota,2006,13,41538
-Tennessee,2006,15,51445
-Texas,2006,14,52714
-Utah,2006,22,47629
-Vermont,2006,10,56792
-Virginia,2006,15,52514
-Washington,2006,19,56219
-West Virginia,2006,14,47588
-Wisconsin,2006,14,56241
-Wyoming,2006,13,59518
-Alabama,2007,15,53214
-Alaska,2007,17,64808
-Arizona,2007,20,52264
-Arkansas,2007,14,52265
-California,2007,21,73561
-Colorado,2007,16,53949
-Connecticut,2007,14,70766
-Delaware,2007,15,63935
-District of Columbia,2007,10,69226
-Florida,2007,14,53586
-Georgia,2007,14,58872
-Hawaii,2007,16,60973
-Idaho,2007,18,50353
-Illinois,2007,15,69051
-Indiana,2007,17,55388
-Iowa,2007,13,53282
-Kansas,2007,13,51537
-Kentucky,2007,15,53902
-Louisiana,2007,13,53625
-Maine,2007,12,49552
-Maryland,2007,14,68588
-Massachusetts,2007,13,69047
-Michigan,2007,17,64052
-Minnesota,2007,16,57756
-Mississippi,2007,14,48417
-Missouri,2007,13,49334
-Montana,2007,14,48955
-Nebraska,2007,13,48967
-Nevada,2007,18,54476
-New Hampshire,2007,13,54361
-New Jersey,2007,12,69968
-New Mexico,2007,15,51510
-New York,2007,12,71172
-North Carolina,2007,14,54070
-North Dakota,2007,12,45992
-Ohio,2007,16,60985
-Oklahoma,2007,13,49728
-Oregon,2007,19,59159
-Pennsylvania,2007,13,63751
-Rhode Island,2007,13,65276
-South Carolina,2007,15,52248
-South Dakota,2007,13,41875
-Tennessee,2007,14,51416
-Texas,2007,14,52728
-Utah,2007,23,47517
-Vermont,2007,10,53201
-Virginia,2007,17,53433
-Washington,2007,19,56959
-West Virginia,2007,13,48561
-Wisconsin,2007,14,56008
-Wyoming,2007,12,60601
-Alabama,2008,15,51539
-Alaska,2008,16,64199
-Arizona,2008,20,50966
-Arkansas,2008,13,52191
-California,2008,21,74861
-Colorado,2008,16,53306
-Connecticut,2008,11,69429
-Delaware,2008,15,62299
-District of Columbia,2008,12,68775
-Florida,2008,14,51585
-Georgia,2008,14,58135
-Hawaii,2008,16,61273
-Idaho,2008,18,49669
-Illinois,2008,15,67441
-Indiana,2008,17,54496
-Iowa,2008,13,53472
-Kansas,2008,13,51013
-Kentucky,2008,15,52634
-Louisiana,2008,13,53460
-Maine,2008,12,49177
-Maryland,2008,14,69096
-Massachusetts,2008,13,73343
-Michigan,2008,17,63025
-Minnesota,2008,15,57100
-Mississippi,2008,14,48921
-Missouri,2008,13,48647
-Montana,2008,13,48842
-Nebraska,2008,13,49426
-Nevada,2008,20,55043
-New Hampshire,2008,12,54829
-New Jersey,2008,11,69384
-New Mexico,2008,14,50300
-New York,2008,12,75988
-North Carolina,2008,13,53483
-North Dakota,2008,11,45794
-Ohio,2008,16,60089
-Oklahoma,2008,13,48204
-Oregon,2008,19,59461
-Pennsylvania,2008,14,62926
-Rhode Island,2008,13,64212
-South Carolina,2008,14,52134
-South Dakota,2008,13,38556
-Tennessee,2008,15,50076
-Texas,2008,14,51844
-Utah,2008,23,46543
-Vermont,2008,10,52643
-Virginia,2008,17,53172
-Washington,2008,19,57792
-West Virginia,2008,13,49144
-Wisconsin,2008,14,56202
-Wyoming,2008,12,60029
-Alabama,2009,16,52494
-Alaska,2009,16,65848
-Arizona,2009,21,51811
-Arkansas,2009,13,51533
-California,2009,20,75262
-Colorado,2009,16,54294
-Connecticut,2009,13,71010
-Delaware,2009,15,62988
-District of Columbia,2009,10,71228
-Florida,2009,14,51542
-Georgia,2009,14,58609
-Hawaii,2009,16,60762
-Idaho,2009,18,51073
-Illinois,2009,15,68502
-Indiana,2009,17,55159
-Iowa,2009,13,54762
-Kansas,2009,13,51486
-Kentucky,2009,16,54671
-Louisiana,2009,13,53964
-Maine,2009,11,50878
-Maryland,2009,14,70592
-Massachusetts,2009,13,76443
-Michigan,2009,17,63956
-Minnesota,2009,16,57857
-Mississippi,2009,15,50368
-Missouri,2009,13,50007
-Montana,2009,13,50495
-Nebraska,2009,13,51011
-Nevada,2009,19,56857
-New Hampshire,2009,13,56767
-New Jersey,2009,11,71871
-New Mexico,2009,14,51046
-New York,2009,12,79047
-North Carolina,2009,14,51699
-North Dakota,2009,11,47411
-Ohio,2009,16,61749
-Oklahoma,2009,14,52627
-Oregon,2009,20,60939
-Pennsylvania,2009,13,65278
-Rhode Island,2009,13,65863
-South Carolina,2009,15,52425
-South Dakota,2009,13,42856
-Tennessee,2009,15,51081
-Texas,2009,14,53256
-Utah,2009,22,50634
-Vermont,2009,10,54164
-Virginia,2009,17,55191
-Washington,2009,19,58489
-West Virginia,2009,13,50716
-Wisconsin,2009,14,56570
-Wyoming,2009,12,61642
-Alabama,2010,15,52400
-Alaska,2010,16,66303
-Arizona,2010,21,51608
-Arkansas,2010,14,51768
-California,2010,24,75355
-Colorado,2010,17,54197
-Connecticut,2010,13,71163
-Delaware,2010,14,62875
-District of Columbia,2010,10,72281
-Florida,2010,15,50685
-Georgia,2010,15,58503
-Hawaii,2010,16,59759
-Idaho,2010,17,51460
-Illinois,2010,15,68378
-Indiana,2010,18,54706
-Iowa,2010,14,54952
-Kansas,2010,13,51095
-Kentucky,2010,15,54305
-Louisiana,2010,14,53867
-Maine,2010,12,51206
-Maryland,2010,14,70666
-Massachusetts,2010,13,77073
-Michigan,2010,18,63592
-Minnesota,2010,16,57753
-Mississippi,2010,15,50811
-Missouri,2010,13,50369
-Montana,2010,14,51152
-Nebraska,2010,13,51574
-Nevada,2010,20,57545
-New Hampshire,2010,12,57294
-New Jersey,2010,12,72698
-New Mexico,2010,15,50954
-New York,2010,13,78909
-North Carolina,2010,15,50845
-North Dakota,2010,11,48041
-Ohio,2010,16,62177
-Oklahoma,2010,15,53221
-Oregon,2010,20,61196
-Pennsylvania,2010,14,65699
-Rhode Island,2010,13,66119
-South Carolina,2010,16,53650
-South Dakota,2010,13,38203
-Tennessee,2010,14,51055
-Texas,2010,14,52377
-Utah,2010,22,50543
-Vermont,2010,10,54417
-Virginia,2010,17,55956
-Washington,2010,19,58384
-West Virginia,2010,13,51283
-Wisconsin,2010,14,56468
-Wyoming,2010,12,61837
-Alabama,2011,15,50522
-Alaska,2011,16,65700
-Arizona,2011,21,51246
-Arkansas,2011,14,48744
-California,2011,23,72127
-Colorado,2011,17,51622
-Connecticut,2011,12,73110
-Delaware,2011,15,61885
-District of Columbia,2011,10,72326
-Florida,2011,15,48918
-Georgia,2011,15,55716
-Hawaii,2011,16,57020
-Idaho,2011,17,56907
-Illinois,2011,15,51098
-Indiana,2011,17,60660
-Iowa,2011,14,53166
-Kansas,2011,12,52876
-Kentucky,2011,16,49169
-Louisiana,2011,14,52339
-Maine,2011,12,52812
-Maryland,2011,14,49822
-Massachusetts,2011,13,66973
-Michigan,2011,18,75484
-Minnesota,2011,16,64790
-Mississippi,2011,15,57843
-Missouri,2011,13,43831
-Montana,2011,14,48841
-Nebraska,2011,13,51093
-Nevada,2011,21,50681
-New Hampshire,2011,13,57422
-New Jersey,2011,12,70597
-New Mexico,2011,15,48016
-New York,2011,13,77249
-North Carolina,2011,15,48358
-North Dakota,2011,11,48475
-Ohio,2011,16,59691
-Oklahoma,2011,15,46720
-Oregon,2011,21,60357
-Pennsylvania,2011,14,65184
-Rhode Island,2011,12,65449
-South Carolina,2011,15,49916
-South Dakota,2011,14,40840
-Tennessee,2011,15,49552
-Texas,2011,15,50911
-Utah,2011,23,50686
-Vermont,2011,10,53998
-Virginia,2011,13,51258
-Washington,2011,19,54972
-West Virginia,2011,13,47698
-Wisconsin,2011,15,56614
-Wyoming,2011,11,60224
-Alabama,2012,14,49432
-Alaska,2012,17,67492
-Arizona,2012,22,51428
-Arkansas,2012,14,48073
-California,2012,23,71468
-Colorado,2012,17,51385
-Connecticut,2012,12,71543
-Delaware,2012,14,61524
-District of Columbia,2012,11,73099
-Florida,2012,15,48039
-Georgia,2012,15,54515
-Hawaii,2012,16,55979
-Idaho,2012,19,51272
-Illinois,2012,15,60941
-Indiana,2012,17,51613
-Iowa,2012,13,52521
-Kansas,2012,11,48932
-Kentucky,2012,15,51755
-Louisiana,2012,15,52970
-Maine,2012,12,49928
-Maryland,2012,14,66235
-Massachusetts,2012,13,74571
-Michigan,2012,18,63464
-Minnesota,2012,16,58008
-Mississippi,2012,15,43107
-Missouri,2012,13,48986
-Montana,2012,14,50366
-Nebraska,2012,13,50512
-Nevada,2012,21,57687
-New Hampshire,2012,12,57318
-New Jersey,2012,12,70924
-New Mexico,2012,15,46859
-New York,2012,13,77607
-North Carolina,2012,15,47151
-North Dakota,2012,11,48808
-Ohio,2012,16,58048
-Oklahoma,2012,15,45745
-Oregon,2012,21,59394
-Pennsylvania,2012,14,64942
-Rhode Island,2012,14,65437
-South Carolina,2012,15,49871
-South Dakota,2012,14,40225
-Tennessee,2012,15,49034
-Texas,2012,15,50329
-Utah,2012,23,50920
-Vermont,2012,10,54150
-Virginia,2012,14,50175
-Washington,2012,19,53849
-West Virginia,2012,13,46859
-Wisconsin,2012,14,55461
-Wyoming,2012,12,58531
+State,Year,Average Teacher Salary,Students per Teacher
+Alabama,1970,43204,24
+Alaska,1970,79478,21
+Arizona,1970,54356,23
+Arkansas,1970,38214,22
+California,1970,64574,24
+Colorado,1970,50457,22
+Connecticut,1970,59029,21
+Delaware,1970,56954,22
+District of Columbia,1970,62122,19
+Florida,1970,51525,23
+Georgia,1970,43893,25
+Hawaii,1970,60236,23
+Idaho,1970,41398,23
+Illinois,1970,60029,21
+Indiana,1970,55179,24
+Iowa,1970,53209,20
+Kansas,1970,47011,20
+Kentucky,1970,42155,24
+Louisiana,1970,48646,23
+Maine,1970,47596,22
+Maryland,1970,59102,22
+Massachusetts,1970,56289,21
+Michigan,1970,64202,23
+Minnesota,1970,57266,21
+Mississippi,1970,35163,24
+Missouri,1970,47926,22
+Montana,1970,47615,21
+Nebraska,1970,47584,19
+Nevada,1970,55740,26
+New Hampshire,1970,48676,21
+New Jersey,1970,58711,21
+New Mexico,1970,47523,24
+New York,1970,64623,20
+North Carolina,1970,45516,24
+North Dakota,1970,42478,19
+Ohio,1970,50817,23
+Oklahoma,1970,44845,22
+Oregon,1970,52995,22
+Pennsylvania,1970,53800,22
+Rhode Island,1970,54472,21
+South Carolina,1970,40703,22
+South Dakota,1970,43295,19
+Tennessee,1970,44217,25
+Texas,1970,47718,22
+Utah,1970,47139,26
+Vermont,1970,48353,18
+Virginia,1970,50256,23
+Washington,1970,57979,24
+West Virginia,1970,44662,24
+Wisconsin,1970,56424,22
+Wyoming,1970,50921,19
+Alabama,1971,44429,24
+Alaska,1971,81133,21
+Arizona,1971,56937,24
+Arkansas,1971,39286,23
+California,1971,65563,23
+Colorado,1971,53196,23
+Connecticut,1971,59117,20
+Delaware,1971,59835,22
+District of Columbia,1971,63278,22
+Florida,1971,51326,23
+Georgia,1971,45464,24
+Hawaii,1971,59269,22
+Idaho,1971,42302,23
+Illinois,1971,61004,22
+Indiana,1971,56113,24
+Iowa,1971,52752,20
+Kansas,1971,47381,20
+Kentucky,1971,42273,23
+Louisiana,1971,50338,23
+Maine,1971,49076,22
+Maryland,1971,60081,22
+Massachusetts,1971,58444,22
+Michigan,1971,66726,24
+Minnesota,1971,58672,21
+Mississippi,1971,37498,23
+Missouri,1971,49853,23
+Montana,1971,48976,21
+Nebraska,1971,48608,20
+Nevada,1971,58526,24
+New Hampshire,1971,48561,22
+New Jersey,1971,61589,20
+New Mexico,1971,47241,23
+New York,1971,67918,20
+North Carolina,1971,49310,24
+North Dakota,1971,43559,19
+Ohio,1971,50414,24
+Oklahoma,1971,44213,23
+Oregon,1971,54423,21
+Pennsylvania,1971,56855,22
+Rhode Island,1971,56907,21
+South Carolina,1971,42226,25
+South Dakota,1971,43804,20
+Tennessee,1971,45908,25
+Texas,1971,48649,22
+Utah,1971,48544,25
+Vermont,1971,48772,17
+Virginia,1971,52162,22
+Washington,1971,58433,24
+West Virginia,1971,46569,23
+Wisconsin,1971,57492,22
+Wyoming,1971,53027,18
+Alabama,1972,45358,23
+Alaska,1972,82058,21
+Arizona,1972,56315,24
+Arkansas,1972,41037,22
+California,1972,67556,23
+Colorado,1972,54096,23
+Connecticut,1972,59345,20
+Delaware,1972,59283,22
+District of Columbia,1972,67867,21
+Florida,1972,51768,23
+Georgia,1972,48603,24
+Hawaii,1972,58937,22
+Idaho,1972,42849,24
+Illinois,1972,63467,21
+Indiana,1972,56225,23
+Iowa,1972,53705,20
+Kansas,1972,47595,19
+Kentucky,1972,43631,23
+Louisiana,1972,49452,20
+Maine,1972,50239,21
+Maryland,1972,62448,22
+Massachusetts,1972,58869,20
+Michigan,1972,66469,24
+Minnesota,1972,59056,21
+Mississippi,1972,38659,23
+Missouri,1972,50698,23
+Montana,1972,50081,20
+Nebraska,1972,48710,19
+Nevada,1972,60800,24
+New Hampshire,1972,51247,20
+New Jersey,1972,65693,19
+New Mexico,1972,48773,23
+New York,1972,69164,19
+North Carolina,1972,50817,23
+North Dakota,1972,45064,19
+Ohio,1972,53880,23
+Oklahoma,1972,43620,22
+Oregon,1972,53444,21
+Pennsylvania,1972,58139,21
+Rhode Island,1972,59356,20
+South Carolina,1972,44792,23
+South Dakota,1972,43988,20
+Tennessee,1972,46440,25
+Texas,1972,48580,22
+Utah,1972,47561,25
+Vermont,1972,49622,17
+Virginia,1972,53235,21
+Washington,1972,59271,24
+West Virginia,1972,45324,23
+Wisconsin,1972,58280,21
+Wyoming,1972,52012,18
+Alabama,1973,45842,23
+Alaska,1973,77839,20
+Arizona,1973,51807,24
+Arkansas,1973,38853,22
+California,1973,65114,22
+Colorado,1973,50336,22
+Connecticut,1973,54841,19
+Delaware,1973,56158,21
+District of Columbia,1973,63264,21
+Florida,1973,49627,23
+Georgia,1973,46530,24
+Hawaii,1973,55219,23
+Idaho,1973,41039,23
+Illinois,1973,59543,21
+Indiana,1973,52127,23
+Iowa,1973,48955,19
+Kansas,1973,44195,19
+Kentucky,1973,41241,23
+Louisiana,1973,45538,20
+Maine,1973,45895,21
+Maryland,1973,58333,21
+Massachusetts,1973,55289,18
+Michigan,1973,61968,23
+Minnesota,1973,55027,21
+Mississippi,1973,37787,22
+Missouri,1973,47329,22
+Montana,1973,46839,19
+Nebraska,1973,45549,19
+Nevada,1973,57512,24
+New Hampshire,1973,47750,20
+New Jersey,1973,59106,19
+New Mexico,1973,45613,23
+New York,1973,66388,19
+North Carolina,1973,50821,23
+North Dakota,1973,42089,18
+Ohio,1973,50187,23
+Oklahoma,1973,40889,22
+Oregon,1973,49318,21
+Pennsylvania,1973,54260,21
+Rhode Island,1973,56675,20
+South Carolina,1973,42478,23
+South Dakota,1973,40287,19
+Tennessee,1973,43923,24
+Texas,1973,44328,21
+Utah,1973,45415,25
+Vermont,1973,44403,17
+Virginia,1973,49281,21
+Washington,1973,56115,24
+West Virginia,1973,41300,22
+Wisconsin,1973,53807,20
+Wyoming,1973,48140,18
+Alabama,1974,39725,22
+Alaska,1974,69939,21
+Arizona,1974,46140,23
+Arkansas,1974,36936,22
+California,1974,61119,22
+Colorado,1974,46663,22
+Connecticut,1974,50403,19
+Delaware,1974,51272,21
+District of Columbia,1974,61292,19
+Florida,1974,43922,22
+Georgia,1974,43273,23
+Hawaii,1974,58426,23
+Idaho,1974,39461,22
+Illinois,1974,56208,20
+Indiana,1974,47758,24
+Iowa,1974,45492,19
+Kansas,1974,39845,18
+Kentucky,1974,38174,22
+Louisiana,1974,41843,20
+Maine,1974,41867,21
+Maryland,1974,53908,21
+Massachusetts,1974,54369,18
+Michigan,1974,59185,24
+Minnesota,1974,50341,20
+Mississippi,1974,34300,22
+Missouri,1974,42654,21
+Montana,1974,42668,19
+Nebraska,1974,39552,18
+Nevada,1974,52204,24
+New Hampshire,1974,42688,18
+New Jersey,1974,53774,18
+New Mexico,1974,42716,22
+New York,1974,62762,18
+North Carolina,1974,46922,23
+North Dakota,1974,39447,18
+Ohio,1974,45813,22
+Oklahoma,1974,38179,21
+Oregon,1974,46149,21
+Pennsylvania,1974,49606,20
+Rhode Island,1974,52818,19
+South Carolina,1974,40412,23
+South Dakota,1974,37181,19
+Tennessee,1974,42337,22
+Texas,1974,41790,21
+Utah,1974,42918,25
+Vermont,1974,41324,17
+Virginia,1974,45559,21
+Washington,1974,53005,23
+West Virginia,1974,38880,21
+Wisconsin,1974,48814,20
+Wyoming,1974,44051,17
+Alabama,1975,42536,21
+Alaska,1975,78208,20
+Arizona,1975,47701,21
+Arkansas,1975,38866,21
+California,1975,61916,22
+Colorado,1975,48735,20
+Connecticut,1975,51920,18
+Delaware,1975,50789,20
+District of Columbia,1975,63517,20
+Florida,1975,42540,21
+Georgia,1975,43886,23
+Hawaii,1975,61608,22
+Idaho,1975,41365,22
+Illinois,1975,57081,20
+Indiana,1975,48453,22
+Iowa,1975,49144,18
+Kansas,1975,44005,18
+Kentucky,1975,39632,22
+Louisiana,1975,43169,21
+Maine,1975,43020,20
+Maryland,1975,55501,21
+Massachusetts,1975,54762,19
+Michigan,1975,59149,23
+Minnesota,1975,51550,20
+Mississippi,1975,37573,21
+Missouri,1975,43754,20
+Montana,1975,44735,19
+Nebraska,1975,42162,18
+Nevada,1975,51718,24
+New Hampshire,1975,41519,20
+New Jersey,1975,55114,18
+New Mexico,1975,43772,21
+New York,1975,66087,19
+North Carolina,1975,45611,23
+North Dakota,1975,41783,17
+Ohio,1975,46812,22
+Oklahoma,1975,39297,20
+Oregon,1975,49755,20
+Pennsylvania,1975,51093,19
+Rhode Island,1975,52664,19
+South Carolina,1975,40164,22
+South Dakota,1975,38110,19
+Tennessee,1975,41832,22
+Texas,1975,45844,20
+Utah,1975,45285,25
+Vermont,1975,40917,16
+Virginia,1975,45783,19
+Washington,1975,55440,23
+West Virginia,1975,42272,21
+Wisconsin,1975,50028,19
+Wyoming,1975,48831,17
+Alabama,1976,41562,20
+Alaska,1976,82658,20
+Arizona,1976,51109,21
+Arkansas,1976,38529,21
+California,1976,64591,21
+Colorado,1976,52261,19
+Connecticut,1976,54071,17
+Delaware,1976,52066,20
+District of Columbia,1976,67553,21
+Florida,1976,48080,21
+Georgia,1976,44220,24
+Hawaii,1976,66388,22
+Idaho,1976,43434,22
+Illinois,1976,58023,20
+Indiana,1976,50576,22
+Iowa,1976,49615,18
+Kansas,1976,44653,18
+Kentucky,1976,43247,21
+Louisiana,1976,43064,21
+Maine,1976,44004,19
+Maryland,1976,58177,20
+Massachusetts,1976,56654,19
+Michigan,1976,61459,23
+Minnesota,1976,55273,19
+Mississippi,1976,37206,21
+Missouri,1976,45322,20
+Montana,1976,46475,18
+Nebraska,1976,44224,17
+Nevada,1976,53330,24
+New Hampshire,1976,41545,18
+New Jersey,1976,57474,18
+New Mexico,1976,46924,22
+New York,1976,67886,19
+North Carolina,1976,47078,23
+North Dakota,1976,42290,17
+Ohio,1976,49528,21
+Oklahoma,1976,41674,20
+Oregon,1976,51637,20
+Pennsylvania,1976,53168,19
+Rhode Island,1976,55851,19
+South Carolina,1976,41566,20
+South Dakota,1976,40310,18
+Tennessee,1976,44174,21
+Texas,1976,45776,20
+Utah,1976,48168,25
+Vermont,1976,42768,17
+Virginia,1976,47689,18
+Washington,1976,59067,23
+West Virginia,1976,45239,20
+Wisconsin,1976,52419,19
+Wyoming,1976,51787,18
+Alabama,1977,43059,20
+Alaska,1977,83200,18
+Arizona,1977,50250,21
+Arkansas,1977,38380,20
+California,1977,63296,21
+Colorado,1977,51742,19
+Connecticut,1977,52777,17
+Delaware,1977,50719,20
+District of Columbia,1977,67307,20
+Florida,1977,47172,22
+Georgia,1977,44703,21
+Hawaii,1977,65413,22
+Idaho,1977,43282,21
+Illinois,1977,58784,20
+Indiana,1977,49488,22
+Iowa,1977,49238,18
+Kansas,1977,44414,17
+Kentucky,1977,43270,21
+Louisiana,1977,46055,21
+Maine,1977,43329,18
+Maryland,1977,58355,20
+Massachusetts,1977,56105,17
+Michigan,1977,60679,23
+Minnesota,1977,52289,19
+Mississippi,1977,38505,20
+Missouri,1977,44860,19
+Montana,1977,46758,17
+Nebraska,1977,43750,17
+Nevada,1977,52738,22
+New Hampshire,1977,40969,18
+New Jersey,1977,56726,18
+New Mexico,1977,47391,20
+New York,1977,65815,18
+North Carolina,1977,47133,22
+North Dakota,1977,41700,17
+Ohio,1977,49113,21
+Oklahoma,1977,42516,19
+Oregon,1977,51078,19
+Pennsylvania,1977,53367,19
+Rhode Island,1977,58999,18
+South Carolina,1977,42153,21
+South Dakota,1977,40048,18
+Tennessee,1977,43993,22
+Texas,1977,46278,19
+Utah,1977,51269,25
+Vermont,1977,41727,17
+Virginia,1977,46301,18
+Washington,1977,59476,23
+West Virginia,1977,44516,19
+Wisconsin,1977,51840,17
+Wyoming,1977,52097,17
+Alabama,1978,43405,19
+Alaska,1978,80954,18
+Arizona,1978,48371,20
+Arkansas,1978,37280,20
+California,1978,58928,20
+Colorado,1978,50248,19
+Connecticut,1978,51900,17
+Delaware,1978,50676,18
+District of Columbia,1978,65321,19
+Florida,1978,44203,21
+Georgia,1978,44497,21
+Hawaii,1978,61535,22
+Idaho,1978,42261,21
+Illinois,1978,55367,18
+Indiana,1978,47885,21
+Iowa,1978,47554,17
+Kansas,1978,42726,16
+Kentucky,1978,44149,21
+Louisiana,1978,43590,20
+Maine,1978,41147,17
+Maryland,1978,55603,19
+Massachusetts,1978,57011,16
+Michigan,1978,60351,22
+Minnesota,1978,51987,18
+Mississippi,1978,37208,19
+Missouri,1978,42610,18
+Montana,1978,45761,17
+Nebraska,1978,42356,17
+Nevada,1978,51410,23
+New Hampshire,1978,39684,19
+New Jersey,1978,54259,17
+New Mexico,1978,47220,20
+New York,1978,62054,20
+North Carolina,1978,45837,21
+North Dakota,1978,40264,17
+Ohio,1978,47866,20
+Oklahoma,1978,41009,18
+Oregon,1978,50026,19
+Pennsylvania,1978,51994,18
+Rhode Island,1978,56242,17
+South Carolina,1978,40631,21
+South Dakota,1978,38279,17
+Tennessee,1978,43314,21
+Texas,1978,43706,19
+Utah,1978,46563,24
+Vermont,1978,39509,16
+Virginia,1978,44490,19
+Washington,1978,58184,22
+West Virginia,1978,42748,20
+Wisconsin,1978,49968,19
+Wyoming,1978,48502,16
+Alabama,1979,37262,24
+Alaska,1979,77638,17
+Arizona,1979,42952,19
+Arkansas,1979,35091,19
+California,1979,51415,21
+Colorado,1979,46238,19
+Connecticut,1979,46306,16
+Delaware,1979,46075,17
+District of Columbia,1979,63312,18
+Florida,1979,40369,21
+Georgia,1979,39525,21
+Hawaii,1979,56837,23
+Idaho,1979,38837,21
+Illinois,1979,50219,19
+Indiana,1979,44507,20
+Iowa,1979,43379,17
+Kansas,1979,39062,16
+Kentucky,1979,41429,21
+Louisiana,1979,39261,18
+Maine,1979,37295,21
+Maryland,1979,50098,19
+Massachusetts,1979,49228,15
+Michigan,1979,56104,21
+Minnesota,1979,45400,18
+Mississippi,1979,33810,19
+Missouri,1979,39039,18
+Montana,1979,41478,17
+Nebraska,1979,38563,16
+Nevada,1979,46492,21
+New Hampshire,1979,37142,18
+New Jersey,1979,48964,17
+New Mexico,1979,42476,19
+New York,1979,56528,19
+North Carolina,1979,40278,20
+North Dakota,1979,37843,16
+Ohio,1979,43568,20
+Oklahoma,1979,37396,18
+Oregon,1979,46411,19
+Pennsylvania,1979,47122,18
+Rhode Island,1979,51363,17
+South Carolina,1979,37272,20
+South Dakota,1979,35231,16
+Tennessee,1979,39864,21
+Texas,1979,40321,19
+Utah,1979,42538,24
+Vermont,1979,35619,15
+Virginia,1979,40115,18
+Washington,1979,53698,22
+West Virginia,1979,39117,18
+Wisconsin,1979,45667,18
+Wyoming,1979,45687,18
+Alabama,1980,38714,21
+Alaska,1980,72524,17
+Arizona,1980,42865,20
+Arkansas,1980,33161,19
+California,1980,52198,21
+Colorado,1980,44304,18
+Connecticut,1980,43479,15
+Delaware,1980,45030,18
+District of Columbia,1980,57167,19
+Florida,1980,38490,20
+Georgia,1980,38587,19
+Hawaii,1980,52832,23
+Idaho,1980,37746,20
+Illinois,1980,48532,18
+Indiana,1980,42997,20
+Iowa,1980,42373,16
+Kansas,1980,38099,16
+Kentucky,1980,39349,20
+Louisiana,1980,39998,18
+Maine,1980,34962,19
+Maryland,1980,47464,18
+Massachusetts,1980,46964,16
+Michigan,1980,54409,21
+Minnesota,1980,44413,17
+Mississippi,1980,32520,18
+Missouri,1980,38527,17
+Montana,1980,39891,17
+Nebraska,1980,37180,17
+Nevada,1980,44220,21
+New Hampshire,1980,34232,20
+New Jersey,1980,45582,16
+New Mexico,1980,42000,19
+New York,1980,53278,18
+North Carolina,1980,39624,20
+North Dakota,1980,37177,16
+Ohio,1980,42230,19
+Oklahoma,1980,37929,17
+Oregon,1980,45088,21
+Pennsylvania,1980,44694,17
+Rhode Island,1980,50187,16
+South Carolina,1980,35858,19
+South Dakota,1980,34146,16
+Tennessee,1980,37769,21
+Texas,1980,39294,18
+Utah,1980,42221,24
+Vermont,1980,33827,15
+Virginia,1980,38811,18
+Washington,1980,53134,21
+West Virginia,1980,37343,18
+Wisconsin,1980,43985,17
+Wyoming,1980,46763,15
+Alabama,1981,37226,21
+Alaska,1981,76122,16
+Arizona,1981,45809,20
+Arkansas,1981,34588,19
+California,1981,54259,23
+Colorado,1981,46681,18
+Connecticut,1981,44965,15
+Delaware,1981,45996,18
+District of Columbia,1981,57860,19
+Florida,1981,40012,20
+Georgia,1981,39018,19
+Hawaii,1981,53751,23
+Idaho,1981,39106,21
+Illinois,1981,50121,19
+Indiana,1981,44437,20
+Iowa,1981,43564,17
+Kansas,1981,39848,16
+Kentucky,1981,41229,21
+Louisiana,1981,42754,20
+Maine,1981,36018,18
+Maryland,1981,50361,18
+Massachusetts,1981,48283,15
+Michigan,1981,57951,22
+Minnesota,1981,47468,17
+Mississippi,1981,33703,19
+Missouri,1981,39135,17
+Montana,1981,42372,16
+Nebraska,1981,39510,16
+Nevada,1981,47546,21
+New Hampshire,1981,35513,17
+New Jersey,1981,47475,16
+New Mexico,1981,44564,19
+New York,1981,55884,18
+North Carolina,1981,40408,20
+North Dakota,1981,41551,17
+Ohio,1981,44231,20
+Oklahoma,1981,38653,17
+Oregon,1981,48415,20
+Pennsylvania,1981,46455,17
+Rhode Island,1981,51644,16
+South Carolina,1981,37234,19
+South Dakota,1981,35091,16
+Tennessee,1981,38830,21
+Texas,1981,41924,18
+Utah,1981,43174,25
+Vermont,1981,35088,15
+Virginia,1981,40554,18
+Washington,1981,54733,22
+West Virginia,1981,40843,17
+Wisconsin,1981,46228,17
+Wyoming,1981,50668,15
+Alabama,1982,41568,20
+Alaska,1982,80176,16
+Arizona,1982,49827,19
+Arkansas,1982,35458,18
+California,1982,55712,23
+Colorado,1982,50654,19
+Connecticut,1982,48910,15
+Delaware,1982,48660,17
+District of Columbia,1982,62835,17
+Florida,1982,43116,18
+Georgia,1982,41080,19
+Hawaii,1982,58500,23
+Idaho,1982,41488,21
+Illinois,1982,52648,18
+Indiana,1982,47541,20
+Iowa,1982,45434,16
+Kansas,1982,43013,16
+Kentucky,1982,43376,20
+Louisiana,1982,43460,18
+Maine,1982,38333,16
+Maryland,1982,54080,19
+Massachusetts,1982,51529,16
+Michigan,1982,60661,21
+Minnesota,1982,53973,18
+Mississippi,1982,33786,19
+Missouri,1982,41338,17
+Montana,1982,46484,16
+Nebraska,1982,41080,15
+Nevada,1982,52069,21
+New Hampshire,1982,39044,16
+New Jersey,1982,50811,16
+New Mexico,1982,48083,19
+New York,1982,58984,17
+North Carolina,1982,41488,20
+North Dakota,1982,44284,17
+Ohio,1982,47195,20
+Oklahoma,1982,43104,17
+Oregon,1982,51306,19
+Pennsylvania,1982,49965,17
+Rhode Island,1982,54676,16
+South Carolina,1982,38983,19
+South Dakota,1982,36793,16
+Tennessee,1982,41004,21
+Texas,1982,46123,18
+Utah,1982,46854,25
+Vermont,1982,38387,15
+Virginia,1982,43729,17
+Washington,1982,55415,22
+West Virginia,1982,40867,17
+Wisconsin,1982,50715,17
+Wyoming,1982,55893,15
+Alabama,1983,41729,20
+Alaska,1983,89224,16
+Arizona,1983,51076,19
+Arkansas,1983,39951,18
+California,1983,58628,23
+Colorado,1983,54931,19
+Connecticut,1983,53400,15
+Delaware,1983,49405,17
+District of Columbia,1983,67654,16
+Florida,1983,46014,18
+Georgia,1983,43968,19
+Hawaii,1983,57483,23
+Idaho,1983,42444,21
+Illinois,1983,57091,18
+Indiana,1983,50829,19
+Iowa,1983,47552,16
+Kansas,1983,45810,16
+Kentucky,1983,46397,20
+Louisiana,1983,43424,19
+Maine,1983,40895,16
+Maryland,1983,56333,18
+Massachusetts,1983,54182,15
+Michigan,1983,63966,20
+Minnesota,1983,57466,18
+Mississippi,1983,37316,19
+Missouri,1983,45474,17
+Montana,1983,48828,16
+Nebraska,1983,44331,15
+Nevada,1983,52770,20
+New Hampshire,1983,41007,16
+New Jersey,1983,54902,16
+New Mexico,1983,48547,19
+New York,1983,64472,17
+North Carolina,1983,43214,20
+North Dakota,1983,45453,17
+Ohio,1983,50244,19
+Oklahoma,1983,43968,17
+Oregon,1983,54645,18
+Pennsylvania,1983,53578,17
+Rhode Island,1983,59795,15
+South Carolina,1983,41026,19
+South Dakota,1983,38894,15
+Tennessee,1983,42269,21
+Texas,1983,47601,18
+Utah,1983,47216,25
+Vermont,1983,41551,14
+Virginia,1983,46435,17
+Washington,1983,57502,21
+West Virginia,1983,41275,16
+Wisconsin,1983,53835,17
+Wyoming,1983,59465,14
+Alabama,1984,45324,19
+Alaska,1984,85891,17
+Arizona,1984,52213,20
+Arkansas,1984,41752,18
+California,1984,61212,23
+Colorado,1984,54612,19
+Connecticut,1984,54641,14
+Delaware,1984,51195,16
+District of Columbia,1984,70814,15
+Florida,1984,46531,18
+Georgia,1984,46028,19
+Hawaii,1984,54999,23
+Idaho,1984,44738,21
+Illinois,1984,56897,18
+Indiana,1984,51035,19
+Iowa,1984,46750,15
+Kansas,1984,47167,15
+Kentucky,1984,45178,20
+Louisiana,1984,43526,19
+Maine,1984,40934,16
+Maryland,1984,57753,18
+Massachusetts,1984,54976,15
+Michigan,1984,63513,20
+Minnesota,1984,56835,17
+Mississippi,1984,35560,18
+Missouri,1984,45675,17
+Montana,1984,48472,16
+Nebraska,1984,44326,15
+Nevada,1984,50292,20
+New Hampshire,1984,41487,16
+New Jersey,1984,55450,15
+New Mexico,1984,48709,19
+New York,1984,63007,16
+North Carolina,1984,46479,19
+North Dakota,1984,44866,15
+Ohio,1984,51092,18
+Oklahoma,1984,42474,17
+Oregon,1984,54441,18
+Pennsylvania,1984,54026,17
+Rhode Island,1984,61845,15
+South Carolina,1984,44984,18
+South Dakota,1984,38813,14
+Tennessee,1984,45723,21
+Texas,1984,51953,18
+Utah,1984,47276,25
+Vermont,1984,42428,14
+Virginia,1984,47504,17
+Washington,1984,56958,21
+West Virginia,1984,43688,16
+Wisconsin,1984,54885,16
+Wyoming,1984,58952,14
+Alabama,1985,50440,20
+Alaska,1985,85445,16
+Arizona,1985,53913,20
+Arkansas,1985,42639,17
+California,1985,63634,23
+Colorado,1985,56559,18
+Connecticut,1985,58128,14
+Delaware,1985,53790,16
+District of Columbia,1985,72548,14
+Florida,1985,48605,18
+Georgia,1985,50343,19
+Hawaii,1985,56458,23
+Idaho,1985,45807,20
+Illinois,1985,58755,18
+Indiana,1985,53137,19
+Iowa,1985,47322,15
+Kansas,1985,49465,15
+Kentucky,1985,45761,19
+Louisiana,1985,44350,19
+Maine,1985,42778,14
+Maryland,1985,58544,17
+Massachusetts,1985,57879,15
+Michigan,1985,65680,19
+Minnesota,1985,59767,17
+Mississippi,1985,40351,18
+Missouri,1985,47938,17
+Montana,1985,49111,16
+Nebraska,1985,45741,15
+Nevada,1985,55943,20
+New Hampshire,1985,44265,16
+New Jersey,1985,59351,15
+New Mexico,1985,48020,19
+New York,1985,66604,16
+North Carolina,1985,48801,19
+North Dakota,1985,45472,15
+Ohio,1985,53559,18
+Oklahoma,1985,46788,17
+Oregon,1985,56053,18
+Pennsylvania,1985,56476,17
+Rhode Island,1985,64375,15
+South Carolina,1985,47173,18
+South Dakota,1985,39528,15
+Tennessee,1985,46713,20
+Texas,1985,53438,17
+Utah,1985,49267,25
+Vermont,1985,45428,14
+Virginia,1985,50451,17
+Washington,1985,57252,21
+West Virginia,1985,45059,16
+Wisconsin,1985,57554,17
+Wyoming,1985,59470,14
+Alabama,1986,50504,20
+Alaska,1986,86575,17
+Arizona,1986,56538,18
+Arkansas,1986,43329,18
+California,1986,67961,23
+Colorado,1986,59620,18
+Connecticut,1986,62918,14
+Delaware,1986,59793,16
+District of Columbia,1986,73574,14
+Florida,1986,51882,17
+Georgia,1986,52681,19
+Hawaii,1986,58374,23
+Idaho,1986,46761,20
+Illinois,1986,61473,17
+Indiana,1986,49156,18
+Iowa,1986,49156,16
+Kansas,1986,51068,15
+Kentucky,1986,48927,19
+Louisiana,1986,46141,19
+Maine,1986,46275,15
+Maryland,1986,62898,17
+Massachusetts,1986,62961,14
+Michigan,1986,68382,19
+Minnesota,1986,61693,17
+Mississippi,1986,42334,19
+Missouri,1986,51016,16
+Montana,1986,50517,16
+Nebraska,1986,47530,15
+Nevada,1986,58689,20
+New Hampshire,1986,47608,16
+New Jersey,1986,62516,15
+New Mexico,1986,52193,19
+New York,1986,69662,15
+North Carolina,1986,51983,19
+North Dakota,1986,46334,15
+Ohio,1986,57227,18
+Oklahoma,1986,46733,17
+Oregon,1986,58102,18
+Pennsylvania,1986,59695,16
+Rhode Island,1986,67656,15
+South Carolina,1986,50506,17
+South Dakota,1986,40885,16
+Tennessee,1986,49258,20
+Texas,1986,54212,17
+Utah,1986,49973,25
+Vermont,1986,47532,14
+Virginia,1986,54508,17
+Washington,1986,59397,21
+West Virginia,1986,46686,15
+Wisconsin,1986,60551,16
+Wyoming,1986,61177,14
+Alabama,1987,47861,19
+Alaska,1987,82964,17
+Arizona,1987,56208,19
+Arkansas,1987,41743,17
+California,1987,68053,23
+Colorado,1987,58800,18
+Connecticut,1987,68726,13
+Delaware,1987,60694,16
+District of Columbia,1987,71225,14
+Florida,1987,51714,17
+Georgia,1987,53749,18
+Hawaii,1987,59075,22
+Idaho,1987,45648,21
+Illinois,1987,60877,17
+Indiana,1987,55472,18
+Iowa,1987,50984,16
+Kansas,1987,50584,15
+Kentucky,1987,49776,18
+Louisiana,1987,43527,18
+Maine,1987,48076,15
+Maryland,1987,63484,17
+Massachusetts,1987,62346,14
+Michigan,1987,68037,20
+Minnesota,1987,61365,17
+Mississippi,1987,42202,19
+Missouri,1987,50711,16
+Montana,1987,48840,16
+Nebraska,1987,46552,15
+Nevada,1987,56643,20
+New Hampshire,1987,49294,16
+New Jersey,1987,63046,14
+New Mexico,1987,50328,19
+New York,1987,70806,15
+North Carolina,1987,51103,18
+North Dakota,1987,44452,16
+Ohio,1987,56656,18
+Oklahoma,1987,44392,17
+Oregon,1987,57587,18
+Pennsylvania,1987,59881,16
+Rhode Island,1987,67434,15
+South Carolina,1987,50749,17
+South Dakota,1987,40549,16
+Tennessee,1987,48815,20
+Texas,1987,52453,17
+Utah,1987,46290,25
+Vermont,1987,50297,14
+Virginia,1987,55800,16
+Washington,1987,57910,20
+West Virginia,1987,44608,15
+Wisconsin,1987,59767,16
+Wyoming,1987,55687,14
+Alabama,1988,48454,19
+Alaska,1988,81528,17
+Arizona,1988,55648,18
+Arkansas,1988,41776,16
+California,1988,67725,23
+Colorado,1988,57714,18
+Connecticut,1988,72915,13
+Delaware,1988,61672,16
+District of Columbia,1988,72697,14
+Florida,1988,52668,17
+Georgia,1988,52564,18
+Hawaii,1988,60097,19
+Idaho,1988,44391,21
+Illinois,1988,60814,17
+Indiana,1988,56940,18
+Iowa,1988,50333,16
+Kansas,1988,53423,15
+Kentucky,1988,48679,18
+Louisiana,1988,43875,18
+Maine,1988,48695,15
+Maryland,1988,66184,17
+Massachusetts,1988,62915,14
+Michigan,1988,67697,20
+Minnesota,1988,59867,17
+Mississippi,1988,44085,18
+Missouri,1988,50779,16
+Montana,1988,47684,16
+Nebraska,1988,46560,15
+Nevada,1988,56312,20
+New Hampshire,1988,52138,16
+New Jersey,1988,64507,14
+New Mexico,1988,47442,19
+New York,1988,71570,15
+North Carolina,1988,50255,17
+North Dakota,1988,43442,15
+Ohio,1988,57934,18
+Oklahoma,1988,43680,17
+Oregon,1988,57386,18
+Pennsylvania,1988,61014,16
+Rhode Island,1988,66842,14
+South Carolina,1988,50031,17
+South Dakota,1988,40087,15
+Tennessee,1988,50023,19
+Texas,1988,51796,17
+Utah,1988,44621,24
+Vermont,1988,52926,14
+Virginia,1988,56560,16
+Washington,1988,57014,20
+West Virginia,1988,42770,15
+Wisconsin,1988,60099,16
+Wyoming,1988,53959,15
+Alabama,1989,45895,18
+Alaska,1989,79768,17
+Arizona,1989,54349,19
+Arkansas,1989,41318,17
+California,1989,70239,22
+Colorado,1989,56856,18
+Connecticut,1989,74791,13
+Delaware,1989,61697,16
+District of Columbia,1989,70985,13
+Florida,1989,53242,17
+Georgia,1989,51769,18
+Hawaii,1989,59238,19
+Idaho,1989,44106,20
+Illinois,1989,60620,17
+Indiana,1989,57121,18
+Iowa,1989,49442,16
+Kansas,1989,53133,15
+Kentucky,1989,48600,18
+Louisiana,1989,44918,18
+Maine,1989,49690,14
+Maryland,1989,67135,17
+Massachusetts,1989,64165,14
+Michigan,1989,68527,20
+Minnesota,1989,59503,17
+Mississippi,1989,44904,18
+Missouri,1989,50083,16
+Montana,1989,46363,16
+Nebraska,1989,47178,15
+Nevada,1989,56545,20
+New Hampshire,1989,53580,16
+New Jersey,1989,65946,14
+New Mexico,1989,45761,18
+New York,1989,71953,15
+North Carolina,1989,51541,17
+North Dakota,1989,42545,15
+Ohio,1989,57705,17
+Oklahoma,1989,42644,16
+Oregon,1989,57007,18
+Pennsylvania,1989,61624,16
+Rhode Island,1989,66650,14
+South Carolina,1989,50310,17
+South Dakota,1989,39372,16
+Tennessee,1989,50005,19
+Texas,1989,50826,17
+Utah,1989,43784,25
+Vermont,1989,53628,14
+Virginia,1989,57188,16
+Washington,1989,56300,20
+West Virginia,1989,42222,15
+Wisconsin,1989,59005,16
+Wyoming,1989,52019,15
+Alabama,1990,46996,20
+Alaska,1990,75945,17
+Arizona,1990,53814,19
+Arkansas,1990,41291,17
+California,1990,69248,23
+Colorado,1990,55644,18
+Connecticut,1990,76610,13
+Delaware,1990,61638,17
+District of Columbia,1990,69072,14
+Florida,1990,53434,17
+Georgia,1990,50672,18
+Hawaii,1990,56908,19
+Idaho,1990,44567,20
+Illinois,1990,60517,17
+Indiana,1990,57284,17
+Iowa,1990,48926,16
+Kansas,1990,52056,15
+Kentucky,1990,50915,17
+Louisiana,1990,45888,17
+Maine,1990,49894,14
+Maryland,1990,67122,17
+Massachusetts,1990,63760,15
+Michigan,1990,68987,20
+Minnesota,1990,57931,17
+Mississippi,1990,42611,18
+Missouri,1990,49466,16
+Montana,1990,46822,16
+Nebraska,1990,46503,15
+Nevada,1990,56326,19
+New Hampshire,1990,54562,16
+New Jersey,1990,67172,14
+New Mexico,1990,45006,18
+New York,1990,73589,15
+North Carolina,1990,51197,17
+North Dakota,1990,41226,16
+Ohio,1990,57036,17
+Oklahoma,1990,42769,16
+Oregon,1990,56486,18
+Pennsylvania,1990,63056,17
+Rhode Island,1990,61202,15
+South Carolina,1990,49491,17
+South Dakota,1990,39131,15
+Tennessee,1990,49399,19
+Texas,1990,49528,15
+Utah,1990,44730,25
+Vermont,1990,54626,13
+Virginia,1990,56228,16
+Washington,1990,57848,20
+West Virginia,1990,45411,15
+Wisconsin,1990,58076,16
+Wyoming,1990,50623,14
+Alabama,1991,45906,18
+Alaska,1991,76015,17
+Arizona,1991,53063,19
+Arkansas,1991,46075,17
+California,1991,67950,23
+Colorado,1991,56290,18
+Connecticut,1991,79948,14
+Delaware,1991,58803,17
+District of Columbia,1991,66036,13
+Florida,1991,52882,18
+Georgia,1991,49992,18
+Hawaii,1991,58768,18
+Idaho,1991,44822,19
+Illinois,1991,62058,17
+Indiana,1991,57880,18
+Iowa,1991,49704,16
+Kansas,1991,52305,15
+Kentucky,1991,52543,17
+Louisiana,1991,44191,17
+Maine,1991,51226,14
+Maryland,1991,65916,17
+Massachusetts,1991,64415,15
+Michigan,1991,70619,19
+Minnesota,1991,58638,17
+Mississippi,1991,41475,18
+Missouri,1991,49180,16
+Montana,1991,46959,16
+Nebraska,1991,46349,15
+Nevada,1991,57627,19
+New Hampshire,1991,56457,15
+New Jersey,1991,69830,14
+New Mexico,1991,44660,18
+New York,1991,73758,15
+North Carolina,1991,49003,17
+North Dakota,1991,41692,15
+Ohio,1991,56052,17
+Oklahoma,1991,43129,16
+Oregon,1991,58040,19
+Pennsylvania,1991,65895,17
+Rhode Island,1991,61983,15
+South Carolina,1991,47773,17
+South Dakota,1991,39643,15
+Tennessee,1991,48715,19
+Texas,1991,49429,16
+Utah,1991,44830,25
+Vermont,1991,57267,14
+Virginia,1991,54064,16
+Washington,1991,59271,20
+West Virginia,1991,46579,15
+Wisconsin,1991,59959,16
+Wyoming,1991,51786,16
+Alabama,1992,45214,17
+Alaska,1992,78340,16
+Arizona,1992,52594,18
+Arkansas,1992,46019,17
+California,1992,67158,23
+Colorado,1992,56265,18
+Connecticut,1992,81095,14
+Delaware,1992,60754,17
+District of Columbia,1992,64923,12
+Florida,1992,52292,18
+Georgia,1992,50699,18
+Hawaii,1992,61179,16
+Idaho,1992,45310,19
+Illinois,1992,64805,16
+Indiana,1992,58824,17
+Iowa,1992,50544,15
+Kansas,1992,55128,15
+Kentucky,1992,52195,17
+Louisiana,1992,43787,16
+Maine,1992,50745,14
+Maryland,1992,65009,16
+Massachusetts,1992,65044,15
+Michigan,1992,73644,19
+Minnesota,1992,58868,17
+Mississippi,1992,40875,18
+Missouri,1992,49277,16
+Montana,1992,46328,16
+Nebraska,1992,48236,14
+Nevada,1992,57235,19
+New Hampshire,1992,56919,15
+New Jersey,1992,71595,13
+New Mexico,1992,44507,16
+New York,1992,75486,14
+North Carolina,1992,49176,16
+North Dakota,1992,42292,15
+Ohio,1992,57906,17
+Oklahoma,1992,43478,15
+Oregon,1992,60189,19
+Pennsylvania,1992,69139,17
+Rhode Island,1992,63632,14
+South Carolina,1992,49024,17
+South Dakota,1992,40745,15
+Tennessee,1992,48580,19
+Texas,1992,50217,16
+Utah,1992,45693,24
+Vermont,1992,58417,13
+Virginia,1992,54112,15
+Washington,1992,59986,20
+West Virginia,1992,50831,15
+Wisconsin,1992,60267,15
+Wyoming,1992,50459,17
+Alabama,1993,46980,17
+Alaska,1993,77760,17
+Arizona,1993,52046,19
+Arkansas,1993,45987,17
+California,1993,65898,23
+Colorado,1993,55362,18
+Connecticut,1993,81454,14
+Delaware,1993,61324,16
+District of Columbia,1993,69627,12
+Florida,1993,52282,18
+Georgia,1993,50266,17
+Hawaii,1993,59843,18
+Idaho,1993,45427,19
+Illinois,1993,64463,16
+Indiana,1993,58448,17
+Iowa,1993,50344,15
+Kansas,1993,55506,15
+Kentucky,1993,51759,17
+Louisiana,1993,42709,16
+Maine,1993,50729,14
+Maryland,1993,64571,17
+Massachusetts,1993,63866,15
+Michigan,1993,73413,19
+Minnesota,1993,58002,17
+Mississippi,1993,41166,17
+Missouri,1993,49622,15
+Montana,1993,46154,16
+Nebraska,1993,48387,14
+Nevada,1993,55573,19
+New Hampshire,1993,55845,15
+New Jersey,1993,73148,13
+New Mexico,1993,44521,17
+New York,1993,74914,14
+North Carolina,1993,48654,16
+North Dakota,1993,41744,15
+Ohio,1993,58384,17
+Oklahoma,1993,44205,15
+Oregon,1993,61724,19
+Pennsylvania,1993,69411,17
+Rhode Island,1993,64256,14
+South Carolina,1993,48390,16
+South Dakota,1993,41340,15
+Tennessee,1993,49941,18
+Texas,1993,49966,16
+Utah,1993,45345,24
+Vermont,1993,56492,14
+Virginia,1993,54025,14
+Washington,1993,58695,20
+West Virginia,1993,49999,15
+Wisconsin,1993,58903,16
+Wyoming,1993,50657,15
+Alabama,1994,49761,17
+Alaska,1994,76616,17
+Arizona,1994,51410,19
+Arkansas,1994,46230,17
+California,1994,65634,23
+Colorado,1994,55238,18
+Connecticut,1994,79962,14
+Delaware,1994,62435,17
+District of Columbia,1994,69823,12
+Florida,1994,52069,19
+Georgia,1994,51595,16
+Hawaii,1994,61544,18
+Idaho,1994,47588,19
+Illinois,1994,63003,16
+Indiana,1994,58776,17
+Iowa,1994,50347,15
+Kansas,1994,55367,15
+Kentucky,1994,51541,16
+Louisiana,1994,42279,16
+Maine,1994,51085,14
+Maryland,1994,64968,16
+Massachusetts,1994,65182,14
+Michigan,1994,66940,19
+Minnesota,1994,57437,17
+Mississippi,1994,42850,17
+Missouri,1994,49833,15
+Montana,1994,45992,16
+Nebraska,1994,49407,14
+Nevada,1994,55661,19
+New Hampshire,1994,55476,15
+New Jersey,1994,73637,13
+New Mexico,1994,45526,17
+New York,1994,76075,14
+North Carolina,1994,49201,16
+North Dakota,1994,42065,15
+Ohio,1994,58803,16
+Oklahoma,1994,45013,15
+Oregon,1994,61603,20
+Pennsylvania,1994,71119,17
+Rhode Island,1994,65077,14
+South Carolina,1994,48380,16
+South Dakota,1994,41533,14
+Tennessee,1994,51892,18
+Texas,1994,49887,15
+Utah,1994,46468,24
+Vermont,1994,56572,13
+Virginia,1994,54304,14
+Washington,1994,57762,20
+West Virginia,1994,51041,14
+Wisconsin,1994,60311,16
+Wyoming,1994,49987,15
+Alabama,1995,48545,17
+Alaska,1995,76928,17
+Arizona,1995,50361,19
+Arkansas,1995,45459,17
+California,1995,65515,23
+Colorado,1995,54826,18
+Connecticut,1995,77911,14
+Delaware,1995,62839,17
+District of Columbia,1995,67748,13
+Florida,1995,51672,18
+Georgia,1995,52714,16
+Hawaii,1995,55513,18
+Idaho,1995,47891,19
+Illinois,1995,63438,16
+Indiana,1995,58408,17
+Iowa,1995,50187,15
+Kansas,1995,54469,15
+Kentucky,1995,51285,16
+Louisiana,1995,41548,16
+Maine,1995,50957,14
+Maryland,1995,63811,16
+Massachusetts,1995,65523,14
+Michigan,1995,69449,19
+Minnesota,1995,57265,18
+Mississippi,1995,42932,17
+Missouri,1995,51689,15
+Montana,1995,45524,16
+Nebraska,1995,48829,14
+Nevada,1995,56070,19
+New Hampshire,1995,55489,16
+New Jersey,1995,74276,13
+New Mexico,1995,45074,16
+New York,1995,74593,14
+North Carolina,1995,47147,16
+North Dakota,1995,41811,16
+Ohio,1995,58656,17
+Oklahoma,1995,44035,15
+Oregon,1995,61558,20
+Pennsylvania,1995,71450,17
+Rhode Island,1995,65361,14
+South Carolina,1995,49024,16
+South Dakota,1995,40845,15
+Tennessee,1995,51356,16
+Texas,1995,49611,15
+Utah,1995,47421,23
+Vermont,1995,56269,13
+Virginia,1995,53939,14
+Washington,1995,58684,20
+West Virginia,1995,49850,14
+Wisconsin,1995,59195,15
+Wyoming,1995,48946,15
+Alabama,1996,49104,16
+Alaska,1996,76406,17
+Arizona,1996,50312,19
+Arkansas,1996,45220,17
+California,1996,65585,22
+Colorado,1996,54574,18
+Connecticut,1996,76073,14
+Delaware,1996,62511,17
+District of Columbia,1996,67905,13
+Florida,1996,51113,18
+Georgia,1996,54373,16
+Hawaii,1996,54071,18
+Idaho,1996,48001,19
+Illinois,1996,64386,16
+Indiana,1996,58194,17
+Iowa,1996,50199,15
+Kansas,1996,54064,15
+Kentucky,1996,51217,16
+Louisiana,1996,42764,16
+Maine,1996,50991,13
+Maryland,1996,62076,16
+Massachusetts,1996,66086,14
+Michigan,1996,66757,19
+Minnesota,1996,57289,17
+Mississippi,1996,41819,17
+Missouri,1996,51808,15
+Montana,1996,45183,16
+Nebraska,1996,47925,14
+Nevada,1996,56331,19
+New Hampshire,1996,55618,15
+New Jersey,1996,74448,13
+New Mexico,1996,44828,16
+New York,1996,74766,14
+North Carolina,1996,47106,16
+North Dakota,1996,41805,15
+Ohio,1996,58581,17
+Oklahoma,1996,44157,16
+Oregon,1996,61702,20
+Pennsylvania,1996,71552,17
+Rhode Island,1996,64899,14
+South Carolina,1996,49270,16
+South Dakota,1996,40376,15
+Tennessee,1996,50974,16
+Texas,1996,49247,15
+Utah,1996,47898,24
+Vermont,1996,56120,13
+Virginia,1996,54064,14
+Washington,1996,57116,20
+West Virginia,1996,50024,14
+Wisconsin,1996,58760,16
+Wyoming,1996,47854,15
+Alabama,1997,48399,16
+Alaska,1997,70200,17
+Arizona,1997,50748,20
+Arkansas,1997,46591,17
+California,1997,65752,21
+Colorado,1997,54920,18
+Connecticut,1997,74815,14
+Delaware,1997,62588,16
+District of Columbia,1997,68355,16
+Florida,1997,50843,18
+Georgia,1997,55405,16
+Hawaii,1997,56597,18
+Idaho,1997,48422,18
+Illinois,1997,64433,16
+Indiana,1997,58622,17
+Iowa,1997,50266,15
+Kansas,1997,54288,15
+Kentucky,1997,51046,16
+Louisiana,1997,44376,15
+Maine,1997,50657,13
+Maryland,1997,61555,17
+Massachusetts,1997,64786,14
+Michigan,1997,70051,18
+Minnesota,1997,55941,16
+Mississippi,1997,42314,17
+Missouri,1997,50062,15
+Montana,1997,45157,16
+Nebraska,1997,48178,14
+Nevada,1997,54705,18
+New Hampshire,1997,54069,15
+New Jersey,1997,74390,13
+New Mexico,1997,44467,17
+New York,1997,71839,14
+North Carolina,1997,48858,16
+North Dakota,1997,41633,15
+Ohio,1997,57494,16
+Oklahoma,1997,45264,15
+Oregon,1997,62235,20
+Pennsylvania,1997,70113,17
+Rhode Island,1997,65332,14
+South Carolina,1997,49695,15
+South Dakota,1997,41109,15
+Tennessee,1997,52118,16
+Texas,1997,50338,15
+Utah,1997,47774,22
+Vermont,1997,53533,13
+Virginia,1997,54056,14
+Washington,1997,57169,20
+West Virginia,1997,49253,14
+Wisconsin,1997,58042,15
+Wyoming,1997,47225,14
+Alabama,1998,52016,15
+Alaska,1998,68026,16
+Arizona,1998,50861,20
+Arkansas,1998,46977,16
+California,1998,65927,20
+Colorado,1998,55218,17
+Connecticut,1998,74908,14
+Delaware,1998,62680,16
+District of Columbia,1998,68469,12
+Florida,1998,51110,18
+Georgia,1998,57614,15
+Hawaii,1998,58633,18
+Idaho,1998,49464,18
+Illinois,1998,66173,16
+Indiana,1998,59775,17
+Iowa,1998,50719,15
+Kansas,1998,54318,14
+Kentucky,1998,51589,15
+Louisiana,1998,47209,15
+Maine,1998,50689,13
+Maryland,1998,61754,16
+Massachusetts,1998,65456,13
+Michigan,1998,70004,17
+Minnesota,1998,57299,16
+Mississippi,1998,42882,16
+Missouri,1998,50456,14
+Montana,1998,45534,16
+Nebraska,1998,47747,14
+Nevada,1998,56464,19
+New Hampshire,1998,54318,15
+New Jersey,1998,74340,13
+New Mexico,1998,47047,16
+New York,1998,71790,14
+North Carolina,1998,52420,16
+North Dakota,1998,42077,14
+Ohio,1998,58908,16
+Oklahoma,1998,45233,15
+Oregon,1998,62200,20
+Pennsylvania,1998,70367,16
+Rhode Island,1998,66291,14
+South Carolina,1998,50108,15
+South Dakota,1998,41462,14
+Tennessee,1998,53003,15
+Texas,1998,50885,15
+Utah,1998,47848,22
+Vermont,1998,53439,12
+Virginia,1998,54419,14
+Washington,1998,56186,20
+West Virginia,1998,49727,14
+Wisconsin,1998,59040,14
+Wyoming,1998,48647,14
+Alabama,1999,52127,15
+Alaska,1999,66012,17
+Arizona,1999,52429,19
+Arkansas,1999,47434,14
+California,1999,67742,20
+Colorado,1999,54221,17
+Connecticut,1999,73567,14
+Delaware,1999,63132,15
+District of Columbia,1999,66884,14
+Florida,1999,52173,18
+Georgia,1999,58284,15
+Hawaii,1999,57652,17
+Idaho,1999,50504,18
+Illinois,1999,66046,16
+Indiana,1999,59459,17
+Iowa,1999,50690,14
+Kansas,1999,49700,14
+Kentucky,1999,51688,15
+Louisiana,1999,47040,15
+Maine,1999,50524,13
+Maryland,1999,62582,16
+Massachusetts,1999,66179,12
+Michigan,1999,69680,17
+Minnesota,1999,56549,15
+Mississippi,1999,45261,16
+Missouri,1999,50659,14
+Montana,1999,45636,15
+Nebraska,1999,47222,14
+Nevada,1999,55964,19
+New Hampshire,1999,53611,15
+New Jersey,1999,73901,12
+New Mexico,1999,46252,16
+New York,1999,72488,13
+North Carolina,1999,55984,15
+North Dakota,1999,42428,14
+Ohio,1999,58871,16
+Oklahoma,1999,44467,15
+Oregon,1999,60150,19
+Pennsylvania,1999,68653,16
+Rhode Island,1999,66834,14
+South Carolina,1999,51263,14
+South Dakota,1999,41303,14
+Tennessee,1999,51614,15
+Texas,1999,53374,14
+Utah,1999,49650,21
+Vermont,1999,53645,12
+Virginia,1999,55046,13
+Washington,1999,58313,20
+West Virginia,1999,49740,14
+Wisconsin,1999,58469,14
+Wyoming,1999,48487,13
+Alabama,2000,50954,15
+Alaska,2000,66148,17
+Arizona,2000,51088,20
+Arkansas,2000,47616,14
+California,2000,72137,20
+Colorado,2000,53861,17
+Connecticut,2000,72430,13
+Delaware,2000,64669,15
+District of Columbia,2000,66947,12
+Florida,2000,52550,18
+Georgia,2000,58029,16
+Hawaii,2000,55054,17
+Idaho,2000,51477,18
+Illinois,2000,65769,16
+Indiana,2000,59534,17
+Iowa,2000,50143,14
+Kansas,2000,49348,14
+Kentucky,2000,50294,16
+Louisiana,2000,46206,14
+Maine,2000,49997,12
+Maryland,2000,63179,16
+Massachusetts,2000,66871,14
+Michigan,2000,70539,17
+Minnesota,2000,58023,16
+Mississippi,2000,43923,16
+Missouri,2000,50467,14
+Montana,2000,45703,15
+Nebraska,2000,46976,13
+Nevada,2000,55592,18
+New Hampshire,2000,52647,14
+New Jersey,2000,71846,12
+New Mexico,2000,46440,15
+New York,2000,70790,13
+North Carolina,2000,57017,15
+North Dakota,2000,42462,13
+Ohio,2000,58782,15
+Oklahoma,2000,47421,14
+Oregon,2000,61840,19
+Pennsylvania,2000,68079,15
+Rhode Island,2000,66631,14
+South Carolina,2000,52148,15
+South Dakota,2000,41601,14
+Tennessee,2000,51451,15
+Texas,2000,52730,14
+Utah,2000,50091,21
+Vermont,2000,52581,12
+Virginia,2000,55223,13
+Washington,2000,57920,20
+West Virginia,2000,49330,13
+Wisconsin,2000,57899,14
+Wyoming,2000,47667,13
+Alabama,2001,49711,16
+Alaska,2001,66049,17
+Arizona,2001,53425,20
+Arkansas,2001,49401,14
+California,2001,72638,20
+Colorado,2001,54342,16
+Connecticut,2001,71573,13
+Delaware,2001,64639,15
+District of Columbia,2001,62883,12
+Florida,2001,52492,18
+Georgia,2001,58905,15
+Hawaii,2001,56956,17
+Idaho,2001,52915,18
+Illinois,2001,66072,16
+Indiana,2001,59068,17
+Iowa,2001,51096,14
+Kansas,2001,49576,14
+Kentucky,2001,50723,15
+Louisiana,2001,48554,14
+Maine,2001,49853,12
+Maryland,2001,64489,16
+Massachusetts,2001,67218,14
+Michigan,2001,70403,17
+Minnesota,2001,56394,16
+Mississippi,2001,44500,15
+Missouri,2001,50783,14
+Montana,2001,45949,15
+Nebraska,2001,48431,13
+Nevada,2001,54482,18
+New Hampshire,2001,53348,14
+New Jersey,2001,71093,12
+New Mexico,2001,48703,15
+New York,2001,69500,13
+North Carolina,2001,57043,15
+North Dakota,2001,43107,13
+Ohio,2001,58846,15
+Oklahoma,2001,46437,14
+Oregon,2001,61589,19
+Pennsylvania,2001,67627,15
+Rhode Island,2001,66503,14
+South Carolina,2001,53358,14
+South Dakota,2001,41827,13
+Tennessee,2001,51477,15
+Texas,2001,52435,14
+Utah,2001,50005,21
+Vermont,2001,52446,12
+Virginia,2001,55775,13
+Washington,2001,58091,19
+West Virginia,2001,49119,14
+Wisconsin,2001,56444,14
+Wyoming,2001,50570,13
+Alabama,2002,50321,15
+Alaska,2002,65372,16
+Arizona,2002,53806,20
+Arkansas,2002,49673,15
+California,2002,74053,20
+Colorado,2002,54307,16
+Connecticut,2002,71526,13
+Delaware,2002,66802,15
+District of Columbia,2002,66790,13
+Florida,2002,51925,18
+Georgia,2002,59909,15
+Hawaii,2002,58503,17
+Idaho,2002,52824,18
+Illinois,2002,67483,15
+Indiana,2002,59336,17
+Iowa,2002,51210,14
+Kansas,2002,50160,14
+Kentucky,2002,51289,15
+Louisiana,2002,48522,14
+Maine,2002,50157,12
+Maryland,2002,65362,15
+Massachusetts,2002,68475,13
+Michigan,2002,71143,19
+Minnesota,2002,56357,16
+Mississippi,2002,45465,15
+Missouri,2002,51085,13
+Montana,2002,47043,14
+Nebraska,2002,49861,13
+Nevada,2002,54991,18
+New Hampshire,2002,53312,14
+New Jersey,2002,71268,12
+New Mexico,2002,48270,15
+New York,2002,69207,13
+North Carolina,2002,56676,15
+North Dakota,2002,43695,13
+Ohio,2002,59803,14
+Oklahoma,2002,45858,15
+Oregon,2002,62629,20
+Pennsylvania,2002,68155,15
+Rhode Island,2002,67202,14
+South Carolina,2002,54312,14
+South Dakota,2002,42651,14
+Tennessee,2002,52204,15
+Texas,2002,52631,14
+Utah,2002,50541,21
+Vermont,2002,54738,11
+Virginia,2002,56776,12
+Washington,2002,59141,19
+West Virginia,2002,50666,14
+Wisconsin,2002,56407,14
+Wyoming,2002,49835,13
+Alabama,2003,49302,13
+Alaska,2003,66554,17
+Arizona,2003,53827,21
+Arkansas,2003,50574,15
+California,2003,72610,21
+Colorado,2003,55726,16
+Connecticut,2003,73759,13
+Delaware,2003,63505,15
+District of Columbia,2003,73337,12
+Florida,2003,52234,18
+Georgia,2003,59160,15
+Hawaii,2003,58505,16
+Idaho,2003,52846,18
+Illinois,2003,69762,16
+Indiana,2003,58906,17
+Iowa,2003,50726,14
+Kansas,2003,49685,14
+Kentucky,2003,51765,15
+Louisiana,2003,48778,14
+Maine,2003,51282,11
+Maryland,2003,64656,15
+Massachusetts,2003,68413,13
+Michigan,2003,69996,17
+Minnesota,2003,58371,16
+Mississippi,2003,45904,15
+Missouri,2003,48891,14
+Montana,2003,47834,14
+Nebraska,2003,49337,13
+Nevada,2003,54356,19
+New Hampshire,2003,54916,14
+New Jersey,2003,71514,12
+New Mexico,2003,48970,15
+New York,2003,70986,12
+North Carolina,2003,55587,15
+North Dakota,2003,45592,13
+Ohio,2003,61081,15
+Oklahoma,2003,45103,15
+Oregon,2003,63252,21
+Pennsylvania,2003,66681,15
+Rhode Island,2003,67229,13
+South Carolina,2003,52951,15
+South Dakota,2003,42755,13
+Tennessee,2003,51866,15
+Texas,2003,52069,14
+Utah,2003,50139,21
+Vermont,2003,54038,11
+Virginia,2003,56158,13
+Washington,2003,58447,19
+West Virginia,2003,49477,14
+Wisconsin,2003,55164,15
+Wyoming,2003,50854,13
+Alabama,2004,47849,14
+Alaska,2004,65690,17
+Arizona,2004,53762,21
+Arkansas,2004,50742,15
+California,2004,72521,20
+Colorado,2004,55070,16
+Connecticut,2004,72347,15
+Delaware,2004,63398,15
+District of Columbia,2004,73248,12
+Florida,2004,52114,17
+Georgia,2004,58299,14
+Hawaii,2004,57827,16
+Idaho,2004,52781,18
+Illinois,2004,69445,15
+Indiana,2004,58371,17
+Iowa,2004,49225,14
+Kansas,2004,49301,14
+Kentucky,2004,50776,15
+Louisiana,2004,48896,14
+Maine,2004,49633,12
+Maryland,2004,65573,15
+Massachusetts,2004,68515,13
+Michigan,2004,71390,17
+Minnesota,2004,58775,16
+Mississippi,2004,45849,15
+Missouri,2004,48953,14
+Montana,2004,48223,14
+Nebraska,2004,49440,13
+Nevada,2004,54375,19
+New Hampshire,2004,55060,13
+New Jersey,2004,71025,11
+New Mexico,2004,49359,15
+New York,2004,70421,12
+North Carolina,2004,54317,15
+North Dakota,2004,45980,12
+Ohio,2004,61013,15
+Oklahoma,2004,47464,15
+Oregon,2004,60560,20
+Pennsylvania,2004,66735,15
+Rhode Island,2004,67004,13
+South Carolina,2004,52865,15
+South Dakota,2004,42654,13
+Tennessee,2004,52723,15
+Texas,2004,51389,14
+Utah,2004,49440,22
+Vermont,2004,55804,11
+Virginia,2004,53590,13
+Washington,2004,57287,19
+West Virginia,2004,48067,14
+Wisconsin,2004,55509,14
+Wyoming,2004,50745,13
+Alabama,2005,48900,13
+Alaska,2005,64905,17
+Arizona,2005,54142,21
+Arkansas,2005,51016,14
+California,2005,71925,20
+Colorado,2005,55286,17
+Connecticut,2005,72112,14
+Delaware,2005,65767,15
+District of Columbia,2005,74167,12
+Florida,2005,52481,17
+Georgia,2005,58539,14
+Hawaii,2005,62537,16
+Idaho,2005,52588,18
+Illinois,2005,70076,15
+Indiana,2005,57272,17
+Iowa,2005,49542,14
+Kansas,2005,50138,13
+Kentucky,2005,50786,15
+Louisiana,2005,48786,14
+Maine,2005,49372,12
+Maryland,2005,66036,15
+Massachusetts,2005,68582,13
+Michigan,2005,70879,17
+Minnesota,2005,58768,16
+Mississippi,2005,45963,15
+Missouri,2005,48385,13
+Montana,2005,48276,14
+Nebraska,2005,49723,13
+Nevada,2005,53843,19
+New Hampshire,2005,54858,13
+New Jersey,2005,69940,12
+New Mexico,2005,50463,15
+New York,2005,69512,12
+North Carolina,2005,53233,15
+North Dakota,2005,45780,12
+Ohio,2005,60980,15
+Oklahoma,2005,46991,14
+Oregon,2005,59364,19
+Pennsylvania,2005,65480,15
+Rhode Island,2005,66332,11
+South Carolina,2005,52409,14
+South Dakota,2005,42067,13
+Tennessee,2005,51554,16
+Texas,2005,50593,14
+Utah,2005,48862,22
+Vermont,2005,56505,10
+Virginia,2005,53113,11
+Washington,2005,56146,19
+West Virginia,2005,46400,14
+Wisconsin,2005,56224,14
+Wyoming,2005,52388,13
+Alabama,2006,50943,13
+Alaska,2006,64174,17
+Arizona,2006,53940,20
+Arkansas,2006,51948,13
+California,2006,74720,20
+Colorado,2006,53813,16
+Connecticut,2006,71412,14
+Delaware,2006,64200,15
+District of Columbia,2006,69272,12
+Florida,2006,53196,16
+Georgia,2006,58594,14
+Hawaii,2006,60962,16
+Idaho,2006,50249,18
+Illinois,2006,68387,14
+Indiana,2006,56159,17
+Iowa,2006,50639,13
+Kansas,2006,50879,13
+Kentucky,2006,51245,15
+Louisiana,2006,50271,14
+Maine,2006,48838,11
+Maryland,2006,66838,14
+Massachusetts,2006,68831,13
+Michigan,2006,64453,17
+Minnesota,2006,58276,16
+Mississippi,2006,47178,15
+Missouri,2006,49123,13
+Montana,2006,48403,14
+Nebraska,2006,49364,13
+Nevada,2006,53236,18
+New Hampshire,2006,54628,13
+New Jersey,2006,70353,12
+New Mexico,2006,50228,15
+New York,2006,68729,12
+North Carolina,2006,54490,13
+North Dakota,2006,45581,12
+Ohio,2006,60980,16
+Oklahoma,2006,49757,14
+Oregon,2006,59775,19
+Pennsylvania,2006,64541,15
+Rhode Island,2006,65698,13
+South Carolina,2006,51817,14
+South Dakota,2006,41538,13
+Tennessee,2006,51445,15
+Texas,2006,52714,14
+Utah,2006,47629,22
+Vermont,2006,56792,10
+Virginia,2006,52514,15
+Washington,2006,56219,19
+West Virginia,2006,47588,14
+Wisconsin,2006,56241,14
+Wyoming,2006,59518,13
+Alabama,2007,53214,15
+Alaska,2007,64808,17
+Arizona,2007,52264,20
+Arkansas,2007,52265,14
+California,2007,73561,21
+Colorado,2007,53949,16
+Connecticut,2007,70766,14
+Delaware,2007,63935,15
+District of Columbia,2007,69226,10
+Florida,2007,53586,14
+Georgia,2007,58872,14
+Hawaii,2007,60973,16
+Idaho,2007,50353,18
+Illinois,2007,69051,15
+Indiana,2007,55388,17
+Iowa,2007,53282,13
+Kansas,2007,51537,13
+Kentucky,2007,53902,15
+Louisiana,2007,53625,13
+Maine,2007,49552,12
+Maryland,2007,68588,14
+Massachusetts,2007,69047,13
+Michigan,2007,64052,17
+Minnesota,2007,57756,16
+Mississippi,2007,48417,14
+Missouri,2007,49334,13
+Montana,2007,48955,14
+Nebraska,2007,48967,13
+Nevada,2007,54476,18
+New Hampshire,2007,54361,13
+New Jersey,2007,69968,12
+New Mexico,2007,51510,15
+New York,2007,71172,12
+North Carolina,2007,54070,14
+North Dakota,2007,45992,12
+Ohio,2007,60985,16
+Oklahoma,2007,49728,13
+Oregon,2007,59159,19
+Pennsylvania,2007,63751,13
+Rhode Island,2007,65276,13
+South Carolina,2007,52248,15
+South Dakota,2007,41875,13
+Tennessee,2007,51416,14
+Texas,2007,52728,14
+Utah,2007,47517,23
+Vermont,2007,53201,10
+Virginia,2007,53433,17
+Washington,2007,56959,19
+West Virginia,2007,48561,13
+Wisconsin,2007,56008,14
+Wyoming,2007,60601,12
+Alabama,2008,51539,15
+Alaska,2008,64199,16
+Arizona,2008,50966,20
+Arkansas,2008,52191,13
+California,2008,74861,21
+Colorado,2008,53306,16
+Connecticut,2008,69429,11
+Delaware,2008,62299,15
+District of Columbia,2008,68775,12
+Florida,2008,51585,14
+Georgia,2008,58135,14
+Hawaii,2008,61273,16
+Idaho,2008,49669,18
+Illinois,2008,67441,15
+Indiana,2008,54496,17
+Iowa,2008,53472,13
+Kansas,2008,51013,13
+Kentucky,2008,52634,15
+Louisiana,2008,53460,13
+Maine,2008,49177,12
+Maryland,2008,69096,14
+Massachusetts,2008,73343,13
+Michigan,2008,63025,17
+Minnesota,2008,57100,15
+Mississippi,2008,48921,14
+Missouri,2008,48647,13
+Montana,2008,48842,13
+Nebraska,2008,49426,13
+Nevada,2008,55043,20
+New Hampshire,2008,54829,12
+New Jersey,2008,69384,11
+New Mexico,2008,50300,14
+New York,2008,75988,12
+North Carolina,2008,53483,13
+North Dakota,2008,45794,11
+Ohio,2008,60089,16
+Oklahoma,2008,48204,13
+Oregon,2008,59461,19
+Pennsylvania,2008,62926,14
+Rhode Island,2008,64212,13
+South Carolina,2008,52134,14
+South Dakota,2008,38556,13
+Tennessee,2008,50076,15
+Texas,2008,51844,14
+Utah,2008,46543,23
+Vermont,2008,52643,10
+Virginia,2008,53172,17
+Washington,2008,57792,19
+West Virginia,2008,49144,13
+Wisconsin,2008,56202,14
+Wyoming,2008,60029,12
+Alabama,2009,52494,16
+Alaska,2009,65848,16
+Arizona,2009,51811,21
+Arkansas,2009,51533,13
+California,2009,75262,20
+Colorado,2009,54294,16
+Connecticut,2009,71010,13
+Delaware,2009,62988,15
+District of Columbia,2009,71228,10
+Florida,2009,51542,14
+Georgia,2009,58609,14
+Hawaii,2009,60762,16
+Idaho,2009,51073,18
+Illinois,2009,68502,15
+Indiana,2009,55159,17
+Iowa,2009,54762,13
+Kansas,2009,51486,13
+Kentucky,2009,54671,16
+Louisiana,2009,53964,13
+Maine,2009,50878,11
+Maryland,2009,70592,14
+Massachusetts,2009,76443,13
+Michigan,2009,63956,17
+Minnesota,2009,57857,16
+Mississippi,2009,50368,15
+Missouri,2009,50007,13
+Montana,2009,50495,13
+Nebraska,2009,51011,13
+Nevada,2009,56857,19
+New Hampshire,2009,56767,13
+New Jersey,2009,71871,11
+New Mexico,2009,51046,14
+New York,2009,79047,12
+North Carolina,2009,51699,14
+North Dakota,2009,47411,11
+Ohio,2009,61749,16
+Oklahoma,2009,52627,14
+Oregon,2009,60939,20
+Pennsylvania,2009,65278,13
+Rhode Island,2009,65863,13
+South Carolina,2009,52425,15
+South Dakota,2009,42856,13
+Tennessee,2009,51081,15
+Texas,2009,53256,14
+Utah,2009,50634,22
+Vermont,2009,54164,10
+Virginia,2009,55191,17
+Washington,2009,58489,19
+West Virginia,2009,50716,13
+Wisconsin,2009,56570,14
+Wyoming,2009,61642,12
+Alabama,2010,52400,15
+Alaska,2010,66303,16
+Arizona,2010,51608,21
+Arkansas,2010,51768,14
+California,2010,75355,24
+Colorado,2010,54197,17
+Connecticut,2010,71163,13
+Delaware,2010,62875,14
+District of Columbia,2010,72281,10
+Florida,2010,50685,15
+Georgia,2010,58503,15
+Hawaii,2010,59759,16
+Idaho,2010,51460,17
+Illinois,2010,68378,15
+Indiana,2010,54706,18
+Iowa,2010,54952,14
+Kansas,2010,51095,13
+Kentucky,2010,54305,15
+Louisiana,2010,53867,14
+Maine,2010,51206,12
+Maryland,2010,70666,14
+Massachusetts,2010,77073,13
+Michigan,2010,63592,18
+Minnesota,2010,57753,16
+Mississippi,2010,50811,15
+Missouri,2010,50369,13
+Montana,2010,51152,14
+Nebraska,2010,51574,13
+Nevada,2010,57545,20
+New Hampshire,2010,57294,12
+New Jersey,2010,72698,12
+New Mexico,2010,50954,15
+New York,2010,78909,13
+North Carolina,2010,50845,15
+North Dakota,2010,48041,11
+Ohio,2010,62177,16
+Oklahoma,2010,53221,15
+Oregon,2010,61196,20
+Pennsylvania,2010,65699,14
+Rhode Island,2010,66119,13
+South Carolina,2010,53650,16
+South Dakota,2010,38203,13
+Tennessee,2010,51055,14
+Texas,2010,52377,14
+Utah,2010,50543,22
+Vermont,2010,54417,10
+Virginia,2010,55956,17
+Washington,2010,58384,19
+West Virginia,2010,51283,13
+Wisconsin,2010,56468,14
+Wyoming,2010,61837,12
+Alabama,2011,50522,15
+Alaska,2011,65700,16
+Arizona,2011,51246,21
+Arkansas,2011,48744,14
+California,2011,72127,23
+Colorado,2011,51622,17
+Connecticut,2011,73110,12
+Delaware,2011,61885,15
+District of Columbia,2011,72326,10
+Florida,2011,48918,15
+Georgia,2011,55716,15
+Hawaii,2011,57020,16
+Idaho,2011,56907,17
+Illinois,2011,51098,15
+Indiana,2011,60660,17
+Iowa,2011,53166,14
+Kansas,2011,52876,12
+Kentucky,2011,49169,16
+Louisiana,2011,52339,14
+Maine,2011,52812,12
+Maryland,2011,49822,14
+Massachusetts,2011,66973,13
+Michigan,2011,75484,18
+Minnesota,2011,64790,16
+Mississippi,2011,57843,15
+Missouri,2011,43831,13
+Montana,2011,48841,14
+Nebraska,2011,51093,13
+Nevada,2011,50681,21
+New Hampshire,2011,57422,13
+New Jersey,2011,70597,12
+New Mexico,2011,48016,15
+New York,2011,77249,13
+North Carolina,2011,48358,15
+North Dakota,2011,48475,11
+Ohio,2011,59691,16
+Oklahoma,2011,46720,15
+Oregon,2011,60357,21
+Pennsylvania,2011,65184,14
+Rhode Island,2011,65449,12
+South Carolina,2011,49916,15
+South Dakota,2011,40840,14
+Tennessee,2011,49552,15
+Texas,2011,50911,15
+Utah,2011,50686,23
+Vermont,2011,53998,10
+Virginia,2011,51258,13
+Washington,2011,54972,19
+West Virginia,2011,47698,13
+Wisconsin,2011,56614,15
+Wyoming,2011,60224,11
+Alabama,2012,49432,#DIV/0!
+Alaska,2012,67492,#DIV/0!
+Arizona,2012,51428,#DIV/0!
+Arkansas,2012,48073,#DIV/0!
+California,2012,71468,#DIV/0!
+Colorado,2012,51385,#DIV/0!
+Connecticut,2012,71543,#DIV/0!
+Delaware,2012,61524,#DIV/0!
+District of Columbia,2012,73099,#DIV/0!
+Florida,2012,48039,#DIV/0!
+Georgia,2012,54515,#DIV/0!
+Hawaii,2012,55979,#DIV/0!
+Idaho,2012,51272,#DIV/0!
+Illinois,2012,60941,#DIV/0!
+Indiana,2012,51613,#DIV/0!
+Iowa,2012,52521,#DIV/0!
+Kansas,2012,48932,#DIV/0!
+Kentucky,2012,51755,#DIV/0!
+Louisiana,2012,52970,#DIV/0!
+Maine,2012,49928,#DIV/0!
+Maryland,2012,66235,#DIV/0!
+Massachusetts,2012,74571,#DIV/0!
+Michigan,2012,63464,#DIV/0!
+Minnesota,2012,58008,#DIV/0!
+Mississippi,2012,43107,#DIV/0!
+Missouri,2012,48986,#DIV/0!
+Montana,2012,50366,#DIV/0!
+Nebraska,2012,50512,#DIV/0!
+Nevada,2012,57687,#DIV/0!
+New Hampshire,2012,57318,#DIV/0!
+New Jersey,2012,70924,#DIV/0!
+New Mexico,2012,46859,#DIV/0!
+New York,2012,77607,#DIV/0!
+North Carolina,2012,47151,#DIV/0!
+North Dakota,2012,48808,#DIV/0!
+Ohio,2012,58048,#DIV/0!
+Oklahoma,2012,45745,#DIV/0!
+Oregon,2012,59394,#DIV/0!
+Pennsylvania,2012,64942,#DIV/0!
+Rhode Island,2012,65437,#DIV/0!
+South Carolina,2012,49871,#DIV/0!
+South Dakota,2012,40225,#DIV/0!
+Tennessee,2012,49034,#DIV/0!
+Texas,2012,50329,#DIV/0!
+Utah,2012,50920,#DIV/0!
+Vermont,2012,54150,#DIV/0!
+Virginia,2012,50175,#DIV/0!
+Washington,2012,53849,#DIV/0!
+West Virginia,2012,46859,#DIV/0!
+Wisconsin,2012,55461,#DIV/0!
+Wyoming,2012,58531,#DIV/0!
+Alabama,2013,49515,
+Alaska,2013,66966,
+Arizona,2013,46075,
+Arkansas,2013,48091,
+California,2013,72561,
+Colorado,2013,50425,
+Connecticut,2013,71735,
+Delaware,2013,60273,
+District of Columbia,2013,74356,
+Florida,2013,48560,
+Georgia,2013,53788,
+Hawaii,2013,57209,
+Idaho,2013,45190,
+Illinois,2013,61105,
+Indiana,2013,51110,
+Iowa,2013,52881,
+Kansas,2013,49008,
+Kentucky,2013,51385,
+Louisiana,2013,49868,
+Maine,2013,50035,
+Maryland,2013,65599,
+Massachusetts,2013,74389,
+Michigan,2013,63180,
+Minnesota,2013,55645,
+Mississippi,2013,42875,
+Missouri,2013,47513,
+Montana,2013,50707,
+Nebraska,2013,50347,
+Nevada,2013,56724,
+New Hampshire,2013,57988,
+New Jersey,2013,69351,
+New Mexico,2013,46473,
+New York,2013,77656,
+North Carolina,2013,45724,
+North Dakota,2013,49460,
+Ohio,2013,56825,
+Oklahoma,2013,45276,
+Oregon,2013,59595,
+Pennsylvania,2013,64740,
+Rhode Island,2013,65752,
+South Carolina,2013,49220,
+South Dakota,2013,40676,
+Tennessee,2013,48521,
+Texas,2013,50501,
+Utah,2013,46237,
+Vermont,2013,56871,
+Virginia,2013,50639,
+Washington,2013,54555,
+West Virginia,2013,45822,
+Wisconsin,2013,54555,
+Wyoming,2013,57506,
