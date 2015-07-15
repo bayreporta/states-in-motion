@@ -164,18 +164,23 @@ var lineFunctions = {
 			// X Axis Ticks //
 			lineChart.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
 		}
-		else if (dataType === "Expend13"){
+		else if (dataType === 'NEAexpend'){
+			lineChart.selectAll(".xLabel").data(x.ticks(2)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
+			lineChart.selectAll(".xTicks").data(x.ticks(2)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
+		
+		}
+		else {//(dataType === "Expend13" || dataType === 'Salaries-Income'){
 			lineChart.selectAll(".xLabel").data(x.ticks(10)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
 			lineChart.selectAll(".xTicks").data(x.ticks(10)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
 		}
-		else {
+		/*else {
 			// X Axis Labels //
 			lineChart.selectAll(".xLabel").data(x.ticks(50)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {return x(d)}).attr("y", h - 10).attr("text-anchor", "middle");
 
 			// X Axis Ticks //
 			lineChart.selectAll(".xTicks").data(x.ticks(50)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {return x(d);}).attr("y1", y(startData)).attr("x2", function(d) {return x(d);}).attr("y2", y(startData) + 10);
 			lineFunctions.adjustNormalX(dataType);
-		}
+		}*/
 
 		/* Y-AXIS LABELS
 		------------------------------*/
@@ -190,7 +195,7 @@ var lineFunctions = {
 				$('section[role="line"] .yLabel:eq('+i+')').text(text + '%');
 			}
 		}
-		else if (dataType === 'Income' || dataType === 'ExpStudent' || dataType === 'Expend13' || dataType === 'Salaries' ){
+		else if (dataType === 'Income' || dataType === 'ExpStudent' || dataType === 'Expend13' || dataType === 'Salaries' || dataType === 'NEAexpend' ){
 			var labels = $('section[role="line"] .yLabel').size();
 			for (var i=0 ; i < labels; i++){
 				var text = $('section[role="line"] .yLabel:eq('+i+')').text();

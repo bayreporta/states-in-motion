@@ -67,7 +67,7 @@ var bubbleFunctions = {
 
 		/* DRAW CHART
 		------------------------------------*/
-		chart = d3.select("section[role='bubble'] #chart").append("svg:svg").attr("width", w).attr("height", h);
+		bubbleChart = d3.select("section[role='bubble'] #chart").append("svg:svg").attr("width", w).attr("height", h);
 	},
 	defaultToggle:function(){
 		$('#selection p[label="California"]').click();
@@ -97,8 +97,8 @@ var bubbleFunctions = {
 
 				/* ADD GUIDING LINES ON HOVER
 				------------------------------------*/
-				chart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", 60).attr("y1", point.attr("cy")).attr("y2", point.attr("cy")).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity",function() { return d3.interpolate(0, .5); }); //x-axis
-				chart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", point.attr("cx")).attr("y1", point.attr("cy")).attr("y2", h - 20).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity", function() { return d3.interpolate(0, .5); }); //y-axis		
+				bubbleChart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", 60).attr("y1", point.attr("cy")).attr("y2", point.attr("cy")).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity",function() { return d3.interpolate(0, .5); }); //x-axis
+				bubbleChart.append("g").attr("class", "guide").append("line").attr("x1", point.attr("cx")).attr("x2", point.attr("cx")).attr("y1", point.attr("cy")).attr("y2", h - 20).style("stroke", colors[colorStep]).transition().delay(200).duration(400).styleTween("opacity", function() { return d3.interpolate(0, .5); }); //y-axis		
 				$point.insertBefore("section[role='bubble'] .axis:eq(0)"); //reorder to front
 
 				//address color issue
@@ -228,8 +228,8 @@ var bubbleFunctions = {
 	updateLabels:function(data){
 		/* UPDATE LABEL POSITIONS
 		------------------------------------*/	
-		chart.selectAll("text").data(data).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;});
-		console.log(data)
+		bubbleChart.selectAll("text").data(data).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;});
+
 		/* UPDATE LABELS
 		------------------------------------*/	
 		for (i=0 ; i < data.length ; i++){
@@ -419,6 +419,38 @@ var bubbleFunctions = {
 		------------------------------------*/
 		if (firstRun == true) {
 
+			/* TOOLTIP
+			------------------------------------*/
+			var tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function(d) {
+				var clicked = $(this).attr('clicked');
+				var hover = $(this).attr('hover');
+
+				if (hover !== 'true'){
+					$(this).attr('hover', 'true');
+				}
+				else {
+					$(this).attr('hover', 'false');
+				}
+
+				if (clicked !== 'true' && hover !== 'true'){
+					$(this).css('fill', thisColor);
+					$('.d3-tip').css('display', 'block');
+
+				}
+				else if (clicked !== 'true' && hover !== 'false'){
+					$(this).css('fill', '#e2e2e2');
+					$('.d3-tip').css('display', 'none');
+				}
+				else if (clicked === 'true' && hover !== 'true'){
+					$('.d3-tip').css('display', 'block');
+				}
+				else if (clicked === 'true' && hover !== 'false'){
+					$('.d3-tip').css('display', 'none');
+				}
+ 			   	
+ 			   	return "<p>"+d[2]+"</p><p>x: " + bubbleFunctions.commaSeparateNumber(d[0]) + "</p><p>y: " + bubbleFunctions.commaSeparateNumber(d[1]) + "</p>";
+			})
+			bubbleChart.call(tip);
 
 			/* SET SCALES
 			------------------------------------*/
@@ -432,7 +464,7 @@ var bubbleFunctions = {
 
 			/* DRAW PLOTS
 			------------------------------------*/
-			chart.selectAll("circle").data(data).enter().append("circle").attr("class", "plotPoint").attr("cx", function(d){return xScale(d[0]);}).attr("cy", function(d){return yScale(d[1]);}).attr("data-x", function(d){return d[0];}).attr("data-y", function(d){return d[1];}).attr("r", 5).attr("clicked","false").on("mouseover", bubbleFunctions.highlightPoint).on("mouseleave", bubbleFunctions.unhightlightPoint);
+			bubbleChart.selectAll("circle").data(data).enter().append("circle").attr("class", "plotPoint").attr("cx", function(d){return xScale(d[0]);}).attr("cy", function(d){return yScale(d[1]);}).attr("data-x", function(d){return d[0];}).attr("data-y", function(d){return d[1];}).attr("r", 5).attr("clicked","false").on("mouseover", tip.show).on("mouseleave", tip.show);
 			
 			/* ADD INIT ELEMENT POSITIONS
 			------------------------------------*/
@@ -442,15 +474,15 @@ var bubbleFunctions = {
 			
 			/* DRAW LABELS
 			------------------------------------*/	
-			chart.selectAll("text").data(data).enter().append("text").text(function(d) {return d[2];}).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;}).attr("class", "plotLabels").attr("label", function(d){return d[2];}) //meta data for bars
+			bubbleChart.selectAll("text").data(data).enter().append("text").text(function(d) {return d[2];}).attr("x", function(d) {return xScale(d[0]) + 5;}).attr("y", function(d) {return yScale(d[1]) - 5;}).attr("class", "plotLabels").attr("label", function(d){return d[2];}) //meta data for bars
 			for (i=0 ; i < totalPoints ; i++){
 				$("section[role='bubble'] #chart circle:eq("+i+")").attr("label", points._wrapped[i]);
 			}
 			
 			/* CREATE AXES
 			------------------------------------*/	
-			chart.append("g").attr("class", "axis").attr("transform", "translate(0," + (h - padding) + ")").call(xAxis); //xaxis
-			chart.append("g").attr("class", "axis").attr("transform", "translate(" + 60 + ",0)").call(yAxis); //yaxis
+			bubbleChart.append("g").attr("class", "axis").attr("transform", "translate(0," + (h - padding) + ")").call(xAxis); //xaxis
+			bubbleChart.append("g").attr("class", "axis").attr("transform", "translate(" + 60 + ",0)").call(yAxis); //yaxis
 			
 			/* MOVE AXES BACK
 			------------------------------------*/	
@@ -467,7 +499,7 @@ var bubbleFunctions = {
 
 			/* MODIFY PLOTS
 			------------------------------------*/	
-			chart.selectAll("circle").data(data).attr("class", "plotPoint").transition().attr("cx", function(d){return xScale(d[0]);}).attr("cy", function(d){return yScale(d[1]);}).attr("data-x", function(d){return d[0];}).attr("data-y", function(d){return d[1];}).attr("r", 5);
+			bubbleChart.selectAll("circle").data(data).attr("class", "plotPoint").transition().attr("cx", function(d){return xScale(d[0]);}).attr("cy", function(d){return yScale(d[1]);}).attr("data-x", function(d){return d[0];}).attr("data-y", function(d){return d[1];}).attr("r", 5);
 			for (i=0 ; i < totalPoints ; i++){
 				$("#chart circle:eq("+i+")").attr("label", points._wrapped[i]);
 			}
@@ -536,6 +568,12 @@ var bubbleFunctions = {
 				$('section[role="bubble"] .axis:eq(0) g:eq('+i+') text').text('$' + text);
 			}
 		}
+	},
+	commaSeparateNumber:function(val){
+	    while (/(\d+)(\d{3})/.test(val.toString())){
+	      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+	    }
+	    return val;
 	}
 }
 
