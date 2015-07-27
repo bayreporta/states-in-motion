@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bar Motion Chart</title>
+		<link rel="stylesheet" type="text/css" href="css/bar-motion.css"/>		
+	</head>
+	<body>
+		<section id="header">
+			<h2></h2>
+			<p></p>
+		</section>
+		<section role="bar-motion">
+			<div id="main-wrapper" class="bar-chart">
+				<h3 id="bar-y-axis"></h3>
+				<div id="content">
+					<div id="chart"></div>	
+				</div>
+				<div id="selection"></div> 
+			</div> 
+			<div id="nav-wrapper" class="">
+				<h2></h2>
+				<img id="playMotion" src="assets/play.png" width="30">
+				<div class="progress">
+			    	<div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+				</div>
+				<input id="yearSlider" type="range" name="" min="" max="" value="" step="1" onchange="barFunctions.updateSlider(this.value)">
+				<img id="reloadChart" src="assets/reload.png" width="30">
+			</div>
+		</section>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.3/d3-tip.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+		<script src="js/bar-motion.js"></script>
+	</body>
+</html>

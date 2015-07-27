@@ -2,8 +2,8 @@ import json
 import csv
 data = []
 i = 0
-inputFile = 'data'
-outputFile = 'data'
+inputFile = 'salaries'
+outputFile = 'salaries'
 
 #### IMPORT CSV ####
 with open(inputFile + '.csv', 'rb') as csvFile:

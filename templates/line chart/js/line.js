@@ -63,7 +63,7 @@ var lineFunctions = {
 
 		var endYearAdj = endYear + 1;
 
-
+		/* ADJUSTING Y AXIS POSITION */
 		if (config[9]){
 			$('section[role="line"] #y-axis').css('left', config[9] + 'px');
 		}
