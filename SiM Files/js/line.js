@@ -57,10 +57,11 @@ var lineFunctions = {
 	setDefaults:function(config){
 		startData = config[6];
 		endData = config[7];
-		startYear = config[8];
-		endYear = config[9];
+		startYear = parseInt(config[8]);
+		endYear = parseInt(config[9]);
 		yAxisLabel = config[10]
 		var endYearAdj = endYear + 1;
+
 
 		if (config[16]){
 			$('section[role="line"] #y-axis').css('left', config[16] + 'px');
@@ -219,6 +220,8 @@ var lineFunctions = {
 			------------------------------*/
 			var val = d[i].slice(1), lineData = [], started = false;
 
+
+
 			/* CONFIG DATA FOR D3
 			------------------------------*/
 			for (j = 0; j < val.length; j++) {
@@ -362,8 +365,8 @@ var lineFunctions = {
 
 		/* LOAD CHART DATA
 		===============================*/
-		d3.text('data/' + config[5] + '.csv', 'text/csv', function(text) {
-			var d = d3.csv.parseRows(text);
+		jQuery.getJSON('data/' + config[5] + '.json', function(d) {
+			console.log(d)
 			lineFunctions.processData(d);
 		});	
 		

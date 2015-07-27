@@ -422,8 +422,7 @@ var barFunctions = {
 
 		/* LOAD CHART DATA
 		===============================*/
-		d3.text('data/' + config[5] + '.csv', 'text/csv', function(text) {
-			var d = d3.csv.parseRows(text);
+		jQuery.getJSON('data/' + config[5] + '.json', function(d) {
 			barFunctions.processData(d);
 		});	
 	},

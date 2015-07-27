@@ -9,7 +9,9 @@ h2 {font-family: 'Roboto',san-serif;font-size: 1.5em;text-transform: uppercase;c
 #header p {font-size: .9em;color: #666;margin: 5px 0 0 15px;padding: 0;font-family:'Roboto', san-serif;font-weight:300;}
 
 .sim-content {max-width: 650px;clear: both;margin-top: 100px;}
-.sim-content p {font-family:'roboto',san-serif;font-size: 1em;line-height: 1.5em;color: #222;}
+.sim-content p {font-family:'georgia',serif;font-size: 1em;line-height: 1.5em;color: #222;}
+.sim-content a {color: #39709f;text-decoration: none;font-weight:700;}
+.sim-content a:hover {color:#1e3b54;text-decoration:underline;}
 
 #chart {margin-left: -30px;}
 #main-wrapper {height:450px;overflow: auto;}
@@ -22,8 +24,6 @@ section {width:800px;}
 #reset-button:hover {background: #aaa;}
 
 .sr-graphic p {margin:0 0 1em 0;padding:0;line-height: 1.4em;font-family:'Roboto', san-serif;font-weight:300;color:#97918F;font-size:.9em;}
-.sr-graphic a {color: #4DC193;text-decoration: none;font-weight:700;}
-.sr-graphic a:hover {text-decoration:underline;}
 .sr-graphic #content {float:left;}
 .sr-graphic #info {height: 60px;border-top: 1px solid #e2e2e2;padding: 20px 0 0 0;}
 

@@ -26,6 +26,11 @@ d3.text('data/config.csv', 'text/csv', function(text) {
 	if (isLine.length > 0){lineFunctions.executeChart(thisConfig);}
 	if (isBar.length > 0){barFunctions.executeChart(thisConfig);}
 	if (isBubble.length > 0){bubbleFunctions.executeChart(thisConfig);}	
+
+	/* STATES IN MOTION DISCLAIMER
+	------------------------------*/
+	jQuery('.sim-content').append('<p><em>Chart by John C. Osborn, <a href="http://edsource.org/author/josborn">EdSource</a>. <a href="mailto:josborn@edsource.org">Contact him with any questions</a>.</em></p>');
+
 });	
 
 
