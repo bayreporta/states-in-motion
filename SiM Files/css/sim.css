@@ -1,0 +1,31 @@
+
+/*States in Motion Page*/
+
+article.sim {width: 100%;margin: 0 auto;}
+.sim-content {margin:5em 0 0 0;}
+#slick-header .slick-social-hed {top:-50px;}
+
+.data-explain {font-family: "Roboto Condensed",sans-serif;font-size: .9em;font-weight: 300;margin: -20px 20px 0 0;display: block;}
+.data-options {display: block;margin:0;overflow:hidden;}
+.data-option, .twitter-option, .gsheet-option, .view-option {font-family: "Roboto",sans-serif !important;font-size: .75em;font-weight: 300;color: #9d9d9d;margin: 0 30px 0 0;text-decoration:none;float:left;}
+.data-option:hover, .twitter-option:hover, .gsheet-option:hover, .view-option:hover {color:#848484;}
+.sr-embed {display:none}
+.sr-embed textarea {overflow: visible;width: 300px;height: 45px;font-size:.7em;}
+
+
+#chester .content>article .box a {font-size:.9em;font-family:'roboto condensed', san-serif;}
+#chester .content>article p, #chester .content>article a, #chester .content>article li  {font-family:georgia,serif;}
+
+
+@media (min-width:800px){
+	#chester .content {max-width:800px;}
+}
+
+@media (min-width:768px){
+	#header>.wrap, #chester>.wrap, #footer>.wrap {width:100%;}
+}
+
+@media (min-width:1280px){
+article.sim {width: 70%;margin: 0 auto;}
+	
+}
